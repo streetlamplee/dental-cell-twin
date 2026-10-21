@@ -56,6 +56,26 @@ async def _try_capture(name, viewport_api, out_png, app):
     return True
 
 
+async def _measure_lag(viewport_api, app):
+    """Render lag: compare the viewport's frame_info at request time with the captured
+    frame's frame_info, over several app updates."""
+    print(f"{TAG} frame_info keys: {sorted(viewport_api.frame_info.keys())}")
+    for i in range(5):
+        info_req = dict(viewport_api.frame_info)
+        upd_req = app.get_update_number()
+        cap = capture_viewport_to_buffer(viewport_api, lambda *a: None)
+        n_updates = 0
+        while not cap.done if hasattr(cap, "done") else False:
+            await app.next_update_async()
+            n_updates += 1
+        await cap.wait_for_result()
+        info_cap = cap.frame_info or {}
+        print(f"{TAG} lag#{i}: request update={upd_req} swh={info_req.get('swh_frame_number')} | "
+              f"captured swh={info_cap.get('swh_frame_number')} at update={app.get_update_number()} "
+              f"fps={info_req.get('fps')}")
+        await app.next_update_async()
+
+
 async def _main():
     app = omni.kit.app.get_app()
     out = carb.settings.get_settings().get("/visiontwin/probe/out")
@@ -74,6 +94,8 @@ async def _main():
 
         ok_a = await _try_capture("A InspectionFrameProvider", ext._frames.viewport_api,
                                   out.replace(".png", "_A.png"), app)
+
+        await _measure_lag(ext._frames.viewport_api, app)
 
         win = create_viewport_window("VisionTwin Probe B", width=640, height=480, camera_path=L.CAMERA_PATH)
         await _frames(app, 30)

@@ -1,8 +1,8 @@
 """Kit startup script (run with kit --exec): build the factory, run one full line run
 with vision inspection enabled, wait for all frames, then quit.
 The run (frames/*.png, inspections.csv, run.json) is written under results/runs/.
-Used by scripts/collect_frames.ps1. Seed / product count come from
---/exts/visiontwin.factory/seed and --/exts/visiontwin.factory/maxProducts.
+Used by scripts/collect_frames.ps1. Seed / product count / speed come from
+--/exts/visiontwin.factory/{seed,maxProducts,speed}.
 """
 
 import asyncio
@@ -37,8 +37,10 @@ async def _main():
         for _ in range(120):
             await app.next_update_async()
         ext.start()
-        await _wait_for(lambda: ext._sim.finished, app, 60 * 60 * 10)
-        await _wait_for(lambda: ext.pending_frames == 0, app, 600)
+        # run_complete is set after the line finished AND every pending frame was handled
+        # (results.csv / summary.json written).
+        await _wait_for(lambda: ext.run_complete, app, 60 * 60 * 10)
+        print(f"{TAG} summary: {ext.summary}")
         print(f"{TAG} done: run_dir={ext.run_dir}")
         code = 0
     except Exception:
