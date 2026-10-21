@@ -38,6 +38,7 @@ def capsule_to_rgb(buffer, buffer_size: int, width: int, height: int, byte_forma
 
 class InspectionFrameProvider:
     WINDOW_TITLE = "VisionTwin Inspection Camera"
+    TIMEOUT_UPDATES = 180  # 3 s of simulation time at the default fixed step
 
     def __init__(self, camera_path: Optional[str], resolution: Tuple[int, int]) -> None:
         w, h = resolution
@@ -49,6 +50,7 @@ class InspectionFrameProvider:
         self._pending = 0
         self._last_digest = None
         self.frame_target_misses = 0
+        self.timeouts = 0
 
     async def ready_async(self) -> None:
         """Wait for the first rendered frames, then lock the resolution.
@@ -108,7 +110,24 @@ class InspectionFrameProvider:
             cap = ByteCapture(_on_capture, aov_name="LdrColor", frame_to_capture=target,
                               viewport=self.viewport_api)
             self.viewport_api.schedule_capture(cap)
-            await cap.wait_for_result()
+            waiter = asyncio.ensure_future(cap.wait_for_result())
+            app = omni.kit.app.get_app()
+            for _ in range(self.TIMEOUT_UPDATES):
+                if waiter.done():
+                    break
+                await app.next_update_async()
+            if not waiter.done():
+                # Seen 2026-10-21: after 24 products the inspection viewport stopped reaching
+                # the requested frame and captures waited forever. Give up, report, move on.
+                waiter.cancel()
+                self.timeouts += 1
+                last = self.viewport_api.frame_info.get("swh_frame_number")
+                msg = (f"capture timeout: frame {target} not rendered within {self.TIMEOUT_UPDATES} updates "
+                       f"(viewport last swh={last}, now update={app.get_update_number()})")
+                carb.log_warn(f"[visiontwin.factory] {msg}")
+                if on_error:
+                    on_error(msg)
+                return
             if "rgb" not in got:
                 self.frame_target_misses += 1
                 if on_error:

@@ -391,6 +391,7 @@ class VisionTwinFactoryExtension(omni.ext.IExt):
             "frame_mismatches": self._frame_mismatches,
             "stale_frames": self._stale_frames,
             "frame_target_misses": self._frames.frame_target_misses if self._frames else None,
+            "capture_timeouts": self._frames.timeouts if self._frames else None,
             "not_exited": sum(p.state != ProductState.EXITED for p in products),
             "pending_frames_at_finalize": self.pending_frames,
             "simulation_time_s": round(self._sim.time, 3),
