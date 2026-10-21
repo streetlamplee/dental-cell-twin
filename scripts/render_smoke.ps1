@@ -20,7 +20,7 @@ $png = (Join-Path $outDir "render_smoke_$stamp.png") -replace '\\', '/'
 $exec = (Join-Path $PSScriptRoot "render_smoke.py") -replace '\\', '/'
 $log = New-LogPath "render_smoke"
 
-$kitArgs = "--exec `"$exec`" --/visiontwin/smoke/out=`"$png`" --/visiontwin/smoke/frames=$Frames $KitAutomationArgs"
+$kitArgs = "--exec `"$exec`" --/visiontwin/smoke/out=`"$png`" --/visiontwin/smoke/frames=$Frames --/exts/visiontwin.factory/outputDir=`"$($outDir -replace '\\', '/')/smoke_runs`" $KitAutomationArgs"
 $ErrorActionPreference = 'Continue'
 & cmd /c "`"$bat`" $kitArgs 2>&1" | ForEach-Object {
     Add-Content -Path $log -Value $_ -Encoding utf8
