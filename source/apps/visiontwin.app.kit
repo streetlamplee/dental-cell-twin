@@ -94,6 +94,7 @@ telemetry.enableAnonymousAppName = true
 telemetry.enableAnonymousData = true
 privacy.externalBuild = true
 exts."visiontwin.factory".outputDir = "${app}/../../../../results"  # repo-root/results (apps -> release -> windows-x86_64 -> _build -> root)
+app.asyncRendering = false  # VisionTwin: render in lock-step with updates; async rendering let the sim run ~70 updates ahead of the captured frame
 exts."visiontwin.factory".inspectorConfig = "${app}/../../../../config/inspector.json"  # calibrated inspector parameters
 
 

@@ -16,9 +16,11 @@ from typing import Callable, Optional, Tuple
 
 import carb
 import numpy as np
-from omni.kit.viewport.utility import capture_viewport_to_buffer, create_viewport_window, next_viewport_frame_async
+import omni.kit.app
+from omni.kit.viewport.utility import create_viewport_window, next_viewport_frame_async
+from omni.kit.widget.viewport.capture import ByteCapture
 
-FrameCallback = Callable[[np.ndarray, float, bool], None]  # (rgb, capture_latency_ms, stale)
+FrameCallback = Callable[[np.ndarray, float, bool, Optional[int]], None]  # (rgb, latency_ms, stale, frame_offset)
 
 _get_pointer = ctypes.pythonapi.PyCapsule_GetPointer
 _get_pointer.argtypes = [ctypes.py_object, ctypes.c_char_p]
@@ -36,10 +38,6 @@ def capsule_to_rgb(buffer, buffer_size: int, width: int, height: int, byte_forma
 
 class InspectionFrameProvider:
     WINDOW_TITLE = "VisionTwin Inspection Camera"
-    # Stale-frame retry budget: 3 attempts x 3 frames (~0.15 s at 60 fps) keeps the product
-    # inside the +-0.25 m inspection window at 0.5 m/s.
-    MAX_ATTEMPTS = 3
-    RETRY_FRAMES = 3
 
     def __init__(self, camera_path: Optional[str], resolution: Tuple[int, int]) -> None:
         w, h = resolution
@@ -50,7 +48,7 @@ class InspectionFrameProvider:
             raise RuntimeError("could not create the inspection viewport window")
         self._pending = 0
         self._last_digest = None
-        self.last_attempts = 0
+        self.frame_target_misses = 0
 
     async def ready_async(self) -> None:
         """Wait for the first rendered frames, then lock the resolution.
@@ -79,17 +77,24 @@ class InspectionFrameProvider:
         self.viewport_api.camera_path = camera_path
 
     def request_frame(self, on_frame: FrameCallback, on_error: Optional[Callable[[str], None]] = None) -> None:
-        """Capture a frame rendered AFTER this request (non-blocking).
+        """Capture the frame that renders the CURRENT update's stage state (non-blocking).
 
-        on_frame(rgb, capture_latency_ms, stale): stale=True when the pixels are byte-identical
-        to the previous capture, i.e. the viewport did not render a new image (seen once on
-        2026-10-21: two products 1.5 s apart got the same frame).
+        The target is the current app update number used as the SWH frame number
+        (frame_to_capture), so the image shows the product exactly where the simulation put
+        it this update, independent of render lag. With async rendering the captured frame
+        trailed the simulation by ~70 updates (2026-10-21).
+
+        on_frame(rgb, capture_latency_ms, stale, frame_offset):
+          stale=True when the pixels are byte-identical to the previous capture;
+          frame_offset = captured SWH frame - requested frame (0 = the requested state;
+          None = unknown). Anything but 0 means the image may not show the requested product.
         """
         t_request = time.perf_counter()
+        target = omni.kit.app.get_app().get_update_number()
         self._pending += 1
-        asyncio.ensure_future(self._capture_async(t_request, on_frame, on_error))
+        asyncio.ensure_future(self._capture_async(target, t_request, on_frame, on_error))
 
-    async def _capture_async(self, t_request, on_frame, on_error):
+    async def _capture_async(self, target, t_request, on_frame, on_error):
         got = {}
 
         def _on_capture(buffer, buffer_size, width, height, byte_format):
@@ -100,22 +105,21 @@ class InspectionFrameProvider:
                 got["error"] = str(exc)
 
         try:
-            await next_viewport_frame_async(self.viewport_api, 1)  # a frame newer than the request
-            for attempt in range(1, self.MAX_ATTEMPTS + 1):
-                got.clear()
-                await capture_viewport_to_buffer(self.viewport_api, _on_capture).wait_for_result()
-                if "error" in got or "rgb" not in got:
-                    if on_error:
-                        on_error(got.get("error", "no frame delivered"))
-                    return
-                digest = hashlib.md5(got["rgb"].tobytes()).digest()
-                stale = digest == self._last_digest
-                if not stale or attempt == self.MAX_ATTEMPTS:
-                    break
-                await next_viewport_frame_async(self.viewport_api, self.RETRY_FRAMES)
+            cap = ByteCapture(_on_capture, aov_name="LdrColor", frame_to_capture=target,
+                              viewport=self.viewport_api)
+            self.viewport_api.schedule_capture(cap)
+            await cap.wait_for_result()
+            if "rgb" not in got:
+                self.frame_target_misses += 1
+                if on_error:
+                    on_error(got.get("error", f"frame {target} not captured"))
+                return
+            swh = (cap.frame_info or {}).get("swh_frame_number")
+            frame_offset = None if swh is None else swh - target
+            digest = hashlib.md5(got["rgb"].tobytes()).digest()
+            stale = digest == self._last_digest
             self._last_digest = digest
-            self.last_attempts = attempt
-            on_frame(got["rgb"], (time.perf_counter() - t_request) * 1000.0, stale)
+            on_frame(got["rgb"], (time.perf_counter() - t_request) * 1000.0, stale, frame_offset)
         finally:
             self._pending -= 1
 
