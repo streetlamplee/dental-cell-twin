@@ -36,3 +36,6 @@ deps/**/user.toml
 
 # Streaming EventTrace
 *.etli
+/logs/
+/results/smoke/
+/results/runs/**/frames/

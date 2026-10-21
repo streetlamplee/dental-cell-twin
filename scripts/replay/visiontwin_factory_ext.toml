@@ -1,0 +1,4 @@
+[basic_python_ui_extension]
+extension_name = "visiontwin.factory"
+extension_display_name = "VisionTwin Factory"
+version = "0.1.0"
