@@ -55,6 +55,7 @@ capture_viewport_to_buffer(win.viewport_api, cb)            # cb(buffer, size, w
 2. **stale 프레임**: 1.5초 떨어진 두 제품(#17, #18)이 바이트까지 같은 프레임을 받았다. `rtx.ecoMode`를 꺼도 다시 발생했다(#13).
    - 수정: 요청 이후 새 프레임을 1장 기다린 뒤 캡처한다. 직전 캡처와 MD5가 같으면 3프레임 뒤 다시 캡처하고, 최대 3회까지 시도한다. 그래도 같으면 `unknown`("stale frame")으로 기록한다(잘못된 판정 대신 미판정).
    - 이후 run(seed 1, seed 42)에서는 중복 프레임 0건.
+   - **Day 4에서 대체됨:** 근본 원인은 비동기 렌더링으로 인한 이미지 지연이었다. 동기 렌더링과 프레임 지정 캡처로 바꿨다 → [[렌더 지연과 프레임 지정 캡처]]. MD5 stale 감지는 안전장치로 남겼다.
 
 ## 진단 도구
 `.\scripts\probe_capture.ps1`: 확장의 provider(A)와 새 ViewportWindow(B)로 각각 캡처해서 성공 여부와 PNG를 남긴다.
