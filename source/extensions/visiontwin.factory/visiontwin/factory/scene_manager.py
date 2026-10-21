@@ -53,6 +53,9 @@ def build_factory_scene(stage: Usd.Stage) -> None:
         for side, y in (("L", L.MARKER_OFFSET_Y), ("R", -L.MARKER_OFFSET_Y)):
             _box(stage, f"{f}/{name}/Post_{side}", (x, y, L.CONVEYOR_TOP_Z + post_h / 2.0 - 0.05),
                  (0.03, 0.03, post_h), color)
+    # Pusher on the +Y side of the reject line (retracted), sweeps rejects to the -Y bin.
+    _box(stage, f"{f}/Pusher", (L.REJECT_X, L.CONVEYOR_WIDTH / 2 + 0.12, L.CONVEYOR_TOP_Z + 0.09),
+         (0.12, 0.04, 0.16), (0.85, 0.75, 0.2))
     # Reject bin beside the belt (-Y side).
     _box(stage, f"{f}/RejectBin", (L.REJECT_X, -L.CONVEYOR_WIDTH / 2 - 0.4, 0.2),
          (0.6, 0.5, 0.4), (0.6, 0.15, 0.1))
@@ -110,8 +113,44 @@ def move_product_prim(stage: Usd.Stage, product_id: int, x: float, y: float = 0.
     UsdGeom.XformCommonAPI(prim).SetTranslate(Gf.Vec3d(x, y, z))
 
 
+PUSHER_PATH = f"{L.FACTORY_PATH}/Pusher"
+PUSHER_HOME_Y = L.CONVEYOR_WIDTH / 2 + 0.12  # retracted, beside the belt (+Y side)
+PUSHER_CONTACT = L.PRODUCT_SIZE / 2 + 0.02  # pusher centre offset from product centre
+BIN_Y = -L.CONVEYOR_WIDTH / 2 - 0.4
+BIN_DROP_Z = 0.4 + L.PRODUCT_SIZE / 2.0
+REJECT_ANIM_S = 0.6
+
+
+def _lerp(a, b, k):
+    return a + (b - a) * k
+
+
+def reject_motion(u: float):
+    """Visual-only reject motion for progress u in [0, 1] -> (product_xyz, pusher_y).
+    approach (pusher reaches the product) -> push (product off the -Y edge) -> drop into
+    the bin while the pusher retracts. Simulation state is already final."""
+    u = min(max(u, 0.0), 1.0)
+    top_z = L.CONVEYOR_TOP_Z + L.PRODUCT_SIZE / 2.0
+    edge_y = -L.CONVEYOR_WIDTH / 2 - L.PRODUCT_SIZE / 2
+    if u < 0.25:
+        k = u / 0.25
+        return (L.REJECT_X, 0.0, top_z), _lerp(PUSHER_HOME_Y, PUSHER_CONTACT, k)
+    if u < 0.65:
+        y = _lerp(0.0, edge_y, (u - 0.25) / 0.4)
+        return (L.REJECT_X, y, top_z), y + PUSHER_CONTACT
+    k = (u - 0.65) / 0.35
+    prod = (L.REJECT_X, _lerp(edge_y, BIN_Y, k), _lerp(top_z, BIN_DROP_Z, k))
+    return prod, _lerp(edge_y + PUSHER_CONTACT, PUSHER_HOME_Y, k)
+
+
+def set_pusher(stage: Usd.Stage, y: float) -> None:
+    prim = stage.GetPrimAtPath(PUSHER_PATH)
+    if prim:
+        UsdGeom.XformCommonAPI(prim).SetTranslate(Gf.Vec3d(L.REJECT_X, y, L.CONVEYOR_TOP_Z + 0.09))
+
+
 def move_product_to_reject_bin(stage: Usd.Stage, product_id: int) -> None:
-    move_product_prim(stage, product_id, L.REJECT_X, -L.CONVEYOR_WIDTH / 2 - 0.4, 0.4 + L.PRODUCT_SIZE / 2.0)
+    move_product_prim(stage, product_id, L.REJECT_X, BIN_Y, BIN_DROP_Z)
 
 
 def remove_product_prim(stage: Usd.Stage, product_id: int) -> None:

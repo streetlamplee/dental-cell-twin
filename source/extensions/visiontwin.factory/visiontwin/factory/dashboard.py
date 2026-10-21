@@ -24,7 +24,7 @@ class Dashboard:
                     speed.model.add_value_changed_fn(lambda m: on_speed(m.get_value_as_float()))
                 ui.Spacer(height=4)
                 self._status = ui.Label("Status: idle", height=20)
-                self._counters = ui.Label("", height=40, word_wrap=True)
+                self._counters = ui.Label("", height=60, word_wrap=True)
                 self._last_event = ui.Label("", height=20, word_wrap=True)
 
     def set_status(self, text: str) -> None:
