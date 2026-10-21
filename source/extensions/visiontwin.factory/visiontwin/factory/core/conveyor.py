@@ -143,6 +143,7 @@ class ConveyorSim:
 
         if p.state == ProductState.INSPECTED and crossed(L.REJECT_X):
             t = t_at(L.REJECT_X)
+            p.sort_time, p.sort_speed = t, speed
             if self.reject_decider(p):
                 self.tracker.transition(p.product_id, ProductState.REJECTED)
                 events.append(LineEvent(t, p.product_id, REJECT, L.REJECT_X))

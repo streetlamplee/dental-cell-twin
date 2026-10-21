@@ -14,7 +14,7 @@ import numpy as np
 
 FIELDS = [
     "run_id", "seed", "product_id", "ground_truth", "predicted_label", "score", "mean_hue",
-    "area_px", "capture_latency_ms", "inspection_latency_ms", "simulation_time_s",
+    "area_px", "capture_latency_ms", "frame_offset", "inspection_latency_ms", "simulation_time_s",
     "conveyor_speed", "lighting_condition", "frame_file", "reason",
 ]
 
@@ -30,6 +30,7 @@ class InspectionRecord:
     mean_hue: float
     area_px: int
     capture_latency_ms: float
+    frame_offset: object  # captured SWH frame - trigger frame (0 = exact); "" if unknown
     inspection_latency_ms: float
     simulation_time_s: float
     conveyor_speed: float

@@ -46,7 +46,13 @@ class Product:
     spawn_time: float
     state: ProductState = ProductState.SPAWNED
     prediction: Optional[str] = None  # set by the inspector (Day 3/4)
-    inspected_time: Optional[float] = None
+    score: Optional[float] = None
+    inspected_time: Optional[float] = None  # sim time of the inspection-line crossing
+    inspection_start_ms: Optional[float] = None  # wall clock since run start: frame requested
+    inspection_end_ms: Optional[float] = None  # wall clock since run start: verdict ready
+    late_prediction: Optional[str] = None  # verdict that arrived after sorting (not applied)
+    sort_time: Optional[float] = None  # sim time of the reject-line crossing
+    sort_speed: Optional[float] = None  # conveyor speed at that moment
     exit_time: Optional[float] = None
     exit_route: Optional[str] = None  # "pass" or "reject"
 
