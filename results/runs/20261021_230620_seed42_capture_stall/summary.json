@@ -1,0 +1,15 @@
+{
+  "run_id": "20261021_230620_seed42",
+  "products": 30,
+  "sorted": 30,
+  "sort_correct": 26,
+  "rejected": 17,
+  "fail_safe_rejects": 6,
+  "late_results": 0,
+  "frame_mismatches": 0,
+  "stale_frames": 0,
+  "frame_target_misses": 0,
+  "not_exited": 0,
+  "pending_frames_at_finalize": 6,
+  "simulation_time_s": 52.117
+}

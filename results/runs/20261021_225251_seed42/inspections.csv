@@ -1,0 +1,31 @@
+run_id,seed,product_id,ground_truth,predicted_label,score,mean_hue,area_px,capture_latency_ms,frame_offset,inspection_latency_ms,simulation_time_s,conveyor_speed,lighting_condition,frame_file,reason
+20261021_225251_seed42,42,1,good,good,0.9865,99.02,12143,753.77,0,9.045,1.619,1.5,default,frames/P_0001.png,hue match 0.99 >= 0.85
+20261021_225251_seed42,42,2,defect,defect,0.0,8.48,15669,694.63,0,1.185,3.113,1.5,default,frames/P_0002.png,hue match 0.00 < 0.85
+20261021_225251_seed42,42,3,defect,defect,0.0,8.82,14964,784.78,0,1.062,4.544,1.5,default,frames/P_0003.png,hue match 0.00 < 0.85
+20261021_225251_seed42,42,4,defect,defect,0.0,8.5,17296,941.32,0,1.626,6.072,1.5,default,frames/P_0004.png,hue match 0.00 < 0.85
+20261021_225251_seed42,42,5,good,good,0.9741,99.26,11323,1549.79,0,1.276,7.63,1.5,default,frames/P_0005.png,hue match 0.97 >= 0.85
+20261021_225251_seed42,42,6,good,good,0.9345,99.34,13502,504.0,0,1.273,9.083,1.5,default,frames/P_0006.png,hue match 0.93 >= 0.85
+20261021_225251_seed42,42,7,good,good,0.9658,99.07,13077,1975.06,0,1.264,10.58,1.5,default,frames/P_0007.png,hue match 0.97 >= 0.85
+20261021_225251_seed42,42,8,defect,unknown,0.0,nan,0,1133.36,0,0.601,12.342,1.5,default,frames/P_0008.png,no foreground in ROI
+20261021_225251_seed42,42,9,good,good,0.9588,99.1,13158,884.05,0,1.069,13.571,1.5,default,frames/P_0009.png,hue match 0.96 >= 0.85
+20261021_225251_seed42,42,10,defect,defect,0.0,8.54,14583,1103.97,0,1.414,15.125,1.5,default,frames/P_0010.png,hue match 0.00 < 0.85
+20261021_225251_seed42,42,11,defect,defect,0.0,8.49,15175,2298.06,0,1.803,16.616,1.5,default,frames/P_0011.png,hue match 0.00 < 0.85
+20261021_225251_seed42,42,12,good,unknown,0.0,nan,0,1152.73,0,0.725,18.335,1.5,default,frames/P_0012.png,no foreground in ROI
+20261021_225251_seed42,42,13,defect,defect,0.0,8.78,16123,676.92,0,1.172,19.586,1.5,default,frames/P_0013.png,hue match 0.00 < 0.85
+20261021_225251_seed42,42,14,defect,defect,0.0,8.74,15956,621.55,0,0.893,21.068,1.5,default,frames/P_0014.png,hue match 0.00 < 0.85
+20261021_225251_seed42,42,15,good,good,0.9849,98.56,12683,673.56,0,1.049,22.536,1.5,default,frames/P_0015.png,hue match 0.98 >= 0.85
+20261021_225251_seed42,42,16,good,good,0.945,99.4,13487,777.81,0,0.975,24.099,1.5,default,frames/P_0016.png,hue match 0.94 >= 0.85
+20261021_225251_seed42,42,17,defect,defect,0.0,8.63,16043,806.93,0,1.022,25.58,1.5,default,frames/P_0017.png,hue match 0.00 < 0.85
+20261021_225251_seed42,42,18,good,good,0.9493,99.28,13193,904.31,0,1.103,27.109,1.5,default,frames/P_0018.png,hue match 0.95 >= 0.85
+20261021_225251_seed42,42,19,good,good,0.9842,98.77,12982,1024.98,0,1.144,28.549,1.5,default,frames/P_0019.png,hue match 0.98 >= 0.85
+20261021_225251_seed42,42,20,defect,defect,0.0,8.67,15785,786.95,0,1.149,30.1,1.5,default,frames/P_0020.png,hue match 0.00 < 0.85
+20261021_225251_seed42,42,21,good,good,0.9628,99.07,13155,719.86,0,1.954,31.578,1.5,default,frames/P_0021.png,hue match 0.96 >= 0.85
+20261021_225251_seed42,42,22,good,good,0.9101,100.02,13465,806.07,0,1.556,33.115,1.5,default,frames/P_0022.png,hue match 0.91 >= 0.85
+20261021_225251_seed42,42,23,good,good,0.9667,99.01,13148,956.01,0,1.036,34.564,1.5,default,frames/P_0023.png,hue match 0.97 >= 0.85
+20261021_225251_seed42,42,24,defect,defect,0.0,8.86,16320,846.73,0,1.182,36.08,1.5,default,frames/P_0024.png,hue match 0.00 < 0.85
+20261021_225251_seed42,42,25,good,good,0.9577,99.14,13337,775.07,0,1.06,37.581,1.5,default,frames/P_0025.png,hue match 0.96 >= 0.85
+20261021_225251_seed42,42,26,good,good,0.972,98.95,12000,744.23,0,0.94,39.118,1.5,default,frames/P_0026.png,hue match 0.97 >= 0.85
+20261021_225251_seed42,42,27,defect,defect,0.0,8.9,15679,650.74,0,1.035,40.564,1.5,default,frames/P_0027.png,hue match 0.00 < 0.85
+20261021_225251_seed42,42,28,defect,defect,0.0,8.74,16338,708.99,0,1.013,42.084,1.5,default,frames/P_0028.png,hue match 0.00 < 0.85
+20261021_225251_seed42,42,29,good,good,0.9708,99.24,13487,678.43,0,1.135,43.562,1.5,default,frames/P_0029.png,hue match 0.97 >= 0.85
+20261021_225251_seed42,42,30,good,good,0.9844,99.22,11270,692.72,0,1.268,45.132,1.5,default,frames/P_0030.png,hue match 0.98 >= 0.85

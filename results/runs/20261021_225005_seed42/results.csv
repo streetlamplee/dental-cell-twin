@@ -1,0 +1,31 @@
+run_id,seed,product_id,ground_truth,predicted_label,score,inspection_start_ms,inspection_end_ms,inspection_latency_ms,sort_result,sort_reason,sort_correct,late_prediction,simulation_time_s,conveyor_speed,lighting_condition,final_state
+20261021_225005_seed42,42,1,good,unknown,0.9678,1514.3,2370.38,856.08,reject,prediction unknown (fail-safe),False,,2.867,1.5,default,EXITED
+20261021_225005_seed42,42,2,defect,unknown,0.0,3003.07,3842.98,839.91,reject,prediction unknown (fail-safe),True,,4.367,1.5,default,EXITED
+20261021_225005_seed42,42,3,defect,unknown,0.0,4483.91,5413.02,929.11,reject,prediction unknown (fail-safe),True,,5.867,1.5,default,EXITED
+20261021_225005_seed42,42,4,defect,defect,0.0,6002.75,6754.61,751.86,reject,predicted defect,True,,7.367,1.5,default,EXITED
+20261021_225005_seed42,42,5,good,good,0.986,7432.77,8137.12,704.35,pass,predicted good,True,,8.867,1.5,default,EXITED
+20261021_225005_seed42,42,6,good,good,0.984,8950.76,9592.29,641.53,pass,predicted good,True,,10.367,1.5,default,EXITED
+20261021_225005_seed42,42,7,good,good,0.9617,10452.25,10934.86,482.62,pass,predicted good,True,,11.867,1.5,default,EXITED
+20261021_225005_seed42,42,8,defect,defect,0.0,11959.3,12553.77,594.48,reject,predicted defect,True,,13.367,1.5,default,EXITED
+20261021_225005_seed42,42,9,good,good,0.9766,13431.79,14029.77,597.99,pass,predicted good,True,,14.867,1.5,default,EXITED
+20261021_225005_seed42,42,10,defect,defect,0.0,14925.48,15501.48,576.0,reject,predicted defect,True,,16.367,1.5,default,EXITED
+20261021_225005_seed42,42,11,defect,defect,0.0,16460.79,17049.15,588.36,reject,predicted defect,True,,17.867,1.5,default,EXITED
+20261021_225005_seed42,42,12,good,good,0.9643,17971.54,18600.94,629.4,pass,predicted good,True,,19.367,1.5,default,EXITED
+20261021_225005_seed42,42,13,defect,defect,0.0,19424.55,20029.1,604.55,reject,predicted defect,True,,20.867,1.5,default,EXITED
+20261021_225005_seed42,42,14,defect,defect,0.0,20970.68,21526.39,555.71,reject,predicted defect,True,,22.367,1.5,default,EXITED
+20261021_225005_seed42,42,15,good,good,0.985,22417.18,22956.62,539.44,pass,predicted good,True,,23.867,1.5,default,EXITED
+20261021_225005_seed42,42,16,good,good,0.9924,23920.38,24474.42,554.04,pass,predicted good,True,,25.367,1.5,default,EXITED
+20261021_225005_seed42,42,17,defect,defect,0.0,25482.48,26059.94,577.46,reject,predicted defect,True,,26.867,1.5,default,EXITED
+20261021_225005_seed42,42,18,good,good,0.9732,26933.48,27489.86,556.38,pass,predicted good,True,,28.367,1.5,default,EXITED
+20261021_225005_seed42,42,19,good,good,0.9801,28428.5,28955.57,527.06,pass,predicted good,True,,29.867,1.5,default,EXITED
+20261021_225005_seed42,42,20,defect,defect,0.0,29959.37,30524.9,565.54,reject,predicted defect,True,,31.367,1.5,default,EXITED
+20261021_225005_seed42,42,21,good,good,0.9663,31448.79,32010.03,561.24,pass,predicted good,True,,32.867,1.5,default,EXITED
+20261021_225005_seed42,42,22,good,good,0.9663,32935.28,33627.42,692.14,pass,predicted good,True,,34.367,1.5,default,EXITED
+20261021_225005_seed42,42,23,good,good,0.9585,34441.31,35106.12,664.81,pass,predicted good,True,,35.867,1.5,default,EXITED
+20261021_225005_seed42,42,24,defect,defect,0.0,35965.88,36693.42,727.54,reject,predicted defect,True,,37.367,1.5,default,EXITED
+20261021_225005_seed42,42,25,good,good,0.9768,37434.55,38042.58,608.03,pass,predicted good,True,,38.867,1.5,default,EXITED
+20261021_225005_seed42,42,26,good,good,0.969,38917.73,39474.86,557.13,pass,predicted good,True,,40.367,1.5,default,EXITED
+20261021_225005_seed42,42,27,defect,defect,0.0,40431.58,40962.61,531.03,reject,predicted defect,True,,41.867,1.5,default,EXITED
+20261021_225005_seed42,42,28,defect,defect,0.0,41952.4,42494.4,542.0,reject,predicted defect,True,,43.367,1.5,default,EXITED
+20261021_225005_seed42,42,29,good,good,0.9625,43453.41,44098.17,644.76,pass,predicted good,True,,44.867,1.5,default,EXITED
+20261021_225005_seed42,42,30,good,good,0.9734,44920.58,45476.33,555.75,pass,predicted good,True,,46.367,1.5,default,EXITED

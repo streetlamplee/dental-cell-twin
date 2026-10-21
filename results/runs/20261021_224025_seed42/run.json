@@ -1,0 +1,28 @@
+{
+  "run_id": "20261021_224025_seed42",
+  "seed": 42,
+  "max_products": 30,
+  "conveyor_speed": 0.5,
+  "spawn_interval": 1.5,
+  "defect_rate": 0.3,
+  "unknown_policy": "reject",
+  "lighting_condition": "default",
+  "camera_resolution": [
+    640,
+    480
+  ],
+  "inspector": {
+    "roi": [
+      205,
+      112,
+      435,
+      368
+    ],
+    "sat_min": 25,
+    "val_min": 40,
+    "min_area_px": 400,
+    "reference_hue": 98.88,
+    "hue_tolerance": 12.0,
+    "good_ratio_min": 0.85
+  }
+}

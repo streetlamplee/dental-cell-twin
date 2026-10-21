@@ -1,0 +1,31 @@
+run_id,seed,product_id,ground_truth,predicted_label,score,mean_hue,area_px,capture_latency_ms,inspection_latency_ms,simulation_time_s,conveyor_speed,lighting_condition,frame_file,reason
+20261021_224154_seed42,42,1,good,unknown,0.0,nan,0,92.88,6.641,1.537,1.5,default,frames/P_0001.png,no foreground in ROI
+20261021_224154_seed42,42,2,defect,unknown,0.0,nan,0,59.44,0.633,3.045,1.5,default,frames/P_0002.png,no foreground in ROI
+20261021_224154_seed42,42,3,defect,unknown,0.0,nan,0,186.14,0.818,4.544,1.5,default,frames/P_0003.png,no foreground in ROI
+20261021_224154_seed42,42,4,defect,unknown,0.0,nan,0,150.05,0.735,6.039,1.5,default,frames/P_0004.png,no foreground in ROI
+20261021_224154_seed42,42,5,good,unknown,0.0,nan,0,48.56,0.577,7.538,1.5,default,frames/P_0005.png,no foreground in ROI
+20261021_224154_seed42,42,6,good,unknown,0.0,nan,0,61.35,0.723,9.035,1.5,default,frames/P_0006.png,no foreground in ROI
+20261021_224154_seed42,42,7,good,unknown,0.0,nan,0,157.72,0.53,10.539,1.5,default,frames/P_0007.png,no foreground in ROI
+20261021_224154_seed42,42,8,defect,unknown,0.0,nan,0,157.73,0.555,12.037,1.5,default,frames/P_0008.png,no foreground in ROI
+20261021_224154_seed42,42,9,good,unknown,0.0,nan,0,77.92,0.789,13.538,1.5,default,frames/P_0009.png,no foreground in ROI
+20261021_224154_seed42,42,10,defect,unknown,0.0,nan,0,138.14,0.525,15.034,1.5,default,frames/P_0010.png,no foreground in ROI
+20261021_224154_seed42,42,11,defect,unknown,0.0,nan,0,80.53,0.482,16.536,1.5,default,frames/P_0011.png,no foreground in ROI
+20261021_224154_seed42,42,12,good,unknown,0.0,nan,0,72.81,0.682,18.038,1.5,default,frames/P_0012.png,no foreground in ROI
+20261021_224154_seed42,42,13,defect,unknown,0.0,nan,0,86.6,0.748,19.537,1.5,default,frames/P_0013.png,no foreground in ROI
+20261021_224154_seed42,42,14,defect,unknown,0.0,nan,0,77.13,0.481,21.039,1.5,default,frames/P_0014.png,no foreground in ROI
+20261021_224154_seed42,42,15,good,unknown,0.0,nan,0,87.31,0.57,22.541,1.5,default,frames/P_0015.png,no foreground in ROI
+20261021_224154_seed42,42,16,good,unknown,0.0,nan,0,139.89,0.525,24.039,1.5,default,frames/P_0016.png,no foreground in ROI
+20261021_224154_seed42,42,17,defect,unknown,0.0,nan,316,137.03,1.403,25.538,1.5,default,frames/P_0017.png,largest blob 316px < min_area 400px
+20261021_224154_seed42,42,18,good,unknown,0.0,nan,0,171.99,0.728,27.04,1.5,default,frames/P_0018.png,no foreground in ROI
+20261021_224154_seed42,42,19,good,unknown,0.0,nan,0,147.72,0.552,28.543,1.5,default,frames/P_0019.png,no foreground in ROI
+20261021_224154_seed42,42,20,defect,unknown,0.0,nan,0,143.4,0.633,30.034,1.5,default,frames/P_0020.png,no foreground in ROI
+20261021_224154_seed42,42,21,good,unknown,0.0,nan,0,112.97,0.563,31.536,1.5,default,frames/P_0021.png,no foreground in ROI
+20261021_224154_seed42,42,22,good,unknown,0.0,nan,0,54.16,0.565,33.036,1.5,default,frames/P_0022.png,no foreground in ROI
+20261021_224154_seed42,42,23,good,unknown,0.0,nan,0,70.6,1.506,34.535,1.5,default,frames/P_0023.png,no foreground in ROI
+20261021_224154_seed42,42,24,defect,unknown,0.0,nan,0,57.86,0.638,36.035,1.5,default,frames/P_0024.png,no foreground in ROI
+20261021_224154_seed42,42,25,good,unknown,0.0,nan,24,132.31,0.555,37.541,1.5,default,frames/P_0025.png,largest blob 24px < min_area 400px
+20261021_224154_seed42,42,26,good,unknown,0.0,nan,0,98.39,0.836,39.039,1.5,default,frames/P_0026.png,no foreground in ROI
+20261021_224154_seed42,42,27,defect,unknown,0.0,nan,0,97.21,0.547,40.535,1.5,default,frames/P_0027.png,no foreground in ROI
+20261021_224154_seed42,42,28,defect,unknown,0.0,nan,0,185.99,0.543,42.042,1.5,default,frames/P_0028.png,no foreground in ROI
+20261021_224154_seed42,42,29,good,unknown,0.0,nan,0,115.0,0.555,43.537,1.5,default,frames/P_0029.png,no foreground in ROI
+20261021_224154_seed42,42,30,good,unknown,0.0,nan,0,124.94,0.828,45.038,1.5,default,frames/P_0030.png,no foreground in ROI
