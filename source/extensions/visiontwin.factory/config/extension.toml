@@ -1,0 +1,67 @@
+# SPDX-FileCopyrightText: Copyright (c) 2024 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+# SPDX-License-Identifier: LicenseRef-NvidiaProprietary
+#
+# NVIDIA CORPORATION, its affiliates and licensors retain all intellectual
+# property and proprietary rights in and to this material, related
+# documentation and any modifications thereto. Any use, reproduction,
+# disclosure or distribution of this material and related documentation
+# without an express license agreement from NVIDIA CORPORATION or
+# its affiliates is strictly prohibited.
+
+[package]
+title = "VisionTwin Factory"
+version = "0.1.0"  # Semantic Versioning is used: https://semver.org/
+description = "VisionTwin: conveyor simulation, camera-based inspection and sorting dashboard."
+category = "Simulation"  # How to categorize this in the Extension Manager
+changelog = "docs/CHANGELOG.md"
+icon = "data/icon.png"  # Icon to show in the Extension Manager
+keywords = ["kit", "visiontwin", "factory", "conveyor", "vision"]  # Search keywords for the Extension Manager
+preview_image = "data/preview.png"  # Preview to show in the Extension Manager
+readme  = "docs/README.md"  # Path (relative to the root) or content of readme markdown file for UI
+repository = "https://github.com/NVIDIA-Omniverse/kit-app-template"  # URL of the extension source repository
+
+
+[dependencies]
+"omni.kit.uiapp" = {}
+"omni.usd" = {}
+"omni.kit.viewport.utility" = {}
+"omni.kit.widget.viewport" = {}
+"omni.kit.pipapi" = {}
+"omni.kit.pip_archive" = {}  # provides Kit's bundled numpy (needed by cv2)
+
+
+[settings]
+# Where runs (frames + CSV) are written. Tokens are resolved. The app .kit overrides this
+# to the repository's results/ folder.
+exts."visiontwin.factory".outputDir = "${data}/visiontwin_results"
+exts."visiontwin.factory".recordFrames = true
+
+
+# OpenCV inside Kit's Python. Prototype-only mechanism (installs at first enable).
+# Pinned to the same version as tests/ use; --no-deps keeps Kit's bundled numpy untouched.
+[python.pipapi]
+requirements = ["opencv-python-headless==4.13.0.92"]
+modules = ["cv2"]
+use_online_index = true
+extra_args = ["--no-deps"]
+
+
+[[python.module]]  # Main python module this extension provides, it will be publicly available as "import visiontwin.factory"
+name = "visiontwin.factory"
+
+
+[documentation]
+pages = [
+    "docs/Overview.md",
+    "docs/CHANGELOG.md",
+]
+
+
+[[test]]
+dependencies = [
+    "omni.kit.test",
+    "omni.kit.ui_test"  # UI testing extension
+]
+
+args = [
+]
