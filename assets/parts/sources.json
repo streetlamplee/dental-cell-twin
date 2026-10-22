@@ -1,0 +1,70 @@
+{
+    "_comment":  "Real CAD parts used as products (Day 6). Only redistributable licenses. fetch_parts.ps1 downloads status=selected entries (or -Name for any) to raw/\u003cname\u003e.step and records sha256 on first download. status: selected | candidate | rejected (with reason). FreeCAD-library URLs are pinned to commit f5ca01cdcaa2f69b9295a6382719c2d90628780c (2026-10-07). Attribution: LICENSES.md.",
+    "parts":  [
+                  {
+                      "name":  "kfl08",
+                      "title":  "KFL08 2-bolt flange bearing unit (8 mm bore)",
+                      "url":  "https://raw.githubusercontent.com/FreeCAD/FreeCAD-library/f5ca01cdcaa2f69b9295a6382719c2d90628780c/Mechanical%20Parts/Mountings/KFL08/KFL08.step",
+                      "license":  "CC-BY-3.0",
+                      "license_url":  "https://github.com/FreeCAD/FreeCAD-library/blob/master/LICENSE-Assets",
+                      "attribution":  "FreeCAD-library contributors (see commit history of Mechanical Parts/Mountings/KFL08)",
+                      "status":  "selected",
+                      "sha256":  "938d5e7e596d5e9586e7b2d7cef89da3003d3cf734dbfa5ab39f6e790319c090",
+                      "author":  "hasecilu (commit b7b292a783, 2022-02-24)"
+                  },
+                  {
+                      "name":  "kp08",
+                      "title":  "KP08 pillow block bearing (8 mm bore)",
+                      "url":  "https://raw.githubusercontent.com/FreeCAD/FreeCAD-library/f5ca01cdcaa2f69b9295a6382719c2d90628780c/Mechanical%20Parts/Mountings/KP08/KP08.step",
+                      "license":  "CC-BY-3.0",
+                      "license_url":  "https://github.com/FreeCAD/FreeCAD-library/blob/master/LICENSE-Assets",
+                      "attribution":  "FreeCAD-library contributors (see commit history of Mechanical Parts/Mountings/KP08)",
+                      "status":  "candidate",
+                      "sha256":  "36db30999125844222fce7c15c9e49a91fec92cd5776f96207fa4c2c48527e26",
+                      "reason":  "alternate: same bearing insert as kfl08, not needed for the MVP"
+                  },
+                  {
+                      "name":  "sc8uu",
+                      "title":  "SC8UU linear bearing block (8 mm)",
+                      "url":  "https://raw.githubusercontent.com/FreeCAD/FreeCAD-library/f5ca01cdcaa2f69b9295a6382719c2d90628780c/Mechanical%20Parts/Mountings/SC8UU/SC8UU.step",
+                      "license":  "CC-BY-3.0",
+                      "license_url":  "https://github.com/FreeCAD/FreeCAD-library/blob/master/LICENSE-Assets",
+                      "attribution":  "FreeCAD-library contributors (see commit history of Mechanical Parts/Mountings/SC8UU)",
+                      "status":  "rejected",
+                      "sha256":  "5d436ba0ef1777f9b7b7381fbcc5983304b56408f0aecc22a8b6c0ae139e9123",
+                      "reason":  "inner bushing is hidden inside the case: a missing part is not visible from the top camera"
+                  },
+                  {
+                      "name":  "sk08",
+                      "title":  "SK08 shaft support (8 mm)",
+                      "url":  "https://raw.githubusercontent.com/FreeCAD/FreeCAD-library/f5ca01cdcaa2f69b9295a6382719c2d90628780c/Mechanical%20Parts/Mountings/SK08/SK08-SK08.step",
+                      "license":  "CC-BY-3.0",
+                      "license_url":  "https://github.com/FreeCAD/FreeCAD-library/blob/master/LICENSE-Assets",
+                      "attribution":  "FreeCAD-library contributors (see commit history of Mechanical Parts/Mountings/SK08)",
+                      "status":  "rejected",
+                      "sha256":  "bb89218f5cd90ce713b08359d4d719f4297483039ef55d2abb33eb5af65d9cd5",
+                      "reason":  "single solid: no sub-part for a missing defect"
+                  },
+                  {
+                      "name":  "l_plate_5h",
+                      "title":  "L-shaped 5-hole joining plate (2020 profile)",
+                      "url":  "https://raw.githubusercontent.com/FreeCAD/FreeCAD-library/f5ca01cdcaa2f69b9295a6382719c2d90628780c/Mechanical%20Parts/Mountings/Joining_plate/L_shaped_5_holes-Plate.step",
+                      "license":  "CC-BY-3.0",
+                      "license_url":  "https://github.com/FreeCAD/FreeCAD-library/blob/master/LICENSE-Assets",
+                      "attribution":  "FreeCAD-library contributors (see commit history of Mechanical Parts/Mountings/Joining_plate)",
+                      "status":  "rejected",
+                      "sha256":  "c38dd6fc5132cee0d660daad78eda3a7928cc4ea2c5b04bbd97443312de6a90b",
+                      "reason":  "single solid: no sub-part for a missing defect"
+                  },
+                  {
+                      "name":  "kicad_dip8",
+                      "title":  "DIP-8 IC package (KiCad)",
+                      "url":  "https://gitlab.com/api/v4/projects/kicad%2Flibraries%2Fkicad-packages3D/repository/files/Package_DIP.3dshapes%2FDIP-8_W7.62mm.step/raw?ref=master\u0026lfs=true",
+                      "license":  "unclear: repo LICENSE.md says CC-BY-SA-4.0 + exception, file header says GPL-3.0-or-later + exception",
+                      "license_url":  "https://gitlab.com/kicad/libraries/kicad-packages3D/-/blob/master/LICENSE.md",
+                      "attribution":  "KiCad Libraries Team",
+                      "status":  "rejected",
+                      "reason":  "conflicting license statements (Gate D: unclear license is not committed); single solid, no sub-part for a missing defect"
+                  }
+              ]
+}
