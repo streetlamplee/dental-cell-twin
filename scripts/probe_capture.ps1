@@ -4,6 +4,7 @@
 출력: results/smoke/probe_<timestamp>_A.png / _B.png (성공한 방법만), logs/probe_capture_<timestamp>.log
 #>
 . "$PSScriptRoot\_common.ps1"
+Warn-IfKitRunning
 
 $bat = Join-Path $Root "_build\windows-x86_64\release\visiontwin.app.kit.bat"
 if (-not (Test-Path $bat)) { throw "Not built yet. Run .\scripts\build_app.ps1 first." }

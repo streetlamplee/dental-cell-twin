@@ -1,4 +1,4 @@
-<#
+﻿<#
 목적: GUI 앱을 실행해 컨베이어 1회 전체 실행(검사 카메라 캡처 + 실시간 판정 + 배출)을 하고 종료한다.
 사용법: .\scripts\collect_frames.ps1 [-Seed 42] [-Products 30] [-Speed 0.5] [-Part box]
 인자: -Seed 랜덤 시드, -Products 투입 제품 수, -Speed 컨베이어 속도(m/s),
@@ -13,6 +13,7 @@ param(
     [string]$Part = "box"
 )
 . "$PSScriptRoot\_common.ps1"
+Warn-IfKitRunning
 
 $bat = Join-Path $Root "_build\windows-x86_64\release\visiontwin.app.kit.bat"
 if (-not (Test-Path $bat)) { throw "Not built yet. Run .\scripts\build_app.ps1 first." }

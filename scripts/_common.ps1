@@ -16,10 +16,12 @@ $env:Path = (($env:Path -split ';') | Where-Object { $_.Trim() -ne '' }) -join '
 # Kit flags for unattended runs (--exec scripts): no crash-report dialog, no save prompt on quit.
 $KitAutomationArgs = "--/crashreporter/gatherUserStory=0 --/app/file/ignoreUnsavedOnExit=true"
 
-# Two Kit instances sharing the 8 GB GPU coincided with D3D crashes when the inspection
-# viewport was created (docs: [[검사 카메라 프레임 캡처 (Gate B)]]). Warn, do not block.
-if (Get-Process kit -ErrorAction SilentlyContinue) {
-    Write-Warning "Another kit.exe is running. Close it for stable automated runs (shared GPU memory)."
+# Call from scripts that launch Kit. Warn (do not block) when another kit.exe already runs:
+# two instances share the 8 GB GPU (docs: [[검사 카메라 프레임 캡처 (Gate B)]]).
+function Warn-IfKitRunning {
+    if (Get-Process kit -ErrorAction SilentlyContinue) {
+        Write-Warning "Another kit.exe is running. Close it for stable automated runs (shared GPU memory)."
+    }
 }
 
 function New-LogPath([string]$Name) {

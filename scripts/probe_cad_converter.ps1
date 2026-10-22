@@ -1,4 +1,4 @@
-<#
+﻿<#
 목적: Gate C 진단. 이 프로젝트의 Kit에서 USD converter(omni.kit.converter.hoops_core)로 STP 1개를 USD로 바꿔 본다.
 사용법: .\scripts\probe_cad_converter.ps1 -Stp <file.stp>
 인자: -Stp  변환할 STP 파일
@@ -8,6 +8,7 @@ param(
     [Parameter(Mandatory = $true)][string]$Stp
 )
 . "$PSScriptRoot\_common.ps1"
+Warn-IfKitRunning
 
 $bat = Join-Path $Root "_build\windows-x86_64\release\visiontwin.app.kit.bat"
 if (-not (Test-Path $bat)) { throw "Not built yet. Run .\scripts\build_app.ps1 first." }

@@ -1,4 +1,4 @@
-<#
+﻿<#
 목적: 메인 Viewport 렌더 배율에 따른 벽시계 실행 시간을 잰다(같은 시드/제품 수의 짧은 run).
 사용법: .\scripts\bench_render.ps1 [-Scale 0.5] [-Products 10]
 인자: -Scale  메인 Viewport resolution_scale, -Products  투입 제품 수
@@ -9,6 +9,7 @@ param(
     [int]$Products = 10
 )
 . "$PSScriptRoot\_common.ps1"
+Warn-IfKitRunning
 
 $bat = Join-Path $Root "_build\windows-x86_64\release\visiontwin.app.kit.bat"
 $exec = (Join-Path $PSScriptRoot "collect_frames.py") -replace '\\', '/'

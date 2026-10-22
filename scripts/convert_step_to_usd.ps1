@@ -1,4 +1,4 @@
-<#
+﻿<#
 목적: STEP 파일을 USD converter(omni.kit.converter.hoops_core)로 USD로 변환한다. 옵션은 config/cad_converter_options.json.
 사용법: .\scripts\convert_step_to_usd.ps1 -Stp assets\cad\teeth_mill.stp [-Out assets\cad\teeth_mill.usd]
 인자: -Stp 입력 STEP, -Out 출력 USD (기본: 입력과 같은 폴더, 같은 이름 .usd)
@@ -9,6 +9,7 @@ param(
     [string]$Out = ""
 )
 . "$PSScriptRoot\_common.ps1"
+Warn-IfKitRunning
 
 $bat = Join-Path $Root "_build\windows-x86_64\release\visiontwin.app.kit.bat"
 if (-not (Test-Path $bat)) { throw "Not built yet. Run .\scripts\build_app.ps1 first." }
