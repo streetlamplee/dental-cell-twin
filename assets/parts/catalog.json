@@ -1,15 +1,36 @@
 {
-  "_comment": "Product parts built from real CAD (Day 6). make_part_variants.ps1 writes usd/<part>_<variant>.usda as reference + override layers on the converted USD (never edited). Paths below are relative to the converted asset's default prim. Paint colours are simulation choices (the STEP case is dark grey, too close to the belt).",
+  "_comment": "Product parts built from CAD (Day 6/7). make_part_variants.ps1 writes usd/<part>_<variant>.usda (final shape) and, for processed parts, usd/<part>_<variant>_raw.usda (before processing), as reference + override layers on the converted USD (never edited). Paths relative to the converted asset's default prim; paint_prims '*' = every mesh. Paint colours are simulation choices. Optional per part: process (station + cycle seconds, compressed time), spawn_interval_s, camera (inspection camera height above the belt and focal length).",
   "kfl08": {
     "converted_usd": "usd/kfl08.usd",
     "target_length_m": 0.2,
     "rotate_xyz_deg": [0, -90, 90],
     "paint_prims": ["KFL08/Case/Case001"],
     "insert_prims": ["KFL08/Rings", "KFL08/Seals", "KFL08/Balls", "KFL08/Cages", "KFL08/Rivets"],
+    "inspection": {"segment": "saturation", "color_metric": "hue", "interior_check": true},
     "variants": {
       "good": {"paint_rgb": [0.10, 0.30, 0.80], "ground_truth": "good", "defect_kind": null},
       "color": {"paint_rgb": [0.85, 0.35, 0.10], "ground_truth": "defect", "defect_kind": "color"},
       "missing": {"paint_rgb": [0.10, 0.30, 0.80], "remove_insert": true, "ground_truth": "defect", "defect_kind": "missing"}
+    }
+  },
+  "crown": {
+    "_comment": "Dental milling line (Day 7): blank -> mill -> crown. Our own CadQuery models (scripts/make_dental_parts.ps1), real size. Zirconia ivory vs wrong material (pink PMMA); shape defect = milling left a corner of blank material (tool breakage). cycle_s is compressed (a real crown takes 10+ minutes).",
+    "rotate_xyz_deg": [0, 0, 0],
+    "paint_prims": ["*"],
+    "process": {"station": "mill", "cycle_s": 3.0},
+    "spawn_interval_s": 3.0,
+    "camera": {"height_above_belt": 0.15, "focal_mm": 35.0},
+    "inspection": {"segment": "bright", "color_metric": "ab", "golden_contour": true},
+    "variants": {
+      "good": {"ground_truth": "good", "defect_kind": null,
+               "raw": {"source": "usd/dental_blank.usd", "paint_rgb": [0.93, 0.90, 0.80]},
+               "final": {"source": "usd/dental_crown.usd", "paint_rgb": [0.93, 0.90, 0.80]}},
+      "color": {"ground_truth": "defect", "defect_kind": "color",
+                "raw": {"source": "usd/dental_blank.usd", "paint_rgb": [0.92, 0.55, 0.62]},
+                "final": {"source": "usd/dental_crown.usd", "paint_rgb": [0.92, 0.55, 0.62]}},
+      "shape": {"ground_truth": "defect", "defect_kind": "shape",
+                "raw": {"source": "usd/dental_blank.usd", "paint_rgb": [0.93, 0.90, 0.80]},
+                "final": {"source": "usd/dental_crown_incomplete.usd", "paint_rgb": [0.93, 0.90, 0.80]}}
     }
   }
 }

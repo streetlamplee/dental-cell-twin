@@ -11,7 +11,7 @@ def Xform "Part" (
             string defect_kind = ""
             string ground_truth = "good"
             string part = "kfl08"
-            string source_step = "raw/kfl08.step"
+            string stage = "final"
             string variant = "good"
         }
     }
