@@ -120,6 +120,17 @@ def test_products_never_spawn_closer_than_min_gap():
         assert sim.time < 600
 
 
+def test_station_line_emits_one_event_per_product_and_keeps_lifecycle():
+    cfg = ConveyorConfig(max_products=10, stations=(("mill", -1.8),))
+    sim = ConveyorSim(cfg)
+    events = run_to_end(sim, dt=0.25)
+    station = [e for e in events if e.kind == "STATION"]
+    assert [e.product_id for e in station] == list(range(1, 11))
+    assert all(e.station == "mill" and e.x == -1.8 for e in station)
+    for pid, kinds in kinds_by_product([e for e in events if e.kind != "STATION"]).items():
+        assert kinds == [SPAWN, INSPECT, SORT, EXIT]
+
+
 def test_invalid_transition_raises():
     t = ProductTracker()
     p = t.spawn(GOOD, None, 0.0, 0.0)

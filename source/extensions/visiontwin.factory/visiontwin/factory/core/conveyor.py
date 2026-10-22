@@ -7,7 +7,7 @@ cannot skip an inspection or reject line.
 
 import random
 from dataclasses import dataclass
-from typing import Callable, List, Optional
+from typing import Callable, List, Optional, Tuple
 
 from . import layout as L
 from .product_tracker import DEFECT, GOOD, Product, ProductState, ProductTracker
@@ -18,6 +18,7 @@ INSPECT = "INSPECT"  # crossed the inspection line
 SORT = "SORT"  # crossed the reject line and stayed on the belt
 REJECT = "REJECT"  # crossed the reject line and was pushed off
 EXIT = "EXIT"  # left the line (end of belt or into the reject bin)
+STATION = "STATION"  # crossed a station line (e.g. the mill); `station` names it
 
 
 @dataclass(frozen=True)
@@ -26,6 +27,7 @@ class LineEvent:
     product_id: int
     kind: str
     x: float
+    station: str = ""
 
 
 @dataclass
@@ -36,6 +38,7 @@ class ConveyorConfig:
     defect_rate: float = 0.3
     max_products: int = 30
     min_gap: float = L.PRODUCT_SIZE * 1.5  # spawn waits until the previous product moved this far
+    stations: Tuple[Tuple[str, float], ...] = ()  # (name, x): visual stations, emit STATION events
 
 
 # Returns True if the product must be pushed off at the reject line.
@@ -135,6 +138,10 @@ class ConveyorSim:
 
         def t_at(line: float) -> float:
             return t_start + (line - x0) / speed
+
+        for name, sx in self.config.stations:
+            if p.state in (ProductState.MOVING, ProductState.INSPECTED, ProductState.SORTED) and crossed(sx):
+                events.append(LineEvent(t_at(sx), p.product_id, STATION, sx, name))
 
         if p.state == ProductState.MOVING and crossed(L.INSPECTION_X):
             self.tracker.transition(p.product_id, ProductState.INSPECTED)

@@ -18,7 +18,7 @@ from omni.kit.viewport.utility import get_active_viewport
 from . import scene_manager as scene
 from .core import layout as L
 from .core.camera_model import inspection_roi
-from .core.conveyor import EXIT, INSPECT, REJECT, SORT, SPAWN, ConveyorConfig, ConveyorSim
+from .core.conveyor import EXIT, INSPECT, REJECT, SORT, SPAWN, STATION, ConveyorConfig, ConveyorSim
 from .core.inspection_log import InspectionLog, InspectionRecord
 from .core.product_tracker import ProductState
 from .core.run_results import build_rows, write_csv
@@ -61,6 +61,7 @@ class VisionTwinFactoryExtension(omni.ext.IExt):
         self._inspector = None
         self._log = None  # InspectionLog for the current run
         self._anims = {}  # product_id -> sim time the reject animation started
+        self._mill = None  # MillStation (CAD asset), when the asset files exist
         self.run_dir = None
         self.run_complete = False
         self.summary = None
@@ -112,6 +113,7 @@ class VisionTwinFactoryExtension(omni.ext.IExt):
         ctx = omni.usd.get_context()
         await ctx.new_stage_async()
         scene.build_factory_scene(ctx.get_stage())
+        self._mill = self._create_mill_station(ctx.get_stage())
         self._reset_run_state()
         await omni.kit.app.get_app().next_update_async()
         if main is not None:
@@ -163,7 +165,8 @@ class VisionTwinFactoryExtension(omni.ext.IExt):
     def _conveyor_config() -> ConveyorConfig:
         return ConveyorConfig(seed=int(_setting("seed", 42)),
                               max_products=int(_setting("maxProducts", 30)),
-                              speed=float(_setting("speed", 0.5)))
+                              speed=float(_setting("speed", 0.5)),
+                              stations=(("mill", L.MILL_X),))
 
     def _new_sorter(self):
         self._sorter = SortingController(unknown_policy=str(_setting("unknownPolicy", "reject")))
@@ -179,6 +182,23 @@ class VisionTwinFactoryExtension(omni.ext.IExt):
         self._stale_frames = 0
         self.run_complete = False
         self.summary = None
+
+    def _create_mill_station(self, stage):
+        """Reference the CAD-converted mill (Day 5). Optional: skipped if the files are missing."""
+        asset = _resolve(_setting("millAsset", ""))
+        kin = _resolve(_setting("millKinematics", ""))
+        if not (_setting("millStation", True) and os.path.isfile(asset) and os.path.isfile(kin)):
+            carb.log_warn(f"{LOG_PREFIX} mill station skipped (asset={asset!r}, kinematics={kin!r})")
+            return None
+        from .mill_station import MillStation
+
+        try:
+            station = MillStation(stage, asset, kin)
+        except Exception as exc:  # the line must still work without the visual station
+            carb.log_error(f"{LOG_PREFIX} mill station failed: {exc}")
+            return None
+        print(f"{LOG_PREFIX} mill station ready ({asset})")
+        return station
 
     def _destroy_frame_provider(self):
         if self._frames is not None:
@@ -266,6 +286,8 @@ class VisionTwinFactoryExtension(omni.ext.IExt):
                 self._anims[p.product_id] = e.time
             elif e.kind == EXIT and p.exit_route == "pass":
                 scene.remove_product_prim(stage, p.product_id)
+            elif e.kind == STATION and e.station == "mill" and self._mill is not None:
+                self._mill.cycle.trigger(e.time)
             reason = ""
             if e.kind in (REJECT, SORT):
                 reason = f" ({self._sorter.decisions[p.product_id].reason})"
@@ -275,6 +297,8 @@ class VisionTwinFactoryExtension(omni.ext.IExt):
         for p in self._sim.tracker.on_belt():
             scene.move_product_prim(stage, p.product_id, p.x)
         self._animate_rejects(stage, finish=False)
+        if self._mill is not None:
+            self._mill.apply(self._sim.time)
         # Request frames after the prims moved, so the next render shows the product on the line.
         for pid in inspected:
             self._request_inspection(pid)

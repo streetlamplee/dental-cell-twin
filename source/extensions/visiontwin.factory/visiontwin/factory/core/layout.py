@@ -34,6 +34,13 @@ MARKER_OFFSET_Y = CONVEYOR_WIDTH / 2.0 + 0.06
 # spawn gap so a neighbour never enters it.
 INSPECTION_HALF_LENGTH = 0.25
 
+# Mill station (CAD asset from reference/teeth_mill.urdf): behind the belt (+Y), upstream
+# of the inspection line and outside the inspection camera's view (|y| > ~0.5 m there).
+MILL_X = -1.8  # station line: products crossing it trigger a machining cycle
+MILL_Y = 0.85
+MILL_STAND_HEIGHT = 0.6
+MILL_PATH = "/World/Factory/MillStation"
+
 # Root prim paths
 ROOT_PATH = "/World"
 FACTORY_PATH = "/World/Factory"

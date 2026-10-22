@@ -35,7 +35,8 @@ def _print_stage_info(viewport):
     print(f"{TAG} upAxis={UsdGeom.GetStageUpAxis(stage)} metersPerUnit={UsdGeom.GetStageMetersPerUnit(stage)}")
     print(f"{TAG} camera={viewport.camera_path} pos={xf.ExtractTranslation()}")
     cache = UsdGeom.BBoxCache(0, [UsdGeom.Tokens.default_])
-    for path in ("/World/Factory/Floor", "/World/Factory/Conveyor", "/World/Products"):
+    for path in ("/World/Factory/Floor", "/World/Factory/Conveyor", "/World/Products",
+                 "/World/Factory/MillStation/Mill"):
         prim = stage.GetPrimAtPath(path)
         rng = cache.ComputeWorldBound(prim).ComputeAlignedRange() if prim else None
         print(f"{TAG} bbox {path}: {rng}")
