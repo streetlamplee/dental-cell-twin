@@ -14,6 +14,7 @@ tags: [visiontwin, index]
 - [[2026-10-21 작업 규칙 - 스크립트화와 Obsidian 문서화]]
 - [[2026-10-21 Kit 110.4.0 kit_base_editor 기반 앱 구성]]
 - [[2026-10-21 고정 시뮬레이션 스텝과 동기 렌더링]]
+- [[2026-10-22 CAD 자산 파이프라인 추가 (URDF→STP→USD)]]
 
 ## Changes (코드 수정)
 - [[2026-10-21 Day1 visiontwin.factory 확장 골격과 팩토리 씬]]
@@ -34,3 +35,4 @@ tags: [visiontwin, index]
 
 ## Progress
 - [[2026-10-21 Progress]]
+- [[2026-10-22 Progress]]

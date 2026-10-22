@@ -4,6 +4,9 @@
 > 시작일 예시: 2026-10-22 ~ 2026-10-28 (원하는 시작일에 맞춰 Day 1~7 재배치)  
 > 목표: **가상 컨베이어 → 카메라 기반 검사 → 제품별 판정 → 자동 분류 → 대시보드 → 재현 가능한 실험 → 포트폴리오 공개**
 
+> **변경 이력**
+> - 2026-10-22: **CAD 자산 파이프라인 추가.** `reference/teeth_mill.urdf`(5축 치과용 밀링기)를 STP로 변환하고, 사용자의 USD converter(HOOPS CAD 변환, `usd_converter` 프로젝트)로 USD를 만들어 공장 라인의 **가공 스테이션**으로 넣는다. 새 Day 5로 넣고, 기존 Day 5~7은 Day 6~8로 미룬다. Day 1~4는 2026-10-21에 끝났으므로 종료일(10-28)은 그대로다. 결정 기록: `docs/decisions/2026-10-22 CAD 자산 파이프라인 추가 (URDF→STP→USD).md`
+
 ## 0. 성공 정의 및 범위
 
 **7일 후 반드시 남길 결과물**
@@ -14,10 +17,12 @@
 4. 제품 ID별 검사 결과를 기록하고 그 제품이 분류 영역에 도착할 때만 배출하는 상태 머신.
 5. 결과 CSV와 기본 성능 리포트(정확도, 검사 지연, 처리량, 분류 성공률).
 6. GitHub에 올릴 README, 구조도, 60~120초 데모 동영상, 한계와 다음 단계.
+7. **(추가) CAD 자산 파이프라인:** URDF → STP → (USD converter) → USD를 스크립트 한 줄씩으로 재현할 수 있고, 변환된 밀링기가 라인의 가공 스테이션으로 씬에 들어간다. URDF의 관절 정보는 별도 파일로 보존해 USD에 다시 적용한다.
 
 **완료 판정(Done):** 신규 개발환경에서 문서대로 실행 가능하고, 동일한 고정 시드로 최소 30개 제품의 전체 사이클을 시연하며, 각 제품에 `id, ground_truth, prediction, ejection_result, inspection_latency_ms`가 저장됨. 정확도·분류 성공률은 **실측값 그대로** 공개(수치 보장/조작 금지).
 
-**의도적으로 제외:** 실물 컨베이어 제작, ESP32/MQTT 연동, 로봇팔, 실제 공장 수준 물리 검증, 복잡한 딥러닝 학습, 고도화된 PLC, 대규모 Synthetic Data 생성. 이는 7일 이후 확장 과제.
+**의도적으로 제외:** 실물 컨베이어 제작, ESP32/MQTT 연동, 로봇팔, 실제 공장 수준 물리 검증, 복잡한 딥러닝 학습, 고도화된 PLC, 대규모 Synthetic Data 생성. 이는 7일 이후 확장 과제.  
+CAD 자산에서도 **물리(관성, 충돌, 관절 드라이브), 실제 가공(G-code) 연동, 정밀 치수 검증**은 제외한다. 밀링기 모델의 치수와 감속비는 URDF에 적힌 대로 임시값이다.
 
 **중요한 구분:** 이번 결과는 **시뮬레이션 기반 디지털 트윈 프로토타입**이다. 실제 현장과 동기화된 검증된 디지털 트윈이라고 주장하지 않는다.
 
@@ -39,6 +44,12 @@
 - **예:** 실제 렌더 프레임을 비전 알고리즘에 입력한다.
 - **아니오:** Kit/Isaac Sim의 **설치 버전에 맞는 공식 API**를 확인하고, 일시적으로 저장된 렌더 PNG를 읽어 검사 엔진을 완성한다. 최종 README에 실시간 프레임 연동 여부를 정확히 명시한다. USD 메타데이터로 판정하는 것은 비전 결과로 간주하지 않는다.
 
+**Gate C — (추가) USD converter가 이 프로젝트의 Kit 110.4에서 STP를 USD로 바꾸는가?** (Day 5 첫 90분)
+
+- **예:** `omni.kit.converter.hoops_core`를 이 프로젝트의 변환 스크립트에서 바로 쓴다.
+- **아니오(Kit 110.4에 없음/실패):** 기존 `usd_converter` 앱(Kit 109.0.3)을 **외부 변환 도구**로 호출하는 스크립트를 만든다. 변환된 USD를 `assets/`에 커밋하고, 변환에 쓴 Kit 버전을 기록한다. 이 경우에도 변환 명령은 스크립트로 재현 가능해야 한다.
+- **둘 다 막힘:** URDF → USD를 코드로 직접 생성(박스/실린더 프림)해 씬 통합과 관절 동작은 끝내고, STP 경로는 Known Issue로 남긴다. "USD converter로 변환했다"고 주장하지 않는다.
+
 ## 2. 권장 MVP 아키텍처
 
 ```text
@@ -50,8 +61,23 @@ Omniverse Kit / OpenUSD
   ├─ VisionInspector: OpenCV, ROI, pass/fail, latency
   ├─ SortingController: 제품 ID와 위치를 기준으로 배출
   ├─ DashboardExtension: omni.ui controls + counters + status
-  └─ EventLogger: CSV, config + random_seed
+  ├─ EventLogger: CSV, config + random_seed
+  └─ (추가) MillStation: CAD에서 변환한 밀링기 USD + 관절 동작(시각용)
+
+CAD 자산 파이프라인 (오프라인, 스크립트로 재현)
+  reference/teeth_mill.urdf
+    ├─ urdf_to_step  → assets/cad/teeth_mill.stp           (링크별 솔리드, 홈 자세, 색상)
+    │                 → assets/cad/teeth_mill.kinematics.json (관절: 종류, 축, 원점, 한계, 부모/자식)
+    └─ USD converter (HOOPS) → assets/cad/teeth_mill.usd   (지오메트리)
+         └─ MillStation: 단위/축 정규화, 링크 프림 매핑, kinematics.json으로 관절 피벗 구성
 ```
+
+**CAD 파이프라인 핵심 규칙**
+
+- STEP에는 관절이 없다. **관절의 원본은 URDF**이고, `kinematics.json`으로 옮겨 USD에 다시 적용한다. 변환 후 USD를 손으로 고쳐 관절을 맞추지 않는다.
+- STEP 안의 부품 이름 = URDF 링크 이름. 변환된 USD에서 이 이름으로 링크를 찾는다. 이름 매칭이 깨지면 실패로 처리하고 추측하지 않는다.
+- 단위와 축은 변환 직후 검증한다. URDF는 m, Z-up이고 STEP/HOOPS 출력은 mm 또는 cm일 수 있다. 바운딩 박스를 URDF 치수와 비교하는 테스트를 둔다.
+- 밀링기는 **시각 자산**이다. 비전 검사와 분류 로직(정답 라벨, 판정)에 영향을 주지 않는다.
 
 **핵심 구현 규칙**
 
@@ -64,9 +90,9 @@ Omniverse Kit / OpenUSD
 
 ## 3. 7일 상세 일정
 
-> **시간 예산:** 하루 6~8시간(총 42~56시간), Agent가 코드 초안·테스트·문서 작성을 지원한다는 가정. Agent는 실제 GUI 실행이나 환경 오류를 스스로 해결한다고 가정하지 않는다. 사용자가 로컬에서 명령을 실행하고 화면·로그를 돌려주는 협업 형태.
+> **시간 예산:** 하루 6~8시간(총 42~56시간; CAD Day 추가 후 작업일 8일, 달력 종료일은 10-28 유지), Agent가 코드 초안·테스트·문서 작성을 지원한다는 가정. Agent는 실제 GUI 실행이나 환경 오류를 스스로 해결한다고 가정하지 않는다. 사용자가 로컬에서 명령을 실행하고 화면·로그를 돌려주는 협업 형태.
 
-### Day 1 — 개발 환경 · 최소 Kit Extension (6~8h)
+### Day 1 — 개발 환경 · 최소 Kit Extension (6~8h) — ✅ 완료 2026-10-21
 
 **핵심 목표:** 실행 가능한 Kit 앱 + 확장 패널 + USD Stage 스모크 테스트.
 
@@ -80,7 +106,7 @@ Omniverse Kit / OpenUSD
 
 **종료 게이트:** 앱 실행 → Extension 로드 → 버튼 반응 → Stage에서 컨베이어 보임.
 
-### Day 2 — 컨베이어 및 제품 추적 상태 머신 (6~8h)
+### Day 2 — 컨베이어 및 제품 추적 상태 머신 (6~8h) — ✅ 완료 2026-10-21
 
 **핵심 목표:** 물체가 스폰되어 이동하고 구역을 통과하는 반복 가능한 시뮬레이션.
 
@@ -94,7 +120,7 @@ Omniverse Kit / OpenUSD
 
 **종료 게이트:** 30개가 중복 ID 없이 이동하고 이벤트를 누락하지 않음.
 
-### Day 3 — 가상 카메라 RGB 기반 OpenCV 검사 (6~8h)
+### Day 3 — 가상 카메라 RGB 기반 OpenCV 검사 (6~8h) — ✅ 완료 2026-10-21
 
 **핵심 목표:** 진짜 **영상 픽셀**로 합격/불합격 판정.
 
@@ -111,7 +137,7 @@ Omniverse Kit / OpenUSD
 
 **비상 대체:** 실시간 텍스처 접근이 막히면 렌더 PNG 배치 검사로 엔진을 먼저 검증하고, 이 상태를 별도 표시한다.
 
-### Day 4 — 자동 분류 · 검사결과와 제품 ID 동기화 (6~8h)
+### Day 4 — 자동 분류 · 검사결과와 제품 ID 동기화 (6~8h) — ✅ 완료 2026-10-21
 
 **핵심 목표:** 검사한 **그 제품만** 올바르게 배출.
 
@@ -125,7 +151,26 @@ Omniverse Kit / OpenUSD
 
 **종료 게이트:** 30개 연속 실행 시 ID 매칭 오류 0건, 분류 결과와 정답 비교 CSV 확보. 다른 성능은 측정 결과를 그대로 기록.
 
-### Day 5 — Kit 대시보드 · 로그 (6~8h)
+### Day 5 — (추가) CAD 자산 파이프라인: URDF → STP → USD → 가공 스테이션 (6~8h)
+
+**핵심 목표:** `reference/teeth_mill.urdf`를 STP로 만들고, USD converter로 USD로 바꿔 공장 라인에 넣는다. 모든 단계는 스크립트로 다시 만들 수 있어야 한다.
+
+- [ ] **Gate C 확인(첫 90분):** 이 프로젝트의 Kit 110.4에서 `omni.kit.converter.hoops_core`가 로드되고, `usd_converter/STP_Input`의 작은 STP 하나가 USD로 바뀌는지 확인한다. 결과에 따라 직접 사용 또는 외부 도구(Kit 109 `usd_converter` 앱) 경로를 정한다.
+- [ ] **URDF 파서(순수 Python, 테스트 포함):** 링크, 비주얼(box/cylinder, origin, 색), 관절(종류, 축, 원점, 한계, 부모/자식)을 읽는다. 홈 자세(관절값 0)에서 각 비주얼의 월드 변환을 계산한다.
+- [ ] **URDF → STP:** 링크별로 솔리드를 만들고(부품 이름 = 링크 이름), 비주얼 색을 넣어 STEP(AP214) 어셈블리로 저장한다. 도구는 CadQuery/OCP(OpenCascade, pip)를 1순위로 하고, 안 되면 FreeCAD 명령줄을 쓴다. 같은 입력이면 같은 STP가 나오는지 확인한다.
+- [ ] **kinematics.json:** 관절 정보를 URDF에서 그대로 옮긴다(관절 이름 `x_joint, y_joint, z_joint, b_joint, c_joint`, 단위 m/rad).
+- [ ] **STP → USD:** USD converter(HOOPS) 옵션은 기존 `usd_converter`와 같게 시작한다(`bOptimize`, `instancing`, `tessLOD=0`, 메타데이터 off). 색상 보존 여부에 따라 `useMaterials`를 결정하고 기록한다.
+- [ ] **변환 결과 검증(스크립트):** 프림 계층에서 링크 이름을 모두 찾고, 단위/축을 정규화한 뒤 링크별 바운딩 박스를 URDF 치수와 비교한다(허용 오차 1 mm).
+- [ ] **MillStation 통합:** 컨베이어 옆(검사선 상류)에 가공 스테이션으로 배치한다. kinematics.json으로 링크마다 관절 피벗 Xform을 만들고, 제품이 스테이션 앞을 지날 때 X/Y/Z/B/C를 짧은 가공 사이클처럼 움직인다(시각 전용, 판정/분류에 영향 없음). Build Scene 버튼으로 함께 생성된다.
+- [ ] **렌더 스모크:** 밀링기가 Overview 화면에 보이고 검사 카메라 ROI에 들어오지 않는지 확인한다(검사 정확도 회귀 run 1회).
+
+**Agent에게 맡길 일:** URDF 파서와 단위 테스트, STP 생성 스크립트, HOOPS 변환 스크립트(Gate C 결과에 맞춰), 변환 검증 스크립트, MillStation 코드, 회귀 run.
+
+**종료 게이트:** `scripts/`의 명령만으로 URDF → STP → USD가 재생성되고, 변환 검증 스크립트가 형상이 있는 링크 6개(비주얼 16개)와 움직이는 관절 5개를 모두 매칭하며, GUI에서 밀링기가 라인 옆에서 관절을 움직이고, 검사/분류 회귀 run 결과가 그대로다(seed 42, 30/30).
+
+**비상 대체:** Gate C 참조. STP 생성이 막히면 STP 단계는 Known Issue로 두고 URDF → USD 직접 생성으로 씬 통합만 끝낸다.
+
+### Day 6 — Kit 대시보드 · 로그 (6~8h)
 
 **핵심 목표:** 포트폴리오에서 바로 시연 가능한 운영 UI.
 
@@ -139,7 +184,7 @@ Omniverse Kit / OpenUSD
 
 **종료 게이트:** UI 변경이 상태 머신에 반영되고 전체 실행 후 CSV 파일이 생성됨.
 
-### Day 6 — 실험 · 분석 · 안정화 (6~8h)
+### Day 7 — 실험 · 분석 · 안정화 (6~8h)
 
 **핵심 목표:** 단순 데모가 아닌 **데이터를 가진 엔지니어링 프로젝트**.
 
@@ -154,7 +199,7 @@ Omniverse Kit / OpenUSD
 
 **종료 게이트:** 실제 로그를 기반으로 한 실험표 1개 이상과 비교 그래프 1개 이상 완성.
 
-### Day 7 — 최종 검증 · GitHub · 발표 자료 (6~8h)
+### Day 8 — 최종 검증 · GitHub · 발표 자료 (6~8h)
 
 **핵심 목표:** 채용 담당자가 따라 할 수 있는 완성도.
 
@@ -226,7 +271,16 @@ product_id 기반 검사→배출 상태 머신을 구현해줘.
 검사 결과 지연, 미판정, 동일 지점에 근접한 2개 제품을 테스트해.
 ```
 
-**Day 6**
+**Day 5 (CAD 자산)**
+```text
+reference/teeth_mill.urdf를 순수 Python으로 파싱하고(테스트 포함), 링크 이름을 부품 이름으로 쓰는
+STEP 어셈블리와 관절 정보 kinematics.json을 만드는 스크립트를 작성해줘.
+그 다음 Kit 110.4에서 omni.kit.converter.hoops_core로 STP를 USD로 바꿀 수 있는지 먼저 확인하고(Gate C),
+변환된 USD의 링크 이름/단위/바운딩 박스를 URDF와 비교하는 검증 스크립트를 만들어줘.
+관절은 USD를 손으로 고치지 말고 kinematics.json으로만 다시 적용해.
+```
+
+**Day 7**
 ```text
 내가 제공한 실제 results.csv만 사용해서 Precision/Recall/F1,
 평균 및 p95 검사 지연, 처리량, 분류 성공률을 계산하고
@@ -234,7 +288,7 @@ product_id 기반 검사→배출 상태 머신을 구현해줘.
 결과가 없으면 추정값을 생성하지 마.
 ```
 
-**Day 7**
+**Day 8**
 ```text
 이 저장소와 실행 로그를 기준으로 채용 포트폴리오용 README를 작성해줘.
 내가 실제로 구현하지 못한 기능은 제외하고, 증빙 링크와 재현 방법을 포함해.
@@ -262,8 +316,11 @@ visiontwin/
 │           ├── sorting_controller.py
 │           ├── dashboard.py
 │           └── event_logger.py
+├── reference/
+│   └── teeth_mill.urdf               # (추가) CAD 파이프라인 입력. 원본은 ROS2 xacro
 ├── assets/
-│   └── factory.usd
+│   ├── factory.usd
+│   └── cad/                          # (추가) 생성물: teeth_mill.stp, .kinematics.json, .usd
 ├── experiments/
 │   ├── run_experiments.py
 │   └── analyze_results.py
@@ -298,9 +355,10 @@ visiontwin/
 | Day 2까지 Kit/Extension 불안정 | 실행 가능한 최소 데모와 환경 기록 | 3D 디테일 |
 | Day 3 프레임 연동 지연 | 렌더 PNG 기반 영상 검사, 정확한 한계 표기 | 실시간 영상 연동 |
 | Day 4 추적 오류 | 제품 ID·상태 머신·로그 안정화 | 제품 수·속도 |
-| Day 5 UI 늦음 | Start/Stop + 핵심 카운터 | 예쁜 차트·복잡한 메뉴 |
-| Day 6 실험 부족 | 동일 시드 재현 실험 + 실제 결과표 | 복잡한 모델/통계 |
-| Day 7 시간 부족 | 1분 영상, 실행법, 데이터, Known Issues | 고급 그래픽 연출 |
+| Day 5 CAD 변환 막힘 (Gate C) | URDF→STP 스크립트, 변환 경로 기록, 씬 통합 | HOOPS 직접 연동, 관절 동작 |
+| Day 6 UI 늦음 | Start/Stop + 핵심 카운터 | 예쁜 차트·복잡한 메뉴 |
+| Day 7 실험 부족 | 동일 시드 재현 실험 + 실제 결과표 | 복잡한 모델/통계 |
+| Day 8 시간 부족 | 1분 영상, 실행법, 데이터, Known Issues | 고급 그래픽 연출 |
 
 **시간 배분 원칙:** 동작하는 핵심 파이프라인 > 실제 검증 데이터 > 재현 가능한 설치 문서 > 시각적 완성도.
 
