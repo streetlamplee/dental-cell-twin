@@ -1,0 +1,146 @@
+{
+  "usd": "teeth_mill.usd",
+  "metersPerUnit": 0.001,
+  "upAxis": "Z",
+  "links": [
+    {
+      "link": "b_cradle",
+      "position_error_mm": 0.0
+    },
+    {
+      "link": "base_link",
+      "position_error_mm": 0.0
+    },
+    {
+      "link": "c_platter",
+      "position_error_mm": 0.0
+    },
+    {
+      "link": "x_carriage",
+      "position_error_mm": 0.0
+    },
+    {
+      "link": "y_table",
+      "position_error_mm": 0.0
+    },
+    {
+      "link": "z_slide",
+      "position_error_mm": 0.0
+    }
+  ],
+  "parts": [
+    {
+      "part": "base_plate",
+      "shape": "box",
+      "outside_mm": 0.0,
+      "inside_mm": 0.0,
+      "color_error": 0.0
+    },
+    {
+      "part": "column",
+      "shape": "box",
+      "outside_mm": 0.0,
+      "inside_mm": 0.0,
+      "color_error": 0.0
+    },
+    {
+      "part": "beam",
+      "shape": "box",
+      "outside_mm": 0.0,
+      "inside_mm": 0.0,
+      "color_error": 0.0
+    },
+    {
+      "part": "x_carriage_shape",
+      "shape": "box",
+      "outside_mm": 0.0,
+      "inside_mm": 0.0,
+      "color_error": 0.0
+    },
+    {
+      "part": "z_plate",
+      "shape": "box",
+      "outside_mm": 0.0,
+      "inside_mm": 0.0,
+      "color_error": 0.0
+    },
+    {
+      "part": "spindle",
+      "shape": "cylinder",
+      "outside_mm": 0.0,
+      "inside_mm": 0.0,
+      "color_error": 0.0
+    },
+    {
+      "part": "tool",
+      "shape": "cylinder",
+      "outside_mm": 0.0,
+      "inside_mm": 0.0,
+      "color_error": 0.0
+    },
+    {
+      "part": "table_plate",
+      "shape": "box",
+      "outside_mm": 0.0,
+      "inside_mm": 0.0,
+      "color_error": 0.0
+    },
+    {
+      "part": "b_housing",
+      "shape": "box",
+      "outside_mm": 0.0,
+      "inside_mm": 0.0,
+      "color_error": 0.0
+    },
+    {
+      "part": "b_support",
+      "shape": "box",
+      "outside_mm": 0.0,
+      "inside_mm": 0.0,
+      "color_error": 0.0
+    },
+    {
+      "part": "b_hub",
+      "shape": "cylinder",
+      "outside_mm": 0.0,
+      "inside_mm": 0.0,
+      "color_error": 0.0
+    },
+    {
+      "part": "cradle",
+      "shape": "box",
+      "outside_mm": 0.0,
+      "inside_mm": 0.0,
+      "color_error": 0.0
+    },
+    {
+      "part": "cradle_end",
+      "shape": "box",
+      "outside_mm": 0.0,
+      "inside_mm": 0.0,
+      "color_error": 0.0
+    },
+    {
+      "part": "platter",
+      "shape": "cylinder",
+      "outside_mm": 0.0,
+      "inside_mm": 0.0,
+      "color_error": 0.0
+    },
+    {
+      "part": "work",
+      "shape": "box",
+      "outside_mm": 0.0,
+      "inside_mm": 0.0,
+      "color_error": 0.0
+    },
+    {
+      "part": "marker",
+      "shape": "box",
+      "outside_mm": 0.0,
+      "inside_mm": 0.0,
+      "color_error": 0.0
+    }
+  ],
+  "failures": []
+}
