@@ -1,0 +1,4 @@
+# STP generation (scripts/urdf_to_step.py). Installed into .venv-cad by setup_cad_env.ps1.
+# Version verified on 2026-10-22 (Python 3.12, Windows).
+cadquery==2.8.0
+usd-core==26.11  # USD inspection/verification outside Kit (verify_cad_usd.py)

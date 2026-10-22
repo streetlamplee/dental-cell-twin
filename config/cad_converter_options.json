@@ -1,0 +1,8 @@
+{
+  "_comment": "omni.kit.converter.hoops_core options. Base = usd_converter project (my_company.stp_pipeline_setup/converter.py); useMaterials is decided by scripts/convert_step_to_usd.ps1 tests (see docs).",
+  "bOptimize": "true",
+  "instancing": "true",
+  "tessLOD": "0",
+  "convertMetadata": "false",
+  "useMaterials": "true"
+}
