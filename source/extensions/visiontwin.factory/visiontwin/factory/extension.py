@@ -33,7 +33,13 @@ from .dashboard import Dashboard
 
 LOG_PREFIX = "[visiontwin.factory]"
 SETTINGS = "/exts/visiontwin.factory"
-LIGHTING = "default"
+# Lighting conditions for experiments: light intensity factor applied to the key + dome lights.
+LIGHT_FACTORS = {"default": 1.0, "dark": 0.35, "bright": 2.0}
+
+
+def _lighting() -> str:
+    name = str(_setting("lighting", "default"))
+    return name if name in LIGHT_FACTORS else "default"
 
 _instance = None
 
@@ -138,10 +144,11 @@ class VisionTwinFactoryExtension(omni.ext.IExt):
         ctx = omni.usd.get_context()
         await ctx.new_stage_async()
         self._catalog = self._make_catalog()
-        scene.build_factory_scene(ctx.get_stage(), *self._camera_params())
+        scene.build_factory_scene(ctx.get_stage(), *self._camera_params(), light_factor=LIGHT_FACTORS[_lighting()])
         self._mill = self._create_mill_station(ctx.get_stage())
         self._reset_run_state()
         await omni.kit.app.get_app().next_update_async()
+        self._use_stage_lights()
         if main is not None:
             main.camera_path = L.OVERVIEW_CAMERA_PATH  # deterministic framing
             # Render load: the main view is for people, the inspection viewport (fixed 640x480)
@@ -153,6 +160,18 @@ class VisionTwinFactoryExtension(omni.ext.IExt):
         self._ui.set_status("scene ready")
         self._refresh_counters()
         print(f"{LOG_PREFIX} factory scene built")
+
+    @staticmethod
+    def _use_stage_lights():
+        """Light the scene with our stage lights only. The viewport's auto light rig
+        ("Default": dome exposure 9 + distant exposure 10) is applied to new stages and
+        outshines KeyLight/Ambient, so lighting conditions had almost no effect (2026-10-22)."""
+        try:
+            import omni.kit.actions.core
+
+            omni.kit.actions.core.execute_action("omni.kit.viewport.menubar.lighting", "set_lighting_mode_stage")
+        except Exception as exc:  # the lighting menu extension is optional
+            carb.log_warn(f"{LOG_PREFIX} could not switch to stage lights: {exc}")
 
     def start(self):
         if not self._scene_ready:
@@ -208,10 +227,13 @@ class VisionTwinFactoryExtension(omni.ext.IExt):
         process = self._catalog.process
         if process:  # dental line: the mill is a processing station on the line
             name, cycle = process
+            cycle = float(_setting("cycleS", cycle))  # experiment override
             extra = dict(process=ProcessStation(name, L.MILL_ENTRY_X, L.MILL_EXIT_X, cycle),
                          spawn_interval=self._catalog.spawn_interval or ConveyorConfig.spawn_interval)
         else:  # the mill only plays a visual cycle when a product passes
             extra = dict(stations=(("mill", L.MILL_X),))
+        if _setting("spawnInterval", None) is not None:  # experiment override
+            extra["spawn_interval"] = float(_setting("spawnInterval", None))
         return ConveyorConfig(seed=int(_setting("seed", 42)),
                               max_products=int(_setting("maxProducts", 30)),
                               defect_rate=float(_setting("defectRate", 0.3)),
@@ -248,7 +270,7 @@ class VisionTwinFactoryExtension(omni.ext.IExt):
 
         try:
             process = self._catalog.process
-            machining = (process[1] * (1.0 - L.MILL_LOAD_FRACTION - L.MILL_UNLOAD_FRACTION)
+            machining = (float(_setting("cycleS", process[1])) * (1.0 - L.MILL_LOAD_FRACTION - L.MILL_UNLOAD_FRACTION)
                          if process else 3.0)
             station = MillStation(stage, asset, kin, hide_work=process is not None, cycle_duration=machining)
         except Exception as exc:  # the line must still work without the visual station
@@ -307,7 +329,9 @@ class VisionTwinFactoryExtension(omni.ext.IExt):
                 "conveyor_speed": self._sim.config.speed, "spawn_interval": self._sim.config.spawn_interval,
                 "defect_rate": self._sim.config.defect_rate, "unknown_policy": self._sorter.unknown_policy,
                 "fixed_dt": float(_setting("fixedDt", 1.0 / 60.0)),
-                "part": self._catalog.part, "lighting_condition": LIGHTING, "camera_resolution": list(L.CAMERA_RESOLUTION),
+                "experiment": str(_setting("experiment", "")), "condition": str(_setting("condition", "")),
+                "process_cycle_s": self._sim.config.process.cycle_s if self._sim.config.process else None,
+                "part": self._catalog.part, "lighting_condition": _lighting(), "camera_resolution": list(L.CAMERA_RESOLUTION),
                 "inspector": self._inspector.config.__dict__}
         with open(os.path.join(self.run_dir, "run.json"), "w", encoding="utf-8") as f:
             json.dump(meta, f, indent=2)
@@ -498,7 +522,7 @@ class VisionTwinFactoryExtension(omni.ext.IExt):
                 capture_latency_ms=round(capture_ms, 2), frame_offset="" if frame_offset is None else frame_offset,
                 inspection_latency_ms=round(result.latency_ms, 3),
                 simulation_time_s=round(sim_time, 3), conveyor_speed=speed,
-                lighting_condition=LIGHTING, frame_file=frame_file or "", reason=result.reason))
+                lighting_condition=_lighting(), frame_file=frame_file or "", reason=result.reason))
         msg = f"id={product_id:04d} vision={result.label} score={result.score:.2f} ({result.latency_ms:.1f} ms)"
         print(f"{LOG_PREFIX} {msg}")
         self._ui.set_last_event(msg)
@@ -520,7 +544,7 @@ class VisionTwinFactoryExtension(omni.ext.IExt):
             self._ui.set_status("finished (no inspection)")
             return
         products = self._sim.tracker.all()
-        rows = build_rows(self._run_id, self._sim.config.seed, LIGHTING, products, self._sorter.decisions)
+        rows = build_rows(self._run_id, self._sim.config.seed, _lighting(), products, self._sorter.decisions)
         write_csv(os.path.join(self.run_dir, "results.csv"), rows)
         if self._events is not None:
             self._events.close()

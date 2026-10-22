@@ -25,7 +25,7 @@ def configure_stage(stage: Usd.Stage) -> None:
 
 
 def build_factory_scene(stage: Usd.Stage, camera_height: float = L.CAMERA_HEIGHT_ABOVE_BELT,
-                        camera_focal_mm: float = L.CAMERA_FOCAL_MM) -> None:
+                        camera_focal_mm: float = L.CAMERA_FOCAL_MM, light_factor: float = 1.0) -> None:
     """Create (or recreate) the factory prims under FACTORY_PATH. The inspection camera's
     height/focal length can be set per product (small dental parts need a close-up)."""
     configure_stage(stage)
@@ -65,7 +65,7 @@ def build_factory_scene(stage: Usd.Stage, camera_height: float = L.CAMERA_HEIGHT
     _define_inspection_camera(stage, camera_height, camera_focal_mm)
     _define_overview_camera(stage)
     _define_mill_camera(stage)
-    _define_light(stage)
+    _define_light(stage, light_factor)
 
 
 def _define_mill_camera(stage: Usd.Stage) -> None:
@@ -224,12 +224,12 @@ def clear_products(stage: Usd.Stage) -> None:
     UsdGeom.Xform.Define(stage, L.PRODUCTS_PATH)
 
 
-def _define_light(stage: Usd.Stage) -> None:
+def _define_light(stage: Usd.Stage, factor: float = 1.0) -> None:
     # Kit's "Default" rig is distant 2^10 + dome 2^9; at that level the top-down inspection
     # frames were washed out (product saturation below threshold), so use 1/4 of it.
     light = UsdLux.DistantLight.Define(stage, f"{L.FACTORY_PATH}/KeyLight")
-    light.CreateIntensityAttr(250.0)
+    light.CreateIntensityAttr(250.0 * factor)
     light.CreateAngleAttr(0.53)
     UsdGeom.XformCommonAPI(light).SetRotate(Gf.Vec3f(-30.0, 20.0, 0.0))
     dome = UsdLux.DomeLight.Define(stage, f"{L.FACTORY_PATH}/Ambient")
-    dome.CreateIntensityAttr(125.0)
+    dome.CreateIntensityAttr(125.0 * factor)

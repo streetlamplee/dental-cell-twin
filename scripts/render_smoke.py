@@ -40,6 +40,20 @@ def _print_stage_info(viewport):
         prim = stage.GetPrimAtPath(path)
         rng = cache.ComputeWorldBound(prim).ComputeAlignedRange() if prim else None
         print(f"{TAG} bbox {path}: {rng}")
+    import carb.settings
+
+    from pxr import Usd, UsdLux
+
+    lights = [(str(p.GetPath()), p.GetTypeName(), p.GetAttribute("inputs:intensity").Get(),
+               p.GetAttribute("inputs:exposure").Get(), UsdGeom.Imageable(p).ComputeVisibility())
+              for p in stage.Traverse(Usd.TraverseInstanceProxies()) if p.HasAPI(UsdLux.LightAPI) or "Light" in p.GetTypeName()]
+    session = [(str(p.GetPath()), p.GetTypeName()) for p in Usd.PrimRange(stage.GetPseudoRoot())
+               if "Light" in p.GetTypeName() and str(p.GetPath()) not in {l[0] for l in lights}]
+    print(f"{TAG} lights: {lights} other: {session}")
+    s = carb.settings.get_settings()
+    print(f"{TAG} auto exposure /rtx/post/histogram/enabled={s.get('/rtx/post/histogram/enabled')} "
+          f"rig={s.get('/exts/omni.kit.viewport.menubar.lighting/defaultRig')} "
+          f"lightingMode={s.get('/rtx/useViewLightingMode')}")
     products = stage.GetPrimAtPath("/World/Products")
     first = products.GetChildren()[0] if products and products.GetChildren() else None
     if first:
