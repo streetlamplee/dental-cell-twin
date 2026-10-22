@@ -22,6 +22,7 @@ from .core import layout as L
 from .core.camera_model import inspection_roi
 from .core.conveyor import (EXIT, INSPECT, LOAD, REJECT, SORT, SPAWN, STATION, UNLOAD, ConveyorConfig,
                             ConveyorSim, ProcessStation)
+from .core.event_log import EventLog
 from .core.inspection_log import InspectionLog, InspectionRecord
 from .core.product_tracker import ProductState
 from .core.run_results import build_rows, write_csv
@@ -65,6 +66,7 @@ class VisionTwinFactoryExtension(omni.ext.IExt):
         self._main_viewport = None
         self._inspector = None
         self._log = None  # InspectionLog for the current run
+        self._events = None  # EventLog (events.csv) for the current run
         self._anims = {}  # product_id -> sim time the reject animation started
         self._mill = None  # MillStation (CAD asset), when the asset files exist
         self.run_dir = None
@@ -77,7 +79,25 @@ class VisionTwinFactoryExtension(omni.ext.IExt):
             on_reset=self.reset,
             on_speed=self._sim.set_speed,
             initial_speed=self._sim.config.speed,
+            on_setting=self._set_setting,
+            initial={k: _setting(k, d) for k, d in (("part", BOX), ("seed", 42), ("maxProducts", 30),
+                                                    ("defectRate", 0.3))},
+            on_view=self.set_view,
         )
+
+    # -- dashboard callbacks ------------------------------------------------
+
+    @staticmethod
+    def _set_setting(name: str, value) -> None:
+        """Line setup from the dashboard; takes effect on Build Scene / Reset."""
+        carb.settings.get_settings().set(f"{SETTINGS}/{name}", value)
+
+    def set_view(self, index: int) -> None:
+        """Main viewport camera: 0 overview, 1 mill close-up, 2 inspection camera."""
+        cams = (L.OVERVIEW_CAMERA_PATH, L.MILL_CAMERA_PATH, L.CAMERA_PATH)
+        main = self.main_viewport
+        if main is not None and 0 <= index < len(cams):
+            main.camera_path = cams[index]
 
     def on_shutdown(self):
         global _instance
@@ -124,6 +144,9 @@ class VisionTwinFactoryExtension(omni.ext.IExt):
         await omni.kit.app.get_app().next_update_async()
         if main is not None:
             main.camera_path = L.OVERVIEW_CAMERA_PATH  # deterministic framing
+            # Render load: the main view is for people, the inspection viewport (fixed 640x480)
+            # is what the vision uses; rendering the main view at a lower scale saves GPU time.
+            main.resolution_scale = float(_setting("mainViewportScale", 0.5))
         await self._create_frame_provider_async(main)
         await self._setup_inspection_async()
         self._scene_ready = True
@@ -191,6 +214,7 @@ class VisionTwinFactoryExtension(omni.ext.IExt):
             extra = dict(stations=(("mill", L.MILL_X),))
         return ConveyorConfig(seed=int(_setting("seed", 42)),
                               max_products=int(_setting("maxProducts", 30)),
+                              defect_rate=float(_setting("defectRate", 0.3)),
                               defect_kinds=self._catalog.defect_kinds,
                               speed=float(_setting("speed", 0.5)), **extra)
 
@@ -204,6 +228,9 @@ class VisionTwinFactoryExtension(omni.ext.IExt):
         self._sim.reset()
         self._new_sorter()
         self._log = None
+        if getattr(self, "_events", None) is not None:
+            self._events.close()
+        self._events = None
         self._anims.clear()
         self._frame_mismatches = 0
         self._stale_frames = 0
@@ -275,6 +302,7 @@ class VisionTwinFactoryExtension(omni.ext.IExt):
         run_id = f"{time.strftime('%Y%m%d_%H%M%S')}_seed{seed}"
         self.run_dir = os.path.join(_resolve(_setting("outputDir", "${data}/visiontwin_results")), "runs", run_id)
         self._log = InspectionLog(self.run_dir, record_frames=bool(_setting("recordFrames", True)))
+        self._events = EventLog(self.run_dir)
         meta = {"run_id": run_id, "seed": seed, "max_products": self._sim.config.max_products,
                 "conveyor_speed": self._sim.config.speed, "spawn_interval": self._sim.config.spawn_interval,
                 "defect_rate": self._sim.config.defect_rate, "unknown_policy": self._sorter.unknown_policy,
@@ -334,6 +362,8 @@ class VisionTwinFactoryExtension(omni.ext.IExt):
             msg = f"t={e.time:7.3f}s id={e.product_id:04d} {e.kind}{reason}"
             print(f"{LOG_PREFIX} {msg}")
             self._ui.set_last_event(msg)
+            if self._events is not None:
+                self._events.write(e.time, e.product_id, e.kind, e.x, e.station, reason.strip(" ()"))
         for p in self._sim.tracker.on_belt():
             scene.move_product_prim(stage, p.product_id, p.x, rest_dz=self._rest_dz)
         self._animate_rejects(stage, finish=False)
@@ -410,11 +440,13 @@ class VisionTwinFactoryExtension(omni.ext.IExt):
         self._frames.request_frame(
             lambda rgb, cap_ms, stale, offset: self._on_frame(product_id, rgb, cap_ms, stale, offset,
                                                              sim_time, speed),
-            on_error=lambda msg: self._on_frame_error(product_id, msg))
+            on_error=lambda msg: self._on_frame_error(product_id, msg, sim_time))
 
-    def _on_frame_error(self, product_id: int, message: str):
+    def _on_frame_error(self, product_id: int, message: str, sim_time: float = 0.0):
         """No usable frame: the product gets 'unknown' (never another product's verdict)."""
         carb.log_warn(f"{LOG_PREFIX} id={product_id:04d} capture failed ({message}) -> unknown")
+        if self._events is not None:
+            self._events.write(sim_time, product_id, "VISION", detail=f"unknown capture failed: {message}")
         p = self._sim.tracker.get(product_id)
         if self._log:
             p.inspection_end_ms = self._run_ms()
@@ -470,6 +502,8 @@ class VisionTwinFactoryExtension(omni.ext.IExt):
         msg = f"id={product_id:04d} vision={result.label} score={result.score:.2f} ({result.latency_ms:.1f} ms)"
         print(f"{LOG_PREFIX} {msg}")
         self._ui.set_last_event(msg)
+        if self._events is not None:
+            self._events.write(sim_time, product_id, "VISION", detail=f"{result.label} {result.defect_reason}".strip())
         self._refresh_counters()
 
     # -- run results ------------------------------------------------------
@@ -488,6 +522,8 @@ class VisionTwinFactoryExtension(omni.ext.IExt):
         products = self._sim.tracker.all()
         rows = build_rows(self._run_id, self._sim.config.seed, LIGHTING, products, self._sorter.decisions)
         write_csv(os.path.join(self.run_dir, "results.csv"), rows)
+        if self._events is not None:
+            self._events.close()
         sorted_rows = [r for r in rows if r["sort_result"]]
         self.summary = {
             "run_id": self._run_id,

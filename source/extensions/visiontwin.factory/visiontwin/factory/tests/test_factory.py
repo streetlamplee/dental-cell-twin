@@ -23,6 +23,19 @@ async def _wait_until(cond, max_frames=600):
     return cond()
 
 
+class TestDashboard(omni.kit.test.AsyncTestCase):
+    async def test_line_setup_controls_exist(self):
+        combos = ui_test.find_all(f"{WINDOW}//Frame/**/ComboBox[*]")
+        self.assertGreaterEqual(len(combos), 2, "product and view selectors")
+        for label in ("Product", "Seed", "Products", "Defect rate", "View"):
+            self.assertIsNotNone(ui_test.find(f"{WINDOW}//Frame/**/Label[*].text=='{label}'"), label)
+
+    async def test_set_view_without_viewport_is_safe(self):
+        import visiontwin.factory.extension as vt
+
+        vt.get_instance().set_view(1)  # headless test app: no main viewport, must not raise
+
+
 class TestFactory(omni.kit.test.AsyncTestCase):
     async def test_build_scene_creates_factory_prims(self):
         await _button("Build Scene").click()
