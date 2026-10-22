@@ -1,0 +1,11 @@
+{
+  "roi": null,
+  "sat_min": 25,
+  "val_min": 40,
+  "min_area_px": 400,
+  "reference_hue": 104.64,
+  "hue_tolerance": 12.0,
+  "good_ratio_min": 0.742,
+  "interior_bright_min": 0.218,
+  "bright_v_min": 140
+}

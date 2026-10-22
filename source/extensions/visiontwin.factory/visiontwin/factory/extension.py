@@ -3,6 +3,7 @@ inspection camera, the reject-line sorting and the UI."""
 
 import asyncio
 import json
+import math
 import os
 import time
 
@@ -22,6 +23,7 @@ from .core.conveyor import EXIT, INSPECT, REJECT, SORT, SPAWN, STATION, Conveyor
 from .core.inspection_log import InspectionLog, InspectionRecord
 from .core.product_tracker import ProductState
 from .core.run_results import build_rows, write_csv
+from .core.product_catalog import BOX, ProductCatalog
 from .core.sorting import SortingController
 from .core.vision_inspector import UNKNOWN, InspectorConfig, VisionInspector
 from .dashboard import Dashboard
@@ -52,6 +54,7 @@ class VisionTwinFactoryExtension(omni.ext.IExt):
         global _instance
         _instance = self
         carb.log_info(f"{LOG_PREFIX} startup")
+        self._catalog = self._make_catalog()
         self._sim = ConveyorSim(self._conveyor_config())
         self._new_sorter()
         self._update_sub = None
@@ -162,17 +165,27 @@ class VisionTwinFactoryExtension(omni.ext.IExt):
     # -- setup ------------------------------------------------------------
 
     @staticmethod
-    def _conveyor_config() -> ConveyorConfig:
+    def _make_catalog() -> ProductCatalog:
+        part = str(_setting("part", BOX))
+        return ProductCatalog(part, _resolve(_setting("partsDir", "")) if part != BOX else None)
+
+    @property
+    def _rest_dz(self) -> float:
+        return scene.BOX_REST_DZ if self._catalog.is_box else scene.PART_REST_DZ
+
+    def _conveyor_config(self) -> ConveyorConfig:
         return ConveyorConfig(seed=int(_setting("seed", 42)),
                               max_products=int(_setting("maxProducts", 30)),
                               speed=float(_setting("speed", 0.5)),
-                              stations=(("mill", L.MILL_X),))
+                              stations=(("mill", L.MILL_X),),
+                              defect_kinds=self._catalog.defect_kinds)
 
     def _new_sorter(self):
         self._sorter = SortingController(unknown_policy=str(_setting("unknownPolicy", "reject")))
         self._sim.reject_decider = self._sorter.decide
 
     def _reset_run_state(self):
+        self._catalog = self._make_catalog()
         self._sim.config = self._conveyor_config()
         self._sim.reset()
         self._new_sorter()
@@ -230,6 +243,8 @@ class VisionTwinFactoryExtension(omni.ext.IExt):
             carb.log_warn(f"{LOG_PREFIX} no viewport: vision inspection disabled")
             return
         cfg_path = _resolve(_setting("inspectorConfig", ""))
+        if not self._catalog.is_box:  # per-part calibration next to the box config
+            cfg_path = os.path.join(os.path.dirname(cfg_path), f"inspector_{self._catalog.part}.json")
         cfg = InspectorConfig.load(cfg_path) if os.path.isfile(cfg_path) else InspectorConfig()
         if cfg.roi is None:
             cfg.roi = inspection_roi(L.CAMERA_RESOLUTION, L.CAMERA_FOCAL_MM, L.CAMERA_H_APERTURE_MM,
@@ -247,7 +262,7 @@ class VisionTwinFactoryExtension(omni.ext.IExt):
                 "conveyor_speed": self._sim.config.speed, "spawn_interval": self._sim.config.spawn_interval,
                 "defect_rate": self._sim.config.defect_rate, "unknown_policy": self._sorter.unknown_policy,
                 "fixed_dt": float(_setting("fixedDt", 1.0 / 60.0)),
-                "lighting_condition": LIGHTING, "camera_resolution": list(L.CAMERA_RESOLUTION),
+                "part": self._catalog.part, "lighting_condition": LIGHTING, "camera_resolution": list(L.CAMERA_RESOLUTION),
                 "inspector": self._inspector.config.__dict__}
         with open(os.path.join(self.run_dir, "run.json"), "w", encoding="utf-8") as f:
             json.dump(meta, f, indent=2)
@@ -279,7 +294,8 @@ class VisionTwinFactoryExtension(omni.ext.IExt):
         for e in self._sim.step(dt):
             p = self._sim.tracker.get(e.product_id)
             if e.kind == SPAWN:
-                scene.spawn_product_prim(stage, p.product_id, p.defect_kind, p.x)
+                scene.spawn_product_prim(stage, p.product_id, p.defect_kind, p.x,
+                                         self._catalog.variant_path(p.ground_truth, p.defect_kind))
             elif e.kind == INSPECT:
                 inspected.append(p.product_id)
             elif e.kind == REJECT:
@@ -295,7 +311,7 @@ class VisionTwinFactoryExtension(omni.ext.IExt):
             print(f"{LOG_PREFIX} {msg}")
             self._ui.set_last_event(msg)
         for p in self._sim.tracker.on_belt():
-            scene.move_product_prim(stage, p.product_id, p.x)
+            scene.move_product_prim(stage, p.product_id, p.x, rest_dz=self._rest_dz)
         self._animate_rejects(stage, finish=False)
         if self._mill is not None:
             self._mill.apply(self._sim.time)
@@ -312,7 +328,7 @@ class VisionTwinFactoryExtension(omni.ext.IExt):
     def _animate_rejects(self, stage, finish: bool):
         for pid, t0 in list(self._anims.items()):
             u = 1.0 if finish else (self._sim.time - t0) / scene.REJECT_ANIM_S
-            (x, y, z), pusher_y = scene.reject_motion(u)
+            (x, y, z), pusher_y = scene.reject_motion(u, self._rest_dz)
             scene.move_product_prim(stage, pid, x, y, z)
             scene.set_pusher(stage, pusher_y)
             if u >= 1.0:
@@ -356,10 +372,13 @@ class VisionTwinFactoryExtension(omni.ext.IExt):
                 if frame_offset is not None else "frame mismatch (no frame number)"
             carb.log_warn(f"{LOG_PREFIX} id={product_id:04d} {result.reason} -> unknown")
         elif stale:
-            # Same pixels as the previous capture: the viewport did not render a new image.
+            # Same pixels as the previous capture. With a verified frame number (offset 0) this is
+            # legitimate: identical parts at the same spot with periodic spacing render identically
+            # (false "stale" on 2026-10-22, products 30/31). Only an unverifiable frame is unknown.
             self._stale_frames += 1
-            result.label, result.reason = UNKNOWN, "stale frame (identical to previous capture)"
-            carb.log_warn(f"{LOG_PREFIX} id={product_id:04d} stale frame -> unknown")
+            if frame_offset is None:
+                result.label, result.reason = UNKNOWN, "stale frame (identical to previous capture)"
+                carb.log_warn(f"{LOG_PREFIX} id={product_id:04d} stale frame -> unknown")
 
         p = self._sim.tracker.get(product_id)
         if self._log:
@@ -370,14 +389,17 @@ class VisionTwinFactoryExtension(omni.ext.IExt):
             carb.log_warn(f"{LOG_PREFIX} id={product_id:04d} verdict arrived after sorting (late)")
         else:
             p.prediction, p.score = result.label, result.score
+            p.defect_reason = result.defect_reason if result.label == "defect" else None
 
         frame_file = self._log.save_frame(product_id, rgb) if self._log else None
         if self._log:
             self._log.append(InspectionRecord(
                 run_id=self._run_id, seed=self._sim.config.seed, product_id=product_id,
                 ground_truth=p.ground_truth,  # evaluation only, copied from the tracker
-                predicted_label=result.label, score=round(result.score, 4),
-                mean_hue=round(result.mean_hue, 2), area_px=result.area_px,
+                predicted_label=result.label, defect_reason=result.defect_reason,
+                score=round(result.score, 4), mean_hue=round(result.mean_hue, 2), area_px=result.area_px,
+                interior_ratio="" if math.isnan(result.interior_ratio) else round(result.interior_ratio, 4),
+                interior_bright="" if math.isnan(result.interior_bright) else round(result.interior_bright, 4),
                 capture_latency_ms=round(capture_ms, 2), frame_offset="" if frame_offset is None else frame_offset,
                 inspection_latency_ms=round(result.latency_ms, 3),
                 simulation_time_s=round(sim_time, 3), conveyor_speed=speed,

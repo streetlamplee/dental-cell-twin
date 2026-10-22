@@ -69,22 +69,34 @@ def main():
     if not rows:
         print("No inspections recorded in this run.")
         return 1
+    kinds = {}
+    if (run_dir / "results.csv").exists():  # ground-truth defect kind (evaluation only)
+        with open(run_dir / "results.csv", encoding="utf-8") as f:
+            kinds = {r["product_id"]: r.get("defect_kind", "") for r in csv.DictReader(f)}
 
     gts, preds, lat, mismatched_online = [], [], [], 0
+    by_kind = {}  # defect kind -> [detected, total, reason matches]
     with open(out_dir / "predictions.csv", "w", newline="", encoding="utf-8") as f:
         w = csv.writer(f)
-        w.writerow(["product_id", "ground_truth", "online_label", "offline_label", "score",
-                    "mean_hue", "area_px", "latency_ms", "reason", "frame_file"])
+        w.writerow(["product_id", "ground_truth", "defect_kind", "online_label", "offline_label",
+                    "defect_reason", "score", "interior_bright", "mean_hue", "area_px", "latency_ms",
+                    "reason", "frame_file"])
         for row in rows:
             bgr = cv2.imread(str(run_dir / row["frame_file"]))
             res = inspector.inspect(cv2.cvtColor(bgr, cv2.COLOR_BGR2RGB))
+            kind = kinds.get(row["product_id"], "")
             gts.append(row["ground_truth"])
             preds.append(res.label)
             lat.append(res.latency_ms)
             mismatched_online += res.label != row["predicted_label"]
-            w.writerow([row["product_id"], row["ground_truth"], row["predicted_label"], res.label,
-                        f"{res.score:.4f}", f"{res.mean_hue:.2f}", res.area_px, f"{res.latency_ms:.3f}",
-                        res.reason, row["frame_file"]])
+            if row["ground_truth"] == "defect":
+                k = by_kind.setdefault(kind or "?", [0, 0, 0])
+                k[0] += res.label == "defect"
+                k[1] += 1
+                k[2] += {"color": "color", "missing": "shape"}.get(kind) in res.defect_reason.split("+")
+            w.writerow([row["product_id"], row["ground_truth"], kind, row["predicted_label"], res.label,
+                        res.defect_reason, f"{res.score:.4f}", f"{res.interior_bright:.4f}",
+                        f"{res.mean_hue:.2f}", res.area_px, f"{res.latency_ms:.3f}", res.reason, row["frame_file"]])
             if res.label != row["ground_truth"]:
                 text = f"id={row['product_id']} gt={row['ground_truth']} pred={res.label} s={res.score:.2f}"
                 cv2.imwrite(str(out_dir / "errors" / Path(row["frame_file"]).name),
@@ -96,6 +108,9 @@ def main():
     print(f"config: {cfg}")
     print(f"confusion (defect=positive): TP={c['tp']} FP={c['fp']} FN={c['fn']} TN={c['tn']} unknown={c['unknown']}")
     print(f"accuracy={fmt(accuracy(gts, preds))} precision={fmt(p)} recall={fmt(r)} f1={fmt(f1)}")
+    for kind, (hit, total, reason_ok) in sorted(by_kind.items()):
+        print(f"  defect kind {kind:8s}: recall {hit}/{total} = {fmt(hit / total)}, "
+              f"reason matches kind {reason_ok}/{total}")
     print(f"offline inspection latency ms: mean={fmt(sum(lat) / len(lat), 2)} p95={fmt(percentile(lat, 95), 2)}")
     print(f"offline vs online label mismatches: {mismatched_online}")
     print(f"misclassified frames: {len(os.listdir(out_dir / 'errors'))} -> {out_dir / 'errors'}")

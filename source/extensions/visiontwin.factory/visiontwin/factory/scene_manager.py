@@ -1,4 +1,4 @@
-﻿"""Builds the static factory scene (floor, conveyor, zones, camera, light) with plain USD."""
+"""Builds the static factory scene (floor, conveyor, zones, camera, light) with plain USD."""
 
 from pxr import Gf, Usd, UsdGeom, UsdLux
 
@@ -98,18 +98,35 @@ def product_path(product_id: int) -> str:
     return f"{L.PRODUCTS_PATH}/P_{product_id:04d}"
 
 
-def spawn_product_prim(stage: Usd.Stage, product_id: int, defect_kind, x: float) -> None:
-    color = DEFECT_COLORS.get(defect_kind, GOOD_COLOR)
-    s = L.PRODUCT_SIZE
-    _box(stage, product_path(product_id), (x, 0.0, L.CONVEYOR_TOP_Z + s / 2.0), (s, s, s), color)
+# Height of a product's origin above the belt surface: the procedural box is centred,
+# CAD part variants have their origin at the bottom (make_part_variants.py).
+BOX_REST_DZ = L.PRODUCT_SIZE / 2.0
+PART_REST_DZ = 0.0
 
 
-def move_product_prim(stage: Usd.Stage, product_id: int, x: float, y: float = 0.0, z: float = None) -> None:
+def spawn_product_prim(stage: Usd.Stage, product_id: int, defect_kind, x: float,
+                       variant_usd: str = None) -> None:
+    """Box (variant_usd None) or a reference to a CAD part variant layer."""
+    if variant_usd is None:
+        color = DEFECT_COLORS.get(defect_kind, GOOD_COLOR)
+        s = L.PRODUCT_SIZE
+        _box(stage, product_path(product_id), (x, 0.0, L.CONVEYOR_TOP_Z + BOX_REST_DZ), (s, s, s), color)
+        return
+    # The variant's /Part carries its own normalising xform ops (centre, rotate, scale), so it is
+    # referenced on a CHILD prim: putting the reference on the product prim itself let our
+    # translate replace the variant's centring translate (part sank 1.7 cm into the belt).
+    xf = UsdGeom.Xform.Define(stage, product_path(product_id))
+    UsdGeom.Xform.Define(stage, f"{product_path(product_id)}/Part").GetPrim().GetReferences().AddReference(variant_usd)
+    UsdGeom.XformCommonAPI(xf).SetTranslate(Gf.Vec3d(x, 0.0, L.CONVEYOR_TOP_Z + PART_REST_DZ))
+
+
+def move_product_prim(stage: Usd.Stage, product_id: int, x: float, y: float = 0.0, z: float = None,
+                      rest_dz: float = BOX_REST_DZ) -> None:
     prim = stage.GetPrimAtPath(product_path(product_id))
     if not prim:
         return
     if z is None:
-        z = L.CONVEYOR_TOP_Z + L.PRODUCT_SIZE / 2.0
+        z = L.CONVEYOR_TOP_Z + rest_dz
     UsdGeom.XformCommonAPI(prim).SetTranslate(Gf.Vec3d(x, y, z))
 
 
@@ -125,12 +142,13 @@ def _lerp(a, b, k):
     return a + (b - a) * k
 
 
-def reject_motion(u: float):
+def reject_motion(u: float, rest_dz: float = BOX_REST_DZ):
     """Visual-only reject motion for progress u in [0, 1] -> (product_xyz, pusher_y).
     approach (pusher reaches the product) -> push (product off the -Y edge) -> drop into
     the bin while the pusher retracts. Simulation state is already final."""
     u = min(max(u, 0.0), 1.0)
-    top_z = L.CONVEYOR_TOP_Z + L.PRODUCT_SIZE / 2.0
+    top_z = L.CONVEYOR_TOP_Z + rest_dz
+    drop_z = BIN_DROP_Z - BOX_REST_DZ + rest_dz
     edge_y = -L.CONVEYOR_WIDTH / 2 - L.PRODUCT_SIZE / 2
     if u < 0.25:
         k = u / 0.25
@@ -139,7 +157,7 @@ def reject_motion(u: float):
         y = _lerp(0.0, edge_y, (u - 0.25) / 0.4)
         return (L.REJECT_X, y, top_z), y + PUSHER_CONTACT
     k = (u - 0.65) / 0.35
-    prod = (L.REJECT_X, _lerp(edge_y, BIN_Y, k), _lerp(top_z, BIN_DROP_Z, k))
+    prod = (L.REJECT_X, _lerp(edge_y, BIN_Y, k), _lerp(top_z, drop_z, k))
     return prod, _lerp(edge_y + PUSHER_CONTACT, PUSHER_HOME_Y, k)
 
 

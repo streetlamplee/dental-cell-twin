@@ -1,12 +1,13 @@
 ﻿<#
 목적: GUI 앱을 실행해 팩토리 씬을 만들고 컨베이어를 잠시 돌린 뒤 Viewport를 PNG로 저장하고 종료한다.
       사람이 화면을 보지 않고도 "씬이 실제로 렌더되는지" 확인하기 위한 스모크 테스트.
-사용법: .\scripts\render_smoke.ps1 [-Frames 240]
-인자: -Frames  캡처 전 컨베이어를 돌릴 업데이트 프레임 수
+사용법: .\scripts\render_smoke.ps1 [-Frames 240] [-Part box]
+인자: -Frames  캡처 전 컨베이어를 돌릴 업데이트 프레임 수, -Part 제품 종류(box 또는 catalog 부품)
 출력: results/smoke/render_smoke_<timestamp>.png, logs/render_smoke_<timestamp>.log
 #>
 param(
-    [int]$Frames = 240
+    [int]$Frames = 240,
+    [string]$Part = "box"
 )
 . "$PSScriptRoot\_common.ps1"
 
@@ -20,7 +21,7 @@ $png = (Join-Path $outDir "render_smoke_$stamp.png") -replace '\\', '/'
 $exec = (Join-Path $PSScriptRoot "render_smoke.py") -replace '\\', '/'
 $log = New-LogPath "render_smoke"
 
-$kitArgs = "--exec `"$exec`" --/visiontwin/smoke/out=`"$png`" --/visiontwin/smoke/frames=$Frames --/exts/visiontwin.factory/outputDir=`"$($outDir -replace '\\', '/')/smoke_runs`" $KitAutomationArgs"
+$kitArgs = "--exec `"$exec`" --/visiontwin/smoke/out=`"$png`" --/visiontwin/smoke/frames=$Frames --/exts/visiontwin.factory/part=$Part --/exts/visiontwin.factory/outputDir=`"$($outDir -replace '\\', '/')/smoke_runs`" $KitAutomationArgs"
 $ErrorActionPreference = 'Continue'
 & cmd /c "`"$bat`" $kitArgs 2>&1" | ForEach-Object {
     Add-Content -Path $log -Value $_ -Encoding utf8

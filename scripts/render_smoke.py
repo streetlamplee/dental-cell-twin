@@ -40,6 +40,13 @@ def _print_stage_info(viewport):
         prim = stage.GetPrimAtPath(path)
         rng = cache.ComputeWorldBound(prim).ComputeAlignedRange() if prim else None
         print(f"{TAG} bbox {path}: {rng}")
+    products = stage.GetPrimAtPath("/World/Products")
+    first = products.GetChildren()[0] if products and products.GetChildren() else None
+    if first:
+        for prim in [first] + [p for p in first.GetChildren()][:1]:
+            xf = UsdGeom.Xformable(prim).ComputeLocalToWorldTransform(0)
+            print(f"{TAG} product {prim.GetPath()} bbox {cache.ComputeWorldBound(prim).ComputeAlignedRange()} "
+                  f"scale~{xf.GetRow3(0).GetLength():.5f} ops={[op.GetOpName() for op in UsdGeom.Xformable(prim).GetOrderedXformOps()]}")
 
 
 async def _main():
