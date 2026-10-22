@@ -1,0 +1,19 @@
+{
+  "_comment": "Day 9 experiments. A: vision robustness (thresholds calibrated under default lighting are NOT recalibrated). B: dental line capacity (mill cycle 3 s compressed, spawn interval varied). Run with scripts/run_experiments.ps1 -Config experiments/day9.json, analyse with scripts/analyze_results.ps1 -Experiment day9.",
+  "name": "day9",
+  "runs": [
+    {"condition": "box_default",   "group": "vision", "part": "box",   "lighting": "default", "speed": 0.5, "products": 40, "seed": 42},
+    {"condition": "box_dark",      "group": "vision", "part": "box",   "lighting": "dark",    "speed": 0.5, "products": 40, "seed": 42},
+    {"condition": "box_fast",      "group": "vision", "part": "box",   "lighting": "default", "speed": 1.5, "products": 40, "seed": 42},
+    {"condition": "kfl08_default", "group": "vision", "part": "kfl08", "lighting": "default", "speed": 0.5, "products": 40, "seed": 42},
+    {"condition": "kfl08_dark",    "group": "vision", "part": "kfl08", "lighting": "dark",    "speed": 0.5, "products": 40, "seed": 42},
+    {"condition": "kfl08_fast",    "group": "vision", "part": "kfl08", "lighting": "default", "speed": 1.5, "products": 40, "seed": 42},
+    {"condition": "crown_default", "group": "vision", "part": "crown", "lighting": "default", "speed": 0.5, "products": 40, "seed": 42},
+    {"condition": "crown_dark",    "group": "vision", "part": "crown", "lighting": "dark",    "speed": 0.5, "products": 40, "seed": 42},
+    {"condition": "crown_fast",    "group": "vision", "part": "crown", "lighting": "default", "speed": 1.5, "products": 40, "seed": 42},
+    {"condition": "line_spawn_2.0", "group": "line", "part": "crown", "lighting": "default", "speed": 0.5, "products": 20, "seed": 42, "spawn_interval": 2.0, "cycle_s": 3.0},
+    {"condition": "line_spawn_2.5", "group": "line", "part": "crown", "lighting": "default", "speed": 0.5, "products": 20, "seed": 42, "spawn_interval": 2.5, "cycle_s": 3.0},
+    {"condition": "line_spawn_3.0", "group": "line", "part": "crown", "lighting": "default", "speed": 0.5, "products": 20, "seed": 42, "spawn_interval": 3.0, "cycle_s": 3.0},
+    {"condition": "line_spawn_4.0", "group": "line", "part": "crown", "lighting": "default", "speed": 0.5, "products": 20, "seed": 42, "spawn_interval": 4.0, "cycle_s": 3.0}
+  ]
+}

@@ -40,3 +40,4 @@ deps/**/user.toml
 /results/smoke/
 /results/runs/**/frames/
 /.venv-cad/
+/results/experiments/**/frames/
