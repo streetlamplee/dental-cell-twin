@@ -7,5 +7,14 @@
   "hue_tolerance": 12.0,
   "good_ratio_min": 0.742,
   "interior_bright_min": 0.218,
-  "bright_v_min": 140
+  "bright_v_min": 140,
+  "segment": "saturation",
+  "bright_delta": 25.0,
+  "color_metric": "hue",
+  "reference_ab": null,
+  "ab_tolerance": 8.0,
+  "golden_contour": null,
+  "golden_area_px": null,
+  "shape_dist_max": null,
+  "area_ratio_tol": null
 }

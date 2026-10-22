@@ -9,6 +9,7 @@ import time
 
 import carb
 import carb.eventdispatcher
+import numpy as np
 import carb.settings
 import carb.tokens
 import omni.ext
@@ -19,7 +20,8 @@ from omni.kit.viewport.utility import get_active_viewport
 from . import scene_manager as scene
 from .core import layout as L
 from .core.camera_model import inspection_roi
-from .core.conveyor import EXIT, INSPECT, REJECT, SORT, SPAWN, STATION, ConveyorConfig, ConveyorSim
+from .core.conveyor import (EXIT, INSPECT, LOAD, REJECT, SORT, SPAWN, STATION, UNLOAD, ConveyorConfig,
+                            ConveyorSim, ProcessStation)
 from .core.inspection_log import InspectionLog, InspectionRecord
 from .core.product_tracker import ProductState
 from .core.run_results import build_rows, write_csv
@@ -115,7 +117,8 @@ class VisionTwinFactoryExtension(omni.ext.IExt):
         self._ui.set_status("creating new stage...")
         ctx = omni.usd.get_context()
         await ctx.new_stage_async()
-        scene.build_factory_scene(ctx.get_stage())
+        self._catalog = self._make_catalog()
+        scene.build_factory_scene(ctx.get_stage(), *self._camera_params())
         self._mill = self._create_mill_station(ctx.get_stage())
         self._reset_run_state()
         await omni.kit.app.get_app().next_update_async()
@@ -173,12 +176,23 @@ class VisionTwinFactoryExtension(omni.ext.IExt):
     def _rest_dz(self) -> float:
         return scene.BOX_REST_DZ if self._catalog.is_box else scene.PART_REST_DZ
 
+    def _camera_params(self):
+        """(height above belt, focal mm) of the inspection camera for the current product."""
+        cam = self._catalog.camera
+        return (cam.height_above_belt, cam.focal_mm) if cam else (L.CAMERA_HEIGHT_ABOVE_BELT, L.CAMERA_FOCAL_MM)
+
     def _conveyor_config(self) -> ConveyorConfig:
+        process = self._catalog.process
+        if process:  # dental line: the mill is a processing station on the line
+            name, cycle = process
+            extra = dict(process=ProcessStation(name, L.MILL_ENTRY_X, L.MILL_EXIT_X, cycle),
+                         spawn_interval=self._catalog.spawn_interval or ConveyorConfig.spawn_interval)
+        else:  # the mill only plays a visual cycle when a product passes
+            extra = dict(stations=(("mill", L.MILL_X),))
         return ConveyorConfig(seed=int(_setting("seed", 42)),
                               max_products=int(_setting("maxProducts", 30)),
-                              speed=float(_setting("speed", 0.5)),
-                              stations=(("mill", L.MILL_X),),
-                              defect_kinds=self._catalog.defect_kinds)
+                              defect_kinds=self._catalog.defect_kinds,
+                              speed=float(_setting("speed", 0.5)), **extra)
 
     def _new_sorter(self):
         self._sorter = SortingController(unknown_policy=str(_setting("unknownPolicy", "reject")))
@@ -206,7 +220,10 @@ class VisionTwinFactoryExtension(omni.ext.IExt):
         from .mill_station import MillStation
 
         try:
-            station = MillStation(stage, asset, kin)
+            process = self._catalog.process
+            machining = (process[1] * (1.0 - L.MILL_LOAD_FRACTION - L.MILL_UNLOAD_FRACTION)
+                         if process else 3.0)
+            station = MillStation(stage, asset, kin, hide_work=process is not None, cycle_duration=machining)
         except Exception as exc:  # the line must still work without the visual station
             carb.log_error(f"{LOG_PREFIX} mill station failed: {exc}")
             return None
@@ -247,9 +264,9 @@ class VisionTwinFactoryExtension(omni.ext.IExt):
             cfg_path = os.path.join(os.path.dirname(cfg_path), f"inspector_{self._catalog.part}.json")
         cfg = InspectorConfig.load(cfg_path) if os.path.isfile(cfg_path) else InspectorConfig()
         if cfg.roi is None:
-            cfg.roi = inspection_roi(L.CAMERA_RESOLUTION, L.CAMERA_FOCAL_MM, L.CAMERA_H_APERTURE_MM,
-                                     L.CAMERA_HEIGHT_ABOVE_BELT, L.CONVEYOR_WIDTH / 2.0 - 0.02,
-                                     L.INSPECTION_HALF_LENGTH)
+            height, focal = self._camera_params()
+            cfg.roi = inspection_roi(L.CAMERA_RESOLUTION, focal, L.CAMERA_H_APERTURE_MM, height,
+                                     L.CONVEYOR_WIDTH / 2.0 - 0.02, L.INSPECTION_HALF_LENGTH)
         self._inspector = VisionInspector(cfg)
         print(f"{LOG_PREFIX} inspector ready: {cfg} (config file: {cfg_path or 'none'})")
 
@@ -295,7 +312,14 @@ class VisionTwinFactoryExtension(omni.ext.IExt):
             p = self._sim.tracker.get(e.product_id)
             if e.kind == SPAWN:
                 scene.spawn_product_prim(stage, p.product_id, p.defect_kind, p.x,
-                                         self._catalog.variant_path(p.ground_truth, p.defect_kind))
+                                         self._catalog.variant_path(p.ground_truth, p.defect_kind),
+                                         self._catalog.raw_path(p.ground_truth, p.defect_kind))
+            elif e.kind == LOAD and self._mill is not None:
+                # machining motion starts after the load transfer
+                self._mill.cycle.trigger(e.time + L.MILL_LOAD_FRACTION * self._sim.config.process.cycle_s)
+            elif e.kind == UNLOAD:
+                scene.show_final_shape(stage, p.product_id)
+                scene.set_product_pose(stage, p.product_id, self._belt_pose(p.x))
             elif e.kind == INSPECT:
                 inspected.append(p.product_id)
             elif e.kind == REJECT:
@@ -315,6 +339,7 @@ class VisionTwinFactoryExtension(omni.ext.IExt):
         self._animate_rejects(stage, finish=False)
         if self._mill is not None:
             self._mill.apply(self._sim.time)
+            self._animate_processing(stage)
         # Request frames after the prims moved, so the next render shows the product on the line.
         for pid in inspected:
             self._request_inspection(pid)
@@ -324,6 +349,44 @@ class VisionTwinFactoryExtension(omni.ext.IExt):
             self.stop()
             self._ui.set_status("finished - writing results")
             asyncio.ensure_future(self._finalize_run_async())
+
+    @staticmethod
+    def _belt_pose(x: float) -> np.ndarray:
+        m = np.eye(4)
+        m[:3, 3] = (x, 0.0, L.CONVEYOR_TOP_Z + scene.PART_REST_DZ)
+        return m
+
+    def _animate_processing(self, stage):
+        """Visual load -> machining -> unload of the product inside the mill station.
+        load: belt entry -> platter (lifted arc); machining: rides the platter (B/C rotation),
+        blank turns into the final shape half-way; unload: platter -> belt exit."""
+        pid = self._sim.station_product
+        st = self._sim.config.process
+        if pid is None or st is None:
+            return
+        p = self._sim.tracker.get(pid)
+        u = (self._sim.time - p.load_time) / st.cycle_s
+        platter = self._mill.platter_pose()
+        lf, uf = L.MILL_LOAD_FRACTION, L.MILL_UNLOAD_FRACTION
+        if u < lf:
+            pose = self._lift_lerp(self._belt_pose(st.x_entry), platter, u / lf)
+        elif u < 1.0 - uf:
+            pose = platter
+            if u >= 0.5:
+                scene.show_final_shape(stage, pid)
+        else:  # unloading (or waiting for a blocked exit at the end of the transfer)
+            scene.show_final_shape(stage, pid)
+            pose = self._lift_lerp(platter, self._belt_pose(st.x_exit), min((u - (1.0 - uf)) / uf, 1.0))
+        scene.set_product_pose(stage, pid, pose)
+
+    @staticmethod
+    def _lift_lerp(a: np.ndarray, b: np.ndarray, k: float, lift: float = 0.12) -> np.ndarray:
+        """Translation lerp with a parabolic lift (transfer arm); rotation from the platter end."""
+        k = min(max(k, 0.0), 1.0)
+        m = (b if k > 0.5 else a).copy()
+        m[:3, 3] = a[:3, 3] + (b[:3, 3] - a[:3, 3]) * k
+        m[2, 3] += lift * 4 * k * (1 - k)
+        return m
 
     def _animate_rejects(self, stage, finish: bool):
         for pid, t0 in list(self._anims.items()):
@@ -441,7 +504,20 @@ class VisionTwinFactoryExtension(omni.ext.IExt):
             "not_exited": sum(p.state != ProductState.EXITED for p in products),
             "pending_frames_at_finalize": self.pending_frames,
             "simulation_time_s": round(self._sim.time, 3),
+            "part": self._catalog.part,
+            "throughput_per_hour": round(len(sorted_rows) / self._sim.time * 3600.0, 1) if self._sim.time else None,
         }
+        if self._sim.config.process is not None:  # dental milling line metrics
+            st = self._sim.config.process
+            self.summary["line"] = {
+                "station": st.name, "cycle_s_compressed": st.cycle_s,
+                "spawn_interval_s": self._sim.config.spawn_interval,
+                "station_utilization": round(self._sim.station_utilization, 4),
+                "station_busy_s": round(self._sim.station_busy_time, 3),
+                "station_exit_blocked_s": round(self._sim.station_blocked_time, 3),
+                "queue_max": self._sim.queue_max,
+                "queue_mean": round(self._sim.queue_mean, 3),
+            }
         with open(os.path.join(self.run_dir, "summary.json"), "w", encoding="utf-8") as f:
             json.dump(self.summary, f, indent=2)
         self.run_complete = True
@@ -463,4 +539,8 @@ class VisionTwinFactoryExtension(omni.ext.IExt):
             f"vision: good={n_pred['good']} defect={n_pred['defect']} unknown={n_pred['unknown']}\n"
             f"sorted: pass={n_pass} reject={n_rej} correct={n_ok}/{len(d)}  "
             f"late={len(self._sorter.late_results)} frame_err={getattr(self, '_frame_mismatches', 0)}"
+            + (f"\nmill: {'MACHINING id=%04d' % self._sim.station_product if self._sim.station_product else 'idle'}"
+               f"  queue={self._sim.queue_len} (max {self._sim.queue_max})"
+               f"  util={self._sim.station_utilization * 100:.0f}%"
+               if self._sim.config.process is not None else "")
         )

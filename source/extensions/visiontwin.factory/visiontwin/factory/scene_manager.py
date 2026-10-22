@@ -24,8 +24,10 @@ def configure_stage(stage: Usd.Stage) -> None:
     stage.SetDefaultPrim(world.GetPrim())
 
 
-def build_factory_scene(stage: Usd.Stage) -> None:
-    """Create (or recreate) the factory prims under FACTORY_PATH."""
+def build_factory_scene(stage: Usd.Stage, camera_height: float = L.CAMERA_HEIGHT_ABOVE_BELT,
+                        camera_focal_mm: float = L.CAMERA_FOCAL_MM) -> None:
+    """Create (or recreate) the factory prims under FACTORY_PATH. The inspection camera's
+    height/focal length can be set per product (small dental parts need a close-up)."""
     configure_stage(stage)
     if stage.GetPrimAtPath(L.FACTORY_PATH):
         stage.RemovePrim(L.FACTORY_PATH)
@@ -60,9 +62,19 @@ def build_factory_scene(stage: Usd.Stage) -> None:
     _box(stage, f"{f}/RejectBin", (L.REJECT_X, -L.CONVEYOR_WIDTH / 2 - 0.4, 0.2),
          (0.6, 0.5, 0.4), (0.6, 0.15, 0.1))
 
-    _define_inspection_camera(stage)
+    _define_inspection_camera(stage, camera_height, camera_focal_mm)
     _define_overview_camera(stage)
+    _define_mill_camera(stage)
     _define_light(stage)
+
+
+def _define_mill_camera(stage: Usd.Stage) -> None:
+    """Close-up of the mill station and its load/unload (dental line demo view)."""
+    cam = UsdGeom.Camera.Define(stage, L.MILL_CAMERA_PATH)
+    eye, target = Gf.Vec3d(*L.MILL_CAMERA_EYE), Gf.Vec3d(*L.MILL_CAMERA_TARGET)
+    cam.AddTransformOp().Set(Gf.Matrix4d().SetLookAt(eye, target, Gf.Vec3d(0, 0, 1)).GetInverse())
+    cam.CreateFocalLengthAttr(24.0)
+    cam.CreateClippingRangeAttr(Gf.Vec2f(0.01, 100.0))
 
 
 def _define_overview_camera(stage: Usd.Stage) -> None:
@@ -77,12 +89,11 @@ def _define_overview_camera(stage: Usd.Stage) -> None:
     cam.CreateClippingRangeAttr(Gf.Vec2f(0.05, 1000.0))
 
 
-def _define_inspection_camera(stage: Usd.Stage) -> None:
+def _define_inspection_camera(stage: Usd.Stage, height: float, focal_mm: float) -> None:
     # A USD camera looks down its local -Z axis, so no rotation = looking straight down.
     cam = UsdGeom.Camera.Define(stage, L.CAMERA_PATH)
-    UsdGeom.XformCommonAPI(cam).SetTranslate(
-        Gf.Vec3d(L.INSPECTION_X, 0.0, L.CONVEYOR_TOP_Z + L.CAMERA_HEIGHT_ABOVE_BELT))
-    cam.CreateFocalLengthAttr(L.CAMERA_FOCAL_MM)
+    UsdGeom.XformCommonAPI(cam).SetTranslate(Gf.Vec3d(L.INSPECTION_X, 0.0, L.CONVEYOR_TOP_Z + height))
+    cam.CreateFocalLengthAttr(focal_mm)
     cam.CreateHorizontalApertureAttr(L.CAMERA_H_APERTURE_MM)
     cam.CreateVerticalApertureAttr(L.CAMERA_V_APERTURE_MM)
     cam.CreateClippingRangeAttr(Gf.Vec2f(0.01, 100.0))
@@ -105,8 +116,10 @@ PART_REST_DZ = 0.0
 
 
 def spawn_product_prim(stage: Usd.Stage, product_id: int, defect_kind, x: float,
-                       variant_usd: str = None) -> None:
-    """Box (variant_usd None) or a reference to a CAD part variant layer."""
+                       variant_usd: str = None, raw_usd: str = None) -> None:
+    """Box (variant_usd None) or a CAD part: P_xxxx (position) / Pose (rotation, follows the mill
+    platter while processed) / Part (final shape) and, for processed parts, Raw (shape before
+    processing; Part stays hidden until show_final_shape)."""
     if variant_usd is None:
         color = DEFECT_COLORS.get(defect_kind, GOOD_COLOR)
         s = L.PRODUCT_SIZE
@@ -115,9 +128,39 @@ def spawn_product_prim(stage: Usd.Stage, product_id: int, defect_kind, x: float,
     # The variant's /Part carries its own normalising xform ops (centre, rotate, scale), so it is
     # referenced on a CHILD prim: putting the reference on the product prim itself let our
     # translate replace the variant's centring translate (part sank 1.7 cm into the belt).
-    xf = UsdGeom.Xform.Define(stage, product_path(product_id))
-    UsdGeom.Xform.Define(stage, f"{product_path(product_id)}/Part").GetPrim().GetReferences().AddReference(variant_usd)
+    path = product_path(product_id)
+    xf = UsdGeom.Xform.Define(stage, path)
+    pose = UsdGeom.Xform.Define(stage, f"{path}/Pose")
+    pose.AddTransformOp().Set(Gf.Matrix4d(1.0))
+    final = UsdGeom.Xform.Define(stage, f"{path}/Pose/Part")
+    final.GetPrim().GetReferences().AddReference(variant_usd)
+    if raw_usd:
+        UsdGeom.Xform.Define(stage, f"{path}/Pose/Raw").GetPrim().GetReferences().AddReference(raw_usd)
+        final.MakeInvisible()
     UsdGeom.XformCommonAPI(xf).SetTranslate(Gf.Vec3d(x, 0.0, L.CONVEYOR_TOP_Z + PART_REST_DZ))
+
+
+def show_final_shape(stage: Usd.Stage, product_id: int) -> None:
+    """Processed part: hide the raw shape (blank) and show the final one (crown)."""
+    path = product_path(product_id)
+    raw, final = stage.GetPrimAtPath(f"{path}/Pose/Raw"), stage.GetPrimAtPath(f"{path}/Pose/Part")
+    if raw:
+        UsdGeom.Imageable(raw).MakeInvisible()
+    if final:
+        UsdGeom.Imageable(final).MakeVisible()
+
+
+def set_product_pose(stage: Usd.Stage, product_id: int, world) -> None:
+    """Place a CAD part with a full 4x4 world transform (numpy, metres): translation on the
+    product prim, rotation on its Pose child (used while it rides the mill platter)."""
+    path = product_path(product_id)
+    prim, pose = stage.GetPrimAtPath(path), stage.GetPrimAtPath(f"{path}/Pose")
+    if not prim or not pose:
+        return
+    UsdGeom.XformCommonAPI(prim).SetTranslate(Gf.Vec3d(*(float(v) for v in world[:3, 3])))
+    rot = Gf.Matrix4d(1.0)
+    rot.SetRotateOnly(Gf.Matrix3d(*(float(v) for v in world[:3, :3].T.flatten())))  # USD: row vectors
+    UsdGeom.Xformable(pose).GetOrderedXformOps()[0].Set(rot)
 
 
 def move_product_prim(stage: Usd.Stage, product_id: int, x: float, y: float = 0.0, z: float = None,

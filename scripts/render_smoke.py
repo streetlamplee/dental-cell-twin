@@ -73,7 +73,10 @@ async def _main():
 
         # Overview image, then the same frame through the inspection camera.
         results = []
-        for cam_path, path in ((None, out), (L.CAMERA_PATH, out.replace(".png", "_inspection.png"))):
+        shots = [(None, out), (L.CAMERA_PATH, out.replace(".png", "_inspection.png"))]
+        if viewport.stage.GetPrimAtPath(L.MILL_CAMERA_PATH):
+            shots.insert(1, (L.MILL_CAMERA_PATH, out.replace(".png", "_mill.png")))
+        for cam_path, path in shots:
             if cam_path:
                 viewport.camera_path = cam_path
             await next_viewport_frame_async(viewport, 30)  # let RTX converge a little

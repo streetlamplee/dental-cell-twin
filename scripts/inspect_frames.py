@@ -93,7 +93,7 @@ def main():
                 k = by_kind.setdefault(kind or "?", [0, 0, 0])
                 k[0] += res.label == "defect"
                 k[1] += 1
-                k[2] += {"color": "color", "missing": "shape"}.get(kind) in res.defect_reason.split("+")
+                k[2] += {"color": "color", "missing": "shape", "shape": "shape"}.get(kind) in res.defect_reason.split("+")
             w.writerow([row["product_id"], row["ground_truth"], kind, row["predicted_label"], res.label,
                         res.defect_reason, f"{res.score:.4f}", f"{res.interior_bright:.4f}",
                         f"{res.mean_hue:.2f}", res.area_px, f"{res.latency_ms:.3f}", res.reason, row["frame_file"]])

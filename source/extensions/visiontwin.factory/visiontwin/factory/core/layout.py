@@ -40,6 +40,16 @@ MILL_X = -1.8  # station line: products crossing it trigger a machining cycle
 MILL_Y = 0.85
 MILL_STAND_HEIGHT = 0.6
 MILL_PATH = "/World/Factory/MillStation"
+# Dental line: the mill is a processing station; products stop at the entry, are loaded onto
+# the C platter, machined and unloaded at the exit. Entry/exit are > min_gap apart.
+MILL_ENTRY_X = MILL_X - 0.2
+MILL_EXIT_X = MILL_X + 0.2
+# Fractions of the processing cycle: load (belt -> platter), machining, unload (platter -> belt).
+MILL_LOAD_FRACTION = 0.15
+MILL_UNLOAD_FRACTION = 0.15
+MILL_CAMERA_PATH = "/World/Factory/MillCamera"
+MILL_CAMERA_EYE = (MILL_X + 0.55, -0.55, 1.35)  # front-right, above the belt: entry, mill and exit
+MILL_CAMERA_TARGET = (MILL_X, 0.45, 0.8)
 
 # Root prim paths
 ROOT_PATH = "/World"
