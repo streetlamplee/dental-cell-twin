@@ -39,6 +39,9 @@ class ConveyorConfig:
     max_products: int = 30
     min_gap: float = L.PRODUCT_SIZE * 1.5  # spawn waits until the previous product moved this far
     stations: Tuple[Tuple[str, float], ...] = ()  # (name, x): visual stations, emit STATION events
+    # Defect kinds drawn uniformly for defective products. With a single kind no extra random
+    # number is drawn, so box runs keep exactly the same ground-truth sequence as before.
+    defect_kinds: Tuple[str, ...] = ("color",)
 
 
 # Returns True if the product must be pushed off at the reject line.
@@ -105,8 +108,11 @@ class ConveyorSim:
 
     def _spawn(self, t: float) -> Product:
         is_defect = self._rng.random() < self.config.defect_rate
-        p = self.tracker.spawn(DEFECT if is_defect else GOOD, "color" if is_defect else None,
-                               L.SPAWN_X, t)
+        kind = None
+        if is_defect:
+            kinds = self.config.defect_kinds
+            kind = kinds[0] if len(kinds) == 1 else kinds[self._rng.randrange(len(kinds))]
+        p = self.tracker.spawn(DEFECT if is_defect else GOOD, kind, L.SPAWN_X, t)
         self.tracker.transition(p.product_id, ProductState.MOVING)
         self._spawned += 1
         return p

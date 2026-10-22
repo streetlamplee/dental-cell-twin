@@ -13,8 +13,8 @@ import cv2
 import numpy as np
 
 FIELDS = [
-    "run_id", "seed", "product_id", "ground_truth", "predicted_label", "score", "mean_hue",
-    "area_px", "capture_latency_ms", "frame_offset", "inspection_latency_ms", "simulation_time_s",
+    "run_id", "seed", "product_id", "ground_truth", "predicted_label", "defect_reason", "score", "mean_hue",
+    "area_px", "interior_ratio", "interior_bright", "capture_latency_ms", "frame_offset", "inspection_latency_ms", "simulation_time_s",
     "conveyor_speed", "lighting_condition", "frame_file", "reason",
 ]
 
@@ -26,9 +26,12 @@ class InspectionRecord:
     product_id: int
     ground_truth: str
     predicted_label: str
+    defect_reason: str
     score: float
     mean_hue: float
     area_px: int
+    interior_ratio: object  # float, "" when the shape check is off
+    interior_bright: object
     capture_latency_ms: float
     frame_offset: object  # captured SWH frame - trigger frame (0 = exact); "" if unknown
     inspection_latency_ms: float

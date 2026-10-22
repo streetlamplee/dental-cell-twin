@@ -8,7 +8,7 @@ from typing import Dict, Iterable, List
 from .sorting import SortDecision, SortingController
 
 FIELDS = [
-    "run_id", "seed", "product_id", "ground_truth", "predicted_label", "score",
+    "run_id", "seed", "product_id", "ground_truth", "defect_kind", "predicted_label", "defect_reason", "score",
     "inspection_start_ms", "inspection_end_ms", "inspection_latency_ms",
     "sort_result", "sort_reason", "sort_correct", "late_prediction",
     "simulation_time_s", "conveyor_speed", "lighting_condition", "final_state",
@@ -29,7 +29,9 @@ def build_rows(run_id: str, seed: int, lighting: str, products: Iterable,
         rows.append({
             "run_id": run_id, "seed": seed, "product_id": p.product_id,
             "ground_truth": p.ground_truth,
+            "defect_kind": p.defect_kind or "",
             "predicted_label": "" if d is None or d.prediction is None else d.prediction,
+            "defect_reason": p.defect_reason or "",
             "score": _r(p.score, 4),
             "inspection_start_ms": _r(p.inspection_start_ms, 2),
             "inspection_end_ms": _r(p.inspection_end_ms, 2),

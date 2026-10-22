@@ -47,6 +47,7 @@ class Product:
     state: ProductState = ProductState.SPAWNED
     prediction: Optional[str] = None  # set by the inspector (Day 3/4)
     score: Optional[float] = None
+    defect_reason: Optional[str] = None  # inspector's reason for a defect verdict ("color", "shape", ...)
     inspected_time: Optional[float] = None  # sim time of the inspection-line crossing
     inspection_start_ms: Optional[float] = None  # wall clock since run start: frame requested
     inspection_end_ms: Optional[float] = None  # wall clock since run start: verdict ready

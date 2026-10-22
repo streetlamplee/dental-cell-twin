@@ -7,9 +7,14 @@ Method
 1. Restrict to the ROI (belt lane).
 2. Foreground = saturated, not-too-dark pixels (the belt and floor are grey).
 3. Product = largest connected foreground blob above `min_area_px`.
-4. score = fraction of blob pixels whose hue is within `hue_tolerance` of the
-   reference ("golden sample") hue. score >= good_ratio_min -> good, else defect.
-5. No blob -> unknown (never guess).
+4. Colour check: score = fraction of blob pixels whose hue is within `hue_tolerance`
+   of the reference ("golden sample") hue; score < good_ratio_min -> colour defect.
+5. Shape check (optional, `interior_bright_min` set): fill the blob's outer contour;
+   interior = filled - blob (bores, holes, inserts: the unsaturated inside of the part).
+   interior_bright = fraction of interior pixels with V >= `bright_v_min`. A bearing
+   insert shows bright rings, an empty bore shows the dark belt/shadow ->
+   interior_bright < interior_bright_min -> shape (missing part) defect.
+6. No blob -> unknown (never guess). Any failed check -> defect, reason lists them.
 """
 
 import json
@@ -34,6 +39,9 @@ class InspectorConfig:
     reference_hue: float = 105.0  # OpenCV hue 0..179 of a good product
     hue_tolerance: float = 12.0
     good_ratio_min: float = 0.85
+    # Shape check (None = off, as for the box product)
+    interior_bright_min: Optional[float] = None
+    bright_v_min: int = 140
 
     @classmethod
     def load(cls, path: str) -> "InspectorConfig":
@@ -61,6 +69,9 @@ class InspectionResult:
     latency_ms: float
     reason: str
     params: dict = field(default_factory=dict)
+    defect_reason: str = ""  # "", "color", "shape" or "color+shape"
+    interior_ratio: float = float("nan")  # interior area / filled silhouette area
+    interior_bright: float = float("nan")  # bright fraction of the interior
 
 
 def hue_distance(h: np.ndarray, ref: float) -> np.ndarray:
@@ -103,13 +114,43 @@ class VisionInspector:
             return self._result(UNKNOWN, 0.0, area, float("nan"), None, t0,
                                 f"largest blob {area}px < min_area {c.min_area_px}px", params)
 
-        hues = hsv[:, :, 0][labels == idx]
+        blob = labels == idx
+        hues = hsv[:, :, 0][blob]
         score = float((hue_distance(hues, c.reference_hue) <= c.hue_tolerance).mean())
         bx, by, bw, bh = (int(v) for v in stats[idx, :4])
         bbox = (bx + x0, by + y0, bw, bh)
-        label = GOOD if score >= c.good_ratio_min else DEFECT
-        reason = f"hue match {score:.2f} {'>=' if label == GOOD else '<'} {c.good_ratio_min}"
-        return self._result(label, score, area, circular_mean_hue(hues), bbox, t0, reason, params)
+        color_ok = score >= c.good_ratio_min
+        reasons = [f"hue match {score:.2f} {'>=' if color_ok else '<'} {c.good_ratio_min}"]
+        failed = [] if color_ok else ["color"]
+
+        interior_ratio = interior_bright = float("nan")
+        if c.interior_bright_min is not None:
+            interior_ratio, interior_bright = self._interior(blob, hsv[:, :, 2], c.bright_v_min)
+            shape_ok = interior_bright >= c.interior_bright_min
+            reasons.append(f"interior bright {interior_bright:.2f} {'>=' if shape_ok else '<'} "
+                           f"{c.interior_bright_min} (interior {interior_ratio:.2f})")
+            if not shape_ok:
+                failed.append("shape")
+            params["interior_bright_min"] = c.interior_bright_min
+
+        label = DEFECT if failed else GOOD
+        res = self._result(label, score, area, circular_mean_hue(hues), bbox, t0, "; ".join(reasons), params)
+        res.defect_reason = "+".join(failed)
+        res.interior_ratio, res.interior_bright = interior_ratio, interior_bright
+        return res
+
+    @staticmethod
+    def _interior(blob: np.ndarray, value: np.ndarray, bright_v_min: int):
+        """Interior of the blob's outer contour that is not blob (holes, bores, inserts)."""
+        contours, _ = cv2.findContours(blob.astype(np.uint8), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+        filled = np.zeros(blob.shape, np.uint8)
+        cv2.drawContours(filled, contours, -1, 1, thickness=cv2.FILLED)
+        interior = (filled > 0) & ~blob
+        n_interior, n_filled = int(interior.sum()), int((filled > 0).sum())
+        if n_interior == 0:
+            return 0.0, 0.0
+        bright = float((value[interior] >= bright_v_min).mean())
+        return n_interior / max(n_filled, 1), bright
 
     @staticmethod
     def _result(label, score, area, mean_hue, bbox, t0, reason, params) -> InspectionResult:

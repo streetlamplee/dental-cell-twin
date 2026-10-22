@@ -91,6 +91,51 @@ def test_rgba_input_accepted_and_bad_shape_rejected(inspector):
         inspector.inspect(np.zeros((H, W), np.uint8))
 
 
+def flange(paint, insert: bool):
+    """Synthetic top view of a flange bearing: painted plate with a bore; the insert
+    shows a bright ring inside the bore, a missing insert shows the dark belt."""
+    img = scene(None)
+    cv2.ellipse(img, (320, 240), (95, 55), 0, 0, 360, paint, -1)
+    cv2.circle(img, (250, 240), 10, BELT, -1)  # bolt holes
+    cv2.circle(img, (390, 240), 10, BELT, -1)
+    cv2.circle(img, (320, 240), 40, BELT, -1)  # bore
+    if insert:
+        cv2.circle(img, (320, 240), 38, (230, 230, 230), -1)  # outer ring (bright, unsaturated)
+        cv2.circle(img, (320, 240), 26, (20, 20, 20), -1)  # seal
+        cv2.circle(img, (320, 240), 12, (220, 220, 220), -1)  # inner ring
+        cv2.circle(img, (320, 240), 6, BELT, -1)  # shaft bore
+    return img
+
+
+@pytest.fixture
+def part_inspector():
+    return VisionInspector(InspectorConfig(roi=(0, 100, W, 380), reference_hue=hue_of(BLUE),
+                                           good_ratio_min=0.85, interior_bright_min=0.3))
+
+
+def test_part_good_passes_both_checks(part_inspector):
+    r = part_inspector.inspect(flange(BLUE, insert=True))
+    assert r.label == GOOD and r.defect_reason == ""
+    assert r.interior_bright > 0.3
+
+
+def test_part_missing_insert_is_shape_defect(part_inspector):
+    r = part_inspector.inspect(flange(BLUE, insert=False))
+    assert r.label == DEFECT and r.defect_reason == "shape"
+    assert r.interior_bright < 0.05
+
+
+def test_part_color_defect_reports_color(part_inspector):
+    r = part_inspector.inspect(flange(RED, insert=True))
+    assert r.label == DEFECT and r.defect_reason == "color"
+
+
+def test_box_config_has_shape_check_off(inspector):
+    r = inspector.inspect(scene(BLUE))
+    assert r.label == GOOD and r.defect_reason == ""
+    assert np.isnan(r.interior_bright)
+
+
 def test_inspector_api_takes_only_pixels():
     params = list(pyinspect.signature(VisionInspector.inspect).parameters)
     assert params == ["self", "rgb"]  # no product id / ground truth can be passed

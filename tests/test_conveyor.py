@@ -131,6 +131,21 @@ def test_station_line_emits_one_event_per_product_and_keeps_lifecycle():
         assert kinds == [SPAWN, INSPECT, SORT, EXIT]
 
 
+def test_defect_kinds_split_and_single_kind_keeps_box_sequence():
+    base = ConveyorSim(ConveyorConfig(seed=42, max_products=30))
+    run_to_end(base, dt=0.25)
+    single = ConveyorSim(ConveyorConfig(seed=42, max_products=30, defect_kinds=("color",)))
+    run_to_end(single, dt=0.25)
+    assert [p.ground_truth for p in base.tracker.all()] == [p.ground_truth for p in single.tracker.all()]
+
+    multi = ConveyorSim(ConveyorConfig(seed=42, max_products=60, defect_rate=0.5,
+                                       defect_kinds=("color", "missing")))
+    run_to_end(multi, dt=0.25)
+    kinds = [p.defect_kind for p in multi.tracker.all() if p.ground_truth == DEFECT]
+    assert set(kinds) == {"color", "missing"}
+    assert all(p.defect_kind is None for p in multi.tracker.all() if p.ground_truth == GOOD)
+
+
 def test_invalid_transition_raises():
     t = ProductTracker()
     p = t.spawn(GOOD, None, 0.0, 0.0)
