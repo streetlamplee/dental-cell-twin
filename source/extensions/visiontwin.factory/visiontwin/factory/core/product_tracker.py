@@ -2,6 +2,8 @@
 
 SPAWNED -> MOVING -> INSPECTED -> SORTED   -> EXITED   (passed down the line)
                               +-> REJECTED -> EXITED   (pushed into reject bin)
+With a processing station (dental mill line), before inspection:
+          MOVING -> PROCESSING -> MOVING   (loaded into the station, machined, unloaded)
 
 ground_truth is stored for evaluation only. Vision code must never read it.
 """
@@ -17,6 +19,7 @@ DEFECT = "defect"
 class ProductState(str, Enum):
     SPAWNED = "SPAWNED"
     MOVING = "MOVING"
+    PROCESSING = "PROCESSING"
     INSPECTED = "INSPECTED"
     SORTED = "SORTED"
     REJECTED = "REJECTED"
@@ -25,7 +28,8 @@ class ProductState(str, Enum):
 
 _ALLOWED = {
     ProductState.SPAWNED: {ProductState.MOVING},
-    ProductState.MOVING: {ProductState.INSPECTED},
+    ProductState.MOVING: {ProductState.INSPECTED, ProductState.PROCESSING},
+    ProductState.PROCESSING: {ProductState.MOVING},
     ProductState.INSPECTED: {ProductState.SORTED, ProductState.REJECTED},
     ProductState.SORTED: {ProductState.EXITED},
     ProductState.REJECTED: {ProductState.EXITED},
@@ -54,6 +58,8 @@ class Product:
     late_prediction: Optional[str] = None  # verdict that arrived after sorting (not applied)
     sort_time: Optional[float] = None  # sim time of the reject-line crossing
     sort_speed: Optional[float] = None  # conveyor speed at that moment
+    load_time: Optional[float] = None  # entered the processing station
+    unload_time: Optional[float] = None  # left it (processed)
     exit_time: Optional[float] = None
     exit_route: Optional[str] = None  # "pass" or "reject"
 

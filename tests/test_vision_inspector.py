@@ -136,6 +136,62 @@ def test_box_config_has_shape_check_off(inspector):
     assert np.isnan(r.interior_bright)
 
 
+IVORY = (235, 228, 205)
+PINK = (232, 150, 165)
+BELT_DARK = (100, 100, 104)
+
+
+def crown(color, remnant=False, dx=0):
+    """Top view of a crown on a dark belt, with a cast shadow (darker than the belt)."""
+    img = np.full((H, W, 3), BELT_DARK, np.uint8)
+    cx, cy = 320 + dx, 240
+    cv2.rectangle(img, (cx - 70, cy - 25), (cx - 10, cy + 70), (55, 55, 58), -1)  # shadow
+    cv2.rectangle(img, (cx - 40, cy - 36), (cx + 40, cy + 36), color, -1)
+    for sx, sy in ((-40, -36), (40, -36), (-40, 36), (40, 36)):  # round the corners
+        cv2.rectangle(img, (cx + min(sx, 0) + (0 if sx < 0 else -12), cy + min(sy, 0) + (0 if sy < 0 else -12)),
+                      (cx + max(sx, 0) + (12 if sx < 0 else 0), cy + max(sy, 0) + (12 if sy < 0 else 0)),
+                      BELT_DARK, -1)
+        cv2.circle(img, (cx + sx - 12 * np.sign(sx), cy + sy - 12 * np.sign(sy)), 12, color, -1)
+    cv2.line(img, (cx, cy - 30), (cx, cy + 30), tuple(int(v * 0.8) for v in color), 2)  # fissure
+    if remnant:
+        cv2.rectangle(img, (cx + 5, cy - 50), (cx + 60, cy - 5), (225, 222, 210), -1)  # unmilled corner
+    return img
+
+
+def lab_ab(rgb):
+    return tuple(float(v) for v in cv2.cvtColor(np.uint8([[rgb]]), cv2.COLOR_RGB2LAB)[0, 0, 1:])
+
+
+@pytest.fixture
+def crown_inspector():
+    base = InspectorConfig(segment="bright", bright_delta=25, color_metric="ab", reference_ab=lab_ab(IVORY),
+                           ab_tolerance=8.0, good_ratio_min=0.8)
+    golden = VisionInspector(base).inspect(crown(IVORY))
+    cfg = InspectorConfig(**{**base.__dict__, "golden_contour": golden.contour,
+                             "golden_area_px": float(cv2.contourArea(np.array(golden.contour, np.int32))),
+                             "shape_dist_max": 0.05, "area_ratio_tol": 0.1})
+    return VisionInspector(cfg)
+
+
+def test_crown_good_ignores_shadow_and_passes(crown_inspector):
+    r = crown_inspector.inspect(crown(IVORY, dx=25))  # translation must not matter
+    assert r.label == GOOD, r.reason
+    assert r.area_ratio == pytest.approx(1.0, abs=0.05)
+    x, y, w, h = r.bbox
+    assert w < 110  # the shadow is not part of the silhouette
+
+
+def test_crown_wrong_shade_is_color_defect(crown_inspector):
+    r = crown_inspector.inspect(crown(PINK))
+    assert r.label == DEFECT and r.defect_reason == "color", r.reason
+
+
+def test_crown_unmilled_corner_is_shape_defect(crown_inspector):
+    r = crown_inspector.inspect(crown(IVORY, remnant=True))
+    assert r.label == DEFECT and "shape" in r.defect_reason, r.reason
+    assert r.area_ratio > 1.1 or r.shape_dist > 0.05
+
+
 def test_inspector_api_takes_only_pixels():
     params = list(pyinspect.signature(VisionInspector.inspect).parameters)
     assert params == ["self", "rgb"]  # no product id / ground truth can be passed

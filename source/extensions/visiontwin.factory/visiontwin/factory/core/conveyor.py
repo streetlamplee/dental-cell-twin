@@ -3,6 +3,12 @@
 Positions advance by simulation time `dt`, not by render frames, and line
 crossings are detected on the segment [x_before, x_after], so a large dt
 cannot skip an inspection or reject line.
+
+Optional processing station (dental mill line): unprocessed products stop at the
+station entry; when the station is free the product is loaded (PROCESSING, off the
+belt), released after `cycle_s` at the exit when the exit is clear, and continues as
+MOVING. While the station is busy, products queue at the entry and the ones behind
+stop at `min_gap` (accumulating conveyor).
 """
 
 import random
@@ -18,7 +24,9 @@ INSPECT = "INSPECT"  # crossed the inspection line
 SORT = "SORT"  # crossed the reject line and stayed on the belt
 REJECT = "REJECT"  # crossed the reject line and was pushed off
 EXIT = "EXIT"  # left the line (end of belt or into the reject bin)
-STATION = "STATION"  # crossed a station line (e.g. the mill); `station` names it
+STATION = "STATION"  # crossed a (visual) station line; `station` names it
+LOAD = "LOAD"  # loaded into the processing station
+UNLOAD = "UNLOAD"  # processed and put back on the belt
 
 
 @dataclass(frozen=True)
@@ -28,6 +36,14 @@ class LineEvent:
     kind: str
     x: float
     station: str = ""
+
+
+@dataclass(frozen=True)
+class ProcessStation:
+    name: str
+    x_entry: float
+    x_exit: float
+    cycle_s: float
 
 
 @dataclass
@@ -42,6 +58,7 @@ class ConveyorConfig:
     # Defect kinds drawn uniformly for defective products. With a single kind no extra random
     # number is drawn, so box runs keep exactly the same ground-truth sequence as before.
     defect_kinds: Tuple[str, ...] = ("color",)
+    process: Optional[ProcessStation] = None
 
 
 # Returns True if the product must be pushed off at the reject line.
@@ -62,6 +79,15 @@ class ConveyorSim:
         self._rng = random.Random(self.config.seed)
         self._next_spawn_time = 0.0
         self._spawned = 0
+        # processing station state + line metrics
+        self.station_product: Optional[int] = None
+        self._station_done = 0.0
+        self._station_free_at = 0.0
+        self.station_busy_time = 0.0
+        self.station_blocked_time = 0.0
+        self.queue_len = 0
+        self.queue_max = 0
+        self._queue_area = 0.0  # integral of queue length over time
 
     def start(self) -> None:
         self.running = True
@@ -76,7 +102,16 @@ class ConveyorSim:
 
     @property
     def finished(self) -> bool:
-        return self._spawned >= self.config.max_products and not self.tracker.on_belt()
+        return (self._spawned >= self.config.max_products and not self.tracker.on_belt()
+                and self.station_product is None)
+
+    @property
+    def queue_mean(self) -> float:
+        return self._queue_area / self.time if self.time > 0 else 0.0
+
+    @property
+    def station_utilization(self) -> float:
+        return self.station_busy_time / self.time if self.time > 0 else 0.0
 
     def step(self, dt: float) -> List[LineEvent]:
         """Advance the simulation by dt seconds and return events in time order."""
@@ -85,9 +120,17 @@ class ConveyorSim:
         t0, t1 = self.time, self.time + dt
         events: List[LineEvent] = []
 
-        # Move products already on the belt during [t0, t1].
+        if self.config.process is not None:
+            self._station_unload(t0, t1, events)
+
+        # Move products already on the belt during [t0, t1], downstream first so that each
+        # product's leader has already moved (accumulation needs the leader's new position).
+        leader_x = None
+        waiting = 0
         for p in sorted(self.tracker.on_belt(), key=lambda p: -p.x):
-            events.extend(self._advance(p, t0, t1))
+            evs, leader_x, stopped = self._advance(p, t0, t1, leader_x)
+            events.extend(evs)
+            waiting += stopped
 
         # Spawn products scheduled inside this step, then move them for the remaining time.
         while self._spawned < self.config.max_products and self._next_spawn_time <= t1:
@@ -97,8 +140,16 @@ class ConveyorSim:
             ts = max(self._next_spawn_time, t0, t_clear)
             p = self._spawn(ts)
             events.append(LineEvent(ts, p.product_id, SPAWN, p.x))
-            events.extend(self._advance(p, ts, t1))
+            evs, _, _ = self._advance(p, ts, t1, None)
+            events.extend(evs)
             self._next_spawn_time = ts + self.config.spawn_interval
+
+        if self.config.process is not None:
+            if self.station_product is not None:
+                self.station_busy_time += dt
+            self.queue_len = waiting
+            self.queue_max = max(self.queue_max, waiting)
+            self._queue_area += waiting * dt
 
         self.time = t1
         events.sort(key=lambda e: (e.time, e.product_id))
@@ -133,11 +184,53 @@ class ConveyorSim:
             return float("-inf")
         return t1 - clearance / self.config.speed
 
-    def _advance(self, p: Product, t_start: float, t_end: float) -> List[LineEvent]:
+    def _station_unload(self, t0: float, t1: float, events: List[LineEvent]) -> None:
+        st = self.config.process
+        if self.station_product is None or self._station_done > t1:
+            return
+        gap = self.config.min_gap
+        # Only processed products (downstream of the station) can block the exit. Unprocessed
+        # products wait at the entry and never move into it; counting them deadlocked the line
+        # (queue waits for the station, station waits for the queue).
+        if any(q.unload_time is not None and abs(q.x - st.x_exit) < gap for q in self.tracker.on_belt()):
+            self.station_blocked_time += t1 - max(t0, self._station_done)  # exit blocked: wait inside
+            return
+        t = max(self._station_done, t0)
+        p = self.tracker.get(self.station_product)
+        self.tracker.transition(p.product_id, ProductState.MOVING)
+        p.x, p.unload_time = st.x_exit, t
+        self.station_product = None
+        self._station_free_at = t
+        events.append(LineEvent(t, p.product_id, UNLOAD, st.x_exit, st.name))
+
+    def _station_load(self, p: Product, t: float, events: List[LineEvent]) -> None:
+        st = self.config.process
+        self.tracker.transition(p.product_id, ProductState.PROCESSING)
+        p.x, p.load_time = st.x_entry, t
+        self.station_product = p.product_id
+        self._station_done = t + st.cycle_s
+        events.append(LineEvent(t, p.product_id, LOAD, st.x_entry, st.name))
+
+    def _advance(self, p: Product, t_start: float, t_end: float, leader_x: Optional[float]):
+        """Move one product. Returns (events, x to use as the next product's leader, stopped)."""
         speed = self.config.speed
+        st = self.config.process
         x0 = p.x
-        x1 = x0 + speed * (t_end - t_start)
+        x_free = x0 + speed * (t_end - t_start)
+        x1 = x_free
         events: List[LineEvent] = []
+        if st is not None:
+            if leader_x is not None:
+                x1 = min(x1, leader_x - self.config.min_gap)  # accumulate behind the leader
+            unprocessed = p.state == ProductState.MOVING and p.unload_time is None
+            if unprocessed and x0 <= st.x_entry:
+                x1 = min(x1, st.x_entry)  # stop at the entry until the station takes it
+            x1 = max(x1, x0)  # never move backwards
+            if unprocessed and x1 >= st.x_entry and self.station_product is None:
+                t_arrive = t_start + (st.x_entry - x0) / speed if speed > 0 and x0 < st.x_entry else t_start
+                self._station_load(p, max(t_arrive, self._station_free_at, t_start), events)
+                return events, leader_x, False
+        stopped = st is not None and x1 < x_free - 1e-12 and p.unload_time is None
 
         def crossed(line: float) -> bool:
             return x0 < line <= x1
@@ -161,16 +254,16 @@ class ConveyorSim:
                 self.tracker.transition(p.product_id, ProductState.REJECTED)
                 events.append(LineEvent(t, p.product_id, REJECT, L.REJECT_X))
                 self._exit(p, t, "reject", L.REJECT_X, events)
-                return events
+                return events, leader_x, stopped
             self.tracker.transition(p.product_id, ProductState.SORTED)
             events.append(LineEvent(t, p.product_id, SORT, L.REJECT_X))
 
         if p.state == ProductState.SORTED and crossed(L.EXIT_X):
             self._exit(p, t_at(L.EXIT_X), "pass", L.EXIT_X, events)
-            return events
+            return events, leader_x, stopped
 
         p.x = x1
-        return events
+        return events, x1, stopped
 
     def _exit(self, p: Product, t: float, route: str, x: float, events: List[LineEvent]) -> None:
         p.x = x
