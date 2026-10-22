@@ -1,0 +1,26 @@
+run_id,seed,product_id,ground_truth,predicted_label,defect_reason,score,mean_hue,area_px,interior_ratio,interior_bright,capture_latency_ms,frame_offset,inspection_latency_ms,simulation_time_s,conveyor_speed,lighting_condition,frame_file,reason
+20261022_213416_seed42,42,1,good,good,,0.9593,98.9,13005,,,217.34,0,7.837,4.617,0.5,default,frames/P_0001.png,hue match 0.96 >= 0.85
+20261022_213416_seed42,42,2,defect,defect,color,0.0,8.05,16586,,,222.14,0,1.13,6.117,0.5,default,frames/P_0002.png,hue match 0.00 < 0.85
+20261022_213416_seed42,42,3,defect,defect,color,0.0,8.02,16600,,,217.81,0,1.164,7.617,0.5,default,frames/P_0003.png,hue match 0.00 < 0.85
+20261022_213416_seed42,42,4,defect,defect,color,0.0,8.26,15843,,,224.34,0,1.222,9.1,0.5,default,frames/P_0004.png,hue match 0.00 < 0.85
+20261022_213416_seed42,42,5,good,good,,0.9846,98.55,12680,,,210.08,0,1.134,10.6,0.5,default,frames/P_0005.png,hue match 0.98 >= 0.85
+20261022_213416_seed42,42,6,good,good,,0.9941,98.34,12458,,,215.56,0,1.017,12.1,0.5,default,frames/P_0006.png,hue match 0.99 >= 0.85
+20261022_213416_seed42,42,7,good,good,,0.9846,98.57,12700,,,214.99,0,1.19,13.6,0.5,default,frames/P_0007.png,hue match 0.98 >= 0.85
+20261022_213416_seed42,42,8,defect,defect,color,0.0,8.23,15815,,,216.56,0,1.329,15.1,0.5,default,frames/P_0008.png,hue match 0.00 < 0.85
+20261022_213416_seed42,42,9,good,good,,0.9906,98.47,12621,,,216.14,0,1.113,16.6,0.5,default,frames/P_0009.png,hue match 0.99 >= 0.85
+20261022_213416_seed42,42,10,defect,defect,color,0.0,8.17,16277,,,208.57,0,1.231,18.1,0.5,default,frames/P_0010.png,hue match 0.00 < 0.85
+20261022_213416_seed42,42,11,defect,defect,color,0.0,8.31,15509,,,212.96,0,1.063,19.6,0.5,default,frames/P_0011.png,hue match 0.00 < 0.85
+20261022_213416_seed42,42,12,good,good,,0.9914,98.41,12499,,,206.98,0,1.248,21.1,0.5,default,frames/P_0012.png,hue match 0.99 >= 0.85
+20261022_213416_seed42,42,13,defect,defect,color,0.0,8.04,16826,,,213.46,0,1.139,22.617,0.5,default,frames/P_0013.png,hue match 0.00 < 0.85
+20261022_213416_seed42,42,14,defect,defect,color,0.0,8.26,16179,,,210.63,0,1.128,24.117,0.5,default,frames/P_0014.png,hue match 0.00 < 0.85
+20261022_213416_seed42,42,15,good,good,,0.9514,98.99,13081,,,213.28,0,0.973,25.617,0.5,default,frames/P_0015.png,hue match 0.95 >= 0.85
+20261022_213416_seed42,42,16,good,good,,0.9609,98.84,12893,,,208.48,0,1.082,27.117,0.5,default,frames/P_0016.png,hue match 0.96 >= 0.85
+20261022_213416_seed42,42,17,defect,defect,color,0.0,8.19,16221,,,210.34,0,1.022,28.617,0.5,default,frames/P_0017.png,hue match 0.00 < 0.85
+20261022_213416_seed42,42,18,good,good,,0.9559,98.84,12942,,,210.12,0,1.024,30.117,0.5,default,frames/P_0018.png,hue match 0.96 >= 0.85
+20261022_213416_seed42,42,19,good,good,,0.9636,98.83,12915,,,214.26,0,1.018,31.617,0.5,default,frames/P_0019.png,hue match 0.96 >= 0.85
+20261022_213416_seed42,42,20,defect,defect,color,0.0,8.27,15956,,,215.27,0,1.003,33.117,0.5,default,frames/P_0020.png,hue match 0.00 < 0.85
+20261022_213416_seed42,42,21,good,good,,0.9559,98.95,13038,,,211.54,0,0.953,34.617,0.5,default,frames/P_0021.png,hue match 0.96 >= 0.85
+20261022_213416_seed42,42,22,good,good,,0.9399,99.13,13184,,,216.7,0,0.901,36.117,0.5,default,frames/P_0022.png,hue match 0.94 >= 0.85
+20261022_213416_seed42,42,23,good,good,,0.9616,98.84,12901,,,212.21,0,0.972,37.617,0.5,default,frames/P_0023.png,hue match 0.96 >= 0.85
+20261022_213416_seed42,42,24,defect,defect,color,0.0,8.2,16026,,,218.55,0,1.143,39.117,0.5,default,frames/P_0024.png,hue match 0.00 < 0.85
+20261022_213416_seed42,42,25,good,good,,0.9597,98.93,13066,,,211.11,0,1.008,40.617,0.5,default,frames/P_0025.png,hue match 0.96 >= 0.85
