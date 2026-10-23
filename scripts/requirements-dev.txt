@@ -1,0 +1,7 @@
+# System Python packages for tests and analysis outside Kit
+# (test_core, calibrate_inspector, inspect_frames, analyze_results).
+# Versions verified on 2026-10-23 (Python 3.12.0, Windows).
+numpy==2.4.3
+opencv-python==4.13.0.92
+pytest==9.0.2
+matplotlib==3.10.8
