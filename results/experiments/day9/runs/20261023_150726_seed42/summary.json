@@ -1,0 +1,18 @@
+{
+  "run_id": "20261023_150726_seed42",
+  "products": 40,
+  "sorted": 40,
+  "sort_correct": 40,
+  "rejected": 13,
+  "fail_safe_rejects": 0,
+  "late_results": 0,
+  "frame_mismatches": 0,
+  "stale_frames": 0,
+  "frame_target_misses": 0,
+  "capture_timeouts": 0,
+  "not_exited": 0,
+  "pending_frames_at_finalize": 0,
+  "simulation_time_s": 62.383,
+  "part": "box",
+  "throughput_per_hour": 2308.3
+}
