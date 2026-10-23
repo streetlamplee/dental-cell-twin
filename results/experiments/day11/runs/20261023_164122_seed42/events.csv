@@ -1,0 +1,241 @@
+sim_time_s,product_id,event,x,station,detail
+0.0,1,SPAWN,-2.8,,
+2.84,1,LOAD,-1.38,cell,
+4.04,1,VIEW,-1.38,cell,0
+4.79,1,VIEW,-1.38,cell,1
+5.54,1,VIEW,-1.38,cell,2
+6.29,1,VIEW,-1.38,cell,3
+7.04,1,VIEW,-1.38,cell,4
+7.05,1,VISION,,,good
+8.0,2,SPAWN,-2.8,,
+8.24,1,UNLOAD,-0.62,cell,
+8.24,1,INSPECT,-0.62,cell,
+10.84,2,LOAD,-1.38,cell,
+12.04,2,VIEW,-1.38,cell,0
+12.4733,1,SORT,1.5,,predicted good
+12.79,2,VIEW,-1.38,cell,1
+13.54,2,VIEW,-1.38,cell,2
+14.29,2,VIEW,-1.38,cell,3
+15.04,2,VIEW,-1.38,cell,4
+15.05,2,VISION,,,defect color
+15.4733,1,EXIT,3.0,,
+16.0,3,SPAWN,-2.8,,
+16.24,2,UNLOAD,-0.62,cell,
+16.24,2,INSPECT,-0.62,cell,
+18.84,3,LOAD,-1.38,cell,
+20.04,3,VIEW,-1.38,cell,0
+20.4733,2,REJECT,1.5,,predicted defect
+20.4733,2,EXIT,1.5,,
+20.79,3,VIEW,-1.38,cell,1
+21.54,3,VIEW,-1.38,cell,2
+22.29,3,VIEW,-1.38,cell,3
+23.04,3,VIEW,-1.38,cell,4
+23.05,3,VISION,,,defect shape
+24.0,4,SPAWN,-2.8,,
+24.24,3,UNLOAD,-0.62,cell,
+24.24,3,INSPECT,-0.62,cell,
+26.84,4,LOAD,-1.38,cell,
+28.04,4,VIEW,-1.38,cell,0
+28.4733,3,REJECT,1.5,,predicted defect
+28.4733,3,EXIT,1.5,,
+28.79,4,VIEW,-1.38,cell,1
+29.54,4,VIEW,-1.38,cell,2
+30.29,4,VIEW,-1.38,cell,3
+31.04,4,VIEW,-1.38,cell,4
+31.05,4,VISION,,,good
+32.0,5,SPAWN,-2.8,,
+32.24,4,UNLOAD,-0.62,cell,
+32.24,4,INSPECT,-0.62,cell,
+34.84,5,LOAD,-1.38,cell,
+36.04,5,VIEW,-1.38,cell,0
+36.4733,4,SORT,1.5,,predicted good
+36.79,5,VIEW,-1.38,cell,1
+37.54,5,VIEW,-1.38,cell,2
+38.29,5,VIEW,-1.38,cell,3
+39.04,5,VIEW,-1.38,cell,4
+39.05,5,VISION,,,good
+39.4733,4,EXIT,3.0,,
+40.0,6,SPAWN,-2.8,,
+40.24,5,UNLOAD,-0.62,cell,
+40.24,5,INSPECT,-0.62,cell,
+42.84,6,LOAD,-1.38,cell,
+44.04,6,VIEW,-1.38,cell,0
+44.4733,5,SORT,1.5,,predicted good
+44.79,6,VIEW,-1.38,cell,1
+45.54,6,VIEW,-1.38,cell,2
+46.29,6,VIEW,-1.38,cell,3
+47.04,6,VIEW,-1.38,cell,4
+47.05,6,VISION,,,good
+47.4733,5,EXIT,3.0,,
+48.0,7,SPAWN,-2.8,,
+48.24,6,UNLOAD,-0.62,cell,
+48.24,6,INSPECT,-0.62,cell,
+50.84,7,LOAD,-1.38,cell,
+52.04,7,VIEW,-1.38,cell,0
+52.4733,6,SORT,1.5,,predicted good
+52.79,7,VIEW,-1.38,cell,1
+53.54,7,VIEW,-1.38,cell,2
+54.29,7,VIEW,-1.38,cell,3
+55.04,7,VIEW,-1.38,cell,4
+55.05,7,VISION,,,defect color+shape
+55.4733,6,EXIT,3.0,,
+56.0,8,SPAWN,-2.8,,
+56.24,7,UNLOAD,-0.62,cell,
+56.24,7,INSPECT,-0.62,cell,
+58.84,8,LOAD,-1.38,cell,
+60.04,8,VIEW,-1.38,cell,0
+60.4733,7,REJECT,1.5,,predicted defect
+60.4733,7,EXIT,1.5,,
+60.79,8,VIEW,-1.38,cell,1
+61.54,8,VIEW,-1.38,cell,2
+62.29,8,VIEW,-1.38,cell,3
+63.04,8,VIEW,-1.38,cell,4
+63.05,8,VISION,,,defect shape
+64.0,9,SPAWN,-2.8,,
+64.24,8,UNLOAD,-0.62,cell,
+64.24,8,INSPECT,-0.62,cell,
+66.84,9,LOAD,-1.38,cell,
+68.04,9,VIEW,-1.38,cell,0
+68.4733,8,REJECT,1.5,,predicted defect
+68.4733,8,EXIT,1.5,,
+68.79,9,VIEW,-1.38,cell,1
+69.54,9,VIEW,-1.38,cell,2
+70.29,9,VIEW,-1.38,cell,3
+71.04,9,VIEW,-1.38,cell,4
+71.05,9,VISION,,,defect shape
+72.0,10,SPAWN,-2.8,,
+72.24,9,UNLOAD,-0.62,cell,
+72.24,9,INSPECT,-0.62,cell,
+74.84,10,LOAD,-1.38,cell,
+76.04,10,VIEW,-1.38,cell,0
+76.4733,9,REJECT,1.5,,predicted defect
+76.4733,9,EXIT,1.5,,
+76.79,10,VIEW,-1.38,cell,1
+77.54,10,VIEW,-1.38,cell,2
+78.29,10,VIEW,-1.38,cell,3
+79.04,10,VIEW,-1.38,cell,4
+79.05,10,VISION,,,good
+80.0,11,SPAWN,-2.8,,
+80.24,10,UNLOAD,-0.62,cell,
+80.24,10,INSPECT,-0.62,cell,
+82.84,11,LOAD,-1.38,cell,
+84.04,11,VIEW,-1.38,cell,0
+84.4733,10,SORT,1.5,,predicted good
+84.79,11,VIEW,-1.38,cell,1
+85.54,11,VIEW,-1.38,cell,2
+86.29,11,VIEW,-1.38,cell,3
+87.04,11,VIEW,-1.38,cell,4
+87.05,11,VISION,,,good
+87.4733,10,EXIT,3.0,,
+88.0,12,SPAWN,-2.8,,
+88.24,11,UNLOAD,-0.62,cell,
+88.24,11,INSPECT,-0.62,cell,
+90.84,12,LOAD,-1.38,cell,
+92.04,12,VIEW,-1.38,cell,0
+92.4733,11,SORT,1.5,,predicted good
+92.79,12,VIEW,-1.38,cell,1
+93.54,12,VIEW,-1.38,cell,2
+94.29,12,VIEW,-1.38,cell,3
+95.04,12,VIEW,-1.38,cell,4
+95.05,12,VISION,,,good
+95.4733,11,EXIT,3.0,,
+96.0,13,SPAWN,-2.8,,
+96.24,12,UNLOAD,-0.62,cell,
+96.24,12,INSPECT,-0.62,cell,
+98.84,13,LOAD,-1.38,cell,
+100.04,13,VIEW,-1.38,cell,0
+100.4733,12,SORT,1.5,,predicted good
+100.79,13,VIEW,-1.38,cell,1
+101.54,13,VIEW,-1.38,cell,2
+102.29,13,VIEW,-1.38,cell,3
+103.04,13,VIEW,-1.38,cell,4
+103.05,13,VISION,,,good
+103.4733,12,EXIT,3.0,,
+104.0,14,SPAWN,-2.8,,
+104.24,13,UNLOAD,-0.62,cell,
+104.24,13,INSPECT,-0.62,cell,
+106.84,14,LOAD,-1.38,cell,
+108.04,14,VIEW,-1.38,cell,0
+108.4733,13,SORT,1.5,,predicted good
+108.79,14,VIEW,-1.38,cell,1
+109.54,14,VIEW,-1.38,cell,2
+110.29,14,VIEW,-1.38,cell,3
+111.04,14,VIEW,-1.38,cell,4
+111.05,14,VISION,,,good
+111.4733,13,EXIT,3.0,,
+112.0,15,SPAWN,-2.8,,
+112.24,14,UNLOAD,-0.62,cell,
+112.24,14,INSPECT,-0.62,cell,
+114.84,15,LOAD,-1.38,cell,
+116.04,15,VIEW,-1.38,cell,0
+116.4733,14,SORT,1.5,,predicted good
+116.79,15,VIEW,-1.38,cell,1
+117.54,15,VIEW,-1.38,cell,2
+118.29,15,VIEW,-1.38,cell,3
+119.04,15,VIEW,-1.38,cell,4
+119.05,15,VISION,,,good
+119.4733,14,EXIT,3.0,,
+120.0,16,SPAWN,-2.8,,
+120.24,15,UNLOAD,-0.62,cell,
+120.24,15,INSPECT,-0.62,cell,
+122.84,16,LOAD,-1.38,cell,
+124.04,16,VIEW,-1.38,cell,0
+124.4733,15,SORT,1.5,,predicted good
+124.79,16,VIEW,-1.38,cell,1
+125.54,16,VIEW,-1.38,cell,2
+126.29,16,VIEW,-1.38,cell,3
+127.04,16,VIEW,-1.38,cell,4
+127.05,16,VISION,,,defect shape
+127.4733,15,EXIT,3.0,,
+128.0,17,SPAWN,-2.8,,
+128.24,16,UNLOAD,-0.62,cell,
+128.24,16,INSPECT,-0.62,cell,
+130.84,17,LOAD,-1.38,cell,
+132.04,17,VIEW,-1.38,cell,0
+132.4733,16,REJECT,1.5,,predicted defect
+132.4733,16,EXIT,1.5,,
+132.79,17,VIEW,-1.38,cell,1
+133.54,17,VIEW,-1.38,cell,2
+134.29,17,VIEW,-1.38,cell,3
+135.04,17,VIEW,-1.38,cell,4
+135.05,17,VISION,,,good
+136.0,18,SPAWN,-2.8,,
+136.24,17,UNLOAD,-0.62,cell,
+136.24,17,INSPECT,-0.62,cell,
+138.84,18,LOAD,-1.38,cell,
+140.04,18,VIEW,-1.38,cell,0
+140.4733,17,SORT,1.5,,predicted good
+140.79,18,VIEW,-1.38,cell,1
+141.54,18,VIEW,-1.38,cell,2
+142.29,18,VIEW,-1.38,cell,3
+143.04,18,VIEW,-1.38,cell,4
+143.05,18,VISION,,,defect color+shape
+143.4733,17,EXIT,3.0,,
+144.0,19,SPAWN,-2.8,,
+144.24,18,UNLOAD,-0.62,cell,
+144.24,18,INSPECT,-0.62,cell,
+146.84,19,LOAD,-1.38,cell,
+148.04,19,VIEW,-1.38,cell,0
+148.4733,18,REJECT,1.5,,predicted defect
+148.4733,18,EXIT,1.5,,
+148.79,19,VIEW,-1.38,cell,1
+149.54,19,VIEW,-1.38,cell,2
+150.29,19,VIEW,-1.38,cell,3
+151.04,19,VIEW,-1.38,cell,4
+151.05,19,VISION,,,good
+152.0,20,SPAWN,-2.8,,
+152.24,19,UNLOAD,-0.62,cell,
+152.24,19,INSPECT,-0.62,cell,
+154.84,20,LOAD,-1.38,cell,
+156.04,20,VIEW,-1.38,cell,0
+156.4733,19,SORT,1.5,,predicted good
+156.79,20,VIEW,-1.38,cell,1
+157.54,20,VIEW,-1.38,cell,2
+158.29,20,VIEW,-1.38,cell,3
+159.04,20,VIEW,-1.38,cell,4
+159.05,20,VISION,,,defect color
+159.4733,19,EXIT,3.0,,
+160.24,20,UNLOAD,-0.62,cell,
+160.24,20,INSPECT,-0.62,cell,
+164.4733,20,REJECT,1.5,,predicted defect
+164.4733,20,EXIT,1.5,,

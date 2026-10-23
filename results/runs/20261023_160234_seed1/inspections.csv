@@ -1,0 +1,181 @@
+run_id,seed,product_id,view,ground_truth,predicted_label,defect_reason,score,mean_hue,area_px,interior_ratio,interior_bright,capture_latency_ms,frame_offset,inspection_latency_ms,simulation_time_s,conveyor_speed,lighting_condition,frame_file,reason
+20261023_160234_seed1,1,1,0,defect,defect,color,0.0,23.56,4605,,,143.18,0,106.492,4.05,0.5,default,frames/P_0001_v0.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,1,1,defect,defect,color,0.0,22.87,5132,,,152.02,0,1.635,4.8,0.5,default,frames/P_0001_v1.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,1,2,defect,defect,color,0.0002,22.83,5070,,,153.8,0,1.831,5.55,0.5,default,frames/P_0001_v2.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,1,3,defect,defect,color,0.0,22.8,5274,,,150.02,0,1.475,6.3,0.5,default,frames/P_0001_v3.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,1,4,defect,defect,color,0.0,22.92,5071,,,149.77,0,1.617,7.05,0.5,default,frames/P_0001_v4.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,1,all,defect,defect,color,0.0,23.56,4605,,,153.8,0,113.051,7.05,0.5,default,,top: defect color; side_a: defect color; side_b: defect color; side_c: defect color; side_d: defect color
+20261023_160234_seed1,1,2,0,defect,defect,color,0.0,173.76,4541,,,145.29,0,1.388,10.05,0.5,default,frames/P_0002_v0.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,2,1,defect,defect,color,0.0,173.62,5190,,,151.27,0,1.653,10.8,0.5,default,frames/P_0002_v1.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,2,2,defect,defect,color,0.0,173.61,4982,,,150.17,0,1.478,11.55,0.5,default,frames/P_0002_v2.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,2,3,defect,defect,color,0.0,173.64,5183,,,151.93,0,2.147,12.3,0.5,default,frames/P_0002_v3.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,2,4,defect,defect,color,0.0,173.67,4972,,,148.41,0,1.618,13.05,0.5,default,frames/P_0002_v4.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,2,all,defect,defect,color,0.0,173.76,4541,,,151.93,0,8.284,13.05,0.5,default,,top: defect color; side_a: defect color; side_b: defect color; side_c: defect color; side_d: defect color
+20261023_160234_seed1,1,3,0,good,defect,color,0.0,23.48,4607,,,147.53,0,1.575,16.05,0.5,default,frames/P_0003_v0.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,3,1,good,defect,color,0.0,22.89,5275,,,149.81,0,1.489,16.8,0.5,default,frames/P_0003_v1.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,3,2,good,defect,color,0.0002,22.87,5077,,,150.7,0,1.527,17.55,0.5,default,frames/P_0003_v2.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,3,3,good,defect,color,0.0,22.7,5270,,,150.05,0,1.658,18.3,0.5,default,frames/P_0003_v3.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,3,4,good,defect,color,0.0,22.87,5077,,,150.72,0,1.637,19.05,0.5,default,frames/P_0003_v4.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,3,all,good,defect,color,0.0,23.48,4607,,,150.72,0,7.886,19.05,0.5,default,,top: defect color; side_a: defect color; side_b: defect color; side_c: defect color; side_d: defect color
+20261023_160234_seed1,1,4,0,good,defect,color,0.0,23.44,4604,,,144.69,0,1.427,22.05,0.5,default,frames/P_0004_v0.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,4,1,good,defect,color,0.0,22.75,5278,,,150.82,0,1.7,22.8,0.5,default,frames/P_0004_v1.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,4,2,good,defect,color,0.0002,22.86,5074,,,152.62,0,1.759,23.55,0.5,default,frames/P_0004_v2.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,4,3,good,defect,color,0.0,22.72,5269,,,153.09,0,1.501,24.3,0.5,default,frames/P_0004_v3.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,4,4,good,defect,color,0.0002,22.82,5064,,,146.79,0,1.565,25.05,0.5,default,frames/P_0004_v4.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,4,all,good,defect,color,0.0,23.44,4604,,,153.09,0,7.951,25.05,0.5,default,,top: defect color; side_a: defect color; side_b: defect color; side_c: defect color; side_d: defect color
+20261023_160234_seed1,1,5,0,good,defect,color,0.0,23.48,4606,,,140.25,0,1.452,28.05,0.5,default,frames/P_0005_v0.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,5,1,good,defect,color,0.0,22.8,5284,,,147.61,0,1.463,28.8,0.5,default,frames/P_0005_v1.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,5,2,good,defect,color,0.0002,22.78,5075,,,146.55,0,1.542,29.55,0.5,default,frames/P_0005_v2.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,5,3,good,defect,color,0.0,22.7,5270,,,147.4,0,1.482,30.3,0.5,default,frames/P_0005_v3.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,5,4,good,defect,color,0.0002,22.82,5075,,,144.34,0,1.429,31.05,0.5,default,frames/P_0005_v4.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,5,all,good,defect,color,0.0,23.48,4606,,,147.61,0,7.368,31.05,0.5,default,,top: defect color; side_a: defect color; side_b: defect color; side_c: defect color; side_d: defect color
+20261023_160234_seed1,1,6,0,defect,defect,color,0.0,173.79,4538,,,138.33,0,1.457,34.05,0.5,default,frames/P_0006_v0.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,6,1,defect,defect,color,0.0,173.64,5193,,,148.06,0,1.627,34.8,0.5,default,frames/P_0006_v1.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,6,2,defect,defect,color,0.0,173.63,4979,,,148.09,0,1.384,35.55,0.5,default,frames/P_0006_v2.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,6,3,defect,defect,color,0.0,173.65,5181,,,145.84,0,1.469,36.3,0.5,default,frames/P_0006_v3.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,6,4,defect,defect,color,0.0,173.61,4982,,,146.39,0,1.477,37.05,0.5,default,frames/P_0006_v4.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,6,all,defect,defect,color,0.0,173.79,4538,,,148.09,0,7.414,37.05,0.5,default,,top: defect color; side_a: defect color; side_b: defect color; side_c: defect color; side_d: defect color
+20261023_160234_seed1,1,7,0,defect,defect,color,0.0,173.76,4529,,,138.44,0,1.507,40.05,0.5,default,frames/P_0007_v0.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,7,1,defect,defect,color,0.0,173.64,5197,,,146.68,0,1.775,40.8,0.5,default,frames/P_0007_v1.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,7,2,defect,defect,color,0.0,173.6,4968,,,146.54,0,1.549,41.55,0.5,default,frames/P_0007_v2.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,7,3,defect,defect,color,0.0,173.67,5189,,,146.78,0,1.35,42.3,0.5,default,frames/P_0007_v3.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,7,4,defect,defect,color,0.0,173.64,4984,,,145.3,0,1.532,43.05,0.5,default,frames/P_0007_v4.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,7,all,defect,defect,color,0.0,173.76,4529,,,146.78,0,7.714,43.05,0.5,default,,top: defect color; side_a: defect color; side_b: defect color; side_c: defect color; side_d: defect color
+20261023_160234_seed1,1,8,0,good,defect,color,0.0,23.47,4603,,,139.51,0,1.482,46.05,0.5,default,frames/P_0008_v0.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,8,1,good,defect,color,0.0,22.72,5276,,,146.68,0,1.491,46.8,0.5,default,frames/P_0008_v1.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,8,2,good,defect,color,0.0,22.76,5073,,,147.81,0,1.62,47.55,0.5,default,frames/P_0008_v2.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,8,3,good,defect,color,0.0,22.81,5271,,,145.86,0,1.516,48.3,0.5,default,frames/P_0008_v3.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,8,4,good,defect,color,0.0008,22.79,5061,,,146.31,0,1.393,49.05,0.5,default,frames/P_0008_v4.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,8,all,good,defect,color,0.0,23.47,4603,,,147.81,0,7.502,49.05,0.5,default,,top: defect color; side_a: defect color; side_b: defect color; side_c: defect color; side_d: defect color
+20261023_160234_seed1,1,9,0,good,defect,color,0.0,23.55,4605,,,139.71,0,1.389,52.05,0.5,default,frames/P_0009_v0.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,9,1,good,defect,color,0.0,22.78,5276,,,151.1,0,1.583,52.8,0.5,default,frames/P_0009_v1.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,9,2,good,defect,color,0.0,22.82,5074,,,147.55,0,1.565,53.55,0.5,default,frames/P_0009_v2.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,9,3,good,defect,color,0.0,22.76,5275,,,146.47,0,1.449,54.3,0.5,default,frames/P_0009_v3.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,9,4,good,defect,color,0.0,22.76,5062,,,146.35,0,1.469,55.05,0.5,default,frames/P_0009_v4.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,9,all,good,defect,color,0.0,23.55,4605,,,151.1,0,7.456,55.05,0.5,default,,top: defect color; side_a: defect color; side_b: defect color; side_c: defect color; side_d: defect color
+20261023_160234_seed1,1,10,0,defect,defect,color,0.0,173.79,4521,,,140.03,0,1.509,58.05,0.5,default,frames/P_0010_v0.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,10,1,defect,defect,color,0.0,173.67,5192,,,147.34,0,1.435,58.8,0.5,default,frames/P_0010_v1.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,10,2,defect,defect,color,0.0,173.66,4977,,,147.02,0,1.606,59.55,0.5,default,frames/P_0010_v2.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,10,3,defect,defect,color,0.0,173.68,5182,,,146.29,0,1.439,60.3,0.5,default,frames/P_0010_v3.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,10,4,defect,defect,color,0.0,173.66,4976,,,146.26,0,1.444,61.05,0.5,default,frames/P_0010_v4.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,10,all,defect,defect,color,0.0,173.79,4521,,,147.34,0,7.432,61.05,0.5,default,,top: defect color; side_a: defect color; side_b: defect color; side_c: defect color; side_d: defect color
+20261023_160234_seed1,1,11,0,defect,defect,color,0.0,23.45,4603,,,138.76,0,1.6,64.05,0.5,default,frames/P_0011_v0.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,11,1,defect,defect,color,0.0,22.74,5139,,,145.9,0,1.436,64.8,0.5,default,frames/P_0011_v1.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,11,2,defect,defect,color,0.0,22.74,5081,,,147.62,0,1.708,65.55,0.5,default,frames/P_0011_v2.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,11,3,defect,defect,color,0.0,22.68,5279,,,147.47,0,1.528,66.3,0.5,default,frames/P_0011_v3.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,11,4,defect,defect,color,0.0004,22.84,5080,,,146.31,0,1.366,67.05,0.5,default,frames/P_0011_v4.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,11,all,defect,defect,color,0.0,23.45,4603,,,147.62,0,7.638,67.05,0.5,default,,top: defect color; side_a: defect color; side_b: defect color; side_c: defect color; side_d: defect color
+20261023_160234_seed1,1,12,0,good,defect,color,0.0,23.38,4605,,,139.66,0,1.427,70.05,0.5,default,frames/P_0012_v0.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,12,1,good,defect,color,0.0,22.75,5284,,,146.71,0,1.651,70.8,0.5,default,frames/P_0012_v1.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,12,2,good,defect,color,0.0002,22.79,5065,,,147.52,0,1.429,71.55,0.5,default,frames/P_0012_v2.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,12,3,good,defect,color,0.0,22.68,5263,,,145.3,0,1.544,72.3,0.5,default,frames/P_0012_v3.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,12,4,good,defect,color,0.0,22.88,5073,,,144.82,0,1.351,73.05,0.5,default,frames/P_0012_v4.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,12,all,good,defect,color,0.0,23.38,4605,,,147.52,0,7.403,73.05,0.5,default,,top: defect color; side_a: defect color; side_b: defect color; side_c: defect color; side_d: defect color
+20261023_160234_seed1,1,13,0,defect,defect,color,0.0,173.78,4532,,,140.13,0,1.612,76.05,0.5,default,frames/P_0013_v0.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,13,1,defect,defect,color,0.0,173.65,5190,,,145.63,0,1.587,76.8,0.5,default,frames/P_0013_v1.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,13,2,defect,defect,color,0.0,173.62,4996,,,146.94,0,1.519,77.55,0.5,default,frames/P_0013_v2.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,13,3,defect,defect,color,0.0,173.66,5194,,,149.85,0,1.377,78.3,0.5,default,frames/P_0013_v3.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,13,4,defect,defect,color,0.0,173.62,4962,,,148.8,0,1.777,79.05,0.5,default,frames/P_0013_v4.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,13,all,defect,defect,color,0.0,173.78,4532,,,149.85,0,7.871,79.05,0.5,default,,top: defect color; side_a: defect color; side_b: defect color; side_c: defect color; side_d: defect color
+20261023_160234_seed1,1,14,0,defect,defect,color,0.0,23.48,4604,,,140.29,0,1.401,82.05,0.5,default,frames/P_0014_v0.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,14,1,defect,defect,color,0.0,22.77,5139,,,146.98,0,1.388,82.8,0.5,default,frames/P_0014_v1.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,14,2,defect,defect,color,0.001,22.85,5059,,,147.82,0,1.584,83.55,0.5,default,frames/P_0014_v2.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,14,3,defect,defect,color,0.0,22.68,5274,,,147.02,0,1.508,84.3,0.5,default,frames/P_0014_v3.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,14,4,defect,defect,color,0.0,22.92,5067,,,145.77,0,1.406,85.05,0.5,default,frames/P_0014_v4.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,14,all,defect,defect,color,0.0,23.48,4604,,,147.82,0,7.287,85.05,0.5,default,,top: defect color; side_a: defect color; side_b: defect color; side_c: defect color; side_d: defect color
+20261023_160234_seed1,1,15,0,good,defect,color,0.0,23.4,4604,,,140.07,0,1.396,88.05,0.5,default,frames/P_0015_v0.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,15,1,good,defect,color,0.0,23.4,4604,,,148.12,0,1.357,88.8,0.5,default,frames/P_0015_v1.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,15,2,good,defect,color,0.0,22.77,5082,,,146.48,0,1.564,89.55,0.5,default,frames/P_0015_v2.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,15,3,good,defect,color,0.0,22.74,5276,,,147.46,0,1.431,90.3,0.5,default,frames/P_0015_v3.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,15,4,good,defect,color,0.0,22.76,5075,,,146.81,0,1.516,91.05,0.5,default,frames/P_0015_v4.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,15,all,good,defect,color,0.0,23.4,4604,,,148.12,0,7.263,91.05,0.5,default,,top: defect color; side_a: defect color; side_b: defect color; side_c: defect color; side_d: defect color
+20261023_160234_seed1,1,16,0,defect,defect,color,0.0,173.73,4563,,,140.21,0,1.435,94.05,0.5,default,frames/P_0016_v0.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,16,1,defect,defect,color,0.0,173.65,5201,,,146.28,0,1.539,94.8,0.5,default,frames/P_0016_v1.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,16,2,defect,defect,color,0.0,173.66,4985,,,146.65,0,1.372,95.55,0.5,default,frames/P_0016_v2.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,16,3,defect,defect,color,0.0,173.67,5192,,,147.35,0,1.587,96.3,0.5,default,frames/P_0016_v3.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,16,4,defect,defect,color,0.0,173.65,4981,,,146.04,0,1.532,97.05,0.5,default,frames/P_0016_v4.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,16,all,defect,defect,color,0.0,173.73,4563,,,147.35,0,7.465,97.05,0.5,default,,top: defect color; side_a: defect color; side_b: defect color; side_c: defect color; side_d: defect color
+20261023_160234_seed1,1,17,0,good,defect,color,0.0,23.44,4605,,,139.45,0,1.509,100.05,0.5,default,frames/P_0017_v0.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,17,1,good,defect,color,0.0,22.88,5276,,,147.24,0,1.489,100.8,0.5,default,frames/P_0017_v1.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,17,2,good,defect,color,0.0,22.88,5071,,,146.63,0,1.489,101.55,0.5,default,frames/P_0017_v2.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,17,3,good,defect,color,0.0,22.67,5272,,,148.15,0,1.484,102.3,0.5,default,frames/P_0017_v3.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,17,4,good,defect,color,0.0,22.79,5068,,,147.73,0,1.434,103.05,0.5,default,frames/P_0017_v4.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,17,all,good,defect,color,0.0,23.44,4605,,,148.15,0,7.406,103.05,0.5,default,,top: defect color; side_a: defect color; side_b: defect color; side_c: defect color; side_d: defect color
+20261023_160234_seed1,1,18,0,good,defect,color,0.0,23.39,4600,,,139.79,0,1.353,106.05,0.5,default,frames/P_0018_v0.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,18,1,good,defect,color,0.0,22.87,5272,,,151.52,0,1.541,106.8,0.5,default,frames/P_0018_v1.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,18,2,good,defect,color,0.0,22.77,5068,,,147.26,0,1.603,107.55,0.5,default,frames/P_0018_v2.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,18,3,good,defect,color,0.0,22.69,5280,,,146.73,0,1.362,108.3,0.5,default,frames/P_0018_v3.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,18,4,good,defect,color,0.0,22.9,5076,,,146.54,0,1.638,109.05,0.5,default,frames/P_0018_v4.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,18,all,good,defect,color,0.0,23.39,4600,,,151.52,0,7.496,109.05,0.5,default,,top: defect color; side_a: defect color; side_b: defect color; side_c: defect color; side_d: defect color
+20261023_160234_seed1,1,19,0,good,defect,color,0.0,23.37,4605,,,142.24,0,1.723,112.05,0.5,default,frames/P_0019_v0.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,19,1,good,defect,color,0.0,22.78,5271,,,148.13,0,1.515,112.8,0.5,default,frames/P_0019_v1.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,19,2,good,defect,color,0.0008,22.84,5078,,,147.35,0,1.563,113.55,0.5,default,frames/P_0019_v2.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,19,3,good,defect,color,0.0,22.68,5271,,,145.93,0,1.369,114.3,0.5,default,frames/P_0019_v3.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,19,4,good,defect,color,0.0,22.77,5079,,,147.08,0,1.582,115.05,0.5,default,frames/P_0019_v4.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,19,all,good,defect,color,0.0,23.37,4605,,,148.13,0,7.752,115.05,0.5,default,,top: defect color; side_a: defect color; side_b: defect color; side_c: defect color; side_d: defect color
+20261023_160234_seed1,1,20,0,good,defect,color,0.0,23.46,4603,,,142.83,0,1.542,118.05,0.5,default,frames/P_0020_v0.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,20,1,good,defect,color,0.0,22.82,5275,,,148.03,0,1.377,118.8,0.5,default,frames/P_0020_v1.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,20,2,good,defect,color,0.0,22.82,5082,,,148.19,0,1.523,119.55,0.5,default,frames/P_0020_v2.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,20,3,good,defect,color,0.0,22.79,5276,,,146.94,0,1.559,120.3,0.5,default,frames/P_0020_v3.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,20,4,good,defect,color,0.0002,22.78,5068,,,148.03,0,1.519,121.05,0.5,default,frames/P_0020_v4.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,20,all,good,defect,color,0.0,23.46,4603,,,148.19,0,7.52,121.05,0.5,default,,top: defect color; side_a: defect color; side_b: defect color; side_c: defect color; side_d: defect color
+20261023_160234_seed1,1,21,0,good,defect,color,0.0,23.54,4605,,,139.82,0,1.513,124.05,0.5,default,frames/P_0021_v0.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,21,1,good,defect,color,0.0,22.8,5276,,,146.81,0,1.35,124.8,0.5,default,frames/P_0021_v1.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,21,2,good,defect,color,0.0006,22.89,5079,,,148.34,0,1.511,125.55,0.5,default,frames/P_0021_v2.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,21,3,good,defect,color,0.0,22.66,5276,,,146.29,0,1.614,126.3,0.5,default,frames/P_0021_v3.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,21,4,good,defect,color,0.0004,22.7,5080,,,146.22,0,1.504,127.05,0.5,default,frames/P_0021_v4.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,21,all,good,defect,color,0.0,23.54,4605,,,148.34,0,7.491,127.05,0.5,default,,top: defect color; side_a: defect color; side_b: defect color; side_c: defect color; side_d: defect color
+20261023_160234_seed1,1,22,0,good,defect,color,0.0,23.41,4604,,,141.35,0,1.378,130.05,0.5,default,frames/P_0022_v0.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,22,1,good,defect,color,0.0,22.8,5276,,,146.46,0,1.714,130.8,0.5,default,frames/P_0022_v1.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,22,2,good,defect,color,0.0,22.85,5059,,,145.29,0,1.367,131.55,0.5,default,frames/P_0022_v2.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,22,3,good,defect,color,0.0,22.73,5257,,,147.09,0,1.507,132.3,0.5,default,frames/P_0022_v3.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,22,4,good,defect,color,0.0,22.82,5071,,,146.17,0,1.336,133.05,0.5,default,frames/P_0022_v4.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,22,all,good,defect,color,0.0,23.41,4604,,,147.09,0,7.303,133.05,0.5,default,,top: defect color; side_a: defect color; side_b: defect color; side_c: defect color; side_d: defect color
+20261023_160234_seed1,1,23,0,good,defect,color,0.0,23.47,4606,,,139.85,0,1.645,136.05,0.5,default,frames/P_0023_v0.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,23,1,good,defect,color,0.0,22.72,5280,,,145.87,0,1.472,136.8,0.5,default,frames/P_0023_v1.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,23,2,good,defect,color,0.0006,22.89,5069,,,148.54,0,1.503,137.55,0.5,default,frames/P_0023_v2.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,23,3,good,defect,color,0.0,22.74,5275,,,149.75,0,1.658,138.3,0.5,default,frames/P_0023_v3.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,23,4,good,defect,color,0.0002,22.85,5071,,,146.14,0,1.59,139.05,0.5,default,frames/P_0023_v4.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,23,all,good,defect,color,0.0,23.47,4606,,,149.75,0,7.867,139.05,0.5,default,,top: defect color; side_a: defect color; side_b: defect color; side_c: defect color; side_d: defect color
+20261023_160234_seed1,1,24,0,good,defect,color,0.0,23.42,4603,,,140.55,0,1.399,142.05,0.5,default,frames/P_0024_v0.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,24,1,good,defect,color,0.0,22.7,5269,,,147.24,0,1.573,142.8,0.5,default,frames/P_0024_v1.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,24,2,good,defect,color,0.0002,22.75,5073,,,151.27,0,1.387,143.55,0.5,default,frames/P_0024_v2.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,24,3,good,defect,color,0.0,22.7,5275,,,146.66,0,1.546,144.3,0.5,default,frames/P_0024_v3.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,24,4,good,defect,color,0.0,22.81,5080,,,146.53,0,1.529,145.05,0.5,default,frames/P_0024_v4.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,24,all,good,defect,color,0.0,23.42,4603,,,151.27,0,7.434,145.05,0.5,default,,top: defect color; side_a: defect color; side_b: defect color; side_c: defect color; side_d: defect color
+20261023_160234_seed1,1,25,0,good,defect,color,0.0,23.35,4606,,,139.99,0,1.329,148.05,0.5,default,frames/P_0025_v0.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,25,1,good,defect,color,0.0,22.72,5276,,,146.38,0,1.523,148.8,0.5,default,frames/P_0025_v1.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,25,2,good,defect,color,0.0002,22.77,5074,,,146.6,0,1.483,149.55,0.5,default,frames/P_0025_v2.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,25,3,good,defect,color,0.0,22.6,5271,,,147.32,0,1.375,150.3,0.5,default,frames/P_0025_v3.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,25,4,good,defect,color,0.0,22.74,5069,,,145.77,0,1.334,151.05,0.5,default,frames/P_0025_v4.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,25,all,good,defect,color,0.0,23.35,4606,,,147.32,0,7.043,151.05,0.5,default,,top: defect color; side_a: defect color; side_b: defect color; side_c: defect color; side_d: defect color
+20261023_160234_seed1,1,26,0,good,defect,color,0.0,23.4,4605,,,140.58,0,1.467,154.05,0.5,default,frames/P_0026_v0.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,26,1,good,defect,color,0.0,22.75,5275,,,146.12,0,1.352,154.8,0.5,default,frames/P_0026_v1.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,26,2,good,defect,color,0.0,22.78,5067,,,146.5,0,1.48,155.55,0.5,default,frames/P_0026_v2.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,26,3,good,defect,color,0.0,22.73,5274,,,146.46,0,1.327,156.3,0.5,default,frames/P_0026_v3.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,26,4,good,defect,color,0.0,22.86,5078,,,144.07,0,1.493,157.05,0.5,default,frames/P_0026_v4.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,26,all,good,defect,color,0.0,23.4,4605,,,146.5,0,7.119,157.05,0.5,default,,top: defect color; side_a: defect color; side_b: defect color; side_c: defect color; side_d: defect color
+20261023_160234_seed1,1,27,0,good,defect,color,0.0,23.43,4602,,,139.22,0,1.325,160.05,0.5,default,frames/P_0027_v0.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,27,1,good,defect,color,0.0,22.8,5278,,,147.91,0,1.574,160.8,0.5,default,frames/P_0027_v1.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,27,2,good,defect,color,0.0002,22.86,5059,,,147.59,0,1.407,161.55,0.5,default,frames/P_0027_v2.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,27,3,good,defect,color,0.0,22.72,5279,,,146.62,0,1.611,162.3,0.5,default,frames/P_0027_v3.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,27,4,good,defect,color,0.0,22.86,5071,,,145.19,0,1.694,163.05,0.5,default,frames/P_0027_v4.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,27,all,good,defect,color,0.0,23.43,4602,,,147.91,0,7.611,163.05,0.5,default,,top: defect color; side_a: defect color; side_b: defect color; side_c: defect color; side_d: defect color
+20261023_160234_seed1,1,28,0,good,defect,color,0.0,23.44,4604,,,138.97,0,1.405,166.05,0.5,default,frames/P_0028_v0.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,28,1,good,defect,color,0.0,22.88,5272,,,146.91,0,1.611,166.8,0.5,default,frames/P_0028_v1.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,28,2,good,defect,color,0.0,22.83,5074,,,148.21,0,1.382,167.55,0.5,default,frames/P_0028_v2.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,28,3,good,defect,color,0.0,22.77,5277,,,146.15,0,1.377,168.3,0.5,default,frames/P_0028_v3.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,28,4,good,defect,color,0.0004,22.8,5079,,,149.13,0,1.79,169.05,0.5,default,frames/P_0028_v4.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,28,all,good,defect,color,0.0,23.44,4604,,,149.13,0,7.565,169.05,0.5,default,,top: defect color; side_a: defect color; side_b: defect color; side_c: defect color; side_d: defect color
+20261023_160234_seed1,1,29,0,good,defect,color,0.0,23.44,4605,,,142.8,0,1.325,172.05,0.5,default,frames/P_0029_v0.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,29,1,good,defect,color,0.0,22.75,5281,,,147.11,0,1.514,172.8,0.5,default,frames/P_0029_v1.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,29,2,good,defect,color,0.0,22.88,5070,,,147.1,0,1.343,173.55,0.5,default,frames/P_0029_v2.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,29,3,good,defect,color,0.0,22.8,5261,,,146.21,0,1.358,174.3,0.5,default,frames/P_0029_v3.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,29,4,good,defect,color,0.0002,22.86,5069,,,145.69,0,1.626,175.05,0.5,default,frames/P_0029_v4.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,29,all,good,defect,color,0.0,23.44,4605,,,147.11,0,7.166,175.05,0.5,default,,top: defect color; side_a: defect color; side_b: defect color; side_c: defect color; side_d: defect color
+20261023_160234_seed1,1,30,0,good,defect,color,0.0,23.4,4605,,,138.83,0,1.459,178.05,0.5,default,frames/P_0030_v0.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,30,1,good,defect,color,0.0,22.75,5283,,,146.95,0,1.55,178.8,0.5,default,frames/P_0030_v1.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,30,2,good,defect,color,0.0004,22.78,5073,,,147.54,0,1.422,179.55,0.5,default,frames/P_0030_v2.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,30,3,good,defect,color,0.0,22.7,5269,,,146.23,0,1.447,180.3,0.5,default,frames/P_0030_v3.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,30,4,good,defect,color,0.0,22.84,5075,,,148.74,0,1.634,181.05,0.5,default,frames/P_0030_v4.png,hue match 0.00 < 0.85
+20261023_160234_seed1,1,30,all,good,defect,color,0.0,23.4,4605,,,148.74,0,7.512,181.05,0.5,default,,top: defect color; side_a: defect color; side_b: defect color; side_c: defect color; side_d: defect color

@@ -1,0 +1,30 @@
+{
+  "run_id": "20261023_163624_seed42",
+  "products": 20,
+  "sorted": 20,
+  "sort_correct": 20,
+  "rejected": 8,
+  "fail_safe_rejects": 0,
+  "late_results": 0,
+  "frame_mismatches": 0,
+  "stale_frames": 0,
+  "view_retakes": 0,
+  "frame_target_misses": 0,
+  "capture_timeouts": 0,
+  "not_exited": 0,
+  "pending_frames_at_finalize": 0,
+  "simulation_time_s": 115.083,
+  "part": "crown",
+  "throughput_per_hour": 625.6,
+  "line": {
+    "station": "cell",
+    "cycle_s": 5.4,
+    "views": 5,
+    "spawn_interval_s": 5.4,
+    "station_utilization": 0.9385,
+    "station_busy_s": 108.0,
+    "station_exit_blocked_s": 0.0,
+    "queue_max": 0,
+    "queue_mean": 0.0
+  }
+}
