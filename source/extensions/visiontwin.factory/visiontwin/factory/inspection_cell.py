@@ -84,7 +84,7 @@ class InspectionCell:
 
         # Stand from the floor to the machine base (base plate bottom = base frame z 0).
         rx, ry, rz = (float(v) for v in self.root[:3, 3])
-        scene._box(stage, f"{L.CELL_PATH}/Stand", (rx, ry + 0.056, rz / 2.0), (0.56, 0.64, rz), (0.45, 0.45, 0.5))
+        scene._box(stage, f"{L.CELL_PATH}/Stand", (rx, ry + 0.076, rz / 2.0), (0.56, 0.60, rz), (0.45, 0.45, 0.5))
         mill = UsdGeom.Xform.Define(stage, f"{L.CELL_PATH}/Machine")
         mill.GetPrim().GetReferences().AddReference(asset_path)
         xf = UsdGeom.XformCommonAPI(mill)
@@ -121,13 +121,16 @@ class InspectionCell:
         self._seat = self.root @ cycle.product_seat(cycle.load_pose)
         self.apply(None)
 
-    def apply(self, t_since_load) -> None:
-        """Pose the machine `t_since_load` seconds into a cycle (None: idle at the load pose)."""
+    def apply(self, t_since_load, camera_offset=(0.0, 0.0, 0.0)) -> None:
+        """Pose the machine `t_since_load` seconds into a cycle (None: idle at the load pose).
+        camera_offset (world metres) only moves the camera (synthetic data jitter)."""
         q = self.cycle.pose_at(t_since_load)
         tf = self.model.link_transforms(q)
         for link, op in self._ops.items():
             op.Set(_gf(tf[link], self._unit))
-        self._rig_op.Set(_gf(self.root @ self.cycle.camera(q)))
+        cam = self.root @ self.cycle.camera(q)
+        cam[:3, 3] += np.asarray(camera_offset, dtype=float)
+        self._rig_op.Set(_gf(cam))
         self._seat = self.root @ self.cycle.product_seat(q)
         self._fixture_op.Set(_gf(self._seat))
 

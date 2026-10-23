@@ -29,6 +29,7 @@ class CellSpec:
     standoff_m: float
     focal_mm: float
     roi_half_m: float
+    transfer: Optional[str] = None  # robot (assets/robots/usd/<name>.usd) moving products in/out
 
 
 class ProductCatalog:
@@ -74,7 +75,7 @@ class ProductCatalog:
         if not c:
             return None
         return CellSpec(tuple(c["views"]), dict(c.get("timing", {})), float(c["standoff_m"]),
-                        float(c["focal_mm"]), float(c["roi_half_m"]))
+                        float(c["focal_mm"]), float(c["roi_half_m"]), c.get("transfer"))
 
     @property
     def camera(self) -> Optional[CameraSpec]:

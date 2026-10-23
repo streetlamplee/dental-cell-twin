@@ -17,11 +17,12 @@
     "_comment": "Dental crown inspection cell (Day 11): finished crowns (milled upstream) ride the conveyor into the 5-axis machine, which carries a camera on its spindle instead of a tool. B/C tilt and turn the crown on the platter for a top view and four side views. Our own CadQuery models (scripts/make_dental_parts.ps1), real size. Zirconia ivory vs wrong material (pink); shape = uncut corner of blank material; chip = notch at the margin of one side wall (invisible from the top).",
     "rotate_xyz_deg": [0, 0, 0],
     "paint_prims": ["*"],
-    "spawn_interval_s": 6.0,
+    "spawn_interval_s": 9.0,
     "cell": {
-      "_comment": "standoff_m: camera to crown centre; roi_half_m: inspection window half size on that plane. Timing in seconds of simulation time.",
+      "_comment": "standoff_m: camera to crown centre; roi_half_m: inspection window half size on that plane. Timing in seconds of simulation time; load_s/unload_s are the transfer robot's pick-and-place (Day 12: Seeed reBot Arm, 0.6 s arcs before).",
       "standoff_m": 0.11, "focal_mm": 24.0, "roi_half_m": 0.022,
-      "timing": {"load_s": 0.6, "move_s": 0.45, "hold_s": 0.3, "unload_s": 0.6},
+      "transfer": "rebot_b601_dm",
+      "timing": {"load_s": 2.0, "move_s": 0.45, "hold_s": 0.3, "unload_s": 2.0},
       "views": [
         {"name": "top", "b_deg": 0, "c_deg": 0},
         {"name": "side_a", "b_deg": 45, "c_deg": 0},
