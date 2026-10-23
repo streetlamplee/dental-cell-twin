@@ -18,6 +18,7 @@ FIELDS = [
     "run_id", "seed", "product_id", "view", "ground_truth", "predicted_label", "defect_reason", "score", "mean_hue",
     "area_px", "interior_ratio", "interior_bright", "capture_latency_ms", "frame_offset", "inspection_latency_ms", "simulation_time_s",
     "conveyor_speed", "lighting_condition", "frame_file", "reason",
+    "model_label", "model_score", "model_view", "model_latency_ms",
 ]
 
 
@@ -43,6 +44,11 @@ class InspectionRecord:
     frame_file: str
     reason: str
     view: object = 0  # view index, or "all" for the combined verdict of a multi-view product
+    # Learned inspector on the same frames ("all" rows of an inspection cell run with a model)
+    model_label: str = ""
+    model_score: object = ""
+    model_view: str = ""  # view with the highest defect score
+    model_latency_ms: object = ""
 
 
 class InspectionLog:

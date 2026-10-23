@@ -269,3 +269,36 @@ def test_silhouette_diff_finds_a_small_dent_that_hu_moments_miss():
     shifted = good + np.array([[[7, -5]]], np.int32)
     assert silhouette_diff(shifted, good) < 0.01  # centroid alignment: position does not matter
     assert silhouette_diff(dented, good) > 0.04
+
+
+def test_model_inspector_takes_max_over_views_and_uses_the_card_threshold(tmp_path):
+    import json as _json
+
+    from core.model_inspector import INPUT, ModelCard, ModelInspector, preprocess
+
+    card_path = tmp_path / "m.json"
+    card_path.write_text(_json.dumps({"views": ["top", "side_a"], "roi": [10, 10, 74, 74], "input_size": INPUT,
+                                      "normalize": [0.5, 0.25], "threshold": 0.6, "name": "m"}), encoding="utf-8")
+    card = ModelCard.load(str(card_path))
+    seen = {}
+
+    def network(batch):
+        seen["shape"] = batch.shape
+        return 2.0, [-3.0, 2.0]  # side_a decides
+
+    v = ModelInspector(network, card).judge([np.zeros((100, 100, 3), np.uint8)] * 2)
+    assert seen["shape"] == (1, 2, 3, INPUT, INPUT)
+    assert v.label == DEFECT and v.decided_by == "side_a" and v.score == pytest.approx(1 / (1 + np.exp(-2.0)))
+    x = preprocess(np.full((100, 100, 3), 255, np.uint8), (10, 10, 74, 74))
+    assert x.shape == (3, INPUT, INPUT) and np.allclose(x, (1.0 - 0.5) / 0.25)
+
+
+def test_model_card_with_other_preprocessing_is_rejected(tmp_path):
+    import json as _json
+
+    from core.model_inspector import ModelCard
+
+    p = tmp_path / "m.json"
+    p.write_text(_json.dumps({"views": ["top"], "roi": [0, 0, 1, 1], "input_size": 224, "normalize": [0.5, 0.25]}))
+    with pytest.raises(ValueError, match="preprocessing"):
+        ModelCard.load(str(p))

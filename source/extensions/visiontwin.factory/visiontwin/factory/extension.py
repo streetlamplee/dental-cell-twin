@@ -20,6 +20,7 @@ import carb.settings
 import carb.tokens
 import omni.ext
 import omni.kit.app
+import omni.kit.pipapi
 import omni.usd
 from omni.kit.viewport.utility import get_active_viewport
 
@@ -82,8 +83,10 @@ class VisionTwinFactoryExtension(omni.ext.IExt):
         self._events = None  # EventLog (events.csv) for the current run
         self._anims = {}  # product_id -> sim time the reject animation started
         self._cell = None  # InspectionCell (CAD machine + spindle camera), dental crown line
+        self._arm = None  # RobotArm (Seeed reBot Arm) moving products in/out of the cell
         self._cell_cycle_cache = None  # (part, CellCycle)
         self._inspectors = []  # cell: one VisionInspector per view
+        self._model = None  # cell: learned ModelInspector (ONNX), runs next to the rule inspectors
         self._view_results = {}  # cell: product_id -> {view index: InspectionResult}
         self.run_dir = None
         self.run_complete = False
@@ -160,6 +163,7 @@ class VisionTwinFactoryExtension(omni.ext.IExt):
         scene.build_factory_scene(ctx.get_stage(), *self._camera_params(), light_factor=LIGHT_FACTORS[_lighting()],
                                   layout=layout)
         self._cell = self._create_cell(ctx.get_stage()) if layout == scene.CELL else None
+        self._arm = self._create_arm(ctx.get_stage()) if self._cell is not None else None
         self._reset_run_state()
         await omni.kit.app.get_app().next_update_async()
         self._use_stage_lights()
@@ -301,6 +305,32 @@ class VisionTwinFactoryExtension(omni.ext.IExt):
               f"views {[v.name for v in cell.cycle.views]})")
         return cell
 
+    def _create_arm(self, stage):
+        """Transfer robot of the cell (Day 12). Optional: without the robot asset the product
+        moves on a lifted arc with the same timing, so runs do not depend on it."""
+        name = self._catalog.cell.transfer
+        if not name:
+            return None
+        base = _resolve(_setting("robotsDir", ""))
+        asset, kin = os.path.join(base, f"{name}.usd"), os.path.join(base, f"{name}.kinematics.json")
+        if not (os.path.isfile(asset) and os.path.isfile(kin)):
+            carb.log_warn(f"{LOG_PREFIX} transfer robot {name!r} missing ({asset}); products move on an arc. "
+                          "Run scripts/fetch_robot.ps1 and scripts/urdf_mesh_to_usd.ps1 to add it.")
+            return None
+        from .robot_arm import RobotArm, build_transfer
+
+        cycle = self._cell.cycle
+        key = (self._catalog.part, asset)
+        cached = getattr(self, "_transfer_cache", None)
+        if cached is None or cached[0] != key:
+            seat = self._cell.root @ cycle.product_seat(cycle.load_pose)
+            transfer = build_transfer(kin, self._belt_pose(L.CELL_ENTRY_X), seat, self._belt_pose(L.CELL_EXIT_X),
+                                      cycle.timing.load_s, cycle.timing.unload_s)
+            self._transfer_cache = cached = (key, transfer)
+        arm = RobotArm(stage, asset, cached[1])
+        print(f"{LOG_PREFIX} transfer robot ready ({asset})")
+        return arm
+
     def _destroy_frame_provider(self):
         if self._frames is not None:
             self._frames.destroy()
@@ -362,6 +392,33 @@ class VisionTwinFactoryExtension(omni.ext.IExt):
         self._inspectors = [VisionInspector(c) for c in cfgs]
         self._inspector = self._inspectors[0]
         print(f"{LOG_PREFIX} cell inspectors ready: {n} views, roi {roi} (config file: {cfg_path})")
+        self._model = self._load_model([v.name for v in cycle.views], roi)
+
+    def _load_model(self, views, roi):
+        """Learned inspector (Day 12) from inspectorModel (ONNX + model card), or None.
+        ONNX Runtime is installed into Kit's Python on first use (omni.kit.pipapi, with its
+        dependencies; the extension's own pip list uses --no-deps)."""
+        path = _resolve(_setting("inspectorModel", "")) if _setting("inspectorModel", "") else ""
+        if not path or not os.path.isfile(path):
+            return None
+        from .core.model_inspector import ModelCard, ModelInspector
+
+        card = ModelCard.load(os.path.splitext(path)[0] + ".json")
+        if card.views != list(views) or tuple(card.roi) != tuple(roi):
+            carb.log_error(f"{LOG_PREFIX} model {path} was trained for views {card.views} / roi {card.roi}, "
+                           f"the cell has {views} / {roi}: model disabled")
+            return None
+        omni.kit.pipapi.install("onnxruntime-directml", module="onnxruntime")
+        import onnxruntime as ort
+
+        sess = ort.InferenceSession(path, providers=["CPUExecutionProvider"])
+
+        def network(batch):
+            logit, view_logits = sess.run(None, {"views": batch.astype(np.float32)})
+            return float(np.ravel(logit)[0]), list(np.ravel(view_logits))
+
+        print(f"{LOG_PREFIX} learned inspector ready: {path} (decision: {_setting('decision', 'rules')})")
+        return ModelInspector(network, card)
 
     def _open_run(self):
         seed = self._sim.config.seed
@@ -378,6 +435,8 @@ class VisionTwinFactoryExtension(omni.ext.IExt):
                 "part": self._catalog.part, "lighting_condition": _lighting(), "camera_resolution": list(L.CAMERA_RESOLUTION),
                 "inspector": self._inspector.config.__dict__,
                 "views": [v.name for v in self._cell.cycle.views] if self._cell else None,
+                "decision": str(_setting("decision", "rules")),
+                "inspector_model": self._model.card.extra.get("name") if self._model else None,
                 "view_inspectors": [i.config.__dict__ for i in self._inspectors] if self._cell else None}
         with open(os.path.join(self.run_dir, "run.json"), "w", encoding="utf-8") as f:
             json.dump(meta, f, indent=2)
@@ -465,22 +524,37 @@ class VisionTwinFactoryExtension(omni.ext.IExt):
 
     def _animate_cell(self, stage):
         """Inspection cell: pose the machine, then move the product with it.
-        load: belt entry -> platter (pick-and-place arc); views: rides the tilting/turning
-        platter; unload: platter -> belt exit (stays there if the exit is still blocked)."""
+        load: belt entry -> platter (transfer robot pick-and-place, or a lifted arc without the
+        robot asset); views: rides the tilting/turning platter; unload: platter -> belt exit
+        (stays there if the exit is still blocked). The robot waits between transfers."""
         t = self._station_time()
         self._cell.apply(t)
         if t is None:
+            if self._arm is not None:
+                self._arm.apply(self._arm.transfer.wait_pose())
             return
         cycle, st = self._cell.cycle, self._sim.config.process
         seat = self._cell.seat_pose()
-        if t < cycle.timing.load_s:
-            pose = self._lift_lerp(self._belt_pose(st.x_entry), seat, t / cycle.timing.load_s, L.TRANSFER_LIFT)
-        elif t < cycle.unload_start:
+        load_s, unload_s, u0 = cycle.timing.load_s, cycle.timing.unload_s, cycle.unload_start
+        if t < load_s:
+            pose = self._transfer_pose("load", t, self._belt_pose(st.x_entry), seat, t / load_s)
+        elif t < u0:
             pose = seat
+            if self._arm is not None:
+                self._arm.apply(self._arm.transfer.wait_pose())
         else:
-            pose = self._lift_lerp(seat, self._belt_pose(st.x_exit),
-                                   (t - cycle.unload_start) / cycle.timing.unload_s, L.TRANSFER_LIFT)
+            pose = self._transfer_pose("unload", t - u0, seat, self._belt_pose(st.x_exit), (t - u0) / unload_s)
         scene.set_product_pose(stage, self._sim.station_product, pose)
+
+    def _transfer_pose(self, phase, t, pick, place, k):
+        """Product pose during a transfer; drives the robot when there is one."""
+        if self._arm is None:
+            return self._lift_lerp(pick, place, k, L.TRANSFER_LIFT)
+        q, carried, where = self._arm.transfer.state(phase, t)
+        self._arm.apply(q)
+        if carried is not None:
+            return carried
+        return pick if where == "before" else place
 
     @staticmethod
     def _lift_lerp(a: np.ndarray, b: np.ndarray, k: float, lift: float = 0.12) -> np.ndarray:
@@ -562,7 +636,7 @@ class VisionTwinFactoryExtension(omni.ext.IExt):
                 carb.log_warn(f"{LOG_PREFIX} id={product_id:04d} stale frame -> unknown")
         return result
 
-    def _record(self, product_id, view, result, capture_ms, frame_offset, sim_time, speed, frame_file):
+    def _record(self, product_id, view, result, capture_ms, frame_offset, sim_time, speed, frame_file, model=None):
         if not self._log:
             return
         p = self._sim.tracker.get(product_id)
@@ -576,7 +650,10 @@ class VisionTwinFactoryExtension(omni.ext.IExt):
             capture_latency_ms=round(capture_ms, 2), frame_offset="" if frame_offset is None else frame_offset,
             inspection_latency_ms=round(result.latency_ms, 3),
             simulation_time_s=round(sim_time, 3), conveyor_speed=speed,
-            lighting_condition=_lighting(), frame_file=frame_file or "", reason=result.reason))
+            lighting_condition=_lighting(), frame_file=frame_file or "", reason=result.reason,
+            model_label=model.label if model else "", model_score=round(model.score, 4) if model else "",
+            model_view=(model.decided_by or "") if model else "",
+            model_latency_ms=round(model.latency_ms, 3) if model else ""))
 
     def _apply_verdict(self, product_id, result, sim_time):
         """The product's final vision verdict (applied unless it was already sorted)."""
@@ -625,7 +702,7 @@ class VisionTwinFactoryExtension(omni.ext.IExt):
             carb.log_warn(f"{LOG_PREFIX} id={product_id:04d} view {view} stale frame -> unknown")
         frame_file = self._log.save_frame(product_id, rgb, view) if self._log else None
         self._record(product_id, view, result, capture_ms, frame_offset, sim_time, speed, frame_file)
-        self._view_done(product_id, view, result, capture_ms, sim_time, speed)
+        self._view_done(product_id, view, result, capture_ms, sim_time, speed, rgb)
 
     def _on_view_error(self, product_id, view, message, sim_time, speed):
         carb.log_warn(f"{LOG_PREFIX} id={product_id:04d} view {view} capture failed ({message}) -> unknown")
@@ -633,17 +710,35 @@ class VisionTwinFactoryExtension(omni.ext.IExt):
         self._record(product_id, view, result, 0.0, None, sim_time, speed, "")
         self._view_done(product_id, view, result, 0.0, sim_time, speed)
 
-    def _view_done(self, product_id, view, result, capture_ms, sim_time, speed):
-        """Collect the views of a product; with all of them, combine and apply the verdict."""
+    def _view_done(self, product_id, view, result, capture_ms, sim_time, speed, rgb=None):
+        """Collect the views of a product; with all of them, combine the rule verdicts, run the
+        learned inspector on the same frames, record both and apply the configured decision."""
         got = self._view_results.setdefault(product_id, {})
-        got[view] = (result, capture_ms)
+        got[view] = (result, capture_ms, rgb)
         names = [v.name for v in self._cell.cycle.views]
         if len(got) < len(names):
             return
         del self._view_results[product_id]
         combined = combine_views([got[k][0] for k in range(len(names))], names)
-        self._record(product_id, "all", combined, max(c for _, c in got.values()), 0, sim_time, speed, "")
-        self._apply_verdict(product_id, combined, sim_time)
+        model = None
+        if self._model is not None:
+            # Frames that were not verified (mismatch, stale, failed capture) are not judged at all.
+            unusable = any(got[k][2] is None or got[k][0].reason.startswith(("frame mismatch", "stale", "capture failed"))
+                           for k in range(len(names)))
+            if unusable:
+                from .core.model_inspector import ModelVerdict
+
+                model = ModelVerdict(UNKNOWN, float("nan"), [], None, 0.0)
+            else:
+                model = self._model.judge([got[k][2] for k in range(len(names))])
+        self._record(product_id, "all", combined, max(g[1] for g in got.values()), 0, sim_time, speed, "", model)
+        verdict = combined
+        if model is not None and str(_setting("decision", "rules")) == "model":
+            verdict = InspectionResult(model.label, 0.0 if math.isnan(model.score) else model.score, combined.area_px,
+                                       combined.mean_hue, None, model.latency_ms,
+                                       f"model p(defect)={model.score:.3f} (view {model.decided_by})")
+            verdict.defect_reason = "model" if model.label == "defect" else ""
+        self._apply_verdict(product_id, verdict, sim_time)
 
     # -- run results ------------------------------------------------------
 
