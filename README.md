@@ -2,16 +2,19 @@
 
 > 크라운이 컨베이어를 따라 **5축 기계로 만든 인라인 검사 셀**에 들어간다. 기계는 스핀들에 공구 대신 **카메라**를 달고 있다. B/C축으로 크라운을 기울이고 돌려 윗면 1장과 옆면 4장을 찍는다. 카메라는 **실제 렌더 이미지**로 셰이드와 형상을 판정하고, 불량품은 **제품 ID 기준으로** 배출선에서 밀려난다.
 > 기계는 URDF → STEP → Omniverse CAD converter(USD)로 가져왔고, 관절은 forward/inverse kinematics로 움직인다.
+> 벨트와 셀 사이는 **Seeed reBot Arm(6축 + 그리퍼)**이 IK로 집어 옮긴다. 검사는 규칙 기반 검사기와, **Omniverse Replicator 합성 데이터로만 학습한 다시점 CNN**(Kit 안에서 ONNX로 추론)이 같은 프레임을 나란히 판정한다.
 > 모든 수치는 저장된 run 로그(`results/`)에서 다시 계산할 수 있다. 수치는 보정하거나 꾸미지 않았다.
 
 ![라인 전체: 투입 컨베이어 → 검사 셀 → 배출 컨베이어](docs/screenshots/readme_overview.png)
 
 ![검사 셀 근접: B축이 기울어진 플래터 위 크라운과 스핀들 카메라](docs/screenshots/readme_cell.png)
 
+![이송 로봇: 1구간 끝에서 집은 크라운을 플래터로 옮기는 reBot Arm](docs/screenshots/readme_robot.png)
+
 ![스핀들 카메라의 다섯 시점: 정상품 / 마진 치핑](docs/screenshots/readme_views.png)
 *스핀들 카메라 프레임(실험 run `crown_default`). 윗면만 보면 치핑(#3)은 정상품(#1)과 같아 보이고 판정도 good이다. 측면 A에서만 노치가 드러나 defect로 판정된다.*
 
-**중요:** 이 프로젝트는 **시뮬레이션 기반 디지털 트윈 프로토타입**이다. 실제 현장과 동기화하거나 현장에서 검증한 디지털 트윈이 아니다. 기계 치수는 URDF에 적힌 임시값이고, 셀 사이클(5.4 s)은 시연용 값이다.
+**중요:** 이 프로젝트는 **시뮬레이션 기반 디지털 트윈 프로토타입**이다. 실제 현장과 동기화하거나 현장에서 검증한 디지털 트윈이 아니다. 기계 치수는 URDF에 적힌 임시값이고, 셀 사이클(8.2 s, 로봇 이송 포함)은 시연용 값이다. 학습 모델은 합성 데이터로만 학습했고 같은 렌더러로 평가했으므로, 실제 카메라에서의 성능 근거가 아니다.
 
 ---
 
@@ -21,12 +24,15 @@
 2. **위에서 보이지 않는 결함**(마진 치핑)을, 기계 축으로 시점을 바꿔 가며 잡을 수 있는가? 윗면 한 장과 비교해 무엇이 달라지는가?
 3. 판정 결과를 **바로 그 제품**에 연결해, 그 제품이 배출선에 도착했을 때만 밀어낼 수 있는가? (속도가 바뀌거나 렌더가 지연돼도)
 4. 검사 셀을 라인의 스테이션으로 넣었을 때 가동률, 대기열, 처리량이 어떻게 변하는가?
+5. Omniverse 안에서 만든 **합성 데이터로 학습한 모델**이, 보정한 규칙 기반 검사기의 약점(어두운 조명)을 메울 수 있는가? 같은 프레임으로 비교한다.
 
 ## 2. 기능
 | 영역 | 내용 |
 |---|---|
 | 라인 (크라운) | 투입 → 컨베이어 1구간 → **검사 셀**(입구 대기 → 로딩 → 시점 5개 촬영 → 언로딩) → 컨베이어 2구간 → 배출 푸셔와 bin → 출구 |
 | 검사 셀 | 5축 기계(URDF) + 스핀들 카메라 + 검은 패드. 카메라를 제품 중심 위 0.11 m에 두는 **닫힌 식 역기구학**과 관절 한계 검사. 로딩·언로딩 때는 카메라를 옆으로 비킨다 |
+| 이송 로봇 | **Seeed reBot Arm B601-DM**(공식 URDF + STL → USD). 6축 감쇠 최소제곱 IK(위치 + 자세), 수직 하향 파지로 크라운 방향 유지, 집기 → 플래터 → 집기 → 2구간. 경유점은 사이클을 만들 때 한 번 풀고 허용오차를 검사한다 |
+| 학습 검사기 | **Replicator** 합성 데이터(8,000장, 조명·셰이드·방향·카메라 랜덤화) → 다시점 MIL CNN(PyTorch) → ONNX → **Kit 안 ONNX Runtime**. 규칙 판정과 같은 프레임으로 기록하고, 배출에 쓸 판정은 `decision`(rules/model)으로 고른다 |
 | 제품 | ① **치아 크라운**: 셰이드, 미완성 가공(형상), **마진 치핑(옆면에서만 보임)** ② 실제 CAD 부품 KFL08 베어링 유닛: 색상, 부품 누락 ③ 박스: 색상. ②③은 고정 카메라를 쓰는 한 줄 벨트 라인(회귀 비교용) |
 | 비전 | 640×480 렌더 프레임을 OpenCV로 판정. 색(Lab a*b* 또는 HSV hue), 기준 외곽선(`matchShapes`, 면적비), **실루엣 차이**(중심을 맞춘 XOR), 내부 밝기(누락). **시점마다 따로 보정**하고 판정을 합친다 |
 | 동기화 | 동기 렌더링, 고정 시뮬레이션 스텝(1/60 s), **프레임 지정 캡처**(촬영 시점 update 번호의 프레임만 사용). 셀에서는 직전 캡처와 같은 이미지가 오면 다시 찍는다 |
@@ -53,17 +59,24 @@ flowchart LR
     VP -->|프레임 지정 캡처| FP[frame_provider]
     EXT --> UI[대시보드]
   end
+  subgraph ML["학습 (Kit 밖)"]
+    REPL[Replicator 합성 데이터<br/>generate_dataset] --> TRAIN[MIL CNN 학습<br/>PyTorch] --> ONNX[ONNX + 모델 카드]
+  end
   subgraph CORE["core/ (순수 Python, pytest)"]
     SIM[ConveyorSim + ProcessStation<br/>VIEW 이벤트] --> TRK[ProductTracker]
     CYC[CellCycle<br/>시점 자세·역기구학] --> CELL
     INS[VisionInspector × 5<br/>입력은 rgb 하나뿐] --> CMB[combine_views]
     CMB --> SORT[SortingController]
+    MOD[ModelInspector<br/>ONNX Runtime] --> SORT
+    ARM[ArmTransfer<br/>reBot IK] --> CELL
     TRK --> SORT
   end
   MUSD --> CELL
   PUSD --> SCENE
   EXT <--> SIM
   FP --> INS
+  FP --> MOD
+  ONNX --> MOD
   SORT --> LOG[(run 로그 CSV)]
   LOG -->|analyze_results| REP[표·그래프]
 ```
@@ -71,7 +84,38 @@ flowchart LR
 - **검사 로직과 Kit 분리:** 시뮬레이션, 셀 동작(역기구학 포함), 검사, 분류, 지표는 Kit 없이 테스트되는 `core/`에 있다. Kit 확장은 씬, 렌더, 카메라, UI를 맡는다.
 - **정답 누출 방지:** `VisionInspector.inspect(rgb)`는 이미지만 받고, 이 시그니처는 테스트로 고정했다. 정답은 tracker에서 CSV로만 복사된다.
 
-## 4. 측정 결과 (실측, Day 11)
+## 4. 측정 결과 (실측)
+
+### 규칙 기반 vs 학습 검사기 (Day 12, 같은 run의 같은 프레임)
+- 실험: [experiments/day12.json](experiments/day12.json) · 표: [results/experiments/day12/table.md](results/experiments/day12/table.md) · 9개 run 모두 `check_run` 감사 통과, late 0, frame mismatch 0
+- 학습: 합성 1,600개 샘플(8,000장), 조명 0.3~1.6배. 검증 세트(합성 320개) 320/320. 평가 run(seed 42 실제 라인)은 학습에 없다. 학습 기록: [results/models/crown_mil/](results/models/crown_mil/)
+
+| 조건 | 규칙 기반 (정상 29 / 결함 11) | 학습 모델 (같은 프레임) |
+|---|---|---|
+| default | FP 0, FN 0 | FP 0, FN 0 |
+| **dark** (조명 0.35배, 학습 범위 안) | **FP 29**, FN 0 (precision 0.28) | **FP 0, FN 0** |
+| bright (2.0배, **학습 범위 밖**) | FP 0, FN 0 | FP 0, FN 0 |
+| fast (1.5 m/s) | FP 0, FN 0 | FP 0, FN 0 |
+| dark + **모델이 배출 결정** | (기록만) | 분류 성공 **40/40** |
+
+![규칙 기반 vs 학습 검사기](docs/screenshots/readme_fig_model.png)
+
+- 모델 점수의 여유가 크다. 모든 조건에서 정상품 최대 0.002, 결함 최소 0.9998이다(기준 0.5).
+- 치핑 4개는 모두 **측면 A** 점수가 결정했다. 노치가 실제로 보이는 면과 같다. 같은 네트워크를 윗면 하나에만 쓰면, 합성 검증에서 치핑 recall이 0.00이었다.
+- 추론 시간은 제품당(5시점) 평균 약 12.5 ms(CPU)다.
+- **해석의 한계:** 학습과 평가가 같은 렌더러, 같은 형상 모델이다. 그래서 이 결과는 "합성 데이터로 조명 변화에 강건하게 만들 수 있다"는 시뮬레이션 안의 근거다. 실제 카메라 성능의 근거는 아니다. 결함 표본도 run당 11개로 작다.
+
+### 이송 로봇이 들어간 셀 용량 (크라운 20개, 셀 사이클 8.2 s = 로딩 2.0 + 시점 3.75 + 파킹 0.45 + 언로딩 2.0)
+| 투입 간격 | 셀 가동률 | 최대 대기열 | 처리량 (/h) |
+|---|---|---|---|
+| 6.0 s | 95.9 % | 5 | 421 |
+| 8.2 s | 95.9 % | 0 | 421 |
+| 10.0 s | 79.9 % | 0 | 351 |
+| 12.0 s | 67.4 % | 0 | 296 |
+
+로봇 이송(2.0 s × 2)이 들어가면서 포화 처리량이 626/h(Day 11, 포물선 이송 0.6 s)에서 421/h로 줄었다. 로봇이 셀을 기다리는 동안 다음 제품을 미리 집어 두는 파이프라이닝이 다음 개선 대상이다.
+
+### 다시점 검사와 규칙 기반 검사기 (Day 11)
 검사기는 **default 조명, seed 1 run에서 시점마다 보정**했다(`config/inspector_crown.json`). 아래 평가는 seed 42 run이고, 평가 결과를 보고 임계값을 다시 맞추지 않았다.
 - 실험 정의: [experiments/day11.json](experiments/day11.json) · 전체 표: [results/experiments/day11/table.md](results/experiments/day11/table.md)
 - 10개 run 모두 `check_run` 감사 통과, late 0, frame mismatch 0
@@ -103,7 +147,7 @@ flowchart LR
 - 셀에서 직전 캡처와 같은 이미지가 온 경우가 run 4개에서 1회씩 있었고, 모두 다시 찍어 회복했다(`view_retakes`, stale 0) → [docs/learnings](docs/learnings/셀%20카메라에서%20프레임%20번호가%20맞아도%20이전%20화면이%20오는%20경우.md)
 - 판정 시간(OpenCV)은 시점당 평균 약 2.6 ms다. 캡처 지연은 시점당 평균 약 145 ms(실제 시간)이고, PC 부하에 따라 달라진다.
 
-### 검사 셀 용량 (크라운 20개, 셀 사이클 5.4 s, 투입 간격만 바꿈)
+### 검사 셀 용량, 로봇 없이 (Day 11, 크라운 20개, 셀 사이클 5.4 s, 투입 간격만 바꿈)
 | 투입 간격 | 셀 가동률 | 최대 대기열 | 평균 대기열 | 처리량 (/h) |
 |---|---|---|---|---|
 | 4.0 s | 93.9 % | 5 | 2.28 | 626 |
@@ -173,6 +217,17 @@ python -m pip install -r scripts\requirements-dev.txt
 .\scripts\convert_all_cad.ps1                                    # 전체 STEP → USD + 품질 리포트 + 기계 URDF 검증(bbox 편차 0 mm)
 .\scripts\make_part_variants.ps1 -Part kfl08; .\scripts\make_part_variants.ps1 -Part crown
 .\scripts\compare_tess_lod.ps1 -Stp assets\parts\raw\dental_crown.step   # (선택) LOD 0~4 비교
+.\scripts\fetch_robot.ps1                                        # reBot Arm URDF + 메시(고정 커밋, SHA256) → assets/robots/
+.\scripts\urdf_mesh_to_usd.ps1 -Urdf assets\robots\rebot_b601_dm\Rebot_Arm_description\DM\urdf\ReBot_Arm_DM.urdf -Out assets\robots\usd\rebot_b601_dm.usd
+```
+로봇 USD가 없으면 같은 시간표의 포물선 이송으로 대신하므로, run 결과는 바뀌지 않는다.
+
+### 학습 검사기 다시 만들기 (선택, 모델은 저장소에 포함: `config/models/crown_mil.onnx`)
+```powershell
+.\scripts\setup_ml_env.ps1                                       # torch(CUDA), onnx
+.\scripts\generate_dataset.ps1 -Out datasets\crown_sdg_v1 -Samples 1600   # Replicator 합성 데이터(약 20분, 0.8 GB)
+.\scripts\train_inspector_model.ps1 -Dataset datasets\crown_sdg_v1      # MIL CNN → ONNX + 모델 카드(약 3분, RTX 4060)
+.\scripts\run_experiments.ps1 -Config experiments\day12.json; .\scripts\analyze_results.ps1 -Experiment day12
 ```
 스크립트 전체 설명: [docs/topics/스크립트 목록.md](docs/topics/스크립트%20목록.md)
 
@@ -193,10 +248,11 @@ docs/                                          Obsidian 노트: 결정, 변경, 
 ## 7. 한계 (Known Issues)
 숨기지 않고 적는다. 각 항목의 근거는 `docs/learnings/`에 있다.
 - **조명 변화에 약한 검사(실측):** 크라운의 밝기 기반 분리와 KFL08의 누락 검사(절대 밝기 V ≥ 140)는 어두운 조명에서 정상품을 불량으로 판정한다(crown dark FP 29/29, Day 9 KFL08 dark FP 29/29). 개선 방향: 상대 밝기, 조명별 보정, 도메인 랜덤화. 고친다면 평가 데이터가 아닌 새 seed로 다시 검증해야 한다.
+- **학습 모델의 근거 범위:** 합성 데이터로만 학습하고 같은 렌더러로 평가했다. 실제 카메라에서는 노이즈, 반사, 재질 차이 때문에 다시 학습(실측 이미지 + 합성)이 필요하다. 학습 조명 범위(0.3~1.6배) 밖인 bright(2.0배)에서도 맞혔지만, 조건 하나뿐이다.
 - **결함 표본이 작다:** 평가 run 하나에 치핑 4개, 미완성 가공 1개뿐이다. 결함 종류별 recall은 개수로 읽어야 한다.
 - **치핑 방향이 고정:** 모든 크라운이 같은 방향으로 놓여서 치핑은 항상 측면 A에 보인다. 옆면 4개를 모두 찍으므로 방향이 달라도 보이는 시점은 있지만, 무작위 방향은 실험하지 않았다(윗면 외곽선 검사가 회전에 민감함).
 - **셀 캡처의 이전 화면:** 프레임 번호가 맞는데도 직전 화면이 오는 경우가 있다(Day 11 실험 캡처 1,100장 중 4번). 다시 찍어서 모두 회복했지만 원인은 확인하지 못했다.
-- **시뮬레이션의 한계:** 반송과 픽앤플레이스는 키네마틱이고(물리 없음, 로봇 팔 모델 없음), 기계 관절 동작은 시각용이다. 치수와 사이클은 임시값이다.
+- **시뮬레이션의 한계:** 반송과 픽앤플레이스는 키네마틱이다(물리, 충돌 검사 없음). 로봇과 기계의 관절 동작은 시각용이고, 로봇 궤적은 관절 공간 보간이라 충돌 회피를 하지 않는다. 치수와 사이클은 임시값이다.
 - **렌더 조건이 단순함:** 노이즈, 블러, 렌즈 왜곡, 재질 변화가 없다. 실제 카메라에 적용하려면 실측 이미지로 다시 보정해야 한다.
 - **실행 속도:** 동기 렌더링과 고정 스텝을 쓰기 때문에 GUI가 실시간보다 느리게 보일 수 있다. 크라운 40개 run은 약 5분이 걸렸다.
 - **HOOPS 물리량 미출력:** `convertPhysicsData`를 켜도 이 STEP들에는 `omni:hoops:physics:*` 속성이 생기지 않았다(원인 미확인).

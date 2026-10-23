@@ -23,6 +23,7 @@ tags: [visiontwin, index]
 - [[2026-10-22 치아 밀링 가공 라인으로 확장]]
 - [[2026-10-23 STP to USD 변환 강화]]
 - [[2026-10-23 밀링기를 인라인 검사 셀로]]
+- [[2026-10-24 이송 로봇과 학습 검사기]]
 
 ## Changes (코드 수정)
 - [[2026-10-21 Day1 visiontwin.factory 확장 골격과 팩토리 씬]]
@@ -37,6 +38,7 @@ tags: [visiontwin, index]
 - [[2026-10-23 Day9 실험 2차 결과]]
 - [[2026-10-23 STP to USD 변환 강화 작업]]
 - [[2026-10-23 Day11 인라인 검사 셀 작업]]
+- [[2026-10-24 Day12 이송 로봇과 학습 검사기 작업]]
 
 ## Learnings (새로 알게 된 점)
 - [[2026-10-21 환경 점검 결과]]
@@ -60,8 +62,10 @@ tags: [visiontwin, index]
 - [[Kit 110.4 레지스트리와 Kit 안 ONNX 추론 실측]]
 - [[Seeed reBot Arm URDF를 USD로 가져오기]]
 - [[exec 스크립트의 함수 안 import omni가 Kit을 멈추게 함]]
+- [[IK 회전 오차의 acos 정밀도와 reBot 하향 작업 영역]]
 
 ## Progress
 - [[2026-10-21 Progress]]
 - [[2026-10-22 Progress]]
 - [[2026-10-23 Progress]]
+- [[2026-10-24 Progress]]
