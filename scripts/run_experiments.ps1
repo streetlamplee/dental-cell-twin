@@ -38,6 +38,7 @@ foreach ($r in $cfg.runs) {
     $set = @{ part = $r.part; lighting = $r.lighting; seed = $r.seed; maxProducts = $r.products;
               speed = ([double]$r.speed).ToString($inv); experiment = $cfg.name; condition = $r.condition }
     if ($r.spawn_interval) { $set.spawnInterval = ([double]$r.spawn_interval).ToString($inv) }
+    if ($r.decision) { $set.decision = $r.decision }
     $setArgs = ($set.GetEnumerator() | ForEach-Object { "--/exts/visiontwin.factory/$($_.Key)=$($_.Value)" }) -join " "
     $kitArgs = "--exec `"$exec`" $setArgs --/exts/visiontwin.factory/outputDir=`"$($outDir -replace '\\', '/')`" $KitAutomationArgs"
     $t0 = Get-Date

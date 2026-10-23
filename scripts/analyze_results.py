@@ -7,6 +7,8 @@ Outputs (results/experiments/<name>/):
   fig_vision.png            sort success rate per condition, small multiples by product
   fig_views.png             inspection cell: defect recall per kind, top view only vs all views
                             (from the same runs: view 0 rows vs the combined rows)
+  fig_model.png             inspection cell with a learned inspector: rules vs model on the same
+                            frames (precision and recall per defect kind, per condition)
   fig_line.png              station line: utilisation, max queue, throughput vs spawn interval
 
 Usage: python scripts/analyze_results.py <name>
@@ -34,6 +36,7 @@ PRODUCT_NAME = {"box": "Box (colour)", "kfl08": "KFL08 bearing", "crown": "Denta
 KIND_TO_REASON = {"color": "color", "missing": "shape", "shape": "shape", "chip": "shape"}
 DEFECT_KINDS = ("color", "missing", "shape", "chip")
 VIEW_SERIES = (("top", "Top view only", "#2a78d6"), ("all", "Top + 4 side views", "#eb6834"))  # slots 1, 2
+DECIDER_SERIES = (("rules", "Rule-based (calibrated)", "#2a78d6"), ("model", "Learned (synthetic data)", "#eb6834"))
 
 
 def fmt(x, digits=3):
@@ -81,6 +84,21 @@ def analyse_run(run_dir: Path) -> dict:
         for kind in DEFECT_KINDS:
             sel = res_top[(res_top["ground_truth"] == "defect") & (res_top["defect_kind"] == kind)]
             row[f"recall_top_{kind}"] = (sel["top"] == "defect").mean() if len(sel) else None
+    # Learned inspector on the same products (combined rows carry model_label when a model ran).
+    row["model_precision"] = row["model_recall"] = row["model_FP"] = row["model_ms_mean"] = None
+    row.update({f"model_recall_{kind}": None for kind in DEFECT_KINDS})
+    if multi and "model_label" in insp and insp.loc[insp["view"] == "all", "model_label"].notna().any():
+        allrows = insp[insp["view"] == "all"]
+        ml = dict(zip(allrows["product_id"], allrows["model_label"].fillna("unknown")))
+        res_m = res.assign(model=[ml.get(pid, "unknown") for pid in res["product_id"]])
+        cm = confusion(gts, [p if p in ("good", "defect") else "unknown" for p in res_m["model"]])
+        row["model_precision"], row["model_recall"], _ = precision_recall_f1(cm)
+        row["model_FP"], row["model_unknown"] = cm["fp"], cm["unknown"]
+        row["model_ms_mean"] = float(allrows["model_latency_ms"].mean())
+        for kind in DEFECT_KINDS:
+            sel = res_m[(res_m["ground_truth"] == "defect") & (res_m["defect_kind"] == kind)]
+            row[f"model_recall_{kind}"] = (sel["model"] == "defect").mean() if len(sel) else None
+    row["decision"] = run.get("decision", "rules")
     line = summary.get("line")
     row.update({
         "spawn_interval_s": line["spawn_interval_s"] if line else None,
@@ -162,6 +180,39 @@ def fig_views(df: pd.DataFrame, out: Path) -> None:
     plt.close(fig)
 
 
+def fig_model(df: pd.DataFrame, out: Path) -> None:
+    """Rules vs learned inspector on the same frames: precision and recall per kind, per condition."""
+    vis = df[(df["group"] == "vision") & df["model_recall"].notna()]
+    if vis.empty:
+        return
+    conds = list(vis["condition"])
+    fig, axes = plt.subplots(1, len(conds), figsize=(4.3 * len(conds), 3.9), sharey=True, facecolor=SURFACE)
+    axes = [axes] if len(conds) == 1 else list(axes)
+    for ax, (_, r) in zip(axes, vis.iterrows()):
+        kinds = [k for k in DEFECT_KINDS if r.get(f"recall_{k}") is not None and not pd.isna(r.get(f"recall_{k}"))]
+        metrics = [("precision", "precision")] + [(f"recall_{k}", f"recall\n{k}") for k in kinds]
+        xs = range(len(metrics))
+        for i, (key, label, color) in enumerate(DECIDER_SERIES):
+            vals = [r[m] if key == "rules" else r[f"model_{m}"] for m, _ in metrics]
+            vals = [0.0 if v is None or pd.isna(v) else float(v) for v in vals]
+            bars = ax.bar([x + (i - 0.5) * 0.36 for x in xs], vals, width=0.34, color=color, edgecolor=SURFACE,
+                          linewidth=2, label=label)
+            for b, v in zip(bars, vals):
+                ax.text(b.get_x() + b.get_width() / 2, v + 0.02, f"{v:.2f}", ha="center", va="bottom", fontsize=7,
+                        color=TEXT)
+        style(ax, r["condition"])
+        ax.set_xticks(list(xs))
+        ax.set_xticklabels([lbl for _, lbl in metrics], fontsize=8)
+        ax.set_ylim(0, 1.2)
+        ax.set_yticks([0, 0.25, 0.5, 0.75, 1.0])
+    axes[0].legend(frameon=False, fontsize=8, labelcolor=TEXT, loc="lower left")
+    fig.suptitle("Inspection cell: rule-based vs learned inspector on the same frames (seed 42 line runs)",
+                 color=TEXT, fontsize=12, x=0.01, ha="left")
+    fig.tight_layout()
+    fig.savefig(out, dpi=150, facecolor=SURFACE)
+    plt.close(fig)
+
+
 def fig_line(df: pd.DataFrame, out: Path) -> None:
     line = df[df["group"] == "line"].sort_values("spawn_interval_s")
     if line.empty:
@@ -213,7 +264,8 @@ def main() -> int:
 
     cols = ["condition", "products", "good", "defect", "TP", "FP", "FN", "TN", "unknown", "precision", "recall",
             "f1", "sort_success", "recall_color", "recall_missing", "recall_shape", "recall_chip",
-            "recall_top_only", "recall_top_chip", "capture_ms_mean",
+            "recall_top_only", "recall_top_chip", "model_precision", "model_recall", "model_FP",
+            "model_recall_color", "model_recall_shape", "model_recall_chip", "model_ms_mean", "capture_ms_mean",
             "capture_ms_p95", "inspect_ms_mean", "inspect_ms_p95", "throughput_per_h", "utilization",
             "queue_max", "queue_mean"]
     lines = ["| " + " | ".join(cols) + " |", "|" + "---|" * len(cols)]
@@ -222,9 +274,10 @@ def main() -> int:
     (exp_dir / "table.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
     fig_vision(df, exp_dir / "fig_vision.png")
     fig_views(df, exp_dir / "fig_views.png")
+    fig_model(df, exp_dir / "fig_model.png")
     fig_line(df, exp_dir / "fig_line.png")
     missing = [c for c in order if c not in set(df["condition"])]
-    print(f"{len(df)} runs analysed -> {exp_dir / 'table.md'}, fig_vision.png, fig_views.png, fig_line.png")
+    print(f"{len(df)} runs analysed -> {exp_dir / 'table.md'}, fig_vision.png, fig_views.png, fig_model.png, fig_line.png")
     if missing:
         print(f"not finished: {', '.join(missing)}")
     print("\n".join(lines))

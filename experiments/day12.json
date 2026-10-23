@@ -1,0 +1,15 @@
+{
+  "_comment": "Day 12 experiments: transfer robot (Seeed reBot Arm) + learned inspector. A: rule-based vs learned inspector on the same frames (both logged in every crown run; decision=rules sorts). The model was trained only on synthetic Replicator data with lighting factor 0.3-1.6; 'bright' (2.0) is outside that range. crown_model_decides: the model's verdict sorts the products end to end. B: cell capacity with the robot (cycle 8.2 s). Run: scripts/run_experiments.ps1 -Config experiments/day12.json; analyse: scripts/analyze_results.ps1 -Experiment day12.",
+  "name": "day12",
+  "runs": [
+    {"condition": "crown_default", "group": "vision", "part": "crown", "lighting": "default", "speed": 0.5, "products": 40, "seed": 42},
+    {"condition": "crown_dark",    "group": "vision", "part": "crown", "lighting": "dark",    "speed": 0.5, "products": 40, "seed": 42},
+    {"condition": "crown_bright",  "group": "vision", "part": "crown", "lighting": "bright",  "speed": 0.5, "products": 40, "seed": 42},
+    {"condition": "crown_fast",    "group": "vision", "part": "crown", "lighting": "default", "speed": 1.5, "products": 40, "seed": 42},
+    {"condition": "crown_model_decides", "group": "model", "part": "crown", "lighting": "dark", "speed": 0.5, "products": 40, "seed": 42, "decision": "model"},
+    {"condition": "cell_spawn_6.0",  "group": "line", "part": "crown", "lighting": "default", "speed": 0.5, "products": 20, "seed": 42, "spawn_interval": 6.0},
+    {"condition": "cell_spawn_8.2",  "group": "line", "part": "crown", "lighting": "default", "speed": 0.5, "products": 20, "seed": 42, "spawn_interval": 8.2},
+    {"condition": "cell_spawn_10.0", "group": "line", "part": "crown", "lighting": "default", "speed": 0.5, "products": 20, "seed": 42, "spawn_interval": 10.0},
+    {"condition": "cell_spawn_12.0", "group": "line", "part": "crown", "lighting": "default", "speed": 0.5, "products": 20, "seed": 42, "spawn_interval": 12.0}
+  ]
+}
