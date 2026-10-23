@@ -220,7 +220,7 @@ python -m pip install -r scripts\requirements-dev.txt
 .\scripts\check_run.ps1 -RunDir results\runs\<id>               # 이벤트 로그 감사
 .\scripts\inspect_frames.ps1 -RunDir results\runs\<id>          # 저장된 프레임으로 오프라인 재판정(시점별 검사기 + 합치기)
 .\scripts\collect_frames.ps1 -Seed 1 -Products 30 -Part crown    # 보정 run → calibrate_inspector.ps1 -RunDir ...
-.\scriptsender_teach_program.ps1                                # 표면별 티칭 6개 점 렌더 + 검증표
+.\scripts\render_teach_program.ps1                                # 표면별 티칭 6개 점 렌더 + 검증표
 .\scripts\run_experiments.ps1 -Config experiments\day11.json    # 실험 행렬
 .\scripts\analyze_results.ps1 -Experiment day11                 # table.md, fig_views.png, fig_line.png
 ```
