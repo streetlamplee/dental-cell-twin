@@ -12,6 +12,7 @@ tags: [visiontwin, index]
 - [[Day 5-6 작업 분해]]
 - [[Day 7 치아 밀링 라인 작업 분해]]
 - [[데모 촬영 샷리스트]]
+- [[고도화 방향 조사]]
 
 ## Decisions (기획/설계 변경)
 - [[2026-10-21 작업 규칙 - 스크립트화와 Obsidian 문서화]]
@@ -56,6 +57,9 @@ tags: [visiontwin, index]
 - [[절대 밝기 임계값은 어두운 조명에서 정상품을 불량으로 본다]]
 - [[HOOPS 변환 옵션 실측 (LOD, 문자열 인자, 물리량)]]
 - [[셀 카메라에서 프레임 번호가 맞아도 이전 화면이 오는 경우]]
+- [[Kit 110.4 레지스트리와 Kit 안 ONNX 추론 실측]]
+- [[Seeed reBot Arm URDF를 USD로 가져오기]]
+- [[exec 스크립트의 함수 안 import omni가 Kit을 멈추게 함]]
 
 ## Progress
 - [[2026-10-21 Progress]]
