@@ -1,9 +1,9 @@
 {
   "roi": null,
-  "sat_min": 25,
+  "sat_min": 93,
   "val_min": 40,
   "min_area_px": 400,
-  "reference_hue": 98.88,
+  "reference_hue": 102.93,
   "hue_tolerance": 12.0,
   "good_ratio_min": 0.85,
   "interior_bright_min": null,

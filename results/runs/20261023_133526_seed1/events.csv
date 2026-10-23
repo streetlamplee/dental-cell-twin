@@ -1,0 +1,211 @@
+sim_time_s,product_id,event,x,station,detail
+0.0,1,SPAWN,-2.8,,
+1.6,1,LOAD,-2.0,mill,
+3.0,2,SPAWN,-2.8,,
+4.6,1,UNLOAD,-1.6,mill,
+4.6,2,LOAD,-2.0,mill,
+6.0,3,SPAWN,-2.8,,
+6.8,1,INSPECT,-0.5,,
+6.8167,1,VISION,,,defect color+shape
+7.6,2,UNLOAD,-1.6,mill,
+7.6,3,LOAD,-2.0,mill,
+9.0,4,SPAWN,-2.8,,
+9.8,2,INSPECT,-0.5,,
+9.8,2,VISION,,,defect shape
+10.6,3,UNLOAD,-1.6,mill,
+10.6,4,LOAD,-2.0,mill,
+10.8,1,REJECT,1.5,,predicted defect
+10.8,1,EXIT,1.5,,
+12.0,5,SPAWN,-2.8,,
+12.7833,3,INSPECT,-0.5,,
+12.7833,3,VISION,,,good
+13.6,4,UNLOAD,-1.6,mill,
+13.6,5,LOAD,-2.0,mill,
+13.8,2,REJECT,1.5,,predicted defect
+13.8,2,EXIT,1.5,,
+15.0,6,SPAWN,-2.8,,
+15.7833,4,INSPECT,-0.5,,
+15.7833,4,VISION,,,good
+16.6,5,UNLOAD,-1.6,mill,
+16.6,6,LOAD,-2.0,mill,
+16.7833,3,SORT,1.5,,predicted good
+18.0,7,SPAWN,-2.8,,
+18.7833,5,INSPECT,-0.5,,
+18.8,5,VISION,,,good
+19.6,6,UNLOAD,-1.6,mill,
+19.6,7,LOAD,-2.0,mill,
+19.7833,3,EXIT,3.0,,
+19.7833,4,SORT,1.5,,predicted good
+21.0,8,SPAWN,-2.8,,
+21.7833,6,INSPECT,-0.5,,
+21.8,6,VISION,,,defect shape
+22.6,7,UNLOAD,-1.6,mill,
+22.6,8,LOAD,-2.0,mill,
+22.7833,4,EXIT,3.0,,
+22.7833,5,SORT,1.5,,predicted good
+24.0,9,SPAWN,-2.8,,
+24.8,7,INSPECT,-0.5,,
+24.8167,7,VISION,,,defect shape
+25.6,8,UNLOAD,-1.6,mill,
+25.6,9,LOAD,-2.0,mill,
+25.7833,6,REJECT,1.5,,predicted defect
+25.7833,6,EXIT,1.5,,
+25.7833,5,EXIT,3.0,,
+27.0,10,SPAWN,-2.8,,
+27.8,8,INSPECT,-0.5,,
+27.8167,8,VISION,,,good
+28.6,9,UNLOAD,-1.6,mill,
+28.6,10,LOAD,-2.0,mill,
+28.8,7,REJECT,1.5,,predicted defect
+28.8,7,EXIT,1.5,,
+30.0,11,SPAWN,-2.8,,
+30.8,9,INSPECT,-0.5,,
+30.8167,9,VISION,,,good
+31.6,10,UNLOAD,-1.6,mill,
+31.6,11,LOAD,-2.0,mill,
+31.8,8,SORT,1.5,,predicted good
+33.0,12,SPAWN,-2.8,,
+33.8,10,INSPECT,-0.5,,
+33.8167,10,VISION,,,defect shape
+34.6,11,UNLOAD,-1.6,mill,
+34.6,12,LOAD,-2.0,mill,
+34.8,9,SORT,1.5,,predicted good
+34.8,8,EXIT,3.0,,
+36.0,13,SPAWN,-2.8,,
+36.8,11,INSPECT,-0.5,,
+36.8167,11,VISION,,,defect color+shape
+37.6,12,UNLOAD,-1.6,mill,
+37.6,13,LOAD,-2.0,mill,
+37.8,10,REJECT,1.5,,predicted defect
+37.8,10,EXIT,1.5,,
+37.8,9,EXIT,3.0,,
+39.0,14,SPAWN,-2.8,,
+39.8,12,INSPECT,-0.5,,
+39.8167,12,VISION,,,good
+40.6,13,UNLOAD,-1.6,mill,
+40.6,14,LOAD,-2.0,mill,
+40.8,11,REJECT,1.5,,predicted defect
+40.8,11,EXIT,1.5,,
+42.0,15,SPAWN,-2.8,,
+42.8,13,INSPECT,-0.5,,
+42.8167,13,VISION,,,defect shape
+43.6,14,UNLOAD,-1.6,mill,
+43.6,15,LOAD,-2.0,mill,
+43.8,12,SORT,1.5,,predicted good
+45.0,16,SPAWN,-2.8,,
+45.8,14,INSPECT,-0.5,,
+45.8167,14,VISION,,,defect color+shape
+46.6,15,UNLOAD,-1.6,mill,
+46.6,16,LOAD,-2.0,mill,
+46.8,13,REJECT,1.5,,predicted defect
+46.8,13,EXIT,1.5,,
+46.8,12,EXIT,3.0,,
+48.0,17,SPAWN,-2.8,,
+48.8,15,INSPECT,-0.5,,
+48.8167,15,VISION,,,good
+49.6,16,UNLOAD,-1.6,mill,
+49.6,17,LOAD,-2.0,mill,
+49.8,14,REJECT,1.5,,predicted defect
+49.8,14,EXIT,1.5,,
+51.0,18,SPAWN,-2.8,,
+51.8,16,INSPECT,-0.5,,
+51.8167,16,VISION,,,defect shape
+52.6,17,UNLOAD,-1.6,mill,
+52.6,18,LOAD,-2.0,mill,
+52.8,15,SORT,1.5,,predicted good
+54.0,19,SPAWN,-2.8,,
+54.8,17,INSPECT,-0.5,,
+54.8167,17,VISION,,,good
+55.6,18,UNLOAD,-1.6,mill,
+55.6,19,LOAD,-2.0,mill,
+55.8,16,REJECT,1.5,,predicted defect
+55.8,16,EXIT,1.5,,
+55.8,15,EXIT,3.0,,
+57.0,20,SPAWN,-2.8,,
+57.8,18,INSPECT,-0.5,,
+57.8167,18,VISION,,,good
+58.6,19,UNLOAD,-1.6,mill,
+58.6,20,LOAD,-2.0,mill,
+58.8,17,SORT,1.5,,predicted good
+60.0,21,SPAWN,-2.8,,
+60.8,19,INSPECT,-0.5,,
+60.8167,19,VISION,,,good
+61.6,20,UNLOAD,-1.6,mill,
+61.6,21,LOAD,-2.0,mill,
+61.8,18,SORT,1.5,,predicted good
+61.8,17,EXIT,3.0,,
+63.0,22,SPAWN,-2.8,,
+63.8,20,INSPECT,-0.5,,
+63.8167,20,VISION,,,good
+64.6,21,UNLOAD,-1.6,mill,
+64.6,22,LOAD,-2.0,mill,
+64.8,19,SORT,1.5,,predicted good
+64.8,18,EXIT,3.0,,
+66.0,23,SPAWN,-2.8,,
+66.8,21,INSPECT,-0.5,,
+66.8167,21,VISION,,,good
+67.6,22,UNLOAD,-1.6,mill,
+67.6,23,LOAD,-2.0,mill,
+67.8,20,SORT,1.5,,predicted good
+67.8,19,EXIT,3.0,,
+69.0,24,SPAWN,-2.8,,
+69.8,22,INSPECT,-0.5,,
+69.8167,22,VISION,,,good
+70.6,23,UNLOAD,-1.6,mill,
+70.6,24,LOAD,-2.0,mill,
+70.8,21,SORT,1.5,,predicted good
+70.8,20,EXIT,3.0,,
+72.0,25,SPAWN,-2.8,,
+72.8,23,INSPECT,-0.5,,
+72.8167,23,VISION,,,good
+73.6,24,UNLOAD,-1.6,mill,
+73.6,25,LOAD,-2.0,mill,
+73.8,22,SORT,1.5,,predicted good
+73.8,21,EXIT,3.0,,
+75.0,26,SPAWN,-2.8,,
+75.8,24,INSPECT,-0.5,,
+75.8167,24,VISION,,,good
+76.6,25,UNLOAD,-1.6,mill,
+76.6,26,LOAD,-2.0,mill,
+76.8,23,SORT,1.5,,predicted good
+76.8,22,EXIT,3.0,,
+78.0,27,SPAWN,-2.8,,
+78.8,25,INSPECT,-0.5,,
+78.8167,25,VISION,,,good
+79.6,26,UNLOAD,-1.6,mill,
+79.6,27,LOAD,-2.0,mill,
+79.8,24,SORT,1.5,,predicted good
+79.8,23,EXIT,3.0,,
+81.0,28,SPAWN,-2.8,,
+81.8,26,INSPECT,-0.5,,
+81.8167,26,VISION,,,good
+82.6,27,UNLOAD,-1.6,mill,
+82.6,28,LOAD,-2.0,mill,
+82.8,25,SORT,1.5,,predicted good
+82.8,24,EXIT,3.0,,
+84.0,29,SPAWN,-2.8,,
+84.8,27,INSPECT,-0.5,,
+84.8167,27,VISION,,,good
+85.6,28,UNLOAD,-1.6,mill,
+85.6,29,LOAD,-2.0,mill,
+85.8,26,SORT,1.5,,predicted good
+85.8,25,EXIT,3.0,,
+87.0,30,SPAWN,-2.8,,
+87.8,28,INSPECT,-0.5,,
+87.8167,28,VISION,,,good
+88.6,29,UNLOAD,-1.6,mill,
+88.6,30,LOAD,-2.0,mill,
+88.8,27,SORT,1.5,,predicted good
+88.8,26,EXIT,3.0,,
+90.8,29,INSPECT,-0.5,,
+90.8167,29,VISION,,,good
+91.6,30,UNLOAD,-1.6,mill,
+91.8,28,SORT,1.5,,predicted good
+91.8,27,EXIT,3.0,,
+93.8,30,INSPECT,-0.5,,
+93.8167,30,VISION,,,good
+94.8,29,SORT,1.5,,predicted good
+94.8,28,EXIT,3.0,,
+97.8,30,SORT,1.5,,predicted good
+97.8,29,EXIT,3.0,,
+100.8,30,EXIT,3.0,,
