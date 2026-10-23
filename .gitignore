@@ -43,4 +43,5 @@ deps/**/user.toml
 /results/experiments/**/frames/
 /results/cad_lod/**/*.usd
 /assets/robots/rebot_b601_dm/
-/assets/robots/usd/
+/assets/robots/usd/*.usd
+/datasets/

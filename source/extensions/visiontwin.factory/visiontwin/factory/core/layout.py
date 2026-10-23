@@ -45,9 +45,16 @@ CELL_EXIT_X = CELL_X + CELL_GAP_HALF + 0.06  # place position on section 2
 CELL_PATH = "/World/Factory/Cell"
 CELL_CAMERA_PATH = "/World/Factory/Cell/CameraRig/Camera"  # moves with the spindle
 CELL_OVERVIEW_CAMERA_PATH = "/World/Factory/CellOverviewCamera"
-CELL_OVERVIEW_EYE = (CELL_X + 0.3, -0.5, 1.6)  # high in front: section 1 end, machine, section 2 start
-CELL_OVERVIEW_TARGET = (CELL_X, 0.05, 0.84)
+CELL_OVERVIEW_EYE = (CELL_X + 0.6, -0.75, 1.5)  # front-right, high: robot, machine, both belt ends
+CELL_OVERVIEW_TARGET = (CELL_X - 0.08, 0.0, 0.85)
 TRANSFER_LIFT = 0.15  # pick-and-place arc height (clears the B housing and support)
+# Transfer robot (Seeed reBot Arm B601-DM) in front of the cell, facing the machine (+Y). Its
+# top-down grasp workspace is about 0.5 m wide at 0-0.2 m above its base, so the base stands
+# almost at belt height, close to the platter (all waypoints keep >= 0.29 rad from the limits).
+ARM_PATH = "/World/Factory/Cell/Robot"
+ARM_BASE = (CELL_X, -0.28, 0.84)
+ARM_YAW_DEG = 90.0
+ARM_WAIT = {"joint1": 0.0, "joint2": -0.6, "joint3": -1.9, "joint4": 0.9, "joint5": 0.0, "joint6": 0.0}
 
 # Root prim paths
 ROOT_PATH = "/World"

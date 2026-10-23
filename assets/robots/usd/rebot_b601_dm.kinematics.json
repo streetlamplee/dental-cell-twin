@@ -1,0 +1,742 @@
+{
+  "robot": "ReBot_Arm_DM",
+  "units": {
+    "length": "m",
+    "angle": "rad"
+  },
+  "root": "base_link",
+  "joints": [
+    {
+      "name": "joint1",
+      "type": "revolute",
+      "parent": "base_link",
+      "child": "link1",
+      "origin_xyz": [
+        -8.416e-05,
+        0.0,
+        0.08465
+      ],
+      "origin_rotation": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          -0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "axis": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "lower": -2.8,
+      "upper": 2.8
+    },
+    {
+      "name": "joint2",
+      "type": "revolute",
+      "parent": "link1",
+      "child": "link2",
+      "origin_xyz": [
+        0.020084,
+        0.031625,
+        0.05555
+      ],
+      "origin_rotation": [
+        [
+          1.0,
+          0.0,
+          -0.0
+        ],
+        [
+          0.0,
+          -3.673e-06,
+          1.0
+        ],
+        [
+          -0.0,
+          -1.0,
+          -3.673e-06
+        ]
+      ],
+      "axis": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "lower": -3.14,
+      "upper": 0.0
+    },
+    {
+      "name": "joint3",
+      "type": "revolute",
+      "parent": "link2",
+      "child": "link3",
+      "origin_xyz": [
+        -0.264,
+        0.0,
+        0.0
+      ],
+      "origin_rotation": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          -0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "axis": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "lower": -3.14,
+      "upper": 0.0
+    },
+    {
+      "name": "joint4",
+      "type": "revolute",
+      "parent": "link3",
+      "child": "link4",
+      "origin_xyz": [
+        0.2426,
+        -0.054,
+        -0.001625
+      ],
+      "origin_rotation": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          -0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "axis": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "lower": -1.87,
+      "upper": 1.57
+    },
+    {
+      "name": "joint5",
+      "type": "revolute",
+      "parent": "link4",
+      "child": "link5",
+      "origin_xyz": [
+        0.078308,
+        -0.0375,
+        -0.03
+      ],
+      "origin_rotation": [
+        [
+          1.0,
+          0.0,
+          -0.0
+        ],
+        [
+          0.0,
+          -3.673e-06,
+          1.0
+        ],
+        [
+          -0.0,
+          -1.0,
+          -3.673e-06
+        ]
+      ],
+      "axis": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "lower": -1.57,
+      "upper": 1.57
+    },
+    {
+      "name": "joint6",
+      "type": "revolute",
+      "parent": "link5",
+      "child": "link6",
+      "origin_xyz": [
+        0.028008,
+        0.0,
+        0.04
+      ],
+      "origin_rotation": [
+        [
+          -3.673e-06,
+          0.0,
+          1.0
+        ],
+        [
+          -0.0,
+          1.0,
+          0.0
+        ],
+        [
+          -1.0,
+          -0.0,
+          -3.673e-06
+        ]
+      ],
+      "axis": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "lower": -3.14,
+      "upper": 3.14
+    },
+    {
+      "name": "end_joint",
+      "type": "fixed",
+      "parent": "link6",
+      "child": "end_link",
+      "origin_xyz": [
+        0.0,
+        0.0,
+        0.15539
+      ],
+      "origin_rotation": [
+        [
+          3.673e-06,
+          -9.2654e-05,
+          0.999999996
+        ],
+        [
+          -0.0,
+          -0.999999996,
+          -9.2654e-05
+        ],
+        [
+          1.0,
+          -0.0,
+          -3.673e-06
+        ]
+      ],
+      "axis": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "lower": null,
+      "upper": null
+    },
+    {
+      "name": "finger_left",
+      "type": "prismatic",
+      "parent": "end_link",
+      "child": "finger_left_link",
+      "origin_xyz": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "origin_rotation": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          -0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "axis": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "lower": 0.0,
+      "upper": 0.05
+    },
+    {
+      "name": "finger_right",
+      "type": "prismatic",
+      "parent": "end_link",
+      "child": "finger_right_link",
+      "origin_xyz": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "origin_rotation": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          -0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "axis": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "lower": -0.05,
+      "upper": 0.0
+    }
+  ],
+  "source": "ReBot_Arm_DM.urdf",
+  "usd": {
+    "file": "rebot_b601_dm.usd",
+    "length_unit": "m",
+    "pose": "home (all joint values 0)",
+    "hierarchy": "ReBot_Arm_DM/<link>/<visual>/Mesh"
+  },
+  "visuals": [
+    {
+      "link": "base_link",
+      "visual": "base_link_silver_trim",
+      "part": "base_link_silver_trim",
+      "mesh": "../meshes/visual/colored_base_link_silver_trim.stl",
+      "rgba": [
+        0.878431,
+        0.890196,
+        0.87451,
+        1.0
+      ]
+    },
+    {
+      "link": "base_link",
+      "visual": "base_link_hardware_black",
+      "part": "base_link_hardware_black",
+      "mesh": "../meshes/visual/colored_base_link_hardware_black.stl",
+      "rgba": [
+        0.019608,
+        0.027451,
+        0.023529,
+        1.0
+      ]
+    },
+    {
+      "link": "base_link",
+      "visual": "base_link_matte_black",
+      "part": "base_link_matte_black",
+      "mesh": "../meshes/visual/colored_base_link_matte_black.stl",
+      "rgba": [
+        0.066667,
+        0.07451,
+        0.070588,
+        1.0
+      ]
+    },
+    {
+      "link": "link1",
+      "visual": "link1_matte_black",
+      "part": "link1_matte_black",
+      "mesh": "../meshes/visual/colored_link1_matte_black.stl",
+      "rgba": [
+        0.066667,
+        0.07451,
+        0.070588,
+        1.0
+      ]
+    },
+    {
+      "link": "link1",
+      "visual": "link1_hardware_black",
+      "part": "link1_hardware_black",
+      "mesh": "../meshes/visual/colored_link1_hardware_black.stl",
+      "rgba": [
+        0.019608,
+        0.027451,
+        0.023529,
+        1.0
+      ]
+    },
+    {
+      "link": "link1",
+      "visual": "link1_anodized_grey",
+      "part": "link1_anodized_grey",
+      "mesh": "../meshes/visual/colored_link1_anodized_grey.stl",
+      "rgba": [
+        0.831373,
+        0.847059,
+        0.831373,
+        1.0
+      ]
+    },
+    {
+      "link": "link2",
+      "visual": "link2_seeed_yellow",
+      "part": "link2_seeed_yellow",
+      "mesh": "../meshes/visual/colored_link2_seeed_yellow.stl",
+      "rgba": [
+        0.73,
+        0.84,
+        0.12,
+        1.0
+      ]
+    },
+    {
+      "link": "link2",
+      "visual": "link2_matte_black",
+      "part": "link2_matte_black",
+      "mesh": "../meshes/visual/colored_link2_matte_black.stl",
+      "rgba": [
+        0.066667,
+        0.07451,
+        0.070588,
+        1.0
+      ]
+    },
+    {
+      "link": "link2",
+      "visual": "link2_hardware_black",
+      "part": "link2_hardware_black",
+      "mesh": "../meshes/visual/colored_link2_hardware_black.stl",
+      "rgba": [
+        0.019608,
+        0.027451,
+        0.023529,
+        1.0
+      ]
+    },
+    {
+      "link": "link2",
+      "visual": "link2_anodized_grey",
+      "part": "link2_anodized_grey",
+      "mesh": "../meshes/visual/colored_link2_anodized_grey.stl",
+      "rgba": [
+        0.831373,
+        0.847059,
+        0.831373,
+        1.0
+      ]
+    },
+    {
+      "link": "link3",
+      "visual": "link3_seeed_yellow",
+      "part": "link3_seeed_yellow",
+      "mesh": "../meshes/visual/colored_link3_seeed_yellow.stl",
+      "rgba": [
+        0.73,
+        0.84,
+        0.12,
+        1.0
+      ]
+    },
+    {
+      "link": "link3",
+      "visual": "link3_matte_black",
+      "part": "link3_matte_black",
+      "mesh": "../meshes/visual/colored_link3_matte_black.stl",
+      "rgba": [
+        0.066667,
+        0.07451,
+        0.070588,
+        1.0
+      ]
+    },
+    {
+      "link": "link3",
+      "visual": "link3_hardware_black",
+      "part": "link3_hardware_black",
+      "mesh": "../meshes/visual/colored_link3_hardware_black.stl",
+      "rgba": [
+        0.019608,
+        0.027451,
+        0.023529,
+        1.0
+      ]
+    },
+    {
+      "link": "link3",
+      "visual": "link3_anodized_grey",
+      "part": "link3_anodized_grey",
+      "mesh": "../meshes/visual/colored_link3_anodized_grey.stl",
+      "rgba": [
+        0.831373,
+        0.847059,
+        0.831373,
+        1.0
+      ]
+    },
+    {
+      "link": "link4",
+      "visual": "link4_seeed_yellow",
+      "part": "link4_seeed_yellow",
+      "mesh": "../meshes/visual/colored_link4_seeed_yellow.stl",
+      "rgba": [
+        0.066667,
+        0.07451,
+        0.070588,
+        1.0
+      ]
+    },
+    {
+      "link": "link4",
+      "visual": "link4_matte_black",
+      "part": "link4_matte_black",
+      "mesh": "../meshes/visual/colored_link4_matte_black.stl",
+      "rgba": [
+        0.066667,
+        0.07451,
+        0.070588,
+        1.0
+      ]
+    },
+    {
+      "link": "link4",
+      "visual": "link4_hardware_black",
+      "part": "link4_hardware_black",
+      "mesh": "../meshes/visual/colored_link4_hardware_black.stl",
+      "rgba": [
+        0.019608,
+        0.027451,
+        0.023529,
+        1.0
+      ]
+    },
+    {
+      "link": "link4",
+      "visual": "link4_anodized_grey",
+      "part": "link4_anodized_grey",
+      "mesh": "../meshes/visual/colored_link4_anodized_grey.stl",
+      "rgba": [
+        0.831373,
+        0.847059,
+        0.831373,
+        1.0
+      ]
+    },
+    {
+      "link": "link5",
+      "visual": "link5_matte_black",
+      "part": "link5_matte_black",
+      "mesh": "../meshes/visual/colored_link5_matte_black.stl",
+      "rgba": [
+        0.066667,
+        0.07451,
+        0.070588,
+        1.0
+      ]
+    },
+    {
+      "link": "link5",
+      "visual": "link5_hardware_black",
+      "part": "link5_hardware_black",
+      "mesh": "../meshes/visual/colored_link5_hardware_black.stl",
+      "rgba": [
+        0.019608,
+        0.027451,
+        0.023529,
+        1.0
+      ]
+    },
+    {
+      "link": "link5",
+      "visual": "link5_anodized_grey",
+      "part": "link5_anodized_grey",
+      "mesh": "../meshes/visual/colored_link5_anodized_grey.stl",
+      "rgba": [
+        0.831373,
+        0.847059,
+        0.831373,
+        1.0
+      ]
+    },
+    {
+      "link": "link6",
+      "visual": "link6_matte_black",
+      "part": "link6_matte_black",
+      "mesh": "../meshes/visual/colored_link6_matte_black.stl",
+      "rgba": [
+        0.066667,
+        0.07451,
+        0.070588,
+        1.0
+      ]
+    },
+    {
+      "link": "link6",
+      "visual": "link6_hardware_black",
+      "part": "link6_hardware_black",
+      "mesh": "../meshes/visual/colored_link6_hardware_black.stl",
+      "rgba": [
+        0.019608,
+        0.027451,
+        0.023529,
+        1.0
+      ]
+    },
+    {
+      "link": "end_link",
+      "visual": "gripper_base_seeed_yellow",
+      "part": "gripper_base_seeed_yellow",
+      "mesh": "../meshes/visual/colored_gripper_base_seeed_yellow.stl",
+      "rgba": [
+        0.725,
+        0.835,
+        0.118,
+        1.0
+      ]
+    },
+    {
+      "link": "end_link",
+      "visual": "gripper_base_hardware_black",
+      "part": "gripper_base_hardware_black",
+      "mesh": "../meshes/visual/colored_gripper_base_hardware_black.stl",
+      "rgba": [
+        0.019608,
+        0.027451,
+        0.023529,
+        1.0
+      ]
+    },
+    {
+      "link": "end_link",
+      "visual": "gripper_base_metal",
+      "part": "gripper_base_metal",
+      "mesh": "../meshes/visual/colored_gripper_base_metal.stl",
+      "rgba": [
+        0.831373,
+        0.847059,
+        0.831373,
+        1.0
+      ]
+    },
+    {
+      "link": "finger_left_link",
+      "visual": "finger_left_body",
+      "part": "finger_left_body",
+      "mesh": "../meshes/visual/colored_left_finger_finger_black.stl",
+      "rgba": [
+        0.066667,
+        0.07451,
+        0.070588,
+        1.0
+      ]
+    },
+    {
+      "link": "finger_left_link",
+      "visual": "finger_left_carriage",
+      "part": "finger_left_carriage",
+      "mesh": "../meshes/shared/colored_left_finger_carriage_grey.stl",
+      "rgba": [
+        0.239,
+        0.278,
+        0.271,
+        1.0
+      ]
+    },
+    {
+      "link": "finger_left_link",
+      "visual": "finger_left_travel_stop",
+      "part": "finger_left_travel_stop",
+      "mesh": "../meshes/shared/colored_left_finger_travel_stop_yellow.stl",
+      "rgba": [
+        0.725,
+        0.835,
+        0.118,
+        1.0
+      ]
+    },
+    {
+      "link": "finger_left_link",
+      "visual": "finger_left_crossed_rack",
+      "part": "finger_left_crossed_rack",
+      "mesh": "../meshes/visual/colored_left_finger_rack_metal.stl",
+      "rgba": [
+        0.831373,
+        0.847059,
+        0.831373,
+        1.0
+      ]
+    },
+    {
+      "link": "finger_right_link",
+      "visual": "finger_right_body",
+      "part": "finger_right_body",
+      "mesh": "../meshes/visual/colored_right_finger_finger_black.stl",
+      "rgba": [
+        0.066667,
+        0.07451,
+        0.070588,
+        1.0
+      ]
+    },
+    {
+      "link": "finger_right_link",
+      "visual": "finger_right_carriage",
+      "part": "finger_right_carriage",
+      "mesh": "../meshes/shared/colored_right_finger_carriage_grey.stl",
+      "rgba": [
+        0.239,
+        0.278,
+        0.271,
+        1.0
+      ]
+    },
+    {
+      "link": "finger_right_link",
+      "visual": "finger_right_travel_stop",
+      "part": "finger_right_travel_stop",
+      "mesh": "../meshes/shared/colored_right_finger_travel_stop_yellow.stl",
+      "rgba": [
+        0.725,
+        0.835,
+        0.118,
+        1.0
+      ]
+    },
+    {
+      "link": "finger_right_link",
+      "visual": "finger_right_crossed_rack",
+      "part": "finger_right_crossed_rack",
+      "mesh": "../meshes/visual/colored_right_finger_rack_metal.stl",
+      "rgba": [
+        0.831373,
+        0.847059,
+        0.831373,
+        1.0
+      ]
+    }
+  ]
+}
