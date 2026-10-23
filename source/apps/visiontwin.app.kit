@@ -98,6 +98,7 @@ app.asyncRendering = false  # VisionTwin: render in lock-step with updates; asyn
 exts."visiontwin.factory".millAsset = "${app}/../../../../assets/cad/teeth_mill.usd"  # Day 5: CAD-converted mill
 exts."visiontwin.factory".millKinematics = "${app}/../../../../assets/cad/teeth_mill.kinematics.json"
 exts."visiontwin.factory".partsDir = "${app}/../../../../assets/parts"  # Day 6: CAD part catalog (part=box keeps the cube)
+exts."visiontwin.factory".millUrdf = "${app}/../../../../reference/teeth_mill.urdf"  # Day 13: surface teaching (block + joints)
 exts."visiontwin.factory".robotsDir = "${app}/../../../../assets/robots/usd"  # Day 12: transfer robot USD + kinematics.json
 exts."visiontwin.factory".inspectorModel = "${app}/../../../../config/models/crown_mil.onnx"  # Day 12: learned inspector (if the file exists)
 exts."visiontwin.factory".decision = "rules"  # "rules" | "model": which verdict sorts the product (both are logged)

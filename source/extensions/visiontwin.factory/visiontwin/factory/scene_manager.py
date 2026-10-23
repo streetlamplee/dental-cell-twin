@@ -88,7 +88,13 @@ def _belt_section(stage: Usd.Stage, path: str, x0: float, x1: float) -> None:
 
 
 def _define_cell_overview_camera(stage: Usd.Stage) -> None:
-    """Close-up of the inspection cell: end of section 1, the machine, start of section 2."""
+    """Close-up of the inspection cell: end of section 1, the machine, start of section 2;
+    plus a closer one on the platter for surface teaching."""
+    teach = UsdGeom.Camera.Define(stage, L.TEACH_CAMERA_PATH)
+    teach.AddTransformOp().Set(Gf.Matrix4d().SetLookAt(Gf.Vec3d(*L.TEACH_CAMERA_EYE), Gf.Vec3d(*L.TEACH_CAMERA_TARGET),
+                                                       Gf.Vec3d(0, 0, 1)).GetInverse())
+    teach.CreateFocalLengthAttr(24.0)
+    teach.CreateClippingRangeAttr(Gf.Vec2f(0.005, 100.0))
     cam = UsdGeom.Camera.Define(stage, L.CELL_OVERVIEW_CAMERA_PATH)
     eye, target = Gf.Vec3d(*L.CELL_OVERVIEW_EYE), Gf.Vec3d(*L.CELL_OVERVIEW_TARGET)
     cam.AddTransformOp().Set(Gf.Matrix4d().SetLookAt(eye, target, Gf.Vec3d(0, 0, 1)).GetInverse())

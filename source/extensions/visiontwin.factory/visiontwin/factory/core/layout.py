@@ -47,6 +47,9 @@ CELL_CAMERA_PATH = "/World/Factory/Cell/CameraRig/Camera"  # moves with the spin
 CELL_OVERVIEW_CAMERA_PATH = "/World/Factory/CellOverviewCamera"
 CELL_OVERVIEW_EYE = (CELL_X + 0.6, -0.75, 1.5)  # front-right, high: robot, machine, both belt ends
 CELL_OVERVIEW_TARGET = (CELL_X - 0.08, 0.0, 0.85)
+TEACH_CAMERA_PATH = "/World/Factory/TeachCamera"  # close-up of the platter for surface teaching
+TEACH_CAMERA_EYE = (CELL_X + 0.22, -0.26, 1.0)
+TEACH_CAMERA_TARGET = (CELL_X, 0.04, 0.83)
 TRANSFER_LIFT = 0.15  # pick-and-place arc height (clears the B housing and support)
 # Transfer robot (Seeed reBot Arm B601-DM) in front of the cell, facing the machine (+Y). Its
 # top-down grasp workspace is about 0.5 m wide at 0-0.2 m above its base, so the base stands

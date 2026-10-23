@@ -102,6 +102,7 @@ class VisionTwinFactoryExtension(omni.ext.IExt):
             initial={k: _setting(k, d) for k, d in (("part", BOX), ("seed", 42), ("maxProducts", 30),
                                                     ("defectRate", 0.3))},
             on_view=self.set_view,
+            on_teach=self.open_teach_pendant,
         )
 
     # -- dashboard callbacks ------------------------------------------------
@@ -120,10 +121,42 @@ class VisionTwinFactoryExtension(omni.ext.IExt):
         if main is not None and 0 <= index < len(cams):
             main.camera_path = cams[index]
 
+    def open_teach_pendant(self):
+        """Surface teaching on the cell's machine (Day 13): stops the line, shows the URDF tool
+        and block, and opens the pendant. Closing it puts the cell back."""
+        if not self._scene_ready or self._cell is None:
+            self._ui.set_status("build the crown (inspection cell) scene first")
+            return None
+        if getattr(self, "_pendant", None) is not None:
+            return self._pendant
+        from .core.teach import Teacher
+        from .core.urdf_model import load_urdf
+        from .teach_pendant import TeachPendant
+
+        self.stop()
+        self._cell.teach_mode(True)
+        main = self.main_viewport
+        if main is not None:
+            main.camera_path = L.TEACH_CAMERA_PATH
+        teacher = Teacher.from_urdf(load_urdf(_resolve(_setting("millUrdf", ""))))
+        out = os.path.join(_resolve(_setting("outputDir", "${data}/visiontwin_results")), "teach")
+
+        def closed():
+            self._pendant = None
+            if self._cell is not None:
+                self._cell.teach_mode(False)
+                self._cell.apply(None)
+            self._ui.set_status("teach pendant closed")
+
+        self._pendant = TeachPendant(teacher, self._cell.set_joints, out, closed)
+        self._ui.set_status("teaching (line stopped)")
+        return self._pendant
+
     def on_shutdown(self):
         global _instance
         _instance = None
         carb.log_info(f"{LOG_PREFIX} shutdown")
+        self._close_teach_pendant()
         self._unsubscribe()
         self._destroy_frame_provider()
         if self._ui:
@@ -147,7 +180,13 @@ class VisionTwinFactoryExtension(omni.ext.IExt):
     def _on_build(self):
         asyncio.ensure_future(self.build_scene_async())
 
+    def _close_teach_pendant(self):
+        pendant = getattr(self, "_pendant", None)
+        if pendant is not None:
+            pendant.destroy()
+
     async def build_scene_async(self):
+        self._close_teach_pendant()
         self.stop()
         main = self.main_viewport
         # Order matters (2026-10-21):

@@ -20,7 +20,7 @@ class Dashboard:
                  on_stop: Callable[[], None], on_reset: Callable[[], None],
                  on_speed: Callable[[float], None], initial_speed: float,
                  on_setting: Callable[[str, object], None] = None, initial: Dict[str, object] = None,
-                 on_view: Callable[[int], None] = None) -> None:
+                 on_view: Callable[[int], None] = None, on_teach: Callable[[], None] = None) -> None:
         on_setting = on_setting or (lambda _k, _v: None)
         initial = initial or {}
         self._events = deque(maxlen=5)
@@ -43,6 +43,8 @@ class Dashboard:
                     rate.model.add_value_changed_fn(lambda m: on_setting("defectRate", round(m.get_value_as_float(), 3)))
                 ui.Spacer(height=4)
                 ui.Button("Build Scene", clicked_fn=on_build, height=30)
+                if on_teach:
+                    ui.Button("Teach pendant (crown cell)", clicked_fn=on_teach, height=24)
                 with ui.HStack(spacing=4, height=30):
                     ui.Button("Start", clicked_fn=on_start)
                     ui.Button("Stop", clicked_fn=on_stop)

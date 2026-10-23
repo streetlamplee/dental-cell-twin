@@ -99,10 +99,8 @@ class InspectionCell:
             x = UsdGeom.Xformable(prim)
             x.ClearXformOpOrder()
             self._ops[link] = x.AddTransformOp(opSuffix="joint")
-        for part in HIDDEN_PARTS:
-            prim = stage.GetPrimAtPath(f"{L.CELL_PATH}/Machine/{self.model.name}/{part}")
-            if prim:
-                prim.SetActive(False)
+        self._stage = stage
+        self._set_parts_active(False)
 
         # Camera module on the spindle nose; the optical centre is the rig origin.
         rig = UsdGeom.Xform.Define(stage, f"{L.CELL_PATH}/CameraRig")
@@ -121,10 +119,26 @@ class InspectionCell:
         self._seat = self.root @ cycle.product_seat(cycle.load_pose)
         self.apply(None)
 
+    def _set_parts_active(self, active: bool) -> None:
+        for part in HIDDEN_PARTS:
+            prim = self._stage.GetPrimAtPath(f"{L.CELL_PATH}/Machine/{self.model.name}/{part}")
+            if prim:
+                prim.SetActive(active)
+
+    def teach_mode(self, on: bool) -> None:
+        """Surface teaching (Day 13): show the URDF's tool and block, hide the product pad."""
+        self._set_parts_active(on)
+        pad = self._stage.GetPrimAtPath(f"{L.CELL_PATH}/Fixture")
+        if pad:
+            (UsdGeom.Imageable(pad).MakeInvisible if on else UsdGeom.Imageable(pad).MakeVisible)()
+
     def apply(self, t_since_load, camera_offset=(0.0, 0.0, 0.0)) -> None:
         """Pose the machine `t_since_load` seconds into a cycle (None: idle at the load pose).
         camera_offset (world metres) only moves the camera (synthetic data jitter)."""
-        q = self.cycle.pose_at(t_since_load)
+        self.set_joints(self.cycle.pose_at(t_since_load), camera_offset)
+
+    def set_joints(self, q, camera_offset=(0.0, 0.0, 0.0)) -> None:
+        """Pose the machine at joint values q (metres / radians)."""
         tf = self.model.link_transforms(q)
         for link, op in self._ops.items():
             op.Set(_gf(tf[link], self._unit))
