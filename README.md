@@ -32,6 +32,7 @@
 | 라인 (크라운) | 투입 → 컨베이어 1구간 → **검사 셀**(입구 대기 → 로딩 → 시점 5개 촬영 → 언로딩) → 컨베이어 2구간 → 배출 푸셔와 bin → 출구 |
 | 검사 셀 | 5축 기계(URDF) + 스핀들 카메라 + 검은 패드. 카메라를 제품 중심 위 0.11 m에 두는 **닫힌 식 역기구학**과 관절 한계 검사. 로딩·언로딩 때는 카메라를 옆으로 비킨다 |
 | 이송 로봇 | **Seeed reBot Arm B601-DM**(공식 URDF + STL → USD). 6축 감쇠 최소제곱 IK(위치 + 자세), 수직 하향 파지로 크라운 방향 유지, 집기 → 플래터 → 집기 → 2구간. 경유점은 사이클을 만들 때 한 번 풀고 허용오차를 검사한다 |
+| 표면별 티칭 | 대시보드 "Teach pendant": X/Y/Z/B/C 조그, 원점 + C축 블록 5면 티칭점 자동 생성(공구가 면을 수직으로 바라봄), 점 저장/이동/재생, JSON 내보내기, 점마다 각도 오차·중심 어긋남·거리·축 한계 검증 |
 | 학습 검사기 | **Replicator** 합성 데이터(8,000장, 조명·셰이드·방향·카메라 랜덤화) → 다시점 MIL CNN(PyTorch) → ONNX → **Kit 안 ONNX Runtime**. 규칙 판정과 같은 프레임으로 기록하고, 배출에 쓸 판정은 `decision`(rules/model)으로 고른다 |
 | 제품 | ① **치아 크라운**: 셰이드, 미완성 가공(형상), **마진 치핑(옆면에서만 보임)** ② 실제 CAD 부품 KFL08 베어링 유닛: 색상, 부품 누락 ③ 박스: 색상. ②③은 고정 카메라를 쓰는 한 줄 벨트 라인(회귀 비교용) |
 | 비전 | 640×480 렌더 프레임을 OpenCV로 판정. 색(Lab a*b* 또는 HSV hue), 기준 외곽선(`matchShapes`, 면적비), **실루엣 차이**(중심을 맞춘 XOR), 내부 밝기(누락). **시점마다 따로 보정**하고 판정을 합친다 |
@@ -114,6 +115,20 @@ flowchart LR
 | 12.0 s | 67.4 % | 0 | 296 |
 
 로봇 이송(2.0 s × 2)이 들어가면서 포화 처리량이 626/h(Day 11, 포물선 이송 0.6 s)에서 421/h로 줄었다. 로봇이 셀을 기다리는 동안 다음 제품을 미리 집어 두는 파이프라이닝이 다음 개선 대상이다.
+
+### 표면별 티칭 (Day 13): 원점 + C축 블록 5면
+실제 치아 가공기에서 해 본 티칭(C축 위 네모난 블록의 윗면과 옆면 4개를 위에서 바라보는 5개 점 + 원점)을 기구학으로 다시 만들었다. 실제 티칭 값은 쓰지 않았다(`render_teach_program.ps1`, 거리 20 mm).
+
+![티칭점 6개: 원점, 윗면, 옆면 4개(B −90°, C 0/90/180/270°)](docs/screenshots/readme_teach.png)
+
+| 점 | X / Y / Z (mm) | B / C (°) | 각도 오차 | 중심 어긋남 | 거리 |
+|---|---|---|---|---|---|
+| origin | 0 / 0 / 0 | 0 / 0 | — | — | — |
+| top | −119.95 / 50.98 / −34.1 | 0 / 0 | 0° | 0 mm | 20 mm |
+| side 4개 | −119.95 / 68.48 / −44.1 | −90 / 90, 270, 0, 180 | 0° | 0 mm | 20 mm |
+
+- 옆면이 위를 보려면 B를 90° 기울이고, C로 면을 고른다. 빨간 마커(C축 기준)가 점마다 90°씩 돈다.
+- **10 mm로 붙이면 옆면은 도달할 수 없다.** Z가 −54.1 mm 필요한데 한계는 −49.1 mm다. 이 기계 모델의 Z 행정이 티칭 거리를 제한한다.
 
 ### 다시점 검사와 규칙 기반 검사기 (Day 11)
 검사기는 **default 조명, seed 1 run에서 시점마다 보정**했다(`config/inspector_crown.json`). 아래 평가는 seed 42 run이고, 평가 결과를 보고 임계값을 다시 맞추지 않았다.
@@ -205,6 +220,7 @@ python -m pip install -r scripts\requirements-dev.txt
 .\scripts\check_run.ps1 -RunDir results\runs\<id>               # 이벤트 로그 감사
 .\scripts\inspect_frames.ps1 -RunDir results\runs\<id>          # 저장된 프레임으로 오프라인 재판정(시점별 검사기 + 합치기)
 .\scripts\collect_frames.ps1 -Seed 1 -Products 30 -Part crown    # 보정 run → calibrate_inspector.ps1 -RunDir ...
+.\scriptsender_teach_program.ps1                                # 표면별 티칭 6개 점 렌더 + 검증표
 .\scripts\run_experiments.ps1 -Config experiments\day11.json    # 실험 행렬
 .\scripts\analyze_results.ps1 -Experiment day11                 # table.md, fig_views.png, fig_line.png
 ```

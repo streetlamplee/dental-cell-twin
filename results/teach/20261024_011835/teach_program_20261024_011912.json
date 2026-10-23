@@ -1,0 +1,124 @@
+{
+  "machine": "teeth_mill",
+  "tool": "tool_tip",
+  "checks": [
+    {
+      "face": "top",
+      "angle_deg": 0.0,
+      "offset_mm": 130.3320878563679,
+      "standoff_mm": 54.09999999999998,
+      "within_limits": true
+    },
+    {
+      "face": "top",
+      "angle_deg": 0.0,
+      "offset_mm": 0.0,
+      "standoff_mm": 19.99999999999996,
+      "within_limits": true
+    },
+    {
+      "face": "side_+x",
+      "angle_deg": 0.0,
+      "offset_mm": 5.0037075531084005e-15,
+      "standoff_mm": 19.99999999999996,
+      "within_limits": true
+    },
+    {
+      "face": "side_-x",
+      "angle_deg": 0.0,
+      "offset_mm": 6.206335383118192e-15,
+      "standoff_mm": 19.99999999999996,
+      "within_limits": true
+    },
+    {
+      "face": "side_+y",
+      "angle_deg": 0.0,
+      "offset_mm": 2.7755575615628953e-15,
+      "standoff_mm": 19.99999999999996,
+      "within_limits": true
+    },
+    {
+      "face": "side_-y",
+      "angle_deg": 0.0,
+      "offset_mm": 5.366012646391294e-15,
+      "standoff_mm": 19.99999999999996,
+      "within_limits": true
+    }
+  ],
+  "move_s": 1.0,
+  "hold_s": 0.5,
+  "points": [
+    {
+      "name": "origin",
+      "q": {
+        "x_joint": 0.0,
+        "y_joint": 0.0,
+        "z_joint": 0.0,
+        "b_joint": 0.0,
+        "c_joint": 0.0
+      },
+      "face": null,
+      "source": "auto"
+    },
+    {
+      "name": "top",
+      "q": {
+        "x_joint": -0.11995000000000001,
+        "y_joint": 0.05097500000000001,
+        "z_joint": -0.03409999999999999,
+        "b_joint": 0.0,
+        "c_joint": 0.0
+      },
+      "face": "top",
+      "source": "auto"
+    },
+    {
+      "name": "side_+x",
+      "q": {
+        "x_joint": -0.11995000000000001,
+        "y_joint": 0.06847500000000001,
+        "z_joint": -0.0441,
+        "b_joint": -1.5707963267948966,
+        "c_joint": 1.5707963267948966
+      },
+      "face": "side_+x",
+      "source": "auto"
+    },
+    {
+      "name": "side_-x",
+      "q": {
+        "x_joint": -0.11995,
+        "y_joint": 0.06847500000000001,
+        "z_joint": -0.0441,
+        "b_joint": -1.5707963267948966,
+        "c_joint": 4.71238898038469
+      },
+      "face": "side_-x",
+      "source": "auto"
+    },
+    {
+      "name": "side_+y",
+      "q": {
+        "x_joint": -0.11995000000000001,
+        "y_joint": 0.06847500000000001,
+        "z_joint": -0.0441,
+        "b_joint": -1.5707963267948966,
+        "c_joint": 0.0
+      },
+      "face": "side_+y",
+      "source": "auto"
+    },
+    {
+      "name": "side_-y",
+      "q": {
+        "x_joint": -0.11995000000000001,
+        "y_joint": 0.06847500000000001,
+        "z_joint": -0.0441,
+        "b_joint": -1.5707963267948966,
+        "c_joint": 3.141592653589793
+      },
+      "face": "side_-y",
+      "source": "auto"
+    }
+  ]
+}

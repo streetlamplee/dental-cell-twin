@@ -1,0 +1,84 @@
+{
+  "standoff_mm": 20.0,
+  "rows": [
+    {
+      "point": "origin",
+      "x_joint": 0.0,
+      "y_joint": 0.0,
+      "z_joint": 0.0,
+      "b_joint": 0.0,
+      "c_joint": 0.0,
+      "angle_deg": "",
+      "offset_mm": "",
+      "standoff_mm": "",
+      "limits": true,
+      "captured": true
+    },
+    {
+      "point": "top",
+      "x_joint": -119.95,
+      "y_joint": 50.98,
+      "z_joint": -34.1,
+      "b_joint": 0.0,
+      "c_joint": 0.0,
+      "angle_deg": 0.0,
+      "offset_mm": 0.0,
+      "standoff_mm": 20.0,
+      "limits": true,
+      "captured": true
+    },
+    {
+      "point": "side_+x",
+      "x_joint": -119.95,
+      "y_joint": 68.48,
+      "z_joint": -44.1,
+      "b_joint": -90.0,
+      "c_joint": 90.0,
+      "angle_deg": 0.0,
+      "offset_mm": 0.0,
+      "standoff_mm": 20.0,
+      "limits": true,
+      "captured": true
+    },
+    {
+      "point": "side_-x",
+      "x_joint": -119.95,
+      "y_joint": 68.48,
+      "z_joint": -44.1,
+      "b_joint": -90.0,
+      "c_joint": 270.0,
+      "angle_deg": 0.0,
+      "offset_mm": 0.0,
+      "standoff_mm": 20.0,
+      "limits": true,
+      "captured": true
+    },
+    {
+      "point": "side_+y",
+      "x_joint": -119.95,
+      "y_joint": 68.48,
+      "z_joint": -44.1,
+      "b_joint": -90.0,
+      "c_joint": 0.0,
+      "angle_deg": 0.0,
+      "offset_mm": 0.0,
+      "standoff_mm": 20.0,
+      "limits": true,
+      "captured": true
+    },
+    {
+      "point": "side_-y",
+      "x_joint": -119.95,
+      "y_joint": 68.48,
+      "z_joint": -44.1,
+      "b_joint": -90.0,
+      "c_joint": 180.0,
+      "angle_deg": 0.0,
+      "offset_mm": 0.0,
+      "standoff_mm": 20.0,
+      "limits": true,
+      "captured": true
+    }
+  ],
+  "closer_standoff": "standoff 10 mm: out of reach: side_+x (needs {'z_joint': -54.1} mm), side_-x (needs {'z_joint': -54.1} mm), side_+y (needs {'z_joint': -54.1} mm), side_-y (needs {'z_joint': -54.1} mm)"
+}
