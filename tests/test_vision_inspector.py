@@ -5,7 +5,8 @@ import numpy as np
 import pytest
 
 from core.camera_model import inspection_roi, pixels_per_meter
-from core.vision_inspector import DEFECT, GOOD, UNKNOWN, InspectorConfig, VisionInspector, hue_distance
+from core.vision_inspector import (DEFECT, GOOD, UNKNOWN, InspectionResult, InspectorConfig, VisionInspector,
+                                   combine_views, hue_distance, load_view_configs, save_view_configs)
 
 W, H = 640, 480
 BLUE = (40, 110, 220)  # RGB, hue ~108 in OpenCV scale
@@ -221,3 +222,50 @@ def test_neighbour_product_outside_inspection_window_is_ignored():
     img = scene(RED)
     img[200:280, 0:40] = BLUE
     assert insp.inspect(img).label == DEFECT
+
+
+def _res(label, reason=""):
+    r = InspectionResult(label, 1.0 if label == GOOD else 0.4, 500, 0.0, None, 1.0, "")
+    r.defect_reason = reason
+    return r
+
+
+def test_combine_views_defect_in_any_view_wins():
+    names = ["top", "side_a", "side_b"]
+    out = combine_views([_res(GOOD), _res(DEFECT, "shape"), _res(UNKNOWN)], names)
+    assert out.label == DEFECT and out.defect_reason == "shape"
+    assert "side_a: defect shape" in out.reason and out.latency_ms == 3.0
+
+
+def test_combine_views_unknown_without_defect_and_all_good():
+    names = ["top", "side_a"]
+    assert combine_views([_res(GOOD), _res(UNKNOWN)], names).label == UNKNOWN
+    assert combine_views([_res(GOOD), _res(GOOD)], names).label == GOOD
+    out = combine_views([_res(DEFECT, "color"), _res(DEFECT, "color+shape")], names)
+    assert out.defect_reason == "color+shape"
+
+
+def test_view_configs_round_trip_and_flat_file(tmp_path):
+    cfgs = [InspectorConfig(reference_ab=(127.0, 133.0)), InspectorConfig(shape_dist_max=0.03)]
+    save_view_configs(str(tmp_path / "multi.json"), cfgs, ["top", "side_a"])
+    back = load_view_configs(str(tmp_path / "multi.json"))
+    assert len(back) == 2 and back[0].reference_ab == (127.0, 133.0) and back[1].shape_dist_max == 0.03
+    InspectorConfig(sat_min=33).save(str(tmp_path / "flat.json"))
+    assert [c.sat_min for c in load_view_configs(str(tmp_path / "flat.json"))] == [33]
+
+
+def test_silhouette_diff_finds_a_small_dent_that_hu_moments_miss():
+    from core.vision_inspector import silhouette_diff
+
+    def contour(dent):
+        img = np.zeros((200, 200), np.uint8)
+        cv2.rectangle(img, (60, 70), (140, 130), 1, cv2.FILLED)
+        if dent:
+            cv2.rectangle(img, (90, 120), (110, 131), 0, cv2.FILLED)  # notch in the lower edge
+        cs, _ = cv2.findContours(img, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+        return cs[0]
+
+    good, dented = contour(False), contour(True)
+    shifted = good + np.array([[[7, -5]]], np.int32)
+    assert silhouette_diff(shifted, good) < 0.01  # centroid alignment: position does not matter
+    assert silhouette_diff(dented, good) > 0.04

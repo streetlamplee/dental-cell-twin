@@ -2,8 +2,10 @@
 
 SPAWNED -> MOVING -> INSPECTED -> SORTED   -> EXITED   (passed down the line)
                               +-> REJECTED -> EXITED   (pushed into reject bin)
-With a processing station (dental mill line), before inspection:
-          MOVING -> PROCESSING -> MOVING   (loaded into the station, machined, unloaded)
+With a processing station, before inspection:
+          MOVING -> PROCESSING -> MOVING     (loaded into the station, processed, unloaded)
+With an inspection cell (the station takes the pictures):
+          MOVING -> PROCESSING -> INSPECTED  (loaded, viewed, unloaded onto the next belt)
 
 ground_truth is stored for evaluation only. Vision code must never read it.
 """
@@ -29,7 +31,7 @@ class ProductState(str, Enum):
 _ALLOWED = {
     ProductState.SPAWNED: {ProductState.MOVING},
     ProductState.MOVING: {ProductState.INSPECTED, ProductState.PROCESSING},
-    ProductState.PROCESSING: {ProductState.MOVING},
+    ProductState.PROCESSING: {ProductState.MOVING, ProductState.INSPECTED},
     ProductState.INSPECTED: {ProductState.SORTED, ProductState.REJECTED},
     ProductState.SORTED: {ProductState.EXITED},
     ProductState.REJECTED: {ProductState.EXITED},

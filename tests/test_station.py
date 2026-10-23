@@ -79,3 +79,31 @@ def test_load_times_do_not_depend_on_dt():
     for a, b in zip(sorted(fine.tracker.all(), key=lambda p: p.product_id),
                     sorted(coarse.tracker.all(), key=lambda p: p.product_id)):
         assert a.load_time == pytest.approx(b.load_time, abs=1 / 30 + 1e-6)
+
+
+CELL = ProcessStation("cell", x_entry=-1.38, x_exit=-0.62, cycle_s=5.4, view_times=(1.2, 1.95, 2.7, 3.45, 4.2),
+                      inspects=True)
+
+
+def test_inspection_cell_views_each_product_and_releases_it_inspected():
+    from core.conveyor import VIEW
+
+    sim, events, gaps_ok = run(ConveyorConfig(max_products=8, spawn_interval=6.0, process=CELL))
+    assert gaps_ok
+    for pid, evs in by_product(events).items():
+        kinds = [e.kind for e in evs]
+        assert kinds[:2] == [SPAWN, LOAD] and kinds[2:7] == [VIEW] * 5, (pid, kinds)
+        assert kinds[7:9] == [UNLOAD, INSPECT] and kinds[9] in (SORT, REJECT) and kinds[-1] == EXIT, (pid, kinds)
+        load = evs[1].time
+        assert [e.index for e in evs[2:7]] == [0, 1, 2, 3, 4]
+        assert [round(e.time - load, 9) for e in evs[2:7]] == list(CELL.view_times)
+        p = sim.tracker.get(pid)
+        assert p.inspected_time == p.unload_time  # verdict is due before the reject line
+    assert all(p.state == ProductState.EXITED for p in sim.tracker.all())
+
+
+def test_inspection_cell_queues_when_arrivals_exceed_its_cycle():
+    sim, _, gaps_ok = run(ConveyorConfig(max_products=10, spawn_interval=3.0, process=CELL))
+    assert gaps_ok and sim.queue_max >= 2
+    loads = sorted(p.load_time for p in sim.tracker.all())
+    assert all(b - a >= CELL.cycle_s - 1e-9 for a, b in zip(loads, loads[1:]))

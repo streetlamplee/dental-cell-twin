@@ -1,8 +1,9 @@
 """Which product geometry to spawn for a given ground truth (pure Python).
 
 "box" keeps the original procedural cube. CAD parts come from assets/parts/catalog.json;
-each variant is a USD layer built by make_part_variants. Processed parts (dental crown)
-also have a "raw" layer shown before processing. The ground truth decides the variant;
+each variant is a USD layer built by make_part_variants. Processed parts also have a "raw"
+layer shown before processing. A part with a "cell" entry (dental crown) is inspected by
+the inline inspection cell instead of the fixed top camera. The ground truth decides the variant;
 nothing downstream may read the variant back (the inspector only gets pixels).
 """
 
@@ -18,6 +19,16 @@ BOX = "box"
 class CameraSpec:
     height_above_belt: float
     focal_mm: float
+
+
+@dataclass(frozen=True)
+class CellSpec:
+    """Inline inspection cell: camera on the 5-axis machine (catalog "cell")."""
+    views: Tuple[dict, ...]  # {"name", "b_deg", "c_deg"}
+    timing: dict  # load_s, move_s, hold_s, unload_s
+    standoff_m: float
+    focal_mm: float
+    roi_half_m: float
 
 
 class ProductCatalog:
@@ -56,6 +67,14 @@ class ProductCatalog:
     def spawn_interval(self) -> Optional[float]:
         v = self._spec.get("spawn_interval_s")
         return float(v) if v is not None else None
+
+    @property
+    def cell(self) -> Optional[CellSpec]:
+        c = self._spec.get("cell")
+        if not c:
+            return None
+        return CellSpec(tuple(c["views"]), dict(c.get("timing", {})), float(c["standoff_m"]),
+                        float(c["focal_mm"]), float(c["roi_half_m"]))
 
     @property
     def camera(self) -> Optional[CameraSpec]:

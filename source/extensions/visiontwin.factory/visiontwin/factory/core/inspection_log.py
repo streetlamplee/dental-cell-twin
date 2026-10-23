@@ -1,4 +1,6 @@
 """Per-run inspection records: one CSV row per inspected product, plus its frame PNG.
+Inspection cell (several views): one row per view (view = 0, 1, ...) and one combined row
+(view = "all") per product; product-level analysis uses the "all" rows when present.
 
 Ground truth is written here for evaluation only; it is copied from the tracker,
 never from the inspector, and the inspector never reads this file.
@@ -7,13 +9,13 @@ never from the inspector, and the inspector never reads this file.
 import csv
 import os
 from dataclasses import asdict, dataclass
-from typing import Optional
+from typing import List, Optional
 
 import cv2
 import numpy as np
 
 FIELDS = [
-    "run_id", "seed", "product_id", "ground_truth", "predicted_label", "defect_reason", "score", "mean_hue",
+    "run_id", "seed", "product_id", "view", "ground_truth", "predicted_label", "defect_reason", "score", "mean_hue",
     "area_px", "interior_ratio", "interior_bright", "capture_latency_ms", "frame_offset", "inspection_latency_ms", "simulation_time_s",
     "conveyor_speed", "lighting_condition", "frame_file", "reason",
 ]
@@ -40,6 +42,7 @@ class InspectionRecord:
     lighting_condition: str
     frame_file: str
     reason: str
+    view: object = 0  # view index, or "all" for the combined verdict of a multi-view product
 
 
 class InspectionLog:
@@ -52,13 +55,20 @@ class InspectionLog:
         with open(self.csv_path, "w", newline="", encoding="utf-8") as f:
             csv.DictWriter(f, FIELDS).writeheader()
 
-    def save_frame(self, product_id: int, rgb: np.ndarray) -> Optional[str]:
+    def save_frame(self, product_id: int, rgb: np.ndarray, view: Optional[int] = None) -> Optional[str]:
         if not self.record_frames:
             return None
-        name = f"P_{product_id:04d}.png"
+        name = f"P_{product_id:04d}.png" if view is None else f"P_{product_id:04d}_v{view}.png"
         cv2.imwrite(os.path.join(self.frames_dir, name), cv2.cvtColor(rgb[:, :, :3], cv2.COLOR_RGB2BGR))
         return f"frames/{name}"
 
     def append(self, record: InspectionRecord) -> None:
         with open(self.csv_path, "a", newline="", encoding="utf-8") as f:
             csv.DictWriter(f, FIELDS).writerow(asdict(record))
+
+
+def product_rows(rows: List[dict]) -> List[dict]:
+    """Product-level rows of an inspections.csv: the combined "all" rows of a multi-view run,
+    else the single-view rows (older runs have no view column)."""
+    combined = [r for r in rows if str(r.get("view", "")) == "all"]
+    return combined if combined else [r for r in rows if str(r.get("view", "0")) in ("0", "")]

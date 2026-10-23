@@ -28,8 +28,9 @@ class EventLog:
 
 def check_events(rows) -> list:
     """Audit an events.csv (list of dicts). Returns a list of problems (empty = consistent):
-    every spawned product must end with exactly one EXIT, LOAD/UNLOAD must pair up, and
-    every INSPECT must be followed by exactly one VISION verdict."""
+    every spawned product must end with exactly one EXIT, LOAD/UNLOAD must pair up, every
+    INSPECT must be followed by exactly one VISION verdict, and in an inspection cell every
+    loaded product gets the same number of VIEW events."""
     problems = []
     by_pid = {}
     for r in rows:
@@ -43,4 +44,7 @@ def check_events(rows) -> list:
             problems.append(f"product {pid}: LOAD {evs.count('LOAD')} != UNLOAD {evs.count('UNLOAD')}")
         if evs.count("INSPECT") != evs.count("VISION"):
             problems.append(f"product {pid}: INSPECT {evs.count('INSPECT')} != VISION {evs.count('VISION')}")
+    views = {pid: evs.count("VIEW") for pid, evs in by_pid.items() if "LOAD" in evs}
+    if any(views.values()) and len(set(views.values())) > 1:
+        problems.append(f"VIEW counts differ between products: {sorted(set(views.values()))}")
     return problems

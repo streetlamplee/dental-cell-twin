@@ -29,18 +29,22 @@ def test_kfl08_is_not_processed():
     assert c.raw_path("good", None) is None
 
 
-def test_crown_is_processed_at_the_mill_with_raw_and_final_shapes():
+def test_crown_is_inspected_by_the_cell_with_four_defect_shapes():
     c = ProductCatalog("crown", str(PARTS))
-    assert c.process == ("mill", 3.0)
-    assert c.spawn_interval == 3.0
-    assert c.camera.height_above_belt == 0.15 and c.camera.focal_mm == 35.0
-    assert c.defect_kinds == ("color", "shape")
-    assert c.raw_path("defect", "shape").endswith("crown_shape_raw.usda")
-    assert c.variant_path("defect", "shape").endswith("crown_shape.usda")
-    for gt, kind in (("good", None), ("defect", "color"), ("defect", "shape")):
-        for path in (c.raw_path(gt, kind), c.variant_path(gt, kind)):
-            if not Path(path).exists():
-                pytest.skip("run scripts/make_part_variants.ps1 -Part crown first")
+    assert c.process is None and c.camera is None  # no milling, no fixed top camera
+    cell = c.cell
+    assert [v["name"] for v in cell.views] == ["top", "side_a", "side_b", "side_c", "side_d"]
+    assert cell.standoff_m == 0.11 and cell.focal_mm == 24.0
+    assert c.defect_kinds == ("chip", "color", "shape")
+    assert c.raw_path("defect", "chip") is None
+    for gt, kind in (("good", None), ("defect", "color"), ("defect", "shape"), ("defect", "chip")):
+        if not Path(c.variant_path(gt, kind)).exists():
+            pytest.skip("run scripts/make_part_variants.ps1 -Part crown first")
+
+
+def test_box_and_kfl08_have_no_cell():
+    assert ProductCatalog("box").cell is None
+    assert ProductCatalog("kfl08", str(PARTS)).cell is None
 
 
 def test_variant_files_exist_after_make_part_variants():

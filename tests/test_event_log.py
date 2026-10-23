@@ -25,3 +25,18 @@ def test_audit_finds_missing_verdict_and_exit():
     rows = [{"product_id": "1", "event": e} for e in ("SPAWN", "INSPECT")]
     problems = check_events(rows)
     assert any("EXIT" in p for p in problems) and any("VISION" in p for p in problems)
+
+
+def test_audit_flags_products_with_missing_views():
+    rows = [{"product_id": pid, "event": e} for pid, evs in
+            (("1", ("SPAWN", "LOAD", "VIEW", "VIEW", "UNLOAD", "EXIT")), ("2", ("SPAWN", "LOAD", "VIEW", "UNLOAD", "EXIT")))
+            for e in evs]
+    assert any("VIEW counts" in p for p in check_events(rows))
+
+
+def test_product_rows_prefer_combined_rows():
+    from core.inspection_log import product_rows
+
+    rows = [{"product_id": "1", "view": v} for v in ("0", "1", "all")]
+    assert product_rows(rows) == [{"product_id": "1", "view": "all"}]
+    assert product_rows([{"product_id": "1"}]) == [{"product_id": "1"}]  # runs before the view column

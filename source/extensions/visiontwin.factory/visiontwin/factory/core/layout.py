@@ -34,22 +34,20 @@ MARKER_OFFSET_Y = CONVEYOR_WIDTH / 2.0 + 0.06
 # spawn gap so a neighbour never enters it.
 INSPECTION_HALF_LENGTH = 0.25
 
-# Mill station (CAD asset from reference/teeth_mill.urdf): behind the belt (+Y), upstream
-# of the inspection line and outside the inspection camera's view (|y| > ~0.5 m there).
-MILL_X = -1.8  # station line: products crossing it trigger a machining cycle
-MILL_Y = 0.85
-MILL_STAND_HEIGHT = 0.6
-MILL_PATH = "/World/Factory/MillStation"
-# Dental line: the mill is a processing station; products stop at the entry, are loaded onto
-# the C platter, machined and unloaded at the exit. Entry/exit are > min_gap apart.
-MILL_ENTRY_X = MILL_X - 0.2
-MILL_EXIT_X = MILL_X + 0.2
-# Fractions of the processing cycle: load (belt -> platter), machining, unload (platter -> belt).
-MILL_LOAD_FRACTION = 0.15
-MILL_UNLOAD_FRACTION = 0.15
-MILL_CAMERA_PATH = "/World/Factory/MillCamera"
-MILL_CAMERA_EYE = (MILL_X + 0.55, -0.55, 1.35)  # front-right, above the belt: entry, mill and exit
-MILL_CAMERA_TARGET = (MILL_X, 0.45, 0.8)
+# Inspection cell (dental crown line, Day 11): the 5-axis machine from reference/teeth_mill.urdf
+# stands IN the line between two conveyor sections and carries the inspection camera on its
+# spindle. Products stop at the end of the first section (entry), are loaded onto the C
+# platter, viewed from several angles, and unloaded onto the second section (exit).
+CELL_X = -1.0  # platter centre at the load pose (on the belt line, y = 0)
+CELL_GAP_HALF = 0.32  # belt sections end this far from CELL_X (room for the machine base)
+CELL_ENTRY_X = CELL_X - CELL_GAP_HALF - 0.06  # product stop / pick position on section 1
+CELL_EXIT_X = CELL_X + CELL_GAP_HALF + 0.06  # place position on section 2
+CELL_PATH = "/World/Factory/Cell"
+CELL_CAMERA_PATH = "/World/Factory/Cell/CameraRig/Camera"  # moves with the spindle
+CELL_OVERVIEW_CAMERA_PATH = "/World/Factory/CellOverviewCamera"
+CELL_OVERVIEW_EYE = (CELL_X + 0.3, -0.5, 1.6)  # high in front: section 1 end, machine, section 2 start
+CELL_OVERVIEW_TARGET = (CELL_X, 0.05, 0.84)
+TRANSFER_LIFT = 0.15  # pick-and-place arc height (clears the B housing and support)
 
 # Root prim paths
 ROOT_PATH = "/World"

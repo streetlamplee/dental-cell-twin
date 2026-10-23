@@ -24,12 +24,20 @@ Options for white/unsaturated products (dental crowns, Day 7):
 - golden contour: the filled silhouette's outer contour is compared with the calibrated good
   sample: cv2.matchShapes distance > `shape_dist_max` or |area/golden_area - 1| >
   `area_ratio_tol` -> shape defect (e.g. an unmilled corner of the blank).
+- silhouette difference (optional, `silhouette_diff_max`): filled silhouette and golden
+  silhouette are aligned on their centroids; XOR area / golden area above the limit -> shape
+  defect. Catches small local dents (a chipped margin) that Hu-moment matching misses.
+
+Multi-view (inspection cell, Day 11): one InspectorConfig per view, calibrated on that view's
+frames (the tilted views see a different silhouette and shading). combine_views() merges the
+per-view results: any defect -> defect (reasons per view), else any unknown -> unknown,
+else good.
 """
 
 import json
 import time
 from dataclasses import asdict, dataclass, field, fields
-from typing import Optional, Tuple
+from typing import List, Optional, Sequence, Tuple
 
 import cv2
 import numpy as np
@@ -62,6 +70,7 @@ class InspectorConfig:
     golden_area_px: Optional[float] = None
     shape_dist_max: Optional[float] = None
     area_ratio_tol: Optional[float] = None
+    silhouette_diff_max: Optional[float] = None  # XOR / golden area, centroid-aligned (None = off)
 
     @classmethod
     def load(cls, path: str) -> "InspectorConfig":
@@ -96,7 +105,26 @@ class InspectionResult:
     interior_bright: float = float("nan")  # bright fraction of the interior
     shape_dist: float = float("nan")  # cv2.matchShapes distance to the golden contour
     area_ratio: float = float("nan")  # filled silhouette area / golden area
+    silhouette_diff: float = float("nan")  # centroid-aligned XOR area / golden area
     contour: Optional[list] = None  # outer contour (ROI coordinates) of the product, for calibration
+
+
+def silhouette_diff(contour, golden) -> float:
+    """XOR area of two filled contours aligned on their centroids, relative to the golden area."""
+    def centred(cnt):
+        cnt = np.asarray(cnt, np.float64).reshape(-1, 2)
+        m = cv2.moments(cnt.astype(np.float32))
+        c = np.array([m["m10"] / m["m00"], m["m01"] / m["m00"]]) if m["m00"] else cnt.mean(axis=0)
+        return cnt - c
+    a, b = centred(contour), centred(golden)
+    half = int(np.ceil(max(np.abs(a).max(), np.abs(b).max()))) + 2
+    canvas = []
+    for cnt in (a, b):
+        img = np.zeros((2 * half + 1, 2 * half + 1), np.uint8)
+        cv2.drawContours(img, [np.round(cnt + half).astype(np.int32).reshape(-1, 1, 2)], -1, 1, cv2.FILLED)
+        canvas.append(img)
+    golden_area = max(int(canvas[1].sum()), 1)
+    return float(np.logical_xor(canvas[0], canvas[1]).sum() / golden_area)
 
 
 def hue_distance(h: np.ndarray, ref: float) -> np.ndarray:
@@ -174,7 +202,12 @@ class VisionInspector:
             area_ok = c.area_ratio_tol is None or abs(area_ratio - 1.0) <= c.area_ratio_tol
             reasons.append(f"contour dist {shape_dist:.3f} (max {c.shape_dist_max}), "
                            f"area ratio {area_ratio:.2f} (tol {c.area_ratio_tol})")
-            if not (dist_ok and area_ok) and "shape" not in failed:
+            diff_ok = True
+            if c.silhouette_diff_max is not None:
+                sil = silhouette_diff(contour, golden)
+                diff_ok = sil <= c.silhouette_diff_max
+                reasons.append(f"silhouette diff {sil:.3f} (max {c.silhouette_diff_max})")
+            if not (dist_ok and area_ok and diff_ok) and "shape" not in failed:
                 failed.append("shape")
 
         interior_ratio = interior_bright = float("nan")
@@ -192,6 +225,8 @@ class VisionInspector:
         res.defect_reason = "+".join(failed)
         res.interior_ratio, res.interior_bright = interior_ratio, interior_bright
         res.shape_dist, res.area_ratio = shape_dist, area_ratio
+        if c.golden_contour is not None and contour is not None and c.silhouette_diff_max is not None:
+            res.silhouette_diff = sil
         res.contour = contour.reshape(-1, 2).tolist() if contour is not None else None
         return res
 
@@ -217,3 +252,47 @@ class VisionInspector:
     def _result(label, score, area, mean_hue, bbox, t0, reason, params) -> InspectionResult:
         latency = (time.perf_counter() - t0) * 1000.0
         return InspectionResult(label, score, area, mean_hue, bbox, latency, reason, params)
+
+
+def load_view_configs(path: str) -> List[InspectorConfig]:
+    """Per-view configs from {"views": [{...}, ...]}, or [the single config] for a flat file."""
+    with open(path, encoding="utf-8") as f:
+        data = json.load(f)
+    if "views" not in data:
+        return [InspectorConfig.load(path)]
+    known = {f.name for f in fields(InspectorConfig)}
+    cfgs = []
+    for v in data["views"]:
+        cfg = InspectorConfig(**{k: val for k, val in v.items() if k in known})
+        cfg.roi = tuple(cfg.roi) if cfg.roi is not None else None
+        cfg.reference_ab = tuple(cfg.reference_ab) if cfg.reference_ab is not None else None
+        cfgs.append(cfg)
+    return cfgs
+
+
+def save_view_configs(path: str, configs: Sequence[InspectorConfig], names: Sequence[str]) -> None:
+    with open(path, "w", encoding="utf-8") as f:
+        json.dump({"views": [{"view": n, **asdict(c)} for n, c in zip(names, configs)]}, f, indent=2)
+
+
+def combine_views(results: Sequence[InspectionResult], names: Sequence[str]) -> InspectionResult:
+    """One verdict for a product seen from several views (results in view order)."""
+    if not results:
+        raise ValueError("no view results")
+    defects = [(n, r) for n, r in zip(names, results) if r.label == DEFECT]
+    unknown = [n for n, r in zip(names, results) if r.label == UNKNOWN]
+    if defects:
+        label = DEFECT
+    elif unknown:
+        label = UNKNOWN
+    else:
+        label = GOOD
+    kinds = sorted({k for _, r in defects for k in r.defect_reason.split("+") if k})
+    first = results[0]
+    out = InspectionResult(
+        label=label, score=min(r.score for r in results), area_px=first.area_px, mean_hue=first.mean_hue,
+        bbox=first.bbox, latency_ms=sum(r.latency_ms for r in results),
+        reason="; ".join(f"{n}: {r.label}{' ' + r.defect_reason if r.defect_reason else ''}"
+                         for n, r in zip(names, results)))
+    out.defect_reason = "+".join(kinds)
+    return out

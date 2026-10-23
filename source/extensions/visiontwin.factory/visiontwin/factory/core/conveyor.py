@@ -4,11 +4,14 @@ Positions advance by simulation time `dt`, not by render frames, and line
 crossings are detected on the segment [x_before, x_after], so a large dt
 cannot skip an inspection or reject line.
 
-Optional processing station (dental mill line): unprocessed products stop at the
-station entry; when the station is free the product is loaded (PROCESSING, off the
-belt), released after `cycle_s` at the exit when the exit is clear, and continues as
-MOVING. While the station is busy, products queue at the entry and the ones behind
-stop at `min_gap` (accumulating conveyor).
+Optional processing station: unprocessed products stop at the station entry; when the
+station is free the product is loaded (PROCESSING, off the belt), released after `cycle_s`
+at the exit when the exit is clear, and continues as MOVING. While the station is busy,
+products queue at the entry and the ones behind stop at `min_gap` (accumulating conveyor).
+
+Inspection cell (station with `inspects=True`, dental crown line): the station itself takes
+the pictures. It emits a VIEW event at `load + view_times[k]` for every view and, on unload,
+the product leaves as INSPECTED (INSPECT event at the exit), so no inspection line follows.
 """
 
 import random
@@ -27,6 +30,7 @@ EXIT = "EXIT"  # left the line (end of belt or into the reject bin)
 STATION = "STATION"  # crossed a (visual) station line; `station` names it
 LOAD = "LOAD"  # loaded into the processing station
 UNLOAD = "UNLOAD"  # processed and put back on the belt
+VIEW = "VIEW"  # inspection cell: take view `index` of the product in the station now
 
 
 @dataclass(frozen=True)
@@ -36,6 +40,7 @@ class LineEvent:
     kind: str
     x: float
     station: str = ""
+    index: int = -1  # VIEW: view number
 
 
 @dataclass(frozen=True)
@@ -44,6 +49,8 @@ class ProcessStation:
     x_entry: float
     x_exit: float
     cycle_s: float
+    view_times: Tuple[float, ...] = ()  # seconds after LOAD at which VIEW events fire
+    inspects: bool = False  # True: the station is the inspection (product leaves INSPECTED)
 
 
 @dataclass
@@ -145,6 +152,7 @@ class ConveyorSim:
             self._next_spawn_time = ts + self.config.spawn_interval
 
         if self.config.process is not None:
+            self._station_views(t0, t1, events)
             if self.station_product is not None:
                 self.station_busy_time += dt
             self.queue_len = waiting
@@ -184,6 +192,16 @@ class ConveyorSim:
             return float("-inf")
         return t1 - clearance / self.config.speed
 
+    def _station_views(self, t0: float, t1: float, events: List[LineEvent]) -> None:
+        st = self.config.process
+        if self.station_product is None:
+            return
+        p = self.tracker.get(self.station_product)
+        for k, vt in enumerate(st.view_times):
+            t = p.load_time + vt
+            if t0 < t <= t1:
+                events.append(LineEvent(t, p.product_id, VIEW, st.x_entry, st.name, k))
+
     def _station_unload(self, t0: float, t1: float, events: List[LineEvent]) -> None:
         st = self.config.process
         if self.station_product is None or self._station_done > t1:
@@ -197,11 +215,16 @@ class ConveyorSim:
             return
         t = max(self._station_done, t0)
         p = self.tracker.get(self.station_product)
-        self.tracker.transition(p.product_id, ProductState.MOVING)
         p.x, p.unload_time = st.x_exit, t
         self.station_product = None
         self._station_free_at = t
         events.append(LineEvent(t, p.product_id, UNLOAD, st.x_exit, st.name))
+        if st.inspects:
+            self.tracker.transition(p.product_id, ProductState.INSPECTED)
+            p.inspected_time = t
+            events.append(LineEvent(t, p.product_id, INSPECT, st.x_exit, st.name))
+        else:
+            self.tracker.transition(p.product_id, ProductState.MOVING)
 
     def _station_load(self, p: Product, t: float, events: List[LineEvent]) -> None:
         st = self.config.process
