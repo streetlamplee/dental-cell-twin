@@ -11,8 +11,8 @@ from typing import Callable, Dict, Sequence
 import omni.ui as ui
 
 PRODUCTS = ("box", "kfl08", "crown")
-PRODUCT_LABELS = ("Box (colour)", "KFL08 flange bearing", "Dental crown (mill line)")
-VIEWS = ("Overview", "Mill close-up", "Inspection camera")
+PRODUCT_LABELS = ("Box (colour)", "KFL08 flange bearing", "Dental crown (inspection cell)")
+VIEWS = ("Overview", "Cell close-up", "Inspection camera")
 
 
 class Dashboard:

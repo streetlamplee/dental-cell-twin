@@ -24,10 +24,17 @@ def configure_stage(stage: Usd.Stage) -> None:
     stage.SetDefaultPrim(world.GetPrim())
 
 
+BELT, CELL = "belt", "cell"
+
+
 def build_factory_scene(stage: Usd.Stage, camera_height: float = L.CAMERA_HEIGHT_ABOVE_BELT,
-                        camera_focal_mm: float = L.CAMERA_FOCAL_MM, light_factor: float = 1.0) -> None:
-    """Create (or recreate) the factory prims under FACTORY_PATH. The inspection camera's
-    height/focal length can be set per product (small dental parts need a close-up)."""
+                        camera_focal_mm: float = L.CAMERA_FOCAL_MM, light_factor: float = 1.0,
+                        layout: str = BELT) -> None:
+    """Create (or recreate) the factory prims under FACTORY_PATH.
+
+    layout "belt": one conveyor, fixed top-down inspection camera over the inspection line
+    (height/focal length per product). layout "cell": two conveyor sections with a gap at
+    CELL_X for the inspection cell (machine + spindle camera, added by InspectionCell)."""
     configure_stage(stage)
     if stage.GetPrimAtPath(L.FACTORY_PATH):
         stage.RemovePrim(L.FACTORY_PATH)
@@ -37,20 +44,19 @@ def build_factory_scene(stage: Usd.Stage, camera_height: float = L.CAMERA_HEIGHT
     f = L.FACTORY_PATH
     _box(stage, f"{f}/Floor", (0.0, 0.0, -0.01), (12.0, 8.0, 0.02), (0.35, 0.35, 0.38))
 
-    belt_z = L.CONVEYOR_TOP_Z - L.CONVEYOR_THICKNESS / 2.0
-    _box(stage, f"{f}/Conveyor/Belt", (0.0, 0.0, belt_z),
-         (L.CONVEYOR_LENGTH, L.CONVEYOR_WIDTH, L.CONVEYOR_THICKNESS), (0.12, 0.12, 0.12))
-    leg_h = L.CONVEYOR_TOP_Z - L.CONVEYOR_THICKNESS
-    for i, x in enumerate((-L.CONVEYOR_LENGTH / 2 + 0.2, 0.0, L.CONVEYOR_LENGTH / 2 - 0.2)):
-        for j, y in enumerate((-L.CONVEYOR_WIDTH / 2 + 0.05, L.CONVEYOR_WIDTH / 2 - 0.05)):
-            _box(stage, f"{f}/Conveyor/Leg_{i}_{j}", (x, y, leg_h / 2.0),
-                 (0.08, 0.08, leg_h), (0.5, 0.5, 0.55))
+    start, end = -L.CONVEYOR_LENGTH / 2.0, L.CONVEYOR_LENGTH / 2.0
+    sections = ([(start, end)] if layout == BELT else
+                [(start, L.CELL_X - L.CELL_GAP_HALF), (L.CELL_X + L.CELL_GAP_HALF, end)])
+    for k, (x0, x1) in enumerate(sections):
+        _belt_section(stage, f"{f}/Conveyor/Section_{k}", x0, x1)
 
     # Posts beside the belt showing where inspection and rejection happen. They stand
     # outside the belt lane so the inspection camera's ROI never contains them.
     post_h = 0.25
-    for name, x, color in (("InspectionZone", L.INSPECTION_X, (0.1, 0.6, 1.0)),
-                           ("RejectZone", L.REJECT_X, (1.0, 0.4, 0.1))):
+    zones = [("RejectZone", L.REJECT_X, (1.0, 0.4, 0.1))]
+    if layout == BELT:
+        zones.insert(0, ("InspectionZone", L.INSPECTION_X, (0.1, 0.6, 1.0)))
+    for name, x, color in zones:
         UsdGeom.Xform.Define(stage, f"{f}/{name}")
         for side, y in (("L", L.MARKER_OFFSET_Y), ("R", -L.MARKER_OFFSET_Y)):
             _box(stage, f"{f}/{name}/Post_{side}", (x, y, L.CONVEYOR_TOP_Z + post_h / 2.0 - 0.05),
@@ -62,16 +68,29 @@ def build_factory_scene(stage: Usd.Stage, camera_height: float = L.CAMERA_HEIGHT
     _box(stage, f"{f}/RejectBin", (L.REJECT_X, -L.CONVEYOR_WIDTH / 2 - 0.4, 0.2),
          (0.6, 0.5, 0.4), (0.6, 0.15, 0.1))
 
-    _define_inspection_camera(stage, camera_height, camera_focal_mm)
+    if layout == BELT:
+        _define_inspection_camera(stage, camera_height, camera_focal_mm)
+    else:
+        _define_cell_overview_camera(stage)
     _define_overview_camera(stage)
-    _define_mill_camera(stage)
     _define_light(stage, light_factor)
 
 
-def _define_mill_camera(stage: Usd.Stage) -> None:
-    """Close-up of the mill station and its load/unload (dental line demo view)."""
-    cam = UsdGeom.Camera.Define(stage, L.MILL_CAMERA_PATH)
-    eye, target = Gf.Vec3d(*L.MILL_CAMERA_EYE), Gf.Vec3d(*L.MILL_CAMERA_TARGET)
+def _belt_section(stage: Usd.Stage, path: str, x0: float, x1: float) -> None:
+    belt_z = L.CONVEYOR_TOP_Z - L.CONVEYOR_THICKNESS / 2.0
+    _box(stage, f"{path}/Belt", ((x0 + x1) / 2.0, 0.0, belt_z),
+         (x1 - x0, L.CONVEYOR_WIDTH, L.CONVEYOR_THICKNESS), (0.12, 0.12, 0.12))
+    leg_h = L.CONVEYOR_TOP_Z - L.CONVEYOR_THICKNESS
+    xs = (x0 + 0.2, (x0 + x1) / 2.0, x1 - 0.2) if x1 - x0 > 1.0 else (x0 + 0.1, x1 - 0.1)
+    for i, x in enumerate(xs):
+        for j, y in enumerate((-L.CONVEYOR_WIDTH / 2 + 0.05, L.CONVEYOR_WIDTH / 2 - 0.05)):
+            _box(stage, f"{path}/Leg_{i}_{j}", (x, y, leg_h / 2.0), (0.08, 0.08, leg_h), (0.5, 0.5, 0.55))
+
+
+def _define_cell_overview_camera(stage: Usd.Stage) -> None:
+    """Close-up of the inspection cell: end of section 1, the machine, start of section 2."""
+    cam = UsdGeom.Camera.Define(stage, L.CELL_OVERVIEW_CAMERA_PATH)
+    eye, target = Gf.Vec3d(*L.CELL_OVERVIEW_EYE), Gf.Vec3d(*L.CELL_OVERVIEW_TARGET)
     cam.AddTransformOp().Set(Gf.Matrix4d().SetLookAt(eye, target, Gf.Vec3d(0, 0, 1)).GetInverse())
     cam.CreateFocalLengthAttr(24.0)
     cam.CreateClippingRangeAttr(Gf.Vec2f(0.01, 100.0))
@@ -117,8 +136,8 @@ PART_REST_DZ = 0.0
 
 def spawn_product_prim(stage: Usd.Stage, product_id: int, defect_kind, x: float,
                        variant_usd: str = None, raw_usd: str = None) -> None:
-    """Box (variant_usd None) or a CAD part: P_xxxx (position) / Pose (rotation, follows the mill
-    platter while processed) / Part (final shape) and, for processed parts, Raw (shape before
+    """Box (variant_usd None) or a CAD part: P_xxxx (position) / Pose (rotation, follows the
+    platter while in the inspection cell) / Part (final shape) and, for processed parts, Raw (shape before
     processing; Part stays hidden until show_final_shape)."""
     if variant_usd is None:
         color = DEFECT_COLORS.get(defect_kind, GOOD_COLOR)
@@ -152,7 +171,7 @@ def show_final_shape(stage: Usd.Stage, product_id: int) -> None:
 
 def set_product_pose(stage: Usd.Stage, product_id: int, world) -> None:
     """Place a CAD part with a full 4x4 world transform (numpy, metres): translation on the
-    product prim, rotation on its Pose child (used while it rides the mill platter)."""
+    product prim, rotation on its Pose child (used while it rides the cell's platter)."""
     path = product_path(product_id)
     prim, pose = stage.GetPrimAtPath(path), stage.GetPrimAtPath(f"{path}/Pose")
     if not prim or not pose:

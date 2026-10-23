@@ -1,5 +1,6 @@
 """In-Kit smoke tests: the panel loads, Build Scene creates the factory, Start spawns products."""
 
+import carb.settings
 import omni.kit.app
 import omni.kit.test
 import omni.kit.ui_test as ui_test
@@ -8,6 +9,13 @@ import omni.usd
 from visiontwin.factory.core import layout as L
 
 WINDOW = "VisionTwin Factory"
+BELT = f"{L.FACTORY_PATH}/Conveyor/Section_0/Belt"  # first (or only) conveyor section
+
+
+def _use_belt_layout():
+    """The box line: one conveyor + fixed top camera (the crown's inspection cell needs the CAD
+    machine asset, which the app's settings point to; it is covered by scripts/render_smoke)."""
+    carb.settings.get_settings().set("/exts/visiontwin.factory/part", "box")
 
 
 def _button(text):
@@ -38,20 +46,22 @@ class TestDashboard(omni.kit.test.AsyncTestCase):
 
 class TestFactory(omni.kit.test.AsyncTestCase):
     async def test_build_scene_creates_factory_prims(self):
+        _use_belt_layout()
         await _button("Build Scene").click()
         ok = await _wait_until(lambda: bool(
             omni.usd.get_context().get_stage()
-            and omni.usd.get_context().get_stage().GetPrimAtPath(f"{L.FACTORY_PATH}/Conveyor/Belt")))
+            and omni.usd.get_context().get_stage().GetPrimAtPath(BELT)))
         self.assertTrue(ok, "conveyor belt prim was not created")
         stage = omni.usd.get_context().get_stage()
         for path in (L.CAMERA_PATH, f"{L.FACTORY_PATH}/InspectionZone", f"{L.FACTORY_PATH}/RejectZone"):
             self.assertTrue(stage.GetPrimAtPath(path).IsValid(), path)
 
     async def test_start_spawns_products_and_stop_halts(self):
+        _use_belt_layout()
         await _button("Build Scene").click()
         await _wait_until(lambda: bool(
             omni.usd.get_context().get_stage()
-            and omni.usd.get_context().get_stage().GetPrimAtPath(f"{L.FACTORY_PATH}/Conveyor/Belt")))
+            and omni.usd.get_context().get_stage().GetPrimAtPath(BELT)))
 
         await _button("Start").click()
 

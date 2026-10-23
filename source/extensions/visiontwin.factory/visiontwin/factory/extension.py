@@ -1,5 +1,11 @@
 """VisionTwin factory extension: wires the conveyor simulation to the USD stage, the
-inspection camera, the reject-line sorting and the UI."""
+inspection camera, the reject-line sorting and the UI.
+
+Two line layouts:
+  belt  box / KFL08: one conveyor, fixed top-down camera over the inspection line
+  cell  dental crown: conveyor -> inline inspection cell (5-axis machine with the camera on
+        its spindle; several views per product) -> conveyor -> reject line
+"""
 
 import asyncio
 import json
@@ -20,15 +26,16 @@ from omni.kit.viewport.utility import get_active_viewport
 from . import scene_manager as scene
 from .core import layout as L
 from .core.camera_model import inspection_roi
-from .core.conveyor import (EXIT, INSPECT, LOAD, REJECT, SORT, SPAWN, STATION, UNLOAD, ConveyorConfig,
-                            ConveyorSim, ProcessStation)
+from .core.conveyor import (EXIT, INSPECT, REJECT, SORT, SPAWN, UNLOAD, VIEW, ConveyorConfig, ConveyorSim,
+                            ProcessStation)
 from .core.event_log import EventLog
 from .core.inspection_log import InspectionLog, InspectionRecord
 from .core.product_tracker import ProductState
 from .core.run_results import build_rows, write_csv
 from .core.product_catalog import BOX, ProductCatalog
 from .core.sorting import SortingController
-from .core.vision_inspector import UNKNOWN, InspectorConfig, VisionInspector
+from .core.vision_inspector import (UNKNOWN, InspectionResult, InspectorConfig, VisionInspector, combine_views,
+                                    load_view_configs)
 from .dashboard import Dashboard
 
 LOG_PREFIX = "[visiontwin.factory]"
@@ -74,7 +81,10 @@ class VisionTwinFactoryExtension(omni.ext.IExt):
         self._log = None  # InspectionLog for the current run
         self._events = None  # EventLog (events.csv) for the current run
         self._anims = {}  # product_id -> sim time the reject animation started
-        self._mill = None  # MillStation (CAD asset), when the asset files exist
+        self._cell = None  # InspectionCell (CAD machine + spindle camera), dental crown line
+        self._cell_cycle_cache = None  # (part, CellCycle)
+        self._inspectors = []  # cell: one VisionInspector per view
+        self._view_results = {}  # cell: product_id -> {view index: InspectionResult}
         self.run_dir = None
         self.run_complete = False
         self.summary = None
@@ -99,8 +109,10 @@ class VisionTwinFactoryExtension(omni.ext.IExt):
         carb.settings.get_settings().set(f"{SETTINGS}/{name}", value)
 
     def set_view(self, index: int) -> None:
-        """Main viewport camera: 0 overview, 1 mill close-up, 2 inspection camera."""
-        cams = (L.OVERVIEW_CAMERA_PATH, L.MILL_CAMERA_PATH, L.CAMERA_PATH)
+        """Main viewport camera: 0 overview, 1 inspection cell close-up, 2 inspection camera."""
+        cell = self._catalog.cell is not None
+        cams = (L.OVERVIEW_CAMERA_PATH, L.CELL_OVERVIEW_CAMERA_PATH if cell else L.OVERVIEW_CAMERA_PATH,
+                self._inspection_camera_path)
         main = self.main_viewport
         if main is not None and 0 <= index < len(cams):
             main.camera_path = cams[index]
@@ -144,8 +156,10 @@ class VisionTwinFactoryExtension(omni.ext.IExt):
         ctx = omni.usd.get_context()
         await ctx.new_stage_async()
         self._catalog = self._make_catalog()
-        scene.build_factory_scene(ctx.get_stage(), *self._camera_params(), light_factor=LIGHT_FACTORS[_lighting()])
-        self._mill = self._create_mill_station(ctx.get_stage())
+        layout = scene.CELL if self._catalog.cell else scene.BELT
+        scene.build_factory_scene(ctx.get_stage(), *self._camera_params(), light_factor=LIGHT_FACTORS[_lighting()],
+                                  layout=layout)
+        self._cell = self._create_cell(ctx.get_stage()) if layout == scene.CELL else None
         self._reset_run_state()
         await omni.kit.app.get_app().next_update_async()
         self._use_stage_lights()
@@ -223,15 +237,27 @@ class VisionTwinFactoryExtension(omni.ext.IExt):
         cam = self._catalog.camera
         return (cam.height_above_belt, cam.focal_mm) if cam else (L.CAMERA_HEIGHT_ABOVE_BELT, L.CAMERA_FOCAL_MM)
 
+    @property
+    def _inspection_camera_path(self) -> str:
+        return L.CELL_CAMERA_PATH if self._catalog.cell else L.CAMERA_PATH
+
+    def _cell_cycle(self):
+        """CellCycle of the current part (pure Python; needed before the scene exists)."""
+        cached = getattr(self, "_cell_cycle_cache", None)  # also used from on_startup's first config
+        if cached is None or cached[0] != self._catalog.part:
+            from .inspection_cell import build_cycle
+
+            self._cell_cycle_cache = (self._catalog.part,
+                                      build_cycle(_resolve(_setting("millKinematics", "")), self._catalog.cell))
+        return self._cell_cycle_cache[1]
+
     def _conveyor_config(self) -> ConveyorConfig:
-        process = self._catalog.process
-        if process:  # dental line: the mill is a processing station on the line
-            name, cycle = process
-            cycle = float(_setting("cycleS", cycle))  # experiment override
-            extra = dict(process=ProcessStation(name, L.MILL_ENTRY_X, L.MILL_EXIT_X, cycle),
+        extra = {}
+        if self._catalog.cell:  # dental crown line: the inspection cell is a station in the line
+            cycle = self._cell_cycle()
+            extra = dict(process=ProcessStation("cell", L.CELL_ENTRY_X, L.CELL_EXIT_X, cycle.cycle_s,
+                                                tuple(cycle.view_times), inspects=True),
                          spawn_interval=self._catalog.spawn_interval or ConveyorConfig.spawn_interval)
-        else:  # the mill only plays a visual cycle when a product passes
-            extra = dict(stations=(("mill", L.MILL_X),))
         if _setting("spawnInterval", None) is not None:  # experiment override
             extra["spawn_interval"] = float(_setting("spawnInterval", None))
         return ConveyorConfig(seed=int(_setting("seed", 42)),
@@ -254,30 +280,26 @@ class VisionTwinFactoryExtension(omni.ext.IExt):
             self._events.close()
         self._events = None
         self._anims.clear()
+        self._view_results.clear()
+        self._view_retakes = 0
         self._frame_mismatches = 0
         self._stale_frames = 0
         self.run_complete = False
         self.summary = None
 
-    def _create_mill_station(self, stage):
-        """Reference the CAD-converted mill (Day 5). Optional: skipped if the files are missing."""
+    def _create_cell(self, stage):
+        """Reference the CAD-converted machine as the inline inspection cell (Day 11)."""
         asset = _resolve(_setting("millAsset", ""))
         kin = _resolve(_setting("millKinematics", ""))
-        if not (_setting("millStation", True) and os.path.isfile(asset) and os.path.isfile(kin)):
-            carb.log_warn(f"{LOG_PREFIX} mill station skipped (asset={asset!r}, kinematics={kin!r})")
+        if not (os.path.isfile(asset) and os.path.isfile(kin)):
+            carb.log_error(f"{LOG_PREFIX} inspection cell missing (asset={asset!r}, kinematics={kin!r})")
             return None
-        from .mill_station import MillStation
+        from .inspection_cell import InspectionCell
 
-        try:
-            process = self._catalog.process
-            machining = (float(_setting("cycleS", process[1])) * (1.0 - L.MILL_LOAD_FRACTION - L.MILL_UNLOAD_FRACTION)
-                         if process else 3.0)
-            station = MillStation(stage, asset, kin, hide_work=process is not None, cycle_duration=machining)
-        except Exception as exc:  # the line must still work without the visual station
-            carb.log_error(f"{LOG_PREFIX} mill station failed: {exc}")
-            return None
-        print(f"{LOG_PREFIX} mill station ready ({asset})")
-        return station
+        cell = InspectionCell(stage, asset, kin, self._catalog.cell, self._cell_cycle())
+        print(f"{LOG_PREFIX} inspection cell ready ({asset}, cycle {cell.cycle.cycle_s:.2f}s, "
+              f"views {[v.name for v in cell.cycle.views]})")
+        return cell
 
     def _destroy_frame_provider(self):
         if self._frames is not None:
@@ -300,7 +322,7 @@ class VisionTwinFactoryExtension(omni.ext.IExt):
         self._ui.set_status("waiting for renderer...")
         await next_viewport_frame_async(main, 60)
         self._ui.set_status("starting inspection camera...")
-        self._frames = InspectionFrameProvider(L.CAMERA_PATH, L.CAMERA_RESOLUTION)
+        self._frames = InspectionFrameProvider(self._inspection_camera_path, L.CAMERA_RESOLUTION)
         await self._frames.ready_async()
 
     async def _setup_inspection_async(self):
@@ -311,6 +333,10 @@ class VisionTwinFactoryExtension(omni.ext.IExt):
         cfg_path = _resolve(_setting("inspectorConfig", ""))
         if not self._catalog.is_box:  # per-part calibration next to the box config
             cfg_path = os.path.join(os.path.dirname(cfg_path), f"inspector_{self._catalog.part}.json")
+        if self._catalog.cell:
+            self._setup_cell_inspectors(cfg_path)
+            return
+        self._inspectors = []
         cfg = InspectorConfig.load(cfg_path) if os.path.isfile(cfg_path) else InspectorConfig()
         if cfg.roi is None:
             height, focal = self._camera_params()
@@ -318,6 +344,24 @@ class VisionTwinFactoryExtension(omni.ext.IExt):
                                      L.CONVEYOR_WIDTH / 2.0 - 0.02, L.INSPECTION_HALF_LENGTH)
         self._inspector = VisionInspector(cfg)
         print(f"{LOG_PREFIX} inspector ready: {cfg} (config file: {cfg_path or 'none'})")
+
+    def _setup_cell_inspectors(self, cfg_path: str):
+        """One inspector per view (each view is calibrated on its own frames). Uncalibrated:
+        permissive white-product defaults, so a calibration run can be recorded."""
+        spec, cycle = self._catalog.cell, self._cell_cycle()
+        n = len(cycle.views)
+        cfgs = load_view_configs(cfg_path) if os.path.isfile(cfg_path) else []
+        if len(cfgs) != n:
+            if cfgs:
+                carb.log_warn(f"{LOG_PREFIX} {cfg_path} has {len(cfgs)} views, the cell has {n}: recalibrate")
+            cfgs = [InspectorConfig(segment="bright", color_metric="ab") for _ in range(n)]
+        roi = inspection_roi(L.CAMERA_RESOLUTION, spec.focal_mm, L.CAMERA_H_APERTURE_MM, spec.standoff_m,
+                             spec.roi_half_m, spec.roi_half_m)
+        for c in cfgs:
+            c.roi = c.roi or roi
+        self._inspectors = [VisionInspector(c) for c in cfgs]
+        self._inspector = self._inspectors[0]
+        print(f"{LOG_PREFIX} cell inspectors ready: {n} views, roi {roi} (config file: {cfg_path})")
 
     def _open_run(self):
         seed = self._sim.config.seed
@@ -330,9 +374,11 @@ class VisionTwinFactoryExtension(omni.ext.IExt):
                 "defect_rate": self._sim.config.defect_rate, "unknown_policy": self._sorter.unknown_policy,
                 "fixed_dt": float(_setting("fixedDt", 1.0 / 60.0)),
                 "experiment": str(_setting("experiment", "")), "condition": str(_setting("condition", "")),
-                "process_cycle_s": self._sim.config.process.cycle_s if self._sim.config.process else None,
+                "station_cycle_s": self._sim.config.process.cycle_s if self._sim.config.process else None,
                 "part": self._catalog.part, "lighting_condition": _lighting(), "camera_resolution": list(L.CAMERA_RESOLUTION),
-                "inspector": self._inspector.config.__dict__}
+                "inspector": self._inspector.config.__dict__,
+                "views": [v.name for v in self._cell.cycle.views] if self._cell else None,
+                "view_inspectors": [i.config.__dict__ for i in self._inspectors] if self._cell else None}
         with open(os.path.join(self.run_dir, "run.json"), "w", encoding="utf-8") as f:
             json.dump(meta, f, indent=2)
         self._run_id = run_id
@@ -359,44 +405,46 @@ class VisionTwinFactoryExtension(omni.ext.IExt):
         stage = omni.usd.get_context().get_stage()
         if stage is None:
             return
-        inspected = []
+        inspected, views = [], []
         for e in self._sim.step(dt):
             p = self._sim.tracker.get(e.product_id)
             if e.kind == SPAWN:
                 scene.spawn_product_prim(stage, p.product_id, p.defect_kind, p.x,
                                          self._catalog.variant_path(p.ground_truth, p.defect_kind),
                                          self._catalog.raw_path(p.ground_truth, p.defect_kind))
-            elif e.kind == LOAD and self._mill is not None:
-                # machining motion starts after the load transfer
-                self._mill.cycle.trigger(e.time + L.MILL_LOAD_FRACTION * self._sim.config.process.cycle_s)
             elif e.kind == UNLOAD:
                 scene.show_final_shape(stage, p.product_id)
                 scene.set_product_pose(stage, p.product_id, self._belt_pose(p.x))
-            elif e.kind == INSPECT:
+            elif e.kind == VIEW:
+                views.append((p.product_id, e.index))
+            elif e.kind == INSPECT and self._cell is None:  # the cell takes its pictures at VIEW
                 inspected.append(p.product_id)
             elif e.kind == REJECT:
                 self._anims[p.product_id] = e.time
             elif e.kind == EXIT and p.exit_route == "pass":
                 scene.remove_product_prim(stage, p.product_id)
-            elif e.kind == STATION and e.station == "mill" and self._mill is not None:
-                self._mill.cycle.trigger(e.time)
             reason = ""
             if e.kind in (REJECT, SORT):
                 reason = f" ({self._sorter.decisions[p.product_id].reason})"
+            if e.kind == VIEW:
+                reason = f" {e.index + 1}/{len(self._inspectors) or '?'}"
             msg = f"t={e.time:7.3f}s id={e.product_id:04d} {e.kind}{reason}"
             print(f"{LOG_PREFIX} {msg}")
             self._ui.set_last_event(msg)
             if self._events is not None:
-                self._events.write(e.time, e.product_id, e.kind, e.x, e.station, reason.strip(" ()"))
+                self._events.write(e.time, e.product_id, e.kind, e.x, e.station,
+                                   str(e.index) if e.kind == VIEW else reason.strip(" ()"))
         for p in self._sim.tracker.on_belt():
             scene.move_product_prim(stage, p.product_id, p.x, rest_dz=self._rest_dz)
         self._animate_rejects(stage, finish=False)
-        if self._mill is not None:
-            self._mill.apply(self._sim.time)
-            self._animate_processing(stage)
-        # Request frames after the prims moved, so the next render shows the product on the line.
+        if self._cell is not None:
+            self._animate_cell(stage)
+        # Request frames after the prims (and the cell's camera) moved, so the captured render
+        # shows this update's state.
         for pid in inspected:
             self._request_inspection(pid)
+        for pid, k in views:
+            self._request_view(pid, k)
         self._refresh_counters()
         if self._sim.finished:
             self._animate_rejects(stage, finish=True)
@@ -410,32 +458,33 @@ class VisionTwinFactoryExtension(omni.ext.IExt):
         m[:3, 3] = (x, 0.0, L.CONVEYOR_TOP_Z + scene.PART_REST_DZ)
         return m
 
-    def _animate_processing(self, stage):
-        """Visual load -> machining -> unload of the product inside the mill station.
-        load: belt entry -> platter (lifted arc); machining: rides the platter (B/C rotation),
-        blank turns into the final shape half-way; unload: platter -> belt exit."""
+    def _station_time(self):
+        """Seconds since the product in the cell was loaded, or None when the cell is empty."""
         pid = self._sim.station_product
-        st = self._sim.config.process
-        if pid is None or st is None:
+        return None if pid is None else self._sim.time - self._sim.tracker.get(pid).load_time
+
+    def _animate_cell(self, stage):
+        """Inspection cell: pose the machine, then move the product with it.
+        load: belt entry -> platter (pick-and-place arc); views: rides the tilting/turning
+        platter; unload: platter -> belt exit (stays there if the exit is still blocked)."""
+        t = self._station_time()
+        self._cell.apply(t)
+        if t is None:
             return
-        p = self._sim.tracker.get(pid)
-        u = (self._sim.time - p.load_time) / st.cycle_s
-        platter = self._mill.platter_pose()
-        lf, uf = L.MILL_LOAD_FRACTION, L.MILL_UNLOAD_FRACTION
-        if u < lf:
-            pose = self._lift_lerp(self._belt_pose(st.x_entry), platter, u / lf)
-        elif u < 1.0 - uf:
-            pose = platter
-            if u >= 0.5:
-                scene.show_final_shape(stage, pid)
-        else:  # unloading (or waiting for a blocked exit at the end of the transfer)
-            scene.show_final_shape(stage, pid)
-            pose = self._lift_lerp(platter, self._belt_pose(st.x_exit), min((u - (1.0 - uf)) / uf, 1.0))
-        scene.set_product_pose(stage, pid, pose)
+        cycle, st = self._cell.cycle, self._sim.config.process
+        seat = self._cell.seat_pose()
+        if t < cycle.timing.load_s:
+            pose = self._lift_lerp(self._belt_pose(st.x_entry), seat, t / cycle.timing.load_s, L.TRANSFER_LIFT)
+        elif t < cycle.unload_start:
+            pose = seat
+        else:
+            pose = self._lift_lerp(seat, self._belt_pose(st.x_exit),
+                                   (t - cycle.unload_start) / cycle.timing.unload_s, L.TRANSFER_LIFT)
+        scene.set_product_pose(stage, self._sim.station_product, pose)
 
     @staticmethod
     def _lift_lerp(a: np.ndarray, b: np.ndarray, k: float, lift: float = 0.12) -> np.ndarray:
-        """Translation lerp with a parabolic lift (transfer arm); rotation from the platter end."""
+        """Translation lerp with a parabolic lift (pick-and-place); rotation from the nearer end."""
         k = min(max(k, 0.0), 1.0)
         m = (b if k > 0.5 else a).copy()
         m[:3, 3] = a[:3, 3] + (b[:3, 3] - a[:3, 3]) * k
@@ -481,8 +530,21 @@ class VisionTwinFactoryExtension(omni.ext.IExt):
             p.prediction = UNKNOWN
         self._refresh_counters()
 
-    def _on_frame(self, product_id, rgb, capture_ms, stale, frame_offset, sim_time, speed):
-        result = self._inspector.inspect(rgb)  # pixels only
+    def _request_view(self, product_id: int, view: int, retake: bool = False):
+        """Inspection cell: capture view `view` of the product on the platter (camera in place)."""
+        if self._frames is None or not self._inspectors:
+            return
+        p = self._sim.tracker.get(product_id)
+        if self._log and view == 0 and not retake:
+            p.inspection_start_ms = self._run_ms()
+        sim_time, speed = self._sim.time, self._sim.config.speed
+        self._frames.request_frame(
+            lambda rgb, cap_ms, stale, offset: self._on_view_frame(product_id, view, rgb, cap_ms, stale, offset,
+                                                                  sim_time, speed, retake),
+            on_error=lambda msg: self._on_view_error(product_id, view, msg, sim_time, speed))
+
+    def _vet(self, result, product_id, stale, frame_offset):
+        """Never attach an image that may not show this product's requested state."""
         if frame_offset != 0:
             # The image is not the stage state of the trigger update (frame targeting missed),
             # so it may show the product elsewhere or another product: never attach it.
@@ -498,7 +560,26 @@ class VisionTwinFactoryExtension(omni.ext.IExt):
             if frame_offset is None:
                 result.label, result.reason = UNKNOWN, "stale frame (identical to previous capture)"
                 carb.log_warn(f"{LOG_PREFIX} id={product_id:04d} stale frame -> unknown")
+        return result
 
+    def _record(self, product_id, view, result, capture_ms, frame_offset, sim_time, speed, frame_file):
+        if not self._log:
+            return
+        p = self._sim.tracker.get(product_id)
+        self._log.append(InspectionRecord(
+            run_id=self._run_id, seed=self._sim.config.seed, product_id=product_id, view=view,
+            ground_truth=p.ground_truth,  # evaluation only, copied from the tracker
+            predicted_label=result.label, defect_reason=result.defect_reason,
+            score=round(result.score, 4), mean_hue=round(result.mean_hue, 2), area_px=result.area_px,
+            interior_ratio="" if math.isnan(result.interior_ratio) else round(result.interior_ratio, 4),
+            interior_bright="" if math.isnan(result.interior_bright) else round(result.interior_bright, 4),
+            capture_latency_ms=round(capture_ms, 2), frame_offset="" if frame_offset is None else frame_offset,
+            inspection_latency_ms=round(result.latency_ms, 3),
+            simulation_time_s=round(sim_time, 3), conveyor_speed=speed,
+            lighting_condition=_lighting(), frame_file=frame_file or "", reason=result.reason))
+
+    def _apply_verdict(self, product_id, result, sim_time):
+        """The product's final vision verdict (applied unless it was already sorted)."""
         p = self._sim.tracker.get(product_id)
         if self._log:
             p.inspection_end_ms = self._run_ms()
@@ -509,26 +590,60 @@ class VisionTwinFactoryExtension(omni.ext.IExt):
         else:
             p.prediction, p.score = result.label, result.score
             p.defect_reason = result.defect_reason if result.label == "defect" else None
-
-        frame_file = self._log.save_frame(product_id, rgb) if self._log else None
-        if self._log:
-            self._log.append(InspectionRecord(
-                run_id=self._run_id, seed=self._sim.config.seed, product_id=product_id,
-                ground_truth=p.ground_truth,  # evaluation only, copied from the tracker
-                predicted_label=result.label, defect_reason=result.defect_reason,
-                score=round(result.score, 4), mean_hue=round(result.mean_hue, 2), area_px=result.area_px,
-                interior_ratio="" if math.isnan(result.interior_ratio) else round(result.interior_ratio, 4),
-                interior_bright="" if math.isnan(result.interior_bright) else round(result.interior_bright, 4),
-                capture_latency_ms=round(capture_ms, 2), frame_offset="" if frame_offset is None else frame_offset,
-                inspection_latency_ms=round(result.latency_ms, 3),
-                simulation_time_s=round(sim_time, 3), conveyor_speed=speed,
-                lighting_condition=_lighting(), frame_file=frame_file or "", reason=result.reason))
         msg = f"id={product_id:04d} vision={result.label} score={result.score:.2f} ({result.latency_ms:.1f} ms)"
         print(f"{LOG_PREFIX} {msg}")
         self._ui.set_last_event(msg)
         if self._events is not None:
             self._events.write(sim_time, product_id, "VISION", detail=f"{result.label} {result.defect_reason}".strip())
         self._refresh_counters()
+
+    def _on_frame(self, product_id, rgb, capture_ms, stale, frame_offset, sim_time, speed):
+        result = self._vet(self._inspector.inspect(rgb), product_id, stale, frame_offset)  # pixels only
+        frame_file = self._log.save_frame(product_id, rgb) if self._log else None
+        self._record(product_id, 0, result, capture_ms, frame_offset, sim_time, speed, frame_file)
+        self._apply_verdict(product_id, result, sim_time)
+
+    def _can_retake(self, product_id, view) -> bool:
+        """Still holding still for this view of this product (so a new frame shows the same pose)."""
+        t = self._station_time()
+        return self._sim.station_product == product_id and t is not None and self._cell.cycle.view_at(t) == view
+
+    def _on_view_frame(self, product_id, view, rgb, capture_ms, stale, frame_offset, sim_time, speed, retake=False):
+        # In the cell consecutive captures always differ in pose (another view or another product),
+        # so identical pixels mean the render did not show the requested state, even with a matching
+        # frame number (seen once in 150 captures on 2026-10-23: view 1 = view 0 image). Retake once
+        # while the machine still holds this view, else the view is unknown.
+        if stale and not retake and self._can_retake(product_id, view):
+            self._view_retakes += 1
+            carb.log_warn(f"{LOG_PREFIX} id={product_id:04d} view {view} identical to the previous capture -> retake")
+            self._request_view(product_id, view, retake=True)
+            return
+        result = self._vet(self._inspectors[view].inspect(rgb), product_id, False, frame_offset)  # pixels only
+        if stale:
+            self._stale_frames += 1
+            result.label, result.reason = UNKNOWN, "stale frame (identical to the previous capture, camera moved)"
+            carb.log_warn(f"{LOG_PREFIX} id={product_id:04d} view {view} stale frame -> unknown")
+        frame_file = self._log.save_frame(product_id, rgb, view) if self._log else None
+        self._record(product_id, view, result, capture_ms, frame_offset, sim_time, speed, frame_file)
+        self._view_done(product_id, view, result, capture_ms, sim_time, speed)
+
+    def _on_view_error(self, product_id, view, message, sim_time, speed):
+        carb.log_warn(f"{LOG_PREFIX} id={product_id:04d} view {view} capture failed ({message}) -> unknown")
+        result = InspectionResult(UNKNOWN, 0.0, 0, float("nan"), None, 0.0, f"capture failed: {message}")
+        self._record(product_id, view, result, 0.0, None, sim_time, speed, "")
+        self._view_done(product_id, view, result, 0.0, sim_time, speed)
+
+    def _view_done(self, product_id, view, result, capture_ms, sim_time, speed):
+        """Collect the views of a product; with all of them, combine and apply the verdict."""
+        got = self._view_results.setdefault(product_id, {})
+        got[view] = (result, capture_ms)
+        names = [v.name for v in self._cell.cycle.views]
+        if len(got) < len(names):
+            return
+        del self._view_results[product_id]
+        combined = combine_views([got[k][0] for k in range(len(names))], names)
+        self._record(product_id, "all", combined, max(c for _, c in got.values()), 0, sim_time, speed, "")
+        self._apply_verdict(product_id, combined, sim_time)
 
     # -- run results ------------------------------------------------------
 
@@ -559,6 +674,7 @@ class VisionTwinFactoryExtension(omni.ext.IExt):
             "late_results": len(self._sorter.late_results),
             "frame_mismatches": self._frame_mismatches,
             "stale_frames": self._stale_frames,
+            "view_retakes": getattr(self, "_view_retakes", 0),
             "frame_target_misses": self._frames.frame_target_misses if self._frames else None,
             "capture_timeouts": self._frames.timeouts if self._frames else None,
             "not_exited": sum(p.state != ProductState.EXITED for p in products),
@@ -567,10 +683,10 @@ class VisionTwinFactoryExtension(omni.ext.IExt):
             "part": self._catalog.part,
             "throughput_per_hour": round(len(sorted_rows) / self._sim.time * 3600.0, 1) if self._sim.time else None,
         }
-        if self._sim.config.process is not None:  # dental milling line metrics
+        if self._sim.config.process is not None:  # inspection cell line metrics
             st = self._sim.config.process
             self.summary["line"] = {
-                "station": st.name, "cycle_s_compressed": st.cycle_s,
+                "station": st.name, "cycle_s": round(st.cycle_s, 3), "views": len(st.view_times),
                 "spawn_interval_s": self._sim.config.spawn_interval,
                 "station_utilization": round(self._sim.station_utilization, 4),
                 "station_busy_s": round(self._sim.station_busy_time, 3),
@@ -583,6 +699,12 @@ class VisionTwinFactoryExtension(omni.ext.IExt):
         self.run_complete = True
         self._ui.set_status(f"finished: sorted {self.summary['sort_correct']}/{self.summary['sorted']} correct")
         print(f"{LOG_PREFIX} summary {json.dumps(self.summary)}")
+
+    def _cell_status(self) -> str:
+        pid, t = self._sim.station_product, self._station_time()
+        if self._cell is None or pid is None:
+            return "idle"
+        return f"{self._cell.phase(t)} id={pid:04d}"
 
     def _refresh_counters(self):
         products = self._sim.tracker.all()
@@ -599,7 +721,7 @@ class VisionTwinFactoryExtension(omni.ext.IExt):
             f"vision: good={n_pred['good']} defect={n_pred['defect']} unknown={n_pred['unknown']}\n"
             f"sorted: pass={n_pass} reject={n_rej} correct={n_ok}/{len(d)}  "
             f"late={len(self._sorter.late_results)} frame_err={getattr(self, '_frame_mismatches', 0)}"
-            + (f"\nmill: {'MACHINING id=%04d' % self._sim.station_product if self._sim.station_product else 'idle'}"
+            + (f"\ncell: {self._cell_status()}"
                f"  queue={self._sim.queue_len} (max {self._sim.queue_max})"
                f"  util={self._sim.station_utilization * 100:.0f}%"
                if self._sim.config.process is not None else "")
