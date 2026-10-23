@@ -18,6 +18,8 @@ related: ["[[2026-10-22 Day5 CAD 자산 파이프라인]]", "[[2026-10-22 CAD �
 - 앱 `.kit`에 의존성을 넣지 않고 변환 스크립트에서만 켠다(앱 시작이 무거워지지 않게).
 - 진단: `scripts/probe_cad_converter.ps1`, 실제 변환: `scripts/convert_step_to_usd.ps1`
 
+> 2026-10-23: 옵션 형식, LOD 실측, 물리량 옵션 결과는 [[HOOPS 변환 옵션 실측 (LOD, 문자열 인자, 물리량)]]
+
 ## 출력 구조 (teeth_mill.stp 기준)
 ```
 /teeth_mill                      (defaultPrim, Xform)

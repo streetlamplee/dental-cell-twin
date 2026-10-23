@@ -26,7 +26,8 @@
 |---|---|
 | 라인 | 컨베이어, 투입(시드 고정), 밀링 스테이션(입구 대기 → 로딩 → 가공 → 언로딩), 검사선, 배출 푸셔와 bin |
 | 제품 | ① 박스(색상 결함) ② **실제 CAD 부품 KFL08 베어링 유닛**(색상, 부품 누락) ③ **치아 크라운**(블랭크 → 크라운; 셰이드, 미완성 가공) |
-| CAD 파이프라인 | `teeth_mill.urdf` → STEP 어셈블리(CadQuery) + `kinematics.json` → USD(Omniverse CAD converter, HOOPS) → 관절 forward kinematics 재적용 |
+| CAD 파이프라인 | `teeth_mill.urdf` → STEP 어셈블리(CadQuery, 필렛·챔퍼) + `kinematics.json` → USD(Omniverse CAD converter, HOOPS) → 관절 forward kinematics 재적용 |
+| STEP → USD 변환 | 자산 목록(`config/cad_assets.json`)으로 일괄 변환. 프로파일(machine/product), **측정으로 고른 테셀레이션 LOD**, STEP 메타데이터, 재질. 변환마다 기록(`.convert.json`)과 **품질 리포트**(`.report.json`: STEP B-rep 대비 부피·면적·크기 오차)를 남긴다 |
 | 비전 | 검사 Viewport(640×480) 프레임을 OpenCV로 판정. 색상(HSV hue 또는 Lab a*b*), 내부 밝기(누락), 기준 외곽선(`matchShapes` + 면적비) |
 | 동기화 | 동기 렌더링, 고정 시뮬레이션 스텝(1/60 s), **프레임 지정 캡처**(검사선을 통과한 update 번호의 프레임만 사용, 다르면 판정을 버림) |
 | 분류 | 제품 ID별 판정 → 배출선에서만 동작. 판정이 늦거나 없으면 fail-safe 배출 |
@@ -40,7 +41,7 @@
 flowchart LR
   subgraph CAD["CAD 자산 (오프라인, 스크립트)"]
     URDF[teeth_mill.urdf] -->|urdf_to_step| STP[STEP + kinematics.json]
-    STP -->|convert_step_to_usd<br/>HOOPS converter| MUSD[밀링기 USD]
+    STP -->|convert_all_cad<br/>HOOPS converter, LOD 3| MUSD[밀링기 USD]
     WEB[KFL08 STEP<br/>CC-BY-3.0] --> PUSD[부품 USD + 변형 레이어]
     DENT[CadQuery 크라운/블랭크] --> PUSD
   end
@@ -75,10 +76,23 @@ flowchart LR
 | KFL08 | 40 (정상 29, 색상 5, 누락 6) | 40/40 | 11/11 | TP 11, FP 0 |
 | 치아 크라운 | 40 (정상 29, 셰이드 5, 가공 6) | 40/40 | 11/11 | 밀링기 가동률 91.7 % |
 
-위 표는 Day 4~7 기록이다(뷰포트 기본 라이트 리그가 켜진 상태). 조명을 고친 뒤의 결과는 아래 Day 9 실험을 본다.
+위 표는 Day 4~7 기록이다(뷰포트 기본 라이트 리그가 켜진 상태, CAD 변환 LOD 0). 지금 조건의 결과는 아래 Day 9 실험을 본다.
+
+### STEP → USD 변환 품질
+처음에는 변환 LOD 0(extra low)을 써서 곡면이 거친 다각형이었다. LOD 0~4를 모두 변환해 **STEP B-rep(OpenCascade)의 정확한 부피와 비교**하고 자산별 LOD를 정했다(`compare_tess_lod.ps1`, [results/cad_lod/](results/cad_lod/)).
+
+| 자산 | 선택 LOD | 삼각형 (LOD 0 → 선택) | 부피 오차 (LOD 0 → 선택) | 이유 |
+|---|---|---|---|---|
+| 치아 크라운 | 3 | 608 → 16,774 | −1.68 % → −0.05 % | 근접 카메라 + 외곽선 검사 |
+| KFL08 | 2 | 8,896 → 67,208 | −1.35 % → −0.005 % | LOD 3은 삼각형 3.3배인데 부피 오차 개선 없음 |
+| 밀링기 | 3 | 384 → 31,040 (필렛 포함) | −0.03 % → −0.02 % | 필렛·챔퍼 곡면, 비용 작음. URDF 검증 bbox 편차 0 mm 유지 |
+
+![LOD별 삼각형 수와 부피 오차](docs/screenshots/readme_lod_compare.png)
+
+HOOPS의 `convertPhysicsData`는 이 STEP들에 속성을 쓰지 않아서(실측), 부피와 면적은 OpenCascade로 직접 계산했다.
 
 ### Day 9 실험 (조건 행렬)
-검사기는 **default 조명의 seed 1 run에서만 보정**했다(`config/inspector*.json`). 아래 평가는 seed 42 run이고, 평가 결과를 보고 임계값을 다시 맞추지 않았다.
+검사기는 **default 조명의 seed 1 run에서만 보정**했다(`config/inspector*.json`, 변환 LOD를 바꾼 뒤 다시 보정). 아래 평가는 seed 42 run이고, 평가 결과를 보고 임계값을 다시 맞추지 않았다.
 - 조건: `default`(기준), `dark`(조명 세기 35 %, 검사 화면 평균 밝기 −62 %), `fast`(컨베이어 1.5 m/s)
 - 실험 정의: [experiments/day9.json](experiments/day9.json) · 전체 표: [results/experiments/day9/table.md](results/experiments/day9/table.md) · 13개 run 모두 `check_run` 감사 통과
 
@@ -89,15 +103,15 @@ flowchart LR
 | **KFL08 dark** | 40 | 11 | **29** | 0 | 0 | **0.28** | 1.00 | **0.28** |
 | KFL08 fast | 40 | 11 | 0 | 0 | 29 | 1.00 | 1.00 | 1.00 |
 | crown default | 40 | 11 | 0 | 0 | 29 | 1.00 | 1.00 | 1.00 |
-| **crown dark** | 40 | 11 | **2** | 0 | 27 | **0.85** | 1.00 | **0.95** |
+| **crown dark** | 40 | 11 | **3** | 0 | 26 | **0.79** | 1.00 | **0.93** |
 | crown fast | 40 | 11 | 0 | 0 | 29 | 1.00 | 1.00 | 1.00 |
 
 ![조건별 분류 성공률](results/experiments/day9/fig_vision.png)
 
 **해석 (원인은 inspections.csv의 판정 이유로 확인)**
 - **결함을 놓친 경우는 없다**(모든 조건 recall 1.00). 어두워지면 정상품을 불량으로 보는 **안전 쪽 오류**가 생긴다.
-- KFL08 dark: 누락 검사가 "밝은 픽셀(V ≥ 140) 비율"이라는 **절대 밝기 임계값**을 쓴다. 조명이 어두워지자 정상품의 내부 밝기가 0.00이 되어(기준 ≥ 0.156) 정상 29개가 모두 "누락"으로 판정됐다. 색(hue) 점수는 0.97~0.99로 정상이었다.
-- crown dark: 밝기로 크라운을 분리하면 그림자 쪽 가장자리가 빠져, 면적비가 0.95로 허용 한계(±5 %)에 걸렸다(2건). 외곽선 거리(≤ 0.013)와 셰이드 점수(1.00)는 정상이었다.
+- KFL08 dark: 누락 검사가 "밝은 픽셀(V ≥ 140) 비율"이라는 **절대 밝기 임계값**을 쓴다. 조명이 어두워지자 정상품의 내부 밝기가 0.00이 되어(기준 ≥ 0.161) 정상 29개가 모두 "누락"으로 판정됐다. 색(hue) 점수는 0.97~0.99로 정상이었다.
+- crown dark: 밝기로 크라운을 분리하면 그림자 쪽 가장자리가 빠져, 면적비가 0.95로 허용 한계(±5 %)에 걸렸다(3건). 외곽선 거리(≤ 0.011)와 셰이드 점수(1.00)는 정상이었다.
 - box: hue와 채도는 조명 세기에 거의 영향을 받지 않아 dark에서도 그대로였다.
 - 속도(1.5 m/s): 동기 렌더링, 고정 스텝, 프레임 지정 캡처 덕분에 세 제품 모두 영향이 없었다(late 0, frame mismatch 0).
 
@@ -114,7 +128,7 @@ flowchart LR
 
 투입 간격이 사이클(3 s) 이하이면 **밀링기가 병목**이다. 간격을 줄여도 처리량은 늘지 않고 대기열만 길어진다. 간격이 사이클보다 길면 밀링기가 논다. 가동률이 100 %가 아닌 것은 로딩, 언로딩, 첫 제품 도착 전 시간 때문이다.
 
-**참고: 캡처 지연(벽시계)** 은 run마다 평균 130~1200 ms로 차이가 컸다. 실험하는 동안 PC를 다른 작업과 함께 쓴 영향으로 보인다(추정, 따로 측정하지 않음). 시뮬레이션은 고정 스텝이라 판정과 분류에는 영향이 없었지만, 이 값을 실시간 성능 지표로 쓰면 안 된다. 판정 자체(OpenCV)는 조건별 평균 1.3~8.7 ms다.
+**참고: 캡처 지연(벽시계)** 은 이번 실험에서 조건별 평균 121~136 ms였다. 같은 행렬을 PC를 다른 작업과 함께 쓰면서 돌렸을 때는 130~1200 ms까지 흔들렸다(`results/experiments/day9_lod0/`). 시뮬레이션은 고정 스텝이라 두 경우 모두 판정과 분류에는 영향이 없었다(late 0, mismatch 0). 다만 이 값은 PC 부하에 따라 달라지므로 실시간 성능 지표로 쓰면 안 된다. 판정 자체(OpenCV)는 조건별 평균 1.3~8.7 ms다.
 
 ## 5. 설치와 실행
 
@@ -124,7 +138,7 @@ flowchart LR
 | OS | Windows 11 Pro (10.0.26200) |
 | GPU | NVIDIA RTX 4060 8 GB, 드라이버 610.88 (RTX 필요) |
 | Kit | Omniverse Kit SDK **110.4.0** (kit-app-template 브랜치 `110.4.0`, `kit_base_editor` 기반) |
-| CAD 변환기 | `omni.kit.converter.hoops_core` 512.2.1 (옵션: `config/cad_converter_options.json`) |
+| CAD 변환기 | `omni.kit.converter.hoops_core` 512.2.1 (프로파일: `config/cad_converter_options.json`, 자산별 LOD: `config/cad_assets.json`) |
 | Python (Kit 밖) | 3.12, `scripts/requirements-dev.txt` (테스트·분석), `scripts/requirements-cad.txt` (CadQuery 2.8.0, usd-core 26.11) |
 
 ### 처음부터 실행
@@ -150,9 +164,10 @@ python -m pip install -r scripts\requirements-dev.txt
 ```powershell
 .\scripts\setup_cad_env.ps1
 .\scripts\urdf_to_step.ps1                                       # reference/teeth_mill.urdf → assets/cad/teeth_mill.stp
-.\scripts\convert_step_to_usd.ps1 -Stp assets\cad\teeth_mill.stp
-.\scripts\verify_cad_usd.ps1                                     # 링크 6/6, 부품 16/16, 색 16/16, bbox 편차 0 mm
-.\scripts\fetch_parts.ps1; .\scripts\make_dental_parts.ps1; .\scripts\make_part_variants.ps1 -Part crown
+.\scripts\fetch_parts.ps1; .\scripts\make_dental_parts.ps1           # 부품 STEP 받기 / 치과 모델 STEP 만들기
+.\scripts\convert_all_cad.ps1                                    # 전체 STEP → USD + 품질 리포트 + 밀링기 URDF 검증(bbox 편차 0 mm)
+.\scripts\make_part_variants.ps1 -Part kfl08; .\scripts\make_part_variants.ps1 -Part crown
+.\scripts\compare_tess_lod.ps1 -Stp assets\parts\raw\dental_crown.step   # (선택) LOD 0~4 비교
 ```
 스크립트 전체 설명: [docs/topics/스크립트 목록.md](docs/topics/스크립트%20목록.md)
 
@@ -177,8 +192,10 @@ docs/                                          Obsidian 노트: 결정, 변경, 
 - **시뮬레이션의 한계:** 반송은 키네마틱(물리 없음)이고, 밀링기 관절 동작은 시각용이다(G-code 없음). 가공 사이클 3 s는 압축 시간이고, 치수와 감속비는 URDF의 임시값이다.
 - **렌더 조건이 단순함:** 노이즈, 블러, 렌즈 왜곡, 재질 변화가 없다. 실제 카메라에 적용하려면 실측 이미지로 다시 보정해야 한다.
 - **실행 속도:** 동기 렌더링과 고정 스텝을 쓰기 때문에 GUI가 실시간보다 느리게(슬로모션처럼) 보일 수 있다. Day 9의 크라운 40개 run은 4~20분 걸렸다(PC 부하에 따라 다름).
+- **HOOPS 물리량 미출력:** `convertPhysicsData`를 켜도 이 STEP들에는 `omni:hoops:physics:*` 속성이 생기지 않았다(원인 미확인). B-rep 부피와 면적은 OpenCascade로 대신 계산한다.
+- **밀링기 형상:** URDF가 박스와 원통뿐이라 필렛과 챔퍼로 다듬었지만 실제 기계의 상세 형상은 아니다.
 - **뷰포트 라이트 리그:** Kit은 새 stage에 기본 라이트 리그를 자동으로 넣는다. 확장이 씬을 만든 뒤 Stage Lights로 바꾸지만, GUI에서 사용자가 조명 메뉴를 바꾸면 화면이 보정 조건과 달라진다.
-- **Day 4~7 기록 수치**(위 "개별 평가 run")는 라이트 리그가 켜진 화면에서 측정한 값이다. 지금 화면 기준 수치는 Day 9 표다.
+- **Day 4~7 기록 수치**(위 "개별 평가 run")는 라이트 리그가 켜지고 CAD 변환 LOD 0인 화면에서 측정한 값이다. 지금 화면 기준 수치는 Day 9 표다.
 - 검증 환경은 Windows + RTX 4060 한 대뿐이다. Linux와 다른 GPU에서는 확인하지 않았다.
 
 ## 8. 개선 계획
