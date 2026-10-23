@@ -41,3 +41,4 @@ deps/**/user.toml
 /results/runs/**/frames/
 /.venv-cad/
 /results/experiments/**/frames/
+/results/cad_lod/**/*.usd

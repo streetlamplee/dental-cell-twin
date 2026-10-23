@@ -1,8 +1,35 @@
 {
-  "_comment": "omni.kit.converter.hoops_core options. Base = usd_converter project (my_company.stp_pipeline_setup/converter.py); useMaterials is decided by scripts/convert_step_to_usd.ps1 tests (see docs).",
-  "bOptimize": "true",
-  "instancing": "true",
-  "tessLOD": "0",
-  "convertMetadata": "false",
-  "useMaterials": "true"
+  "_comment": "omni.kit.converter.hoops_core 512.2.1 options per conversion profile (names as in the extension's HoopsOptions / docs/SKILL.md). Chosen by scripts/convert_step_to_usd.ps1 -Profile; per-asset profile and LOD in config/cad_assets.json. Why these values: docs/decisions/2026-10-23 STP to USD 변환 강화.md",
+  "profiles": {
+    "legacy": {
+      "_comment": "Day 5-6 settings (base = user's usd_converter). Extra-low tessellation: curved faces became coarse polygons.",
+      "bOptimize": "true",
+      "instancing": "true",
+      "tessLOD": "0",
+      "convertMetadata": "false",
+      "useMaterials": "true"
+    },
+    "machine": {
+      "_comment": "Line equipment seen from a distance: medium tessellation, colours as materials, STEP product names as metadata.",
+      "sceneOpGenerateUVs": true,
+      "instancing": true,
+      "tessLOD": 2,
+      "accurateSurfaceCurvatures": true,
+      "useNormals": true,
+      "useMaterials": true,
+      "materialType": 1,
+      "convertMetadata": true
+    },
+    "product": {
+      "_comment": "Products seen close up by the inspection camera: higher tessellation so curved surfaces and silhouettes are smooth. convertPhysicsData was tried and authored nothing for these STEP files (see docs).",
+      "sceneOpGenerateUVs": true,
+      "instancing": true,
+      "tessLOD": 3,
+      "accurateSurfaceCurvatures": true,
+      "useNormals": true,
+      "useMaterials": true,
+      "materialType": 1,
+      "convertMetadata": true
+    }
+  }
 }

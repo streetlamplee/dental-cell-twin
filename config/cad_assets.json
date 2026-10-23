@@ -1,0 +1,18 @@
+{
+  "_comment": "CAD assets converted by scripts/convert_all_cad.ps1 (USD converter = omni.kit.converter.hoops_core). profile -> config/cad_converter_options.json; tessLOD chosen from results/cad_lod (scripts/compare_tess_lod.ps1).",
+  "assets": [
+    {"name": "teeth_mill", "step": "assets/cad/teeth_mill.stp", "usd": "assets/cad/teeth_mill.usd",
+     "profile": "machine", "tessLOD": 3, "verify_urdf": true,
+     "_why": "1.9k triangles at LOD 3; round cylinders (spindle, rotary axes) for little cost"},
+    {"name": "kfl08", "step": "assets/parts/raw/kfl08.step", "usd": "assets/parts/usd/kfl08.usd",
+     "profile": "product", "tessLOD": 2,
+     "_why": "67k triangles, volume error -0.005 %; LOD 3 has 3.3x the triangles for no volume gain and many parts are on the belt"},
+    {"name": "dental_blank", "step": "assets/parts/raw/dental_blank.step", "usd": "assets/parts/usd/dental_blank.usd",
+     "profile": "product", "tessLOD": 3},
+    {"name": "dental_crown", "step": "assets/parts/raw/dental_crown.step", "usd": "assets/parts/usd/dental_crown.usd",
+     "profile": "product", "tessLOD": 3,
+     "_why": "close-up inspection with a silhouette (contour) check: 16.8k triangles, volume error -0.05 % (LOD 0: 608, -1.7 %)"},
+    {"name": "dental_crown_incomplete", "step": "assets/parts/raw/dental_crown_incomplete.step",
+     "usd": "assets/parts/usd/dental_crown_incomplete.usd", "profile": "product", "tessLOD": 3}
+  ]
+}
