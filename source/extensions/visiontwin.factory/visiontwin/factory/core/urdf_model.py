@@ -1,7 +1,7 @@
 """Minimal URDF reader (pure Python + numpy): links, box/cylinder visuals, joints.
 
-Covers what reference/teeth_mill.urdf uses. Mesh geometry, inertia and collisions are
-not read. Transforms are 4x4 numpy arrays (meters, URDF frames).
+Covers what reference/teeth_mill.urdf (box/cylinder) and the Seeed reBot Arm URDF (mesh
+visuals, file path relative to the URDF) use. Inertia and collisions are not read. Transforms are 4x4 numpy arrays (meters, URDF frames).
 
 URDF conventions: origin rpy is fixed-axis roll-pitch-yaw, R = Rz(yaw) Ry(pitch) Rx(roll);
 a cylinder's axis is its local Z.
@@ -53,11 +53,12 @@ def _origin(elem) -> np.ndarray:
 @dataclass
 class Visual:
     name: str
-    shape: str  # "box" or "cylinder"
-    size: Tuple[float, ...]  # box: (x, y, z); cylinder: (radius, length)
+    shape: str  # "box", "cylinder" or "mesh"
+    size: Tuple[float, ...]  # box: (x, y, z); cylinder: (radius, length); mesh: scale (x, y, z)
     origin: np.ndarray  # link frame -> visual frame
     rgba: Tuple[float, float, float, float]
     material: str
+    mesh: Optional[str] = None  # mesh file name as written in the URDF
 
 
 @dataclass
@@ -179,18 +180,21 @@ def load_urdf(path: str) -> UrdfModel:
         link = Link(le.get("name"))
         for i, ve in enumerate(le.findall("visual")):
             geo = ve.find("geometry")
-            box, cyl = geo.find("box"), geo.find("cylinder")
+            box, cyl, mesh = geo.find("box"), geo.find("cylinder"), geo.find("mesh")
+            mesh_file = None
             if box is not None:
                 shape, size = "box", _floats(box.get("size"), 3)
             elif cyl is not None:
                 shape, size = "cylinder", (float(cyl.get("radius")), float(cyl.get("length")))
+            elif mesh is not None:
+                shape, size, mesh_file = "mesh", _floats(mesh.get("scale"), 3, 1.0), mesh.get("filename")
             else:
-                raise ValueError(f"link {link.name}: only box/cylinder visuals are supported")
+                raise ValueError(f"link {link.name}: only box/cylinder/mesh visuals are supported")
             mat = ve.find("material")
             mat_name = mat.get("name") if mat is not None else ""
             rgba = colors.get(mat_name, (0.7, 0.7, 0.7, 1.0))
             link.visuals.append(Visual(ve.get("name") or f"{link.name}_visual{i}", shape, size,
-                                       _origin(ve), rgba, mat_name))
+                                       _origin(ve), rgba, mat_name, mesh_file))
         links[link.name] = link
 
     joints: Dict[str, Joint] = {}

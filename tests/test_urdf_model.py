@@ -66,3 +66,19 @@ def test_kinematics_json_round_trip(mill):
     assert "x_joint" in names and "tool_tip_joint" in names
     y = next(j for j in k["joints"] if j["name"] == "y_joint")
     assert y["origin_xyz"] == pytest.approx([0, -0.050975, 0.04])
+
+
+def test_mesh_visuals_are_read(tmp_path):
+    (tmp_path / "arm.urdf").write_text("""<robot name="arm">
+      <material name="yellow"><color rgba="0.7 0.8 0.1 1"/></material>
+      <link name="base"><visual name="shell"><origin xyz="0 0 0.1"/>
+        <geometry><mesh filename="../meshes/base.stl" scale="0.001 0.001 0.001"/></geometry>
+        <material name="yellow"/></visual></link>
+      <link name="link1"/>
+      <joint name="j1" type="revolute"><parent link="base"/><child link="link1"/>
+        <axis xyz="0 0 1"/><limit lower="-1" upper="1"/></joint>
+    </robot>""", encoding="utf-8")
+    m = load_urdf(str(tmp_path / "arm.urdf"))
+    v = m.links["base"].visuals[0]
+    assert v.shape == "mesh" and v.mesh == "../meshes/base.stl" and v.size == (0.001, 0.001, 0.001)
+    assert v.rgba == (0.7, 0.8, 0.1, 1.0) and v.origin[2, 3] == 0.1
