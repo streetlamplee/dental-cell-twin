@@ -1,0 +1,18 @@
+{
+  "converter": "omni.kit.converter.hoops_core-512.2.1",
+  "profile": "product",
+  "options": {
+    "sceneOpGenerateUVs": "true",
+    "instancing": "true",
+    "tessLOD": "3",
+    "accurateSurfaceCurvatures": "true",
+    "useNormals": "true",
+    "useMaterials": "true",
+    "materialType": "1",
+    "convertMetadata": "true"
+  },
+  "source": "dental_crown_chipped.step",
+  "source_sha256": "4121b48d208e0e7db5acae2ceb3a5ba6faaeede0b6026aada2990b5381bb2249",
+  "seconds": 1.15,
+  "output_bytes": 354926
+}

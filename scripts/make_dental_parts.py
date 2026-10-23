@@ -5,6 +5,9 @@ bottom centre, Z up:
   dental_blank            14 x 12 x 16 block (CAD/CAM milling block)
   dental_crown            molar-like crown: rounded 11 x 10 body with four cusps
   dental_crown_incomplete crown + an uncut corner of blank material (tool breakage)
+  dental_crown_chipped    crown with a chipped margin: a notch at the bottom of the -Y wall.
+                          The wall above it is intact, so the top-view silhouette is unchanged;
+                          only a tilted (side) view shows it (inspection cell, multi-view)
 
 Usage: python scripts/make_dental_parts.py <out_dir>
 """
@@ -36,6 +39,11 @@ def crown_incomplete() -> cq.Workplane:
     return crown().union(remnant)
 
 
+def crown_chipped() -> cq.Workplane:
+    notch = cq.Workplane("XY").box(5.0, 1.5, 3.0, centered=(True, False, False)).translate((0, -5.0, 0))
+    return crown().cut(notch)
+
+
 def main() -> int:
     if len(sys.argv) != 2:
         print(__doc__)
@@ -43,7 +51,7 @@ def main() -> int:
     out = Path(sys.argv[1])
     out.mkdir(parents=True, exist_ok=True)
     for name, wp in (("dental_blank", blank()), ("dental_crown", crown()),
-                     ("dental_crown_incomplete", crown_incomplete())):
+                     ("dental_crown_incomplete", crown_incomplete()), ("dental_crown_chipped", crown_chipped())):
         asm = cq.Assembly(name=name).add(wp, name="body")
         path = out / f"{name}.step"
         asm.export(str(path), exportType="STEP")

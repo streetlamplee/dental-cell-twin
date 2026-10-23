@@ -1,5 +1,5 @@
 {
-  "_comment": "Product parts built from CAD (Day 6/7). make_part_variants.ps1 writes usd/<part>_<variant>.usda (final shape) and, for processed parts, usd/<part>_<variant>_raw.usda (before processing), as reference + override layers on the converted USD (never edited). Paths relative to the converted asset's default prim; paint_prims '*' = every mesh. Paint colours are simulation choices. Optional per part: process (station + cycle seconds, compressed time), spawn_interval_s, camera (inspection camera height above the belt and focal length).",
+  "_comment": "Product parts built from CAD (Day 6/7). make_part_variants.ps1 writes usd/<part>_<variant>.usda (final shape) and, for processed parts, usd/<part>_<variant>_raw.usda (before processing), as reference + override layers on the converted USD (never edited). Paths relative to the converted asset's default prim; paint_prims '*' = every mesh. Paint colours are simulation choices. Optional per part: spawn_interval_s, camera (fixed inspection camera height above the belt and focal length), cell (inline inspection cell: camera on the 5-axis machine, views and timing).",
   "kfl08": {
     "converted_usd": "usd/kfl08.usd",
     "target_length_m": 0.2,
@@ -14,23 +14,28 @@
     }
   },
   "crown": {
-    "_comment": "Dental milling line (Day 7): blank -> mill -> crown. Our own CadQuery models (scripts/make_dental_parts.ps1), real size. Zirconia ivory vs wrong material (pink PMMA); shape defect = milling left a corner of blank material (tool breakage). cycle_s is compressed (a real crown takes 10+ minutes).",
+    "_comment": "Dental crown inspection cell (Day 11): finished crowns (milled upstream) ride the conveyor into the 5-axis machine, which carries a camera on its spindle instead of a tool. B/C tilt and turn the crown on the platter for a top view and four side views. Our own CadQuery models (scripts/make_dental_parts.ps1), real size. Zirconia ivory vs wrong material (pink); shape = uncut corner of blank material; chip = notch at the margin of one side wall (invisible from the top).",
     "rotate_xyz_deg": [0, 0, 0],
     "paint_prims": ["*"],
-    "process": {"station": "mill", "cycle_s": 3.0},
-    "spawn_interval_s": 3.0,
-    "camera": {"height_above_belt": 0.15, "focal_mm": 35.0},
-    "inspection": {"segment": "bright", "color_metric": "ab", "golden_contour": true},
+    "spawn_interval_s": 6.0,
+    "cell": {
+      "_comment": "standoff_m: camera to crown centre; roi_half_m: inspection window half size on that plane. Timing in seconds of simulation time.",
+      "standoff_m": 0.11, "focal_mm": 24.0, "roi_half_m": 0.022,
+      "timing": {"load_s": 0.6, "move_s": 0.45, "hold_s": 0.3, "unload_s": 0.6},
+      "views": [
+        {"name": "top", "b_deg": 0, "c_deg": 0},
+        {"name": "side_a", "b_deg": 45, "c_deg": 0},
+        {"name": "side_b", "b_deg": 45, "c_deg": 90},
+        {"name": "side_c", "b_deg": 45, "c_deg": 180},
+        {"name": "side_d", "b_deg": 45, "c_deg": 270}
+      ]
+    },
+    "inspection": {"segment": "bright", "color_metric": "ab", "golden_contour": true, "silhouette_check": true},
     "variants": {
-      "good": {"ground_truth": "good", "defect_kind": null,
-               "raw": {"source": "usd/dental_blank.usd", "paint_rgb": [0.93, 0.90, 0.80]},
-               "final": {"source": "usd/dental_crown.usd", "paint_rgb": [0.93, 0.90, 0.80]}},
-      "color": {"ground_truth": "defect", "defect_kind": "color",
-                "raw": {"source": "usd/dental_blank.usd", "paint_rgb": [0.92, 0.55, 0.62]},
-                "final": {"source": "usd/dental_crown.usd", "paint_rgb": [0.92, 0.55, 0.62]}},
-      "shape": {"ground_truth": "defect", "defect_kind": "shape",
-                "raw": {"source": "usd/dental_blank.usd", "paint_rgb": [0.93, 0.90, 0.80]},
-                "final": {"source": "usd/dental_crown_incomplete.usd", "paint_rgb": [0.93, 0.90, 0.80]}}
+      "good": {"source": "usd/dental_crown.usd", "paint_rgb": [0.93, 0.90, 0.80], "ground_truth": "good", "defect_kind": null},
+      "color": {"source": "usd/dental_crown.usd", "paint_rgb": [0.92, 0.55, 0.62], "ground_truth": "defect", "defect_kind": "color"},
+      "shape": {"source": "usd/dental_crown_incomplete.usd", "paint_rgb": [0.93, 0.90, 0.80], "ground_truth": "defect", "defect_kind": "shape"},
+      "chip": {"source": "usd/dental_crown_chipped.usd", "paint_rgb": [0.93, 0.90, 0.80], "ground_truth": "defect", "defect_kind": "chip"}
     }
   }
 }

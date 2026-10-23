@@ -13,6 +13,8 @@
      "profile": "product", "tessLOD": 3,
      "_why": "close-up inspection with a silhouette (contour) check: 16.8k triangles, volume error -0.05 % (LOD 0: 608, -1.7 %)"},
     {"name": "dental_crown_incomplete", "step": "assets/parts/raw/dental_crown_incomplete.step",
-     "usd": "assets/parts/usd/dental_crown_incomplete.usd", "profile": "product", "tessLOD": 3}
+     "usd": "assets/parts/usd/dental_crown_incomplete.usd", "profile": "product", "tessLOD": 3},
+    {"name": "dental_crown_chipped", "step": "assets/parts/raw/dental_crown_chipped.step",
+     "usd": "assets/parts/usd/dental_crown_chipped.usd", "profile": "product", "tessLOD": 3}
   ]
 }

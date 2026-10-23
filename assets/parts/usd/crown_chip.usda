@@ -8,14 +8,14 @@
 def Xform "Part" (
     customData = {
         dictionary visiontwin = {
-            string defect_kind = ""
-            string ground_truth = "good"
+            string defect_kind = "chip"
+            string ground_truth = "defect"
             string part = "crown"
-            string stage = "raw"
-            string variant = "good"
+            string stage = "final"
+            string variant = "chip"
         }
     }
-    prepend references = @./dental_blank.usd@
+    prepend references = @./dental_crown_chipped.usd@
 )
 {
     float3 xformOp:rotateXYZ = (0, 0, 0)
@@ -40,7 +40,7 @@ def Xform "Part" (
         }
     }
 
-    over "dental_blank"
+    over "dental_crown_chipped"
     {
         over "body" (
             instanceable = false

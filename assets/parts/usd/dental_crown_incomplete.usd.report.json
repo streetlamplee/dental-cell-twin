@@ -15,8 +15,8 @@
       "convertMetadata": "true"
     },
     "source": "dental_crown_incomplete.step",
-    "source_sha256": "eb6a09cd3dafadeedecade27d5a68263a0f4afeec8142772a4e2a22263b7ec98",
-    "seconds": 0.89,
+    "source_sha256": "f4e3a61b75245ab18a676322cca59ea175f1e46de6d40fbd05de5ff383298cf5",
+    "seconds": 1.09,
     "output_bytes": 155666
   },
   "usd_mesh": {

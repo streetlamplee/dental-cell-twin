@@ -15,8 +15,8 @@
       "convertMetadata": "true"
     },
     "source": "dental_blank.step",
-    "source_sha256": "f611d7013692c0a982c08ab08b482034ac693930f9af2352eb874e1578433569",
-    "seconds": 0.99,
+    "source_sha256": "8444750502fc44320d5ff76a3ea94cc251624ffec0ceef82b51a99a7f027b957",
+    "seconds": 0.97,
     "output_bytes": 7691
   },
   "usd_mesh": {

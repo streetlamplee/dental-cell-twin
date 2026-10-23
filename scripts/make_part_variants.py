@@ -9,8 +9,8 @@ mesh), optional insert prims deactivated (missing-part defect).
 Normalisation: rotation from the catalog; scale = target_length_m / longest side if given,
 else the part keeps its real size (metres); centred in x/y, bottom at z = 0.
 
-A variant either uses the part-level "converted_usd" + its own paint/remove settings
-(single stage, e.g. kfl08), or defines "raw"/"final" stages with their own "source" and
+A variant either uses the part-level "converted_usd" (or its own "source") + its own
+paint/remove settings (single stage, e.g. kfl08, crown), or defines "raw"/"final" stages with their own "source" and
 "paint_rgb" (processed parts, e.g. the dental crown).
 
 Usage: python scripts/make_part_variants.py <part>
@@ -120,7 +120,8 @@ def main() -> int:
                 build_layer(PARTS / "usd" / f"{part}_{variant}{suffix}.usda", PARTS / st["source"], spec,
                             st["paint_rgb"], st.get("remove_insert", False), {**meta, "stage": stage_name})
         else:
-            build_layer(PARTS / "usd" / f"{part}_{variant}.usda", PARTS / spec["converted_usd"], spec,
+            source = PARTS / v.get("source", spec.get("converted_usd", ""))  # per-variant shape (e.g. crown defects)
+            build_layer(PARTS / "usd" / f"{part}_{variant}.usda", source, spec,
                         v["paint_rgb"], v.get("remove_insert", False), {**meta, "stage": "final"})
     return 0
 

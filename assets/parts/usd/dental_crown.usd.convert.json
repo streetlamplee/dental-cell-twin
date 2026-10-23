@@ -12,7 +12,7 @@
     "convertMetadata": "true"
   },
   "source": "dental_crown.step",
-  "source_sha256": "ff6feea2229c5221bf28e7a9e3ea2c57056f4bb4afe6c615c8d709d331b429da",
-  "seconds": 1.05,
+  "source_sha256": "d6ede0fd942d925a5be5e33964e7dab5e9d2503151e4abaa48e7f0274143ecac",
+  "seconds": 0.89,
   "output_bytes": 352999
 }
