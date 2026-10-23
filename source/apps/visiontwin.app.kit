@@ -98,6 +98,7 @@ app.asyncRendering = false  # VisionTwin: render in lock-step with updates; asyn
 exts."visiontwin.factory".millAsset = "${app}/../../../../assets/cad/teeth_mill.usd"  # Day 5: CAD-converted mill
 exts."visiontwin.factory".millKinematics = "${app}/../../../../assets/cad/teeth_mill.kinematics.json"
 exts."visiontwin.factory".partsDir = "${app}/../../../../assets/parts"  # Day 6: CAD part catalog (part=box keeps the cube)
+exts."visiontwin.factory".part = "crown"  # GUI opens on the dental milling line; scripts pass part explicitly (box = cube regression line)
 exts."visiontwin.factory".inspectorConfig = "${app}/../../../../config/inspector.json"  # calibrated inspector parameters
 
 
