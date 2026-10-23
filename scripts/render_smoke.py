@@ -36,7 +36,7 @@ def _print_stage_info(viewport):
     print(f"{TAG} camera={viewport.camera_path} pos={xf.ExtractTranslation()}")
     cache = UsdGeom.BBoxCache(0, [UsdGeom.Tokens.default_])
     for path in ("/World/Factory/Floor", "/World/Factory/Conveyor", "/World/Products",
-                 "/World/Factory/MillStation/Mill"):
+                 "/World/Factory/Cell/Machine"):
         prim = stage.GetPrimAtPath(path)
         rng = cache.ComputeWorldBound(prim).ComputeAlignedRange() if prim else None
         print(f"{TAG} bbox {path}: {rng}")
@@ -85,11 +85,12 @@ async def _main():
         print(f"{TAG} sim time {ext._sim.time:.2f}s, products {len(ext._sim.tracker)}")
         _print_stage_info(viewport)
 
-        # Overview image, then the same frame through the inspection camera.
+        # Overview image, the cell close-up (cell layout), then the inspection camera (fixed top
+        # camera, or the spindle camera of the cell).
         results = []
-        shots = [(None, out), (L.CAMERA_PATH, out.replace(".png", "_inspection.png"))]
-        if viewport.stage.GetPrimAtPath(L.MILL_CAMERA_PATH):
-            shots.insert(1, (L.MILL_CAMERA_PATH, out.replace(".png", "_mill.png")))
+        shots = [(None, out), (ext._inspection_camera_path, out.replace(".png", "_inspection.png"))]
+        if viewport.stage.GetPrimAtPath(L.CELL_OVERVIEW_CAMERA_PATH):
+            shots.insert(1, (L.CELL_OVERVIEW_CAMERA_PATH, out.replace(".png", "_cell.png")))
         for cam_path, path in shots:
             if cam_path:
                 viewport.camera_path = cam_path

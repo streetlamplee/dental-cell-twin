@@ -1,0 +1,16 @@
+{
+  "_comment": "Day 11 experiments: dental crown line with the inline inspection cell (camera on the 5-axis machine, 5 views). A: vision (thresholds calibrated per view on seed 1 under default lighting, NOT recalibrated); top-only vs all views is computed from the same runs (view 0 rows). B: cell capacity (cycle 5.4 s, spawn interval varied). box/kfl08 default = regression of the belt layout. Run: scripts/run_experiments.ps1 -Config experiments/day11.json; analyse: scripts/analyze_results.ps1 -Experiment day11.",
+  "name": "day11",
+  "runs": [
+    {"condition": "crown_default", "group": "vision", "part": "crown", "lighting": "default", "speed": 0.5, "products": 40, "seed": 42},
+    {"condition": "crown_dark",    "group": "vision", "part": "crown", "lighting": "dark",    "speed": 0.5, "products": 40, "seed": 42},
+    {"condition": "crown_fast",    "group": "vision", "part": "crown", "lighting": "default", "speed": 1.5, "products": 40, "seed": 42},
+    {"condition": "box_default",   "group": "regression", "part": "box",   "lighting": "default", "speed": 0.5, "products": 40, "seed": 42},
+    {"condition": "kfl08_default", "group": "regression", "part": "kfl08", "lighting": "default", "speed": 0.5, "products": 40, "seed": 42},
+    {"condition": "cell_spawn_4.0", "group": "line", "part": "crown", "lighting": "default", "speed": 0.5, "products": 20, "seed": 42, "spawn_interval": 4.0},
+    {"condition": "cell_spawn_5.0", "group": "line", "part": "crown", "lighting": "default", "speed": 0.5, "products": 20, "seed": 42, "spawn_interval": 5.0},
+    {"condition": "cell_spawn_5.4", "group": "line", "part": "crown", "lighting": "default", "speed": 0.5, "products": 20, "seed": 42, "spawn_interval": 5.4},
+    {"condition": "cell_spawn_6.0", "group": "line", "part": "crown", "lighting": "default", "speed": 0.5, "products": 20, "seed": 42, "spawn_interval": 6.0},
+    {"condition": "cell_spawn_8.0", "group": "line", "part": "crown", "lighting": "default", "speed": 0.5, "products": 20, "seed": 42, "spawn_interval": 8.0}
+  ]
+}
