@@ -277,10 +277,10 @@ docs/                                          Obsidian 노트: 결정, 변경, 
 - 검증 환경은 Windows + RTX 4060 한 대뿐이다.
 
 ## 8. 개선 계획
-- 상대 밝기 기반 분리와 도메인 랜덤화(조명, 재질, 노이즈, 블러)로 조명 강건성을 확보하고, 새 seed로 다시 평가한다.
-- 시점 수와 각도를 최적화한다(처리량과 검출률의 균형). 결함 방향을 무작위로 바꾸는 실험을 한다.
-- 벨트↔플래터 이송에 로봇 팔(URDF)을 넣고, 물리 기반 반송(PhysX)으로 바꾼다.
-- 규칙 기반 검사기와 학습 기반 분류기(합성 데이터 학습)를 비교한다.
+비전 검사는 구현하고 측정한 범위(4장)에서 마무리했다. 추가 고도화(조명 강건성 개선, 시점 최적화, 실측 이미지 재학습)는 이번 계획에서 뺐다.
+- 로봇 파이프라이닝: 셀이 검사하는 동안 다음 제품을 미리 집어 두어 포화 처리량(421/h)을 높인다.
+- 물리 기반 반송(PhysX)과 bin 낙하, 로봇·기계 궤적의 충돌 검사
+- 실제 가공기의 티칭 값과 이 모델의 티칭점 비교, 실제 기계 치수로 URDF 보정
 
 ## 9. 라이선스와 출처
 - 이 저장소의 앱/확장 골격은 NVIDIA [kit-app-template](https://github.com/NVIDIA-Omniverse/kit-app-template)(110.4.0)에서 생성했다. 원래 README는 [readme-assets/KIT_APP_TEMPLATE_README.md](readme-assets/KIT_APP_TEMPLATE_README.md), 라이선스는 [LICENSE](LICENSE)와 [PRODUCT_TERMS_OMNIVERSE](PRODUCT_TERMS_OMNIVERSE)를 따른다. Omniverse Kit SDK는 NVIDIA 라이선스로 빌드할 때 내려받는다.
