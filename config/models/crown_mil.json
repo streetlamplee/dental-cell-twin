@@ -1,0 +1,63 @@
+{
+  "name": "crown_mil",
+  "views": [
+    "top",
+    "side_a",
+    "side_b",
+    "side_c",
+    "side_d"
+  ],
+  "roi": [
+    173,
+    93,
+    467,
+    387
+  ],
+  "input_size": 128,
+  "normalize": [
+    0.5,
+    0.25
+  ],
+  "threshold": 0.5,
+  "architecture": "MilNet: shared 4-block CNN, max over views",
+  "dataset": {
+    "dir": "crown_sdg_v1",
+    "labels_sha256": "a55433eab0e330e806368486842fc6cbcf59fa05708a24e6e6a38353aa9cfe73",
+    "samples": 1600,
+    "light_range": [
+      0.3,
+      1.6
+    ],
+    "replicator": "omni.replicator.core-1.13.38"
+  },
+  "split": "validation = sample id % 5 == 0",
+  "epochs": 20,
+  "seed": 0,
+  "torch": "2.11.0+cu128",
+  "validation_all_views": {
+    "TP": 167,
+    "FP": 0,
+    "FN": 0,
+    "TN": 153,
+    "accuracy": 1.0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "recall_chip": 1.0,
+    "recall_color": 1.0,
+    "recall_shape": 1.0
+  },
+  "validation_top_view_only": {
+    "TP": 107,
+    "FP": 0,
+    "FN": 60,
+    "TN": 153,
+    "accuracy": 0.8125,
+    "precision": 1.0,
+    "recall": 0.6407185628742516,
+    "recall_chip": 0.0,
+    "recall_color": 1.0,
+    "recall_shape": 0.7258064516129032
+  },
+  "onnx_max_abs_diff": 2.2411346435546875e-05,
+  "train_seconds": 198.9
+}
