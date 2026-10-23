@@ -1,0 +1,55 @@
+{
+  "usd": "lod1.usd",
+  "step": "dental_crown.step",
+  "convert": {
+    "converter": "omni.kit.converter.hoops_core-512.2.1",
+    "profile": "product",
+    "options": {
+      "sceneOpGenerateUVs": "true",
+      "instancing": "true",
+      "tessLOD": "1",
+      "accurateSurfaceCurvatures": "true",
+      "useNormals": "true",
+      "useMaterials": "true",
+      "materialType": "1",
+      "convertMetadata": "true"
+    },
+    "source": "dental_crown.step",
+    "source_sha256": "ff6feea2229c5221bf28e7a9e3ea2c57056f4bb4afe6c615c8d709d331b429da",
+    "seconds": 0.67,
+    "output_bytes": 53916
+  },
+  "usd_mesh": {
+    "meshes": 1,
+    "triangles": 2156,
+    "points": 1316,
+    "with_normals": 1,
+    "with_uvs": 1,
+    "volume_mm3": 726.1733773857691,
+    "area_mm2": 464.6651793928261,
+    "size_mm": [
+      11.0,
+      10.0,
+      8.300000190734863
+    ],
+    "materials": 1,
+    "metadata_attrs": 4
+  },
+  "step_brep": {
+    "volume_mm3": 729.7053326135942,
+    "area_mm2": 465.8088791651124,
+    "size_mm": [
+      11.0000002,
+      10.0000002,
+      8.3
+    ]
+  },
+  "volume_error_pct": -0.4840248618130169,
+  "area_error_pct": -0.24552983496927094,
+  "size_diff_mm": [
+    1.9073486257070726e-07,
+    -2.0000000056086265e-07,
+    -2.0000000056086265e-07
+  ],
+  "file_bytes": 53916
+}

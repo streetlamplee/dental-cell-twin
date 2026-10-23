@@ -1,0 +1,18 @@
+{
+  "converter": "omni.kit.converter.hoops_core-512.2.1",
+  "profile": "machine",
+  "options": {
+    "sceneOpGenerateUVs": "true",
+    "instancing": "true",
+    "tessLOD": "3",
+    "accurateSurfaceCurvatures": "true",
+    "useNormals": "true",
+    "useMaterials": "true",
+    "materialType": "1",
+    "convertMetadata": "true"
+  },
+  "source": "teeth_mill.stp",
+  "source_sha256": "0d76133295cf954a6ee0fcebd68c3c24bb4523357ed648dede03da3eff41a32b",
+  "seconds": 1.82,
+  "output_bytes": 713324
+}

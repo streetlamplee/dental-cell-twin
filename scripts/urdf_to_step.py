@@ -21,6 +21,8 @@ sys.path.insert(0, str(ROOT / "source/extensions/visiontwin.factory/visiontwin/f
 from core.urdf_model import load_urdf  # noqa: E402
 
 MM = 1000.0  # metres -> millimetres
+FILLET_FRACTION = 0.12  # box edge fillet radius / smallest box side
+CHAMFER_FRACTION = 0.1  # cylinder end chamfer / min(radius, length)
 
 
 def location(t) -> cq.Location:
@@ -34,12 +36,16 @@ def location(t) -> cq.Location:
 
 
 def solid(visual) -> cq.Workplane:
-    """Centred at the visual frame origin; a cylinder's axis is its local Z (URDF)."""
+    """Centred at the visual frame origin; a cylinder's axis is its local Z (URDF).
+
+    Machined-looking detail without changing the URDF envelope: box edges are filleted and
+    cylinder ends chamfered. Flat faces still reach the URDF size, so every part's bounding
+    box is unchanged (verify_cad_usd checks it)."""
     if visual.shape == "box":
         x, y, z = (s * MM for s in visual.size)
-        return cq.Workplane("XY").box(x, y, z)
+        return cq.Workplane("XY").box(x, y, z).edges().fillet(min(x, y, z) * FILLET_FRACTION)
     radius, length = (s * MM for s in visual.size)
-    return cq.Workplane("XY").cylinder(length, radius)
+    return cq.Workplane("XY").cylinder(length, radius).edges("%CIRCLE").chamfer(min(radius, length) * CHAMFER_FRACTION)
 
 
 def part_name(link_name: str, visual_name: str) -> str:

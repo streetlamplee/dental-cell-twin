@@ -1,0 +1,18 @@
+{
+  "converter": "omni.kit.converter.hoops_core-512.2.1",
+  "profile": "product",
+  "options": {
+    "sceneOpGenerateUVs": "true",
+    "instancing": "true",
+    "tessLOD": "1",
+    "accurateSurfaceCurvatures": "true",
+    "useNormals": "true",
+    "useMaterials": "true",
+    "materialType": "1",
+    "convertMetadata": "true"
+  },
+  "source": "kfl08.step",
+  "source_sha256": "938d5e7e596d5e9586e7b2d7cef89da3003d3cf734dbfa5ab39f6e790319c090",
+  "seconds": 1.14,
+  "output_bytes": 433905
+}

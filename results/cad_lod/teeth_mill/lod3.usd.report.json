@@ -1,0 +1,55 @@
+{
+  "usd": "lod3.usd",
+  "step": "teeth_mill.stp",
+  "convert": {
+    "converter": "omni.kit.converter.hoops_core-512.2.1",
+    "profile": "product",
+    "options": {
+      "sceneOpGenerateUVs": "true",
+      "instancing": "true",
+      "tessLOD": "3",
+      "accurateSurfaceCurvatures": "true",
+      "useNormals": "true",
+      "useMaterials": "true",
+      "materialType": "1",
+      "convertMetadata": "true"
+    },
+    "source": "teeth_mill.stp",
+    "source_sha256": "5152746c2efd7f1b90d01fda67603c88687e54b9e66c6a6723eed3beae44a6d9",
+    "seconds": 1.05,
+    "output_bytes": 64317
+  },
+  "usd_mesh": {
+    "meshes": 16,
+    "triangles": 1920,
+    "points": 2080,
+    "with_normals": 16,
+    "with_uvs": 16,
+    "volume_mm3": 37132860.795053475,
+    "area_mm2": 1950511.7794790575,
+    "size_mm": [
+      490.79998779296875,
+      568.375,
+      541.6
+    ],
+    "materials": 6,
+    "metadata_attrs": 46
+  },
+  "step_brep": {
+    "volume_mm3": 37133043.41654132,
+    "area_mm2": 1950524.1235320494,
+    "size_mm": [
+      490.8,
+      568.375,
+      541.6
+    ]
+  },
+  "volume_error_pct": -0.0004918031786403748,
+  "area_error_pct": -0.0006328582580910071,
+  "size_diff_mm": [
+    -1.2207031261368684e-05,
+    0.0,
+    0.0
+  ],
+  "file_bytes": 64317
+}

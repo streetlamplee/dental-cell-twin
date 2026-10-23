@@ -1,0 +1,55 @@
+{
+  "usd": "kfl08.usd",
+  "step": "kfl08.step",
+  "convert": {
+    "converter": "omni.kit.converter.hoops_core-512.2.1",
+    "profile": "product",
+    "options": {
+      "sceneOpGenerateUVs": "true",
+      "instancing": "true",
+      "tessLOD": "2",
+      "accurateSurfaceCurvatures": "true",
+      "useNormals": "true",
+      "useMaterials": "true",
+      "materialType": "1",
+      "convertMetadata": "true"
+    },
+    "source": "kfl08.step",
+    "source_sha256": "938d5e7e596d5e9586e7b2d7cef89da3003d3cf734dbfa5ab39f6e790319c090",
+    "seconds": 1.18,
+    "output_bytes": 846883
+  },
+  "usd_mesh": {
+    "meshes": 35,
+    "triangles": 67208,
+    "points": 43328,
+    "with_normals": 35,
+    "with_uvs": 35,
+    "volume_mm3": 4068.4047022388604,
+    "area_mm2": 5963.423500555623,
+    "size_mm": [
+      12.599999904632568,
+      48.0,
+      27.0
+    ],
+    "materials": 6,
+    "metadata_attrs": 60
+  },
+  "step_brep": {
+    "volume_mm3": 4068.609773034627,
+    "area_mm2": 5968.60290795915,
+    "size_mm": [
+      12.600000000000026,
+      48.0,
+      27.000000200000002
+    ]
+  },
+  "volume_error_pct": -0.005040316157268264,
+  "area_error_pct": -0.08677755051555215,
+  "size_diff_mm": [
+    -9.536745793070622e-08,
+    -2.0000000233721948e-07,
+    0.0
+  ],
+  "file_bytes": 846883
+}
