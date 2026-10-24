@@ -1,0 +1,87 @@
+[
+  {
+    "asset": "teeth_mill",
+    "step_names": 23,
+    "usd_prims_with_metadata": 23,
+    "metadata_keys": {
+      "__STEP:ProductID": 23,
+      "__STEP:ProductName": 23
+    },
+    "preserved": 23,
+    "missing": [],
+    "instance_names": [
+      "10",
+      "14",
+      "18",
+      "22",
+      "4",
+      "6"
+    ],
+    "instance_names_in_usd": []
+  },
+  {
+    "asset": "kfl08",
+    "step_names": 30,
+    "usd_prims_with_metadata": 30,
+    "metadata_keys": {
+      "__STEP:ProductID": 30,
+      "__STEP:ProductName": 30
+    },
+    "preserved": 30,
+    "missing": [],
+    "instance_names": [],
+    "instance_names_in_usd": []
+  },
+  {
+    "asset": "dental_blank",
+    "step_names": 2,
+    "usd_prims_with_metadata": 2,
+    "metadata_keys": {
+      "__STEP:ProductID": 2,
+      "__STEP:ProductName": 2
+    },
+    "preserved": 2,
+    "missing": [],
+    "instance_names": [],
+    "instance_names_in_usd": []
+  },
+  {
+    "asset": "dental_crown",
+    "step_names": 2,
+    "usd_prims_with_metadata": 2,
+    "metadata_keys": {
+      "__STEP:ProductID": 2,
+      "__STEP:ProductName": 2
+    },
+    "preserved": 2,
+    "missing": [],
+    "instance_names": [],
+    "instance_names_in_usd": []
+  },
+  {
+    "asset": "dental_crown_incomplete",
+    "step_names": 2,
+    "usd_prims_with_metadata": 2,
+    "metadata_keys": {
+      "__STEP:ProductID": 2,
+      "__STEP:ProductName": 2
+    },
+    "preserved": 2,
+    "missing": [],
+    "instance_names": [],
+    "instance_names_in_usd": []
+  },
+  {
+    "asset": "dental_crown_chipped",
+    "step_names": 2,
+    "usd_prims_with_metadata": 2,
+    "metadata_keys": {
+      "__STEP:ProductID": 2,
+      "__STEP:ProductName": 2
+    },
+    "preserved": 2,
+    "missing": [],
+    "instance_names": [],
+    "instance_names_in_usd": []
+  }
+]
