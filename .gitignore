@@ -45,3 +45,4 @@ deps/**/user.toml
 /assets/robots/rebot_b601_dm/
 /assets/robots/usd/*.usd
 /datasets/
+/results/demo/

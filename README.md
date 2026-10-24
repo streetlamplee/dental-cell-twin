@@ -9,6 +9,10 @@
 > 벨트와 셀 사이는 **Seeed reBot Arm(6축 + 그리퍼)**이 IK로 집어 옮긴다. 검사는 규칙 기반 검사기와, **Omniverse Replicator 합성 데이터로만 학습한 다시점 CNN**(Kit 안에서 ONNX로 추론)이 같은 프레임을 나란히 판정한다.
 > 모든 수치는 저장된 run 로그(`results/`)에서 다시 계산할 수 있다. 수치는 보정하거나 꾸미지 않았다.
 
+![데모: reBot Arm이 크라운을 셀에 올리고, 스핀들 카메라가 5시점을 촬영한다 (실제 속도, 자동 녹화)](docs/screenshots/demo_preview.gif)
+
+데모 영상 전체(65 s: 라인 4개 제품, 표면 티칭 재생, 결과 이미지)는 `.\scripts\record_demo.ps1`로 다시 만들 수 있다. 프레임은 Kit 안에서 시뮬레이션 시간에 맞춰 캡처하므로 영상 속도가 실제 속도와 같다.
+
 ![라인 전체: 투입 컨베이어 → 검사 셀 → 배출 컨베이어](docs/screenshots/readme_overview.png)
 
 ![검사 셀 근접: B축이 기울어진 플래터 위 크라운과 스핀들 카메라](docs/screenshots/readme_cell.png)
