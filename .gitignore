@@ -46,3 +46,4 @@ deps/**/user.toml
 /assets/robots/usd/*.usd
 /datasets/
 /results/demo/
+/results/gui_check/

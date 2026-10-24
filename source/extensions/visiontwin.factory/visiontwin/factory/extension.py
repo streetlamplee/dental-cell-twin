@@ -84,6 +84,8 @@ class VisionTwinFactoryExtension(omni.ext.IExt):
         self._new_sorter()
         self._update_sub = None
         self._scene_ready = False
+        self._built_part = None  # product the current scene was built for
+        self._vision_setup_pending = False  # inspection camera being created by Start
         self._frames = None  # InspectionFrameProvider, only when a viewport exists
         self._main_viewport = None
         self._inspector = None
@@ -188,6 +190,17 @@ class VisionTwinFactoryExtension(omni.ext.IExt):
     def _on_build(self):
         asyncio.ensure_future(self.build_scene_async())
 
+    async def _enable_vision_then_start(self):
+        try:
+            await self._create_frame_provider_async(self.main_viewport)
+            await self._setup_inspection_async()
+        finally:
+            self._vision_setup_pending = False
+        if self._frames is None:
+            self._ui.set_status("no inspection camera: vision unavailable")
+            return
+        self.start()
+
     def _close_teach_pendant(self):
         pendant = getattr(self, "_pendant", None)
         if pendant is not None:
@@ -224,6 +237,7 @@ class VisionTwinFactoryExtension(omni.ext.IExt):
             await self._create_frame_provider_async(main)
             await self._setup_inspection_async()
         self._scene_ready = True
+        self._built_part = self._catalog.part
         self._ui.set_status("scene ready")
         self._refresh_counters()
         print(f"{LOG_PREFIX} factory scene built (vision {'on' if _vision_on() else 'off'})")
@@ -244,6 +258,18 @@ class VisionTwinFactoryExtension(omni.ext.IExt):
         if not self._scene_ready:
             self._ui.set_status("build the scene first")
             return
+        if self._catalog.part != self._built_part:  # Reset re-reads the product setting, the scene does not change
+            self._ui.set_status(f"product changed to {self._catalog.part}: press Build Scene")
+            return
+        if _vision_on() and self._frames is None and self.main_viewport is not None:
+            # Vision ticked after Build Scene (GUI check 2026-10-24: Reset + Start ran without
+            # inspection and wrote no record): create the inspection camera first, then start.
+            if not self._vision_setup_pending:
+                self._vision_setup_pending = True
+                asyncio.ensure_future(self._enable_vision_then_start())
+            return
+        if self._log is None and self._sim.time == 0.0:
+            self._new_sorter()  # vision may have been ticked after Reset: the sorter must match it
         if self._log is None and (self._inspector is not None or not _vision_on()):
             self._open_run()
         self._sim.start()
@@ -847,7 +873,10 @@ class VisionTwinFactoryExtension(omni.ext.IExt):
         with open(os.path.join(self.run_dir, "summary.json"), "w", encoding="utf-8") as f:
             json.dump(self.summary, f, indent=2)
         self.run_complete = True
-        self._ui.set_status(f"finished: sorted {self.summary['sort_correct']}/{self.summary['sorted']} correct")
+        if self.summary["vision"]:
+            self._ui.set_status(f"finished: sorted {self.summary['sort_correct']}/{self.summary['sorted']} correct")
+        else:  # nothing was inspected, so "correct" against the hidden ground truth means nothing here
+            self._ui.set_status(f"finished: {self.summary['sorted']} passed (vision off)")
         print(f"{LOG_PREFIX} summary {json.dumps(self.summary)}")
 
     def _cell_status(self) -> str:
@@ -870,9 +899,9 @@ class VisionTwinFactoryExtension(omni.ext.IExt):
             f"on_belt={len(self._sim.tracker.on_belt())}\n"
             + (f"vision: good={n_pred['good']} defect={n_pred['defect']} unknown={n_pred['unknown']}\n"
                if _vision_on() else "vision: off (every product passes)\n")
-            + 
-            f"sorted: pass={n_pass} reject={n_rej} correct={n_ok}/{len(d)}  "
-            f"late={len(self._sorter.late_results)} frame_err={getattr(self, '_frame_mismatches', 0)}"
+            + f"sorted: pass={n_pass} reject={n_rej}"
+            + (f" correct={n_ok}/{len(d)}  " if _vision_on() else "  ")  # no verdicts: "correct" is meaningless
+            + f"late={len(self._sorter.late_results)} frame_err={getattr(self, '_frame_mismatches', 0)}"
             + (f"\ncell: {self._cell_status()}"
                f"  queue={self._sim.queue_len} (max {self._sim.queue_max})"
                f"  util={self._sim.station_utilization * 100:.0f}%"
