@@ -41,7 +41,7 @@ class TeachPendant:
                     ui.Label("Standoff (mm)", width=110)
                     self._standoff = ui.FloatField()
                     self._standoff.model.set_value(20.0)
-                    ui.Button("Origin + 5 faces", clicked_fn=self._generate, width=140)
+                    ui.Button("Origin + 5 faces", clicked_fn=self.generate, width=140)
                 for axis in AXES:
                     name, unit, k = UNIT[axis]
                     lo, hi = ROT_RANGE.get(axis) or (teacher.limits[axis][0] * k, teacher.limits[axis][1] * k)
@@ -53,8 +53,8 @@ class TeachPendant:
                 self._readout = ui.Label("", height=40, word_wrap=True)
                 with ui.HStack(spacing=4, height=28):
                     ui.Button("Save point", clicked_fn=self._save_point)
-                    ui.Button("Play", clicked_fn=self._play)
-                    ui.Button("Stop", clicked_fn=self._stop)
+                    ui.Button("Play", clicked_fn=self.play)
+                    ui.Button("Stop", clicked_fn=self.stop)
                     ui.Button("Export", clicked_fn=self.export)
                 self._status = ui.Label("", height=18)
                 ui.Label("Points", height=18)
@@ -84,7 +84,7 @@ class TeachPendant:
 
     # -- points -------------------------------------------------------------
 
-    def _generate(self) -> None:
+    def generate(self) -> None:
         try:
             self.points = self.teacher.face_program(self._standoff.model.get_value_as_float() / 1000.0)
             self._status.text = f"{len(self.points)} points generated"
@@ -113,11 +113,11 @@ class TeachPendant:
 
     # -- playback and export ------------------------------------------------
 
-    def _play(self) -> None:
+    def play(self) -> None:
         if not self.points:
             self._status.text = "no points"
             return
-        self._stop()
+        self.stop()
         program, start, t = TeachProgram(self.points), dict(self.q), [0.0]
 
         def tick(_event):
@@ -126,13 +126,17 @@ class TeachPendant:
             self.set_pose(q)
             self._status.text = f"playing: {program.points[i].name}"
             if t[0] >= program.duration:
-                self._stop()
+                self.stop()
                 self._status.text = "program finished"
 
         self._play_sub = carb.eventdispatcher.get_eventdispatcher().observe_event(
             event_name=omni.kit.app.GLOBAL_EVENT_UPDATE, on_event=tick, observer_name="visiontwin.teach.play")
 
-    def _stop(self) -> None:
+    @property
+    def playing(self) -> bool:
+        return self._play_sub is not None
+
+    def stop(self) -> None:
         if self._play_sub is not None:
             self._play_sub.reset()
             self._play_sub = None
@@ -151,7 +155,7 @@ class TeachPendant:
         return path
 
     def destroy(self) -> None:
-        self._stop()
+        self.stop()
         if self._window is not None:
             w, self._window = self._window, None
             w.destroy()
