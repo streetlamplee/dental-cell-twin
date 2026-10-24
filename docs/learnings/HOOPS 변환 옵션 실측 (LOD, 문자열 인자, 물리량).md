@@ -38,3 +38,10 @@ TypeError: parseArgs(): incompatible function arguments ... args: Dict[str, str]
 
 ## 5. `convertMetadata`
 STEP 제품 ID와 이름이 프림 속성으로 들어간다: `omni:hoops:metadata:__STEP:ProductID`, `...:ProductName`. 밀링기는 46개, KFL08은 60개다. 이름이 인코딩된 프림(`tn__1_` 등)도 원래 STEP 이름을 찾을 수 있다.
+
+### 보존율 실측 (2026-10-24, `scripts/verify_cad_metadata.ps1`)
+STEP 쪽은 OpenCascade XCAF로 제품(형상 정의)과 인스턴스(어셈블리 배치) 이름을 따로 읽고, USD의 `ProductName`과 대조했다.
+- **제품 이름 61/61 보존**(자산 6개: 밀링기 23, KFL08 30, 치과 모델 4종 각 2)
+- 밀링기의 인스턴스 이름 6개(`4`, `6`, `10`, `14`, `18`, `22`)는 남지 않는다. CadQuery가 링크 배치에 자동으로 붙인 번호다. HOOPS는 인스턴스와 제품을 프림 하나로 합치고, 그 프림에 제품 이름(`base_link` 등)을 단다.
+- `legacy` 프로파일(`convertMetadata=false`)로 변환했던 Day 5~6 USD에는 메타데이터 속성이 0개였다(`report_cad_usd`의 metadata 열).
+- 한계: 이 STEP들에는 PMI나 사용자 속성이 없어서, 그런 메타데이터의 보존은 확인하지 못했다.

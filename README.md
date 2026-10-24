@@ -188,6 +188,11 @@ flowchart LR
 
 HOOPS의 `convertPhysicsData`는 이 STEP들에 속성을 쓰지 않아서(실측), 부피와 면적은 OpenCascade로 직접 계산했다.
 
+**메타데이터 보존 (`verify_cad_metadata.ps1`, [results/cad_metadata/report.md](results/cad_metadata/report.md)):** 변환 옵션 `convertMetadata`를 켜면, STEP 어셈블리의 제품(부품) ID와 이름이 USD 프림 속성(`omni:hoops:metadata:__STEP:ProductID/ProductName`)으로 남는다.
+- 결과: 자산 6개, 제품 이름 **61/61 보존**. 처음 쓰던 설정(메타데이터 끔)에서는 0개였다.
+- 남지 않은 것은 CadQuery가 어셈블리 인스턴스에 자동으로 붙인 번호 6개(4, 6, 10, …)뿐이다. HOOPS는 인스턴스와 제품을 프림 하나로 합치면서 제품 이름을 남긴다.
+- 이 STEP들에는 이름과 ID 말고 다른 메타데이터(PMI, 사용자 속성)가 없다. 그래서 그 부분의 보존은 확인하지 못했다.
+
 ### 이전 단계 기록
 - Day 9 실험(밀링 라인, 고정 카메라): [results/experiments/day9/](results/experiments/day9/). 크라운 라인이 바뀌어 지금은 다시 돌릴 수 없다. box/KFL08의 조명 실험 결과(KFL08 dark FP 29)는 검사기와 고정 카메라 구성이 같아서 참고할 수 있다(당시 밀링기는 카메라 시야 밖에 있었다).
 - Day 4~7 개별 run(라이트 리그가 켜지고 변환 LOD 0인 화면): 각 Day의 변경 노트(`docs/changes/`).
