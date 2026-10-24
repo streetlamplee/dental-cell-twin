@@ -15,7 +15,7 @@ $bat = Join-Path $Root "_build\windows-x86_64\release\visiontwin.app.kit.bat"
 $exec = (Join-Path $PSScriptRoot "collect_frames.py") -replace '\\', '/'
 $out = ((Join-Path $Root "results\smoke\bench_runs") -replace '\\', '/')
 $s = $Scale.ToString([Globalization.CultureInfo]::InvariantCulture)
-$kitArgs = "--exec `"$exec`" --/exts/visiontwin.factory/seed=42 --/exts/visiontwin.factory/part=box --/exts/visiontwin.factory/maxProducts=$Products --/exts/visiontwin.factory/mainViewportScale=$s --/exts/visiontwin.factory/outputDir=`"$out`" $KitAutomationArgs"
+$kitArgs = "--exec `"$exec`" --/exts/visiontwin.factory/seed=42 --/exts/visiontwin.factory/part=box --/exts/visiontwin.factory/maxProducts=$Products --/exts/visiontwin.factory/mainViewportScale=$s --/exts/visiontwin.factory/outputDir=`"$out`" --/exts/visiontwin.factory/vision=true $KitAutomationArgs"
 $log = New-LogPath "bench_render"
 $ErrorActionPreference = 'Continue'
 $t0 = Get-Date

@@ -39,6 +39,8 @@ foreach ($r in $cfg.runs) {
               speed = ([double]$r.speed).ToString($inv); experiment = $cfg.name; condition = $r.condition }
     if ($r.spawn_interval) { $set.spawnInterval = ([double]$r.spawn_interval).ToString($inv) }
     if ($r.decision) { $set.decision = $r.decision }
+    # Experiments measure the inspection: vision on unless a run sets "vision": false (app default is off).
+    $set.vision = if ($r.PSObject.Properties.Name -contains 'vision') { "$($r.vision)".ToLower() } else { 'true' }
     $setArgs = ($set.GetEnumerator() | ForEach-Object { "--/exts/visiontwin.factory/$($_.Key)=$($_.Value)" }) -join " "
     $kitArgs = "--exec `"$exec`" $setArgs --/exts/visiontwin.factory/outputDir=`"$($outDir -replace '\\', '/')`" $KitAutomationArgs"
     $t0 = Get-Date

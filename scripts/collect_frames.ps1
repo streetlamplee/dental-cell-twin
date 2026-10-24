@@ -21,7 +21,7 @@ if (-not (Test-Path $bat)) { throw "Not built yet. Run .\scripts\build_app.ps1 f
 $exec = (Join-Path $PSScriptRoot "collect_frames.py") -replace '\\', '/'
 $log = New-LogPath "collect_frames"
 $speedArg = $Speed.ToString([Globalization.CultureInfo]::InvariantCulture)
-$kitArgs = "--exec `"$exec`" --/exts/visiontwin.factory/seed=$Seed --/exts/visiontwin.factory/maxProducts=$Products --/exts/visiontwin.factory/speed=$speedArg --/exts/visiontwin.factory/part=$Part $KitAutomationArgs"
+$kitArgs = "--exec `"$exec`" --/exts/visiontwin.factory/seed=$Seed --/exts/visiontwin.factory/maxProducts=$Products --/exts/visiontwin.factory/speed=$speedArg --/exts/visiontwin.factory/part=$Part --/exts/visiontwin.factory/vision=true $KitAutomationArgs"
 
 $ErrorActionPreference = 'Continue'
 $runDir = $null

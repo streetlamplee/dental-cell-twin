@@ -25,7 +25,7 @@ $exec = (Join-Path $PSScriptRoot "render_smoke.py") -replace '\\', '/'
 $log = New-LogPath "render_smoke"
 
 $vs = $ViewScale.ToString([Globalization.CultureInfo]::InvariantCulture)
-$kitArgs = "--exec `"$exec`" --/visiontwin/smoke/out=`"$png`" --/visiontwin/smoke/frames=$Frames --/exts/visiontwin.factory/part=$Part --/exts/visiontwin.factory/lighting=$Lighting --/exts/visiontwin.factory/mainViewportScale=$vs --/exts/visiontwin.factory/outputDir=`"$($outDir -replace '\\', '/')/smoke_runs`" $KitAutomationArgs"
+$kitArgs = "--exec `"$exec`" --/visiontwin/smoke/out=`"$png`" --/visiontwin/smoke/frames=$Frames --/exts/visiontwin.factory/part=$Part --/exts/visiontwin.factory/lighting=$Lighting --/exts/visiontwin.factory/mainViewportScale=$vs --/exts/visiontwin.factory/outputDir=`"$($outDir -replace '\\', '/')/smoke_runs`" --/exts/visiontwin.factory/vision=true $KitAutomationArgs"
 $ErrorActionPreference = 'Continue'
 & cmd /c "`"$bat`" $kitArgs 2>&1" | ForEach-Object {
     Add-Content -Path $log -Value $_ -Encoding utf8

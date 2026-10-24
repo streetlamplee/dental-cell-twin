@@ -45,6 +45,14 @@ SETTINGS = "/exts/visiontwin.factory"
 LIGHT_FACTORS = {"default": 1.0, "dark": 0.35, "bright": 2.0}
 
 
+def _vision_on() -> bool:
+    """Vision inspection on/off (setting `vision`, applied on Build Scene / Reset). Off: no
+    inspection camera, no verdicts, every product passes the reject line; the machine, robot
+    and line run as usual. The app's GUI default is off (2026-10-24); scripts that measure
+    vision pass vision=true."""
+    return bool(_setting("vision", True))
+
+
 def _lighting() -> str:
     name = str(_setting("lighting", "default"))
     return name if name in LIGHT_FACTORS else "default"
@@ -100,7 +108,7 @@ class VisionTwinFactoryExtension(omni.ext.IExt):
             initial_speed=self._sim.config.speed,
             on_setting=self._set_setting,
             initial={k: _setting(k, d) for k, d in (("part", BOX), ("seed", 42), ("maxProducts", 30),
-                                                    ("defectRate", 0.3))},
+                                                    ("defectRate", 0.3), ("vision", True))},
             on_view=self.set_view,
             on_teach=self.open_teach_pendant,
         )
@@ -211,12 +219,14 @@ class VisionTwinFactoryExtension(omni.ext.IExt):
             # Render load: the main view is for people, the inspection viewport (fixed 640x480)
             # is what the vision uses; rendering the main view at a lower scale saves GPU time.
             main.resolution_scale = float(_setting("mainViewportScale", 0.5))
-        await self._create_frame_provider_async(main)
-        await self._setup_inspection_async()
+        self._inspector, self._inspectors, self._model = None, [], None
+        if _vision_on():
+            await self._create_frame_provider_async(main)
+            await self._setup_inspection_async()
         self._scene_ready = True
         self._ui.set_status("scene ready")
         self._refresh_counters()
-        print(f"{LOG_PREFIX} factory scene built")
+        print(f"{LOG_PREFIX} factory scene built (vision {'on' if _vision_on() else 'off'})")
 
     @staticmethod
     def _use_stage_lights():
@@ -234,7 +244,7 @@ class VisionTwinFactoryExtension(omni.ext.IExt):
         if not self._scene_ready:
             self._ui.set_status("build the scene first")
             return
-        if self._log is None and self._inspector is not None:
+        if self._log is None and (self._inspector is not None or not _vision_on()):
             self._open_run()
         self._sim.start()
         if self._update_sub is None:
@@ -310,7 +320,8 @@ class VisionTwinFactoryExtension(omni.ext.IExt):
                               speed=float(_setting("speed", 0.5)), **extra)
 
     def _new_sorter(self):
-        self._sorter = SortingController(unknown_policy=str(_setting("unknownPolicy", "reject")))
+        self._sorter = SortingController(unknown_policy=str(_setting("unknownPolicy", "reject")),
+                                         inspection=_vision_on())
         self._sim.reject_decider = self._sorter.decide
 
     def _reset_run_state(self):
@@ -472,7 +483,8 @@ class VisionTwinFactoryExtension(omni.ext.IExt):
                 "experiment": str(_setting("experiment", "")), "condition": str(_setting("condition", "")),
                 "station_cycle_s": self._sim.config.process.cycle_s if self._sim.config.process else None,
                 "part": self._catalog.part, "lighting_condition": _lighting(), "camera_resolution": list(L.CAMERA_RESOLUTION),
-                "inspector": self._inspector.config.__dict__,
+                "vision": _vision_on(),
+                "inspector": self._inspector.config.__dict__ if self._inspector else None,
                 "views": [v.name for v in self._cell.cycle.views] if self._cell else None,
                 "decision": str(_setting("decision", "rules")),
                 "inspector_model": self._model.card.extra.get("name") if self._model else None,
@@ -515,6 +527,9 @@ class VisionTwinFactoryExtension(omni.ext.IExt):
                 scene.set_product_pose(stage, p.product_id, self._belt_pose(p.x))
             elif e.kind == VIEW:
                 views.append((p.product_id, e.index))
+            elif e.kind == INSPECT and not _vision_on():
+                if self._events is not None:  # keeps the INSPECT/VISION audit consistent
+                    self._events.write(e.time, p.product_id, "VISION", detail="skipped (vision off)")
             elif e.kind == INSPECT and self._cell is None:  # the cell takes its pictures at VIEW
                 inspected.append(p.product_id)
             elif e.kind == REJECT:
@@ -809,6 +824,7 @@ class VisionTwinFactoryExtension(omni.ext.IExt):
             "frame_mismatches": self._frame_mismatches,
             "stale_frames": self._stale_frames,
             "view_retakes": getattr(self, "_view_retakes", 0),
+            "vision": _vision_on(),
             "frame_target_misses": self._frames.frame_target_misses if self._frames else None,
             "capture_timeouts": self._frames.timeouts if self._frames else None,
             "not_exited": sum(p.state != ProductState.EXITED for p in products),
@@ -852,7 +868,9 @@ class VisionTwinFactoryExtension(omni.ext.IExt):
         self._ui.set_counters(
             f"t={self._sim.time:.1f}s  spawned={len(products)}  inspected={n_insp}  "
             f"on_belt={len(self._sim.tracker.on_belt())}\n"
-            f"vision: good={n_pred['good']} defect={n_pred['defect']} unknown={n_pred['unknown']}\n"
+            + (f"vision: good={n_pred['good']} defect={n_pred['defect']} unknown={n_pred['unknown']}\n"
+               if _vision_on() else "vision: off (every product passes)\n")
+            + 
             f"sorted: pass={n_pass} reject={n_rej} correct={n_ok}/{len(d)}  "
             f"late={len(self._sorter.late_results)} frame_err={getattr(self, '_frame_mismatches', 0)}"
             + (f"\ncell: {self._cell_status()}"

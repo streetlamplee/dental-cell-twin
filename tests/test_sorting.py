@@ -135,3 +135,11 @@ def test_results_rows_contain_plan_fields_and_correctness():
     for r in rows:
         assert r["sort_result"] == PASS
         assert r["sort_correct"] == (r["ground_truth"] == GOOD)
+
+
+def test_inspection_off_passes_every_product_without_a_verdict():
+    sorter = SortingController(inspection=False)
+    for pid, pred in ((1, "defect"), (2, None), (3, "unknown")):
+        p = type("P", (), {"product_id": pid, "prediction": pred})()
+        assert sorter.decide(p) is False
+        assert sorter.decisions[pid].route == PASS and sorter.decisions[pid].reason == "no inspection (vision off)"

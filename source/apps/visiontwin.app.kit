@@ -101,6 +101,7 @@ exts."visiontwin.factory".partsDir = "${app}/../../../../assets/parts"  # Day 6:
 exts."visiontwin.factory".millUrdf = "${app}/../../../../reference/teeth_mill.urdf"  # Day 13: surface teaching (block + joints)
 exts."visiontwin.factory".robotsDir = "${app}/../../../../assets/robots/usd"  # Day 12: transfer robot USD + kinematics.json
 exts."visiontwin.factory".inspectorModel = "${app}/../../../../config/models/crown_mil.onnx"  # Day 12: learned inspector (if the file exists)
+exts."visiontwin.factory".vision = false  # 2026-10-24: vision inspection off by default (dashboard checkbox or --/exts/visiontwin.factory/vision=true turns it on)
 exts."visiontwin.factory".decision = "rules"  # "rules" | "model": which verdict sorts the product (both are logged)
 exts."visiontwin.factory".part = "crown"  # GUI opens on the dental milling line; scripts pass part explicitly (box = cube regression line)
 exts."visiontwin.factory".inspectorConfig = "${app}/../../../../config/inspector.json"  # calibrated inspector parameters

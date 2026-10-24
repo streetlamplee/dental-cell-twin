@@ -37,6 +37,12 @@ class Dashboard:
                 self._int_field("Seed", initial.get("seed", 42), lambda v: on_setting("seed", v))
                 self._int_field("Products", initial.get("maxProducts", 30), lambda v: on_setting("maxProducts", v))
                 with ui.HStack(height=24):
+                    ui.Label("Vision", width=100)
+                    vision = ui.CheckBox(width=20)
+                    vision.model.set_value(bool(initial.get("vision", False)))
+                    vision.model.add_value_changed_fn(lambda m: on_setting("vision", m.get_value_as_bool()))
+                    ui.Label("  inspection camera + verdicts", width=0)
+                with ui.HStack(height=24):
                     ui.Label("Defect rate", width=100)
                     rate = ui.FloatSlider(min=0.0, max=1.0, step=0.05)
                     rate.model.set_value(float(initial.get("defectRate", 0.3)))

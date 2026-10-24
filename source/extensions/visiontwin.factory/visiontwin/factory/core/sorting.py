@@ -9,6 +9,9 @@ object, so a result can never be applied to a different product. Rules:
   no prediction yet       -> unknown_policy, reason "no result at reject line"
 
 A result that arrives after its product was sorted is recorded as late and ignored.
+
+With inspection switched off (setting `vision = false`) nothing is judged: every product
+passes, with the reason "no inspection (vision off)".
 """
 
 from dataclasses import dataclass
@@ -29,10 +32,11 @@ class SortDecision:
 
 
 class SortingController:
-    def __init__(self, unknown_policy: str = REJECT) -> None:
+    def __init__(self, unknown_policy: str = REJECT, inspection: bool = True) -> None:
         if unknown_policy not in (PASS, REJECT):
             raise ValueError(f"unknown_policy must be {PASS!r} or {REJECT!r}")
         self.unknown_policy = unknown_policy
+        self.inspection = inspection
         self.decisions: Dict[int, SortDecision] = {}
         self.late_results: List[int] = []
 
@@ -42,7 +46,9 @@ class SortingController:
         if pid in self.decisions:
             raise RuntimeError(f"product {pid} reached the reject line twice")
         pred = product.prediction
-        if pred == "defect":
+        if not self.inspection:
+            route, reason = PASS, "no inspection (vision off)"
+        elif pred == "defect":
             route, reason = REJECT, "predicted defect"
         elif pred == "good":
             route, reason = PASS, "predicted good"
