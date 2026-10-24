@@ -1,4 +1,6 @@
-# VisionTwin — 치아 크라운 인라인 검사 라인 디지털 트윈 (Omniverse Kit × 머신비전)
+# dental-cell-twin — 치아 크라운 가공 셀 디지털 트윈 (Omniverse Kit)
+
+프로젝트 코드 이름은 **VisionTwin**이다(확장 `visiontwin.factory`, 앱 `visiontwin.app`). 비전 검사는 설정(`vision`)으로 켜는 선택 기능이고, GUI 기본값은 꺼짐이다.
 
 > 크라운이 컨베이어를 따라 **5축 기계로 만든 인라인 검사 셀**에 들어간다. 기계는 스핀들에 공구 대신 **카메라**를 달고 있다. B/C축으로 크라운을 기울이고 돌려 윗면 1장과 옆면 4장을 찍는다. 카메라는 **실제 렌더 이미지**로 셰이드와 형상을 판정하고, 불량품은 **제품 ID 기준으로** 배출선에서 밀려난다.
 > 기계는 URDF → STEP → Omniverse CAD converter(USD)로 가져왔고, 관절은 forward/inverse kinematics로 움직인다.
@@ -291,5 +293,6 @@ docs/                                          Obsidian 노트: 결정, 변경, 
 ## 9. 라이선스와 출처
 - 이 저장소의 앱/확장 골격은 NVIDIA [kit-app-template](https://github.com/NVIDIA-Omniverse/kit-app-template)(110.4.0)에서 생성했다. 원래 README는 [readme-assets/KIT_APP_TEMPLATE_README.md](readme-assets/KIT_APP_TEMPLATE_README.md), 라이선스는 [LICENSE](LICENSE)와 [PRODUCT_TERMS_OMNIVERSE](PRODUCT_TERMS_OMNIVERSE)를 따른다. Omniverse Kit SDK는 NVIDIA 라이선스로 빌드할 때 내려받는다.
 - KFL08 STEP: **hasecilu**, FreeCAD-library, **CC-BY-3.0**. 변경 내용과 출처: [assets/parts/LICENSES.md](assets/parts/LICENSES.md)
+- Seeed Studio **reBot Arm B601-DM** URDF와 메시: [Seeed-Projects/reBot-DevArm](https://github.com/Seeed-Projects/reBot-DevArm), **CERN-OHL-W-2.0**. 이 저장소에는 URDF에서 뽑은 기구학 JSON만 있고, URDF·메시·USD는 스크립트로 받는다: [assets/robots/LICENSES.md](assets/robots/LICENSES.md)
 - 치아 크라운 모델(정상, 미완성, 치핑)은 이 프로젝트에서 CadQuery로 만들었다(`scripts/make_dental_parts.py`). 5축 기계 `reference/teeth_mill.urdf`는 작성자의 ROS 2 xacro 모델을 펼친 것이다.
 - 개발 기록: [docs/00_Index.md](docs/00_Index.md) (결정, 변경, 알게 된 점)
