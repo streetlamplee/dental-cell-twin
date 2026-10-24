@@ -38,6 +38,7 @@
 | 비전 | 640×480 렌더 프레임을 OpenCV로 판정. 색(Lab a*b* 또는 HSV hue), 기준 외곽선(`matchShapes`, 면적비), **실루엣 차이**(중심을 맞춘 XOR), 내부 밝기(누락). **시점마다 따로 보정**하고 판정을 합친다 |
 | 동기화 | 동기 렌더링, 고정 시뮬레이션 스텝(1/60 s), **프레임 지정 캡처**(촬영 시점 update 번호의 프레임만 사용). 셀에서는 직전 캡처와 같은 이미지가 오면 다시 찍는다 |
 | 분류 | 제품 ID별 판정 → 배출선에서만 동작. 판정이 늦거나 없으면 fail-safe 배출 |
+| 검사 켜기·끄기 | 설정 `vision`(대시보드 "Vision" 체크박스). **GUI 기본은 꺼짐**: 기계·로봇·라인만 돌고 모든 제품이 통과한다. 실험과 측정 스크립트는 켜고 돈다(4장의 수치는 모두 켬) |
 | CAD 파이프라인 | `teeth_mill.urdf` → STEP(CadQuery, 필렛·챔퍼) + `kinematics.json` → USD(HOOPS CAD converter). 자산 목록 일괄 변환, **측정으로 고른 테셀레이션 LOD**, STEP B-rep 대비 품질 리포트 |
 | 대시보드 | 라인(box/KFL08/crown), 시드, 제품 수, 불량률, 속도, 화면 전환(Overview / 셀 근접 / 검사 카메라), 카운터, 셀 상태(LOADING / VIEW k/5 / UNLOADING), 대기열, 가동률 |
 | 기록 | run마다 `run.json`, `inspections.csv`(시점별 행 + 합친 행), `results.csv`, `events.csv`, `summary.json`, 시점별 프레임 |
@@ -216,7 +217,7 @@ git clone <this repo>; cd <repo>
 .\scripts\build_app.ps1                      # Kit SDK와 확장 의존성 받기 + 빌드 (처음엔 오래 걸림, NVIDIA EULA 동의 필요)
 python -m pip install -r scripts\requirements-dev.txt
 .\scripts\test_core.ps1                      # core 단위 테스트
-.\scripts\launch_app.ps1                     # GUI: 크라운 라인으로 열린다 → Build Scene → Start, View = Cell close-up
+.\scripts\launch_app.ps1                     # GUI: 크라운 라인으로 열린다 → Build Scene → Start, View = Cell close-up (검사는 "Vision" 체크 후 Build Scene)
 ```
 
 ### 자동 run과 재현
