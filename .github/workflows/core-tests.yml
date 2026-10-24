@@ -1,0 +1,38 @@
+# Core unit tests on every push and pull request.
+# The simulation, cell cycle, IK, teaching, sorting and inspector logic live in the Kit-free
+# `core/` package, so they run on a GitHub-hosted runner without a GPU or the Omniverse Kit SDK.
+# The Kit app, renders and experiment runs are not part of CI (they need an RTX GPU); their
+# evidence is the recorded results under results/.
+name: core tests
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  core-tests:
+    runs-on: windows-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: scripts/requirements-dev.txt
+
+      - name: Install test dependencies
+        run: python -m pip install -r scripts/requirements-dev.txt
+
+      - name: Run core tests (same script as local development)
+        shell: pwsh
+        run: ./scripts/test_core.ps1
+
+      - name: Upload test log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-core-log
+          path: logs/test_core_*.log

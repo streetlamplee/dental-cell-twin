@@ -1,5 +1,7 @@
 # dental-cell-twin — 치아 크라운 가공 셀 디지털 트윈 (Omniverse Kit)
 
+[![core tests](https://github.com/streetlamplee/dental-cell-twin/actions/workflows/core-tests.yml/badge.svg)](https://github.com/streetlamplee/dental-cell-twin/actions/workflows/core-tests.yml)
+
 프로젝트 코드 이름은 **VisionTwin**이다(확장 `visiontwin.factory`, 앱 `visiontwin.app`). 비전 검사는 설정(`vision`)으로 켜는 선택 기능이고, GUI 기본값은 꺼짐이다.
 
 > 크라운이 컨베이어를 따라 **5축 기계로 만든 인라인 검사 셀**에 들어간다. 기계는 스핀들에 공구 대신 **카메라**를 달고 있다. B/C축으로 크라운을 기울이고 돌려 윗면 1장과 옆면 4장을 찍는다. 카메라는 **실제 렌더 이미지**로 셰이드와 형상을 판정하고, 불량품은 **제품 ID 기준으로** 배출선에서 밀려난다.
