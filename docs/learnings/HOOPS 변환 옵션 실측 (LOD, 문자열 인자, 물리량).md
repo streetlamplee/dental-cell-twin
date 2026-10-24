@@ -45,3 +45,12 @@ STEP 쪽은 OpenCascade XCAF로 제품(형상 정의)과 인스턴스(어셈블�
 - 밀링기의 인스턴스 이름 6개(`4`, `6`, `10`, `14`, `18`, `22`)는 남지 않는다. CadQuery가 링크 배치에 자동으로 붙인 번호다. HOOPS는 인스턴스와 제품을 프림 하나로 합치고, 그 프림에 제품 이름(`base_link` 등)을 단다.
 - `legacy` 프로파일(`convertMetadata=false`)로 변환했던 Day 5~6 USD에는 메타데이터 속성이 0개였다(`report_cad_usd`의 metadata 열).
 - 한계: 이 STEP들에는 PMI나 사용자 속성이 없어서, 그런 메타데이터의 보존은 확인하지 못했다.
+
+## 6. Revit(.rvt/.rfa) → USD (2026-10-24 확인, 실제 변환은 안 해 봄)
+- 사용자가 말한 "래빗 컨버터"는 Revit → USD 변환을 뜻하는 것으로 보인다.
+- 이 Kit(110.4) 레지스트리 확인(`probe_extensions.ps1`):
+  - Revit 전용 변환 확장(`omni.kit.converter.revit`)은 **없다**. IFC 전용 확장도 없다.
+  - `omni.kit.converter.hoops_core` 512.2.1(이 프로젝트가 쓰는 변환기)과 UI 확장 `omni.kit.converter.hoops` 510.6.0은 있다.
+- `hoops_core` 문서의 지원 형식에 **Revit `.RVT`, `.RFA`**와 IFC가 있다. Revit 전용 옵션 `revitLOD`(불러올 상세 수준)도 있다. 그래서 같은 스크립트(`convert_step_to_usd.ps1 -Stp <file.rvt>`)로 변환을 시도할 수 있다. 입력 확장자로 형식을 고른다.
+- 메타데이터: `convertMetadata`의 문서 설명은 "PMI와 BIM 관계(IFC만)를 USD 속성/관계로"다. **Revit 요소 파라미터가 어디까지 남는지는 문서로 확인되지 않았다.** `.rvt` 샘플로 실측해야 한다(`verify_cad_metadata.py`처럼 원본과 대조).
+
