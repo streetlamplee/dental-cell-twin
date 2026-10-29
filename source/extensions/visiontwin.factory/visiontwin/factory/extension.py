@@ -38,6 +38,7 @@ from .core.sorting import SortingController
 from .core.vision_inspector import (UNKNOWN, InspectionResult, InspectorConfig, VisionInspector, combine_views,
                                     load_view_configs)
 from .dashboard import Dashboard
+from .runtime_session import RuntimeSession
 
 LOG_PREFIX = "[visiontwin.factory]"
 SETTINGS = "/exts/visiontwin.factory"
@@ -77,7 +78,6 @@ def _resolve(path: str) -> str:
 class VisionTwinFactoryExtension(omni.ext.IExt):
     def on_startup(self, _ext_id):
         global _instance
-        _instance = self
         carb.log_info(f"{LOG_PREFIX} startup")
         self._catalog = self._make_catalog()
         self._sim = ConveyorSim(self._conveyor_config())
@@ -114,6 +114,8 @@ class VisionTwinFactoryExtension(omni.ext.IExt):
             on_view=self.set_view,
             on_teach=self.open_teach_pendant,
         )
+        self._runtime = RuntimeSession(self)
+        _instance = self  # publish only after the extension is fully initialized
 
     # -- dashboard callbacks ------------------------------------------------
 
@@ -166,6 +168,7 @@ class VisionTwinFactoryExtension(omni.ext.IExt):
         global _instance
         _instance = None
         carb.log_info(f"{LOG_PREFIX} shutdown")
+        self._runtime.shutdown()
         self._close_teach_pendant()
         self._unsubscribe()
         self._destroy_frame_provider()
@@ -188,14 +191,20 @@ class VisionTwinFactoryExtension(omni.ext.IExt):
         return self._main_viewport
 
     def _on_build(self):
-        asyncio.ensure_future(self.build_scene_async())
+        self._runtime.tasks.create(self.build_scene_async())
 
     async def _enable_vision_then_start(self):
+        generation = self._runtime.generation
         try:
             await self._create_frame_provider_async(self.main_viewport)
+            if not self._runtime.valid(generation):
+                return
             await self._setup_inspection_async()
         finally:
-            self._vision_setup_pending = False
+            if self._runtime.valid(generation):
+                self._vision_setup_pending = False
+        if not self._runtime.valid(generation):
+            return
         if self._frames is None:
             self._ui.set_status("no inspection camera: vision unavailable")
             return
@@ -207,6 +216,18 @@ class VisionTwinFactoryExtension(omni.ext.IExt):
             pendant.destroy()
 
     async def build_scene_async(self):
+        if self._runtime.building or not self._runtime.alive:
+            return
+        self._runtime.building = True
+        try:
+            await self._build_scene_async()
+        finally:
+            self._runtime.building = False
+
+    async def _build_scene_async(self):
+        self._runtime.invalidate("build")
+        generation = self._runtime.generation
+        self._scene_ready = False
         self._close_teach_pendant()
         self.stop()
         main = self.main_viewport
@@ -217,7 +238,13 @@ class VisionTwinFactoryExtension(omni.ext.IExt):
         self._destroy_frame_provider()
         self._ui.set_status("creating new stage...")
         ctx = omni.usd.get_context()
-        await ctx.new_stage_async()
+        self._runtime.changing_stage = True
+        try:
+            await ctx.new_stage_async()
+        finally:
+            self._runtime.changing_stage = False
+        if not self._runtime.valid(generation):
+            return
         self._catalog = self._make_catalog()
         layout = scene.CELL if self._catalog.cell else scene.BELT
         scene.build_factory_scene(ctx.get_stage(), *self._camera_params(), light_factor=LIGHT_FACTORS[_lighting()],
@@ -226,6 +253,8 @@ class VisionTwinFactoryExtension(omni.ext.IExt):
         self._arm = self._create_arm(ctx.get_stage()) if self._cell is not None else None
         self._reset_run_state()
         await omni.kit.app.get_app().next_update_async()
+        if not self._runtime.valid(generation):
+            return
         self._use_stage_lights()
         if main is not None:
             main.camera_path = L.OVERVIEW_CAMERA_PATH  # deterministic framing
@@ -235,7 +264,11 @@ class VisionTwinFactoryExtension(omni.ext.IExt):
         self._inspector, self._inspectors, self._model = None, [], None
         if _vision_on():
             await self._create_frame_provider_async(main)
+            if not self._runtime.valid(generation):
+                return
             await self._setup_inspection_async()
+        if not self._runtime.valid(generation):
+            return
         self._scene_ready = True
         self._built_part = self._catalog.part
         self._ui.set_status("scene ready")
@@ -266,7 +299,7 @@ class VisionTwinFactoryExtension(omni.ext.IExt):
             # inspection and wrote no record): create the inspection camera first, then start.
             if not self._vision_setup_pending:
                 self._vision_setup_pending = True
-                asyncio.ensure_future(self._enable_vision_then_start())
+                self._runtime.tasks.create(self._enable_vision_then_start())
             return
         if self._log is None and self._sim.time == 0.0:
             self._new_sorter()  # vision may have been ticked after Reset: the sorter must match it
@@ -290,6 +323,7 @@ class VisionTwinFactoryExtension(omni.ext.IExt):
         print(f"{LOG_PREFIX} stop")
 
     def reset(self):
+        self._runtime.invalidate("reset")
         self.stop()
         self._reset_run_state()
         stage = omni.usd.get_context().get_stage()
@@ -425,11 +459,25 @@ class VisionTwinFactoryExtension(omni.ext.IExt):
 
         from .frame_provider import InspectionFrameProvider
 
+        generation = self._runtime.generation
         self._ui.set_status("waiting for renderer...")
         await next_viewport_frame_async(main, 60)
+        if not self._runtime.valid(generation):
+            return
         self._ui.set_status("starting inspection camera...")
-        self._frames = InspectionFrameProvider(self._inspection_camera_path, L.CAMERA_RESOLUTION)
-        await self._frames.ready_async()
+        provider = InspectionFrameProvider(self._inspection_camera_path, L.CAMERA_RESOLUTION)
+        self._frames = provider
+        try:
+            await provider.ready_async()
+        except BaseException:
+            if self._frames is provider:
+                self._frames = None
+            provider.destroy()
+            raise
+        if not self._runtime.valid(generation):
+            if self._frames is provider:
+                self._frames = None
+            provider.destroy()
 
     async def _setup_inspection_async(self):
         """Create the inspector for the inspection viewport."""
@@ -498,7 +546,7 @@ class VisionTwinFactoryExtension(omni.ext.IExt):
 
     def _open_run(self):
         seed = self._sim.config.seed
-        run_id = f"{time.strftime('%Y%m%d_%H%M%S')}_seed{seed}"
+        run_id = f"{time.strftime('%Y%m%d_%H%M%S')}_{time.time_ns() % 1_000_000_000:09d}_seed{seed}"
         self.run_dir = os.path.join(_resolve(_setting("outputDir", "${data}/visiontwin_results")), "runs", run_id)
         self._log = InspectionLog(self.run_dir, record_frames=bool(_setting("recordFrames", True)))
         self._events = EventLog(self.run_dir)
@@ -506,6 +554,13 @@ class VisionTwinFactoryExtension(omni.ext.IExt):
                 "conveyor_speed": self._sim.config.speed, "spawn_interval": self._sim.config.spawn_interval,
                 "defect_rate": self._sim.config.defect_rate, "unknown_policy": self._sorter.unknown_policy,
                 "fixed_dt": float(_setting("fixedDt", 1.0 / 60.0)),
+                "generation": self._runtime.generation,
+                "capture_wall_timeout_s": float(_setting("captureWallTimeoutS", 30.0)),
+                "capture_update_budget": int(_setting("captureUpdateBudget", 180)),
+                "capture_delivery_delay_s": float(_setting("captureDeliveryDelayS", 0.0)),
+                "main_viewport_scale": float(_setting("mainViewportScale", 0.5)),
+                "async_rendering": carb.settings.get_settings().get("/app/asyncRendering"),
+                "kit_version": omni.kit.app.get_app().get_build_version(),
                 "experiment": str(_setting("experiment", "")), "condition": str(_setting("condition", "")),
                 "station_cycle_s": self._sim.config.process.cycle_s if self._sim.config.process else None,
                 "part": self._catalog.part, "lighting_condition": _lighting(), "camera_resolution": list(L.CAMERA_RESOLUTION),
@@ -519,6 +574,7 @@ class VisionTwinFactoryExtension(omni.ext.IExt):
             json.dump(meta, f, indent=2)
         self._run_id = run_id
         self._run_t0 = time.perf_counter()
+        self._runtime.open(self.run_dir, run_id, bool(_setting("trace", False)))
         print(f"{LOG_PREFIX} run {run_id} -> {self.run_dir}")
 
     def _run_ms(self) -> float:
@@ -578,6 +634,8 @@ class VisionTwinFactoryExtension(omni.ext.IExt):
         self._animate_rejects(stage, finish=False)
         if self._cell is not None:
             self._animate_cell(stage)
+        if _setting("trace", False):
+            self._runtime.mark("STATE_APPLIED")
         # Request frames after the prims (and the cell's camera) moved, so the captured render
         # shows this update's state.
         for pid in inspected:
@@ -589,7 +647,7 @@ class VisionTwinFactoryExtension(omni.ext.IExt):
             self._animate_rejects(stage, finish=True)
             self.stop()
             self._ui.set_status("finished - writing results")
-            asyncio.ensure_future(self._finalize_run_async())
+            self._runtime.tasks.create(self._finalize_run_async())
 
     @staticmethod
     def _belt_pose(x: float) -> np.ndarray:
@@ -664,7 +722,7 @@ class VisionTwinFactoryExtension(omni.ext.IExt):
             p.inspection_start_ms = self._run_ms()
         sim_time = self._sim.time
         speed = self._sim.config.speed
-        self._frames.request_frame(
+        self._runtime.capture(product_id, 0,
             lambda rgb, cap_ms, stale, offset: self._on_frame(product_id, rgb, cap_ms, stale, offset,
                                                              sim_time, speed),
             on_error=lambda msg: self._on_frame_error(product_id, msg, sim_time))
@@ -682,6 +740,8 @@ class VisionTwinFactoryExtension(omni.ext.IExt):
             self._sorter.record_late(product_id)
         else:
             p.prediction = UNKNOWN
+        self._runtime.mark("VERDICT_LATE" if self._sorter.is_sorted(product_id) else "VERDICT_APPLIED",
+                           detail="capture failed -> unknown")
         self._refresh_counters()
 
     def _request_view(self, product_id: int, view: int, retake: bool = False):
@@ -692,7 +752,7 @@ class VisionTwinFactoryExtension(omni.ext.IExt):
         if self._log and view == 0 and not retake:
             p.inspection_start_ms = self._run_ms()
         sim_time, speed = self._sim.time, self._sim.config.speed
-        self._frames.request_frame(
+        self._runtime.capture(product_id, view,
             lambda rgb, cap_ms, stale, offset: self._on_view_frame(product_id, view, rgb, cap_ms, stale, offset,
                                                                   sim_time, speed, retake),
             on_error=lambda msg: self._on_view_error(product_id, view, msg, sim_time, speed))
@@ -747,6 +807,8 @@ class VisionTwinFactoryExtension(omni.ext.IExt):
         else:
             p.prediction, p.score = result.label, result.score
             p.defect_reason = result.defect_reason if result.label == "defect" else None
+        self._runtime.mark("VERDICT_LATE" if self._sorter.is_sorted(product_id) else "VERDICT_APPLIED",
+                           detail=result.label)
         msg = f"id={product_id:04d} vision={result.label} score={result.score:.2f} ({result.latency_ms:.1f} ms)"
         print(f"{LOG_PREFIX} {msg}")
         self._ui.set_last_event(msg)
@@ -756,6 +818,7 @@ class VisionTwinFactoryExtension(omni.ext.IExt):
 
     def _on_frame(self, product_id, rgb, capture_ms, stale, frame_offset, sim_time, speed):
         result = self._vet(self._inspector.inspect(rgb), product_id, stale, frame_offset)  # pixels only
+        self._runtime.mark("INSPECTION_DONE", detail="rules")
         frame_file = self._log.save_frame(product_id, rgb) if self._log else None
         self._record(product_id, 0, result, capture_ms, frame_offset, sim_time, speed, frame_file)
         self._apply_verdict(product_id, result, sim_time)
@@ -780,6 +843,7 @@ class VisionTwinFactoryExtension(omni.ext.IExt):
             self._stale_frames += 1
             result.label, result.reason = UNKNOWN, "stale frame (identical to the previous capture, camera moved)"
             carb.log_warn(f"{LOG_PREFIX} id={product_id:04d} view {view} stale frame -> unknown")
+        self._runtime.mark("INSPECTION_DONE", detail="rules")
         frame_file = self._log.save_frame(product_id, rgb, view) if self._log else None
         self._record(product_id, view, result, capture_ms, frame_offset, sim_time, speed, frame_file)
         self._view_done(product_id, view, result, capture_ms, sim_time, speed, rgb)
@@ -825,10 +889,22 @@ class VisionTwinFactoryExtension(omni.ext.IExt):
     async def _finalize_run_async(self):
         """Write results.csv + summary.json once every pending frame has been handled."""
         app = omni.kit.app.get_app()
+        generation = self._runtime.generation
         for _ in range(600):
+            if not self._runtime.valid(generation):
+                return
             if self.pending_frames == 0:
                 break
             await app.next_update_async()
+        if not self._runtime.valid(generation):
+            return
+        incomplete = self.pending_frames > 0
+        if self._frames:
+            if incomplete:
+                self._frames.cancel_pending()
+            await self._frames.drain()
+        if not self._runtime.valid(generation):
+            return
         if self._log is None:
             self.run_complete = True
             self._ui.set_status("finished (no inspection)")
@@ -840,6 +916,7 @@ class VisionTwinFactoryExtension(omni.ext.IExt):
             self._events.close()
         sorted_rows = [r for r in rows if r["sort_result"]]
         self.summary = {
+            "status": "capture_drain_timeout" if incomplete else "complete",
             "run_id": self._run_id,
             "products": len(products),
             "sorted": len(sorted_rows),
@@ -870,6 +947,11 @@ class VisionTwinFactoryExtension(omni.ext.IExt):
                 "queue_max": self._sim.queue_max,
                 "queue_mean": round(self._sim.queue_mean, 3),
             }
+        if self._runtime.trace:
+            self._runtime.trace.close(self._sim.time, self.summary["status"])
+            self.summary["timing"] = self._runtime.trace.summary(self._sim.time)
+            wall_s = self.summary["timing"]["wall_s"]
+            self.summary["wall_throughput_per_hour"] = len(sorted_rows) / wall_s * 3600 if wall_s else None
         with open(os.path.join(self.run_dir, "summary.json"), "w", encoding="utf-8") as f:
             json.dump(self.summary, f, indent=2)
         self.run_complete = True

@@ -35,6 +35,10 @@ repository = "https://github.com/NVIDIA-Omniverse/kit-app-template"  # URL of th
 # to the repository's results/ folder.
 exts."visiontwin.factory".outputDir = "${data}/visiontwin_results"
 exts."visiontwin.factory".recordFrames = true
+exts."visiontwin.factory".trace = false  # diagnostic trace.csv; timing summary is always recorded
+exts."visiontwin.factory".captureWallTimeoutS = 30.0  # wall-clock deadline, independent of simulation dt
+exts."visiontwin.factory".captureUpdateBudget = 180  # app-update budget; not a wall-clock duration
+exts."visiontwin.factory".captureDeliveryDelayS = 0.0  # diagnostic delivery delay after native capture, seconds
 
 
 # OpenCV inside Kit's Python. Prototype-only mechanism (installs at first enable).

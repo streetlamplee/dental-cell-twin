@@ -8,17 +8,15 @@ Note (Kit 110.4): a bare ViewportWidget inside an omni.ui.Window never delivered
 frames; a full ViewportWindow does (see scripts/probe_capture.ps1).
 """
 
-import asyncio
 import ctypes
-import hashlib
-import time
 from typing import Callable, Optional, Tuple
 
 import carb
+import carb.settings
 import numpy as np
 import omni.kit.app
 from omni.kit.viewport.utility import create_viewport_window, next_viewport_frame_async
-from omni.kit.widget.viewport.capture import ByteCapture
+from .capture_runtime import CapturePool
 
 FrameCallback = Callable[[np.ndarray, float, bool, Optional[int]], None]  # (rgb, latency_ms, stale, frame_offset)
 
@@ -38,7 +36,7 @@ def capsule_to_rgb(buffer, buffer_size: int, width: int, height: int, byte_forma
 
 class InspectionFrameProvider:
     WINDOW_TITLE = "VisionTwin Inspection Camera"
-    TIMEOUT_UPDATES = 180  # 3 s of simulation time at the default fixed step
+    TIMEOUT_UPDATES = 180  # app updates; not a wall-clock timeout or a simulation clock
 
     def __init__(self, camera_path: Optional[str], resolution: Tuple[int, int]) -> None:
         w, h = resolution
@@ -47,10 +45,14 @@ class InspectionFrameProvider:
                                               camera_path=camera_path)
         if self._window is None:
             raise RuntimeError("could not create the inspection viewport window")
-        self._pending = 0
-        self._last_digest = None
-        self.frame_target_misses = 0
-        self.timeouts = 0
+        settings = carb.settings.get_settings()
+        def setting(name, default):
+            value = settings.get(f"/exts/visiontwin.factory/{name}")
+            return default if value is None else value
+        self._pool = CapturePool(lambda: self.viewport_api, capsule_to_rgb,
+            wall_timeout_s=float(setting("captureWallTimeoutS", 30.0)),
+            update_budget=int(setting("captureUpdateBudget", self.TIMEOUT_UPDATES)),
+            delivery_delay_s=float(setting("captureDeliveryDelayS", 0.0)))
 
     async def ready_async(self) -> None:
         """Wait for the first rendered frames, then lock the resolution.
@@ -73,12 +75,21 @@ class InspectionFrameProvider:
 
     @property
     def pending(self) -> int:
-        return self._pending
+        return self._pool.pending
+
+    @property
+    def frame_target_misses(self):
+        return self._pool.frame_target_misses
+
+    @property
+    def timeouts(self):
+        return self._pool.timeouts
 
     def set_camera(self, camera_path: str) -> None:
         self.viewport_api.camera_path = camera_path
 
-    def request_frame(self, on_frame: FrameCallback, on_error: Optional[Callable[[str], None]] = None) -> None:
+    def request_frame(self, on_frame: FrameCallback, on_error: Optional[Callable[[str], None]] = None,
+                      on_event=None) -> None:
         """Capture the frame that renders the CURRENT update's stage state (non-blocking).
 
         The target is the current app update number used as the SWH frame number
@@ -91,58 +102,17 @@ class InspectionFrameProvider:
           frame_offset = captured SWH frame - requested frame (0 = the requested state;
           None = unknown). Anything but 0 means the image may not show the requested product.
         """
-        t_request = time.perf_counter()
-        target = omni.kit.app.get_app().get_update_number()
-        self._pending += 1
-        asyncio.ensure_future(self._capture_async(target, t_request, on_frame, on_error))
+        self._pool.request(on_frame, on_error, on_event)
 
-    async def _capture_async(self, target, t_request, on_frame, on_error):
-        got = {}
+    def cancel_pending(self):
+        self._pool.cancel_pending()
+        self._pool.last_digest = None
 
-        def _on_capture(buffer, buffer_size, width, height, byte_format):
-            try:
-                got["rgb"] = capsule_to_rgb(buffer, buffer_size, width, height, byte_format)
-            except Exception as exc:  # report, never crash the render callback
-                carb.log_error(f"[visiontwin.factory] frame conversion failed: {exc}")
-                got["error"] = str(exc)
-
-        try:
-            cap = ByteCapture(_on_capture, aov_name="LdrColor", frame_to_capture=target,
-                              viewport=self.viewport_api)
-            self.viewport_api.schedule_capture(cap)
-            waiter = asyncio.ensure_future(cap.wait_for_result())
-            app = omni.kit.app.get_app()
-            for _ in range(self.TIMEOUT_UPDATES):
-                if waiter.done():
-                    break
-                await app.next_update_async()
-            if not waiter.done():
-                # Seen 2026-10-21: after 24 products the inspection viewport stopped reaching
-                # the requested frame and captures waited forever. Give up, report, move on.
-                waiter.cancel()
-                self.timeouts += 1
-                last = self.viewport_api.frame_info.get("swh_frame_number")
-                msg = (f"capture timeout: frame {target} not rendered within {self.TIMEOUT_UPDATES} updates "
-                       f"(viewport last swh={last}, now update={app.get_update_number()})")
-                carb.log_warn(f"[visiontwin.factory] {msg}")
-                if on_error:
-                    on_error(msg)
-                return
-            if "rgb" not in got:
-                self.frame_target_misses += 1
-                if on_error:
-                    on_error(got.get("error", f"frame {target} not captured"))
-                return
-            swh = (cap.frame_info or {}).get("swh_frame_number")
-            frame_offset = None if swh is None else swh - target
-            digest = hashlib.md5(got["rgb"].tobytes()).digest()
-            stale = digest == self._last_digest
-            self._last_digest = digest
-            on_frame(got["rgb"], (time.perf_counter() - t_request) * 1000.0, stale, frame_offset)
-        finally:
-            self._pending -= 1
+    async def drain(self):
+        await self._pool.drain()
 
     def destroy(self) -> None:
+        self._pool.close()
         if self._window:
             self._window.destroy()
             self._window = None

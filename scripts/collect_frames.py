@@ -40,6 +40,8 @@ async def _main():
         # run_complete is set after the line finished AND every pending frame was handled
         # (results.csv / summary.json written).
         await _wait_for(lambda: ext.run_complete, app, 60 * 60 * 10)
+        if ext.summary and ext.summary.get("status", "complete") != "complete":
+            raise RuntimeError(f"incomplete run: {ext.summary['status']}")
         print(f"{TAG} summary: {ext.summary}")
         print(f"{TAG} done: run_dir={ext.run_dir}")
         code = 0
