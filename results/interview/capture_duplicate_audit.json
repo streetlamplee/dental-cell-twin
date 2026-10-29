@@ -1,0 +1,24 @@
+{
+  "rows": [
+    {
+      "run": "results\\interview\\baseline\\after_20261029_210305\\box_2\\runs\\20261029_210546_782130200_seed42",
+      "previous_product": "20",
+      "product": "21",
+      "previous_ground_truth": "defect",
+      "ground_truth": "good",
+      "prediction": "defect",
+      "png_bytes_identical": true,
+      "png_sha256": "baa25a573a9e315a996c9a822105003dc82d550d3fce2695756bbb5c9f51379f",
+      "previous_frame": "results\\interview\\baseline\\after_20261029_210305\\box_2\\runs\\20261029_210546_782130200_seed42\\frames\\P_0020.png",
+      "frame": "results\\interview\\baseline\\after_20261029_210305\\box_2\\runs\\20261029_210546_782130200_seed42\\frames\\P_0021.png",
+      "previous_target": "2427",
+      "target": "2517",
+      "captured": "2517",
+      "rgb_digest": "874e0092d4a6eed84c5a004f228c8d1d",
+      "conflicting_expected_labels": true
+    }
+  ],
+  "identical_pairs": 1,
+  "conflicting_expected_labels": 1,
+  "note": "Offline evidence only. Identical pixels can be legitimate; label conflict does not identify the native renderer root cause. No ground-truth information enters the inspector."
+}

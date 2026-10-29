@@ -1,0 +1,39 @@
+{
+  "mode": "after",
+  "repeats": 1,
+  "rows": [
+    {
+      "scenario": "reset",
+      "repeat": 0,
+      "stale_callback_applied": false,
+      "injection": "callback held at frame-provider API boundary"
+    },
+    {
+      "scenario": "build",
+      "repeat": 0,
+      "stale_callback_applied": false,
+      "injection": "callback held at frame-provider API boundary"
+    },
+    {
+      "scenario": "external_stage",
+      "repeat": 0,
+      "stale_callback_applied": false,
+      "injection": "callback held at frame-provider API boundary"
+    },
+    {
+      "scenario": "extension_toggle",
+      "repeat": 0,
+      "stale_callback_applied": false,
+      "injection": "callback held at frame-provider API boundary"
+    },
+    {
+      "scenario": "real_pending_reset",
+      "repeat": 0,
+      "delivered_after_reset": false,
+      "pending": 0,
+      "tasks": 0
+    }
+  ],
+  "stale_callbacks_applied": 0,
+  "pass_expected_behavior": true
+}

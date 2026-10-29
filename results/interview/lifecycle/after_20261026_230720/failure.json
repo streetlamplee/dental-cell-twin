@@ -1,0 +1,23 @@
+{
+  "rows": [
+    {
+      "scenario": "reset",
+      "repeat": 0,
+      "stale_callback_applied": false,
+      "injection": "callback held at frame-provider API boundary"
+    },
+    {
+      "scenario": "build",
+      "repeat": 0,
+      "stale_callback_applied": false,
+      "injection": "callback held at frame-provider API boundary"
+    },
+    {
+      "scenario": "external_stage",
+      "repeat": 0,
+      "stale_callback_applied": false,
+      "injection": "callback held at frame-provider API boundary"
+    }
+  ],
+  "error": "Traceback (most recent call last):\n  File \"c:/users/pc/documents/01_project/omniverse/scripts/verify_kit_lifecycle.py\", line 99, in main\n    held[0][1](\"injected old capture error\")\n  File \"c:/users/pc/documents/01_project/omniverse/_build/windows-x86_64/release/exts/visiontwin.factory/visiontwin/factory/runtime_session.py\", line 96, in call\n    notify(\"DISCARDED\", detail=\"invalid generation\")\n  File \"c:/users/pc/documents/01_project/omniverse/_build/windows-x86_64/release/exts/visiontwin.factory/visiontwin/factory/runtime_session.py\", line 90, in notify\n    trace.event(event, ticket, ext._sim.time, omni.kit.app.get_app().get_update_number(), **details)\n                               ^^^^^^^^\nAttributeError: 'VisionTwinFactoryExtension' object has no attribute '_sim'\n"
+}

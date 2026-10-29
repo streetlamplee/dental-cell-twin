@@ -1,0 +1,9 @@
+﻿{
+    "kit_id":  5668,
+    "graceful_close_requested":  true,
+    "runner_id":  17112,
+    "command":  "\"C:\\Users\\PC\\Documents\\01_project\\omniverse\\_build\\windows-x86_64\\release\\kit\\kit.exe\"  \"C:\\Users\\PC\\Documents\\01_project\\omniverse\\_build\\windows-x86_64\\release\\apps/visiontwin.app.kit\"  --exec \"C:\\Users\\PC\\Documents\\01_project\\omniverse\\scripts\\collect_frames.py\" --/crashreporter/gatherUserStory=0 --/app/file/ignoreUnsavedOnExit=true --/app/extensions/fsWatcherEnabled=false --/exts/visiontwin.factory/maxProducts=\"30\" --/exts/visiontwin.factory/outputDir=\"C:\\Users\\PC\\Documents\\01_project\\omniverse\\results\\interview\\baseline\\after_20261026_233733\\crown_1\" --/exts/visiontwin.factory/part=\"crown\" --/exts/visiontwin.factory/seed=\"42\" --/exts/visiontwin.factory/speed=\"0.5\" --/exts/visiontwin.factory/trace=\"true\" --/exts/visiontwin.factory/vision=\"true\" --/visiontwin/interview/out=\"C:\\Users\\PC\\Documents\\01_project\\omniverse\\results\\interview\\baseline\\after_20261026_233733\\crown_1\"",
+    "stopped_utc":  "2026-10-26T14:43:55.5106725Z",
+    "status":  "interrupted_by_user",
+    "resume":  "See docs/2026-10-26 硫댁젒 以鍮꾩슜 Omniverse 怨좊룄??援ы쁽.md"
+}

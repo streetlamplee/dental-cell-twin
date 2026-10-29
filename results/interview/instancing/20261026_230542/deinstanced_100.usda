@@ -1,0 +1,1322 @@
+#usda 1.0
+(
+    defaultPrim = "World"
+    metersPerUnit = 1
+    upAxis = "Z"
+)
+
+def Xform "World"
+{
+    def Xform "P_0000"
+    {
+        double3 xformOp:translate = (0, 0, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Xform "Part" (
+            instanceable = false
+            prepend references = @../../../../assets/parts/usd/crown_good.usda@
+        )
+        {
+        }
+    }
+
+    def Xform "P_0001"
+    {
+        double3 xformOp:translate = (0.025, 0, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Xform "Part" (
+            instanceable = false
+            prepend references = @../../../../assets/parts/usd/crown_good.usda@
+        )
+        {
+        }
+    }
+
+    def Xform "P_0002"
+    {
+        double3 xformOp:translate = (0.05, 0, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Xform "Part" (
+            instanceable = false
+            prepend references = @../../../../assets/parts/usd/crown_good.usda@
+        )
+        {
+        }
+    }
+
+    def Xform "P_0003"
+    {
+        double3 xformOp:translate = (0.07500000000000001, 0, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Xform "Part" (
+            instanceable = false
+            prepend references = @../../../../assets/parts/usd/crown_good.usda@
+        )
+        {
+        }
+    }
+
+    def Xform "P_0004"
+    {
+        double3 xformOp:translate = (0.1, 0, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Xform "Part" (
+            instanceable = false
+            prepend references = @../../../../assets/parts/usd/crown_good.usda@
+        )
+        {
+        }
+    }
+
+    def Xform "P_0005"
+    {
+        double3 xformOp:translate = (0.125, 0, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Xform "Part" (
+            instanceable = false
+            prepend references = @../../../../assets/parts/usd/crown_good.usda@
+        )
+        {
+        }
+    }
+
+    def Xform "P_0006"
+    {
+        double3 xformOp:translate = (0.15000000000000002, 0, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Xform "Part" (
+            instanceable = false
+            prepend references = @../../../../assets/parts/usd/crown_good.usda@
+        )
+        {
+        }
+    }
+
+    def Xform "P_0007"
+    {
+        double3 xformOp:translate = (0.17500000000000002, 0, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Xform "Part" (
+            instanceable = false
+            prepend references = @../../../../assets/parts/usd/crown_good.usda@
+        )
+        {
+        }
+    }
+
+    def Xform "P_0008"
+    {
+        double3 xformOp:translate = (0.2, 0, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Xform "Part" (
+            instanceable = false
+            prepend references = @../../../../assets/parts/usd/crown_good.usda@
+        )
+        {
+        }
+    }
+
+    def Xform "P_0009"
+    {
+        double3 xformOp:translate = (0.225, 0, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Xform "Part" (
+            instanceable = false
+            prepend references = @../../../../assets/parts/usd/crown_good.usda@
+        )
+        {
+        }
+    }
+
+    def Xform "P_0010"
+    {
+        double3 xformOp:translate = (0, 0.025, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Xform "Part" (
+            instanceable = false
+            prepend references = @../../../../assets/parts/usd/crown_good.usda@
+        )
+        {
+        }
+    }
+
+    def Xform "P_0011"
+    {
+        double3 xformOp:translate = (0.025, 0.025, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Xform "Part" (
+            instanceable = false
+            prepend references = @../../../../assets/parts/usd/crown_good.usda@
+        )
+        {
+        }
+    }
+
+    def Xform "P_0012"
+    {
+        double3 xformOp:translate = (0.05, 0.025, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Xform "Part" (
+            instanceable = false
+            prepend references = @../../../../assets/parts/usd/crown_good.usda@
+        )
+        {
+        }
+    }
+
+    def Xform "P_0013"
+    {
+        double3 xformOp:translate = (0.07500000000000001, 0.025, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Xform "Part" (
+            instanceable = false
+            prepend references = @../../../../assets/parts/usd/crown_good.usda@
+        )
+        {
+        }
+    }
+
+    def Xform "P_0014"
+    {
+        double3 xformOp:translate = (0.1, 0.025, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Xform "Part" (
+            instanceable = false
+            prepend references = @../../../../assets/parts/usd/crown_good.usda@
+        )
+        {
+        }
+    }
+
+    def Xform "P_0015"
+    {
+        double3 xformOp:translate = (0.125, 0.025, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Xform "Part" (
+            instanceable = false
+            prepend references = @../../../../assets/parts/usd/crown_good.usda@
+        )
+        {
+        }
+    }
+
+    def Xform "P_0016"
+    {
+        double3 xformOp:translate = (0.15000000000000002, 0.025, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Xform "Part" (
+            instanceable = false
+            prepend references = @../../../../assets/parts/usd/crown_good.usda@
+        )
+        {
+        }
+    }
+
+    def Xform "P_0017"
+    {
+        double3 xformOp:translate = (0.17500000000000002, 0.025, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Xform "Part" (
+            instanceable = false
+            prepend references = @../../../../assets/parts/usd/crown_good.usda@
+        )
+        {
+        }
+    }
+
+    def Xform "P_0018"
+    {
+        double3 xformOp:translate = (0.2, 0.025, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Xform "Part" (
+            instanceable = false
+            prepend references = @../../../../assets/parts/usd/crown_good.usda@
+        )
+        {
+        }
+    }
+
+    def Xform "P_0019"
+    {
+        double3 xformOp:translate = (0.225, 0.025, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Xform "Part" (
+            instanceable = false
+            prepend references = @../../../../assets/parts/usd/crown_good.usda@
+        )
+        {
+        }
+    }
+
+    def Xform "P_0020"
+    {
+        double3 xformOp:translate = (0, 0.05, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Xform "Part" (
+            instanceable = false
+            prepend references = @../../../../assets/parts/usd/crown_good.usda@
+        )
+        {
+        }
+    }
+
+    def Xform "P_0021"
+    {
+        double3 xformOp:translate = (0.025, 0.05, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Xform "Part" (
+            instanceable = false
+            prepend references = @../../../../assets/parts/usd/crown_good.usda@
+        )
+        {
+        }
+    }
+
+    def Xform "P_0022"
+    {
+        double3 xformOp:translate = (0.05, 0.05, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Xform "Part" (
+            instanceable = false
+            prepend references = @../../../../assets/parts/usd/crown_good.usda@
+        )
+        {
+        }
+    }
+
+    def Xform "P_0023"
+    {
+        double3 xformOp:translate = (0.07500000000000001, 0.05, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Xform "Part" (
+            instanceable = false
+            prepend references = @../../../../assets/parts/usd/crown_good.usda@
+        )
+        {
+        }
+    }
+
+    def Xform "P_0024"
+    {
+        double3 xformOp:translate = (0.1, 0.05, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Xform "Part" (
+            instanceable = false
+            prepend references = @../../../../assets/parts/usd/crown_good.usda@
+        )
+        {
+        }
+    }
+
+    def Xform "P_0025"
+    {
+        double3 xformOp:translate = (0.125, 0.05, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Xform "Part" (
+            instanceable = false
+            prepend references = @../../../../assets/parts/usd/crown_good.usda@
+        )
+        {
+        }
+    }
+
+    def Xform "P_0026"
+    {
+        double3 xformOp:translate = (0.15000000000000002, 0.05, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Xform "Part" (
+            instanceable = false
+            prepend references = @../../../../assets/parts/usd/crown_good.usda@
+        )
+        {
+        }
+    }
+
+    def Xform "P_0027"
+    {
+        double3 xformOp:translate = (0.17500000000000002, 0.05, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Xform "Part" (
+            instanceable = false
+            prepend references = @../../../../assets/parts/usd/crown_good.usda@
+        )
+        {
+        }
+    }
+
+    def Xform "P_0028"
+    {
+        double3 xformOp:translate = (0.2, 0.05, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Xform "Part" (
+            instanceable = false
+            prepend references = @../../../../assets/parts/usd/crown_good.usda@
+        )
+        {
+        }
+    }
+
+    def Xform "P_0029"
+    {
+        double3 xformOp:translate = (0.225, 0.05, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Xform "Part" (
+            instanceable = false
+            prepend references = @../../../../assets/parts/usd/crown_good.usda@
+        )
+        {
+        }
+    }
+
+    def Xform "P_0030"
+    {
+        double3 xformOp:translate = (0, 0.07500000000000001, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Xform "Part" (
+            instanceable = false
+            prepend references = @../../../../assets/parts/usd/crown_good.usda@
+        )
+        {
+        }
+    }
+
+    def Xform "P_0031"
+    {
+        double3 xformOp:translate = (0.025, 0.07500000000000001, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Xform "Part" (
+            instanceable = false
+            prepend references = @../../../../assets/parts/usd/crown_good.usda@
+        )
+        {
+        }
+    }
+
+    def Xform "P_0032"
+    {
+        double3 xformOp:translate = (0.05, 0.07500000000000001, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Xform "Part" (
+            instanceable = false
+            prepend references = @../../../../assets/parts/usd/crown_good.usda@
+        )
+        {
+        }
+    }
+
+    def Xform "P_0033"
+    {
+        double3 xformOp:translate = (0.07500000000000001, 0.07500000000000001, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Xform "Part" (
+            instanceable = false
+            prepend references = @../../../../assets/parts/usd/crown_good.usda@
+        )
+        {
+        }
+    }
+
+    def Xform "P_0034"
+    {
+        double3 xformOp:translate = (0.1, 0.07500000000000001, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Xform "Part" (
+            instanceable = false
+            prepend references = @../../../../assets/parts/usd/crown_good.usda@
+        )
+        {
+        }
+    }
+
+    def Xform "P_0035"
+    {
+        double3 xformOp:translate = (0.125, 0.07500000000000001, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Xform "Part" (
+            instanceable = false
+            prepend references = @../../../../assets/parts/usd/crown_good.usda@
+        )
+        {
+        }
+    }
+
+    def Xform "P_0036"
+    {
+        double3 xformOp:translate = (0.15000000000000002, 0.07500000000000001, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Xform "Part" (
+            instanceable = false
+            prepend references = @../../../../assets/parts/usd/crown_good.usda@
+        )
+        {
+        }
+    }
+
+    def Xform "P_0037"
+    {
+        double3 xformOp:translate = (0.17500000000000002, 0.07500000000000001, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Xform "Part" (
+            instanceable = false
+            prepend references = @../../../../assets/parts/usd/crown_good.usda@
+        )
+        {
+        }
+    }
+
+    def Xform "P_0038"
+    {
+        double3 xformOp:translate = (0.2, 0.07500000000000001, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Xform "Part" (
+            instanceable = false
+            prepend references = @../../../../assets/parts/usd/crown_good.usda@
+        )
+        {
+        }
+    }
+
+    def Xform "P_0039"
+    {
+        double3 xformOp:translate = (0.225, 0.07500000000000001, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Xform "Part" (
+            instanceable = false
+            prepend references = @../../../../assets/parts/usd/crown_good.usda@
+        )
+        {
+        }
+    }
+
+    def Xform "P_0040"
+    {
+        double3 xformOp:translate = (0, 0.1, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Xform "Part" (
+            instanceable = false
+            prepend references = @../../../../assets/parts/usd/crown_good.usda@
+        )
+        {
+        }
+    }
+
+    def Xform "P_0041"
+    {
+        double3 xformOp:translate = (0.025, 0.1, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Xform "Part" (
+            instanceable = false
+            prepend references = @../../../../assets/parts/usd/crown_good.usda@
+        )
+        {
+        }
+    }
+
+    def Xform "P_0042"
+    {
+        double3 xformOp:translate = (0.05, 0.1, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Xform "Part" (
+            instanceable = false
+            prepend references = @../../../../assets/parts/usd/crown_good.usda@
+        )
+        {
+        }
+    }
+
+    def Xform "P_0043"
+    {
+        double3 xformOp:translate = (0.07500000000000001, 0.1, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Xform "Part" (
+            instanceable = false
+            prepend references = @../../../../assets/parts/usd/crown_good.usda@
+        )
+        {
+        }
+    }
+
+    def Xform "P_0044"
+    {
+        double3 xformOp:translate = (0.1, 0.1, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Xform "Part" (
+            instanceable = false
+            prepend references = @../../../../assets/parts/usd/crown_good.usda@
+        )
+        {
+        }
+    }
+
+    def Xform "P_0045"
+    {
+        double3 xformOp:translate = (0.125, 0.1, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Xform "Part" (
+            instanceable = false
+            prepend references = @../../../../assets/parts/usd/crown_good.usda@
+        )
+        {
+        }
+    }
+
+    def Xform "P_0046"
+    {
+        double3 xformOp:translate = (0.15000000000000002, 0.1, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Xform "Part" (
+            instanceable = false
+            prepend references = @../../../../assets/parts/usd/crown_good.usda@
+        )
+        {
+        }
+    }
+
+    def Xform "P_0047"
+    {
+        double3 xformOp:translate = (0.17500000000000002, 0.1, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Xform "Part" (
+            instanceable = false
+            prepend references = @../../../../assets/parts/usd/crown_good.usda@
+        )
+        {
+        }
+    }
+
+    def Xform "P_0048"
+    {
+        double3 xformOp:translate = (0.2, 0.1, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Xform "Part" (
+            instanceable = false
+            prepend references = @../../../../assets/parts/usd/crown_good.usda@
+        )
+        {
+        }
+    }
+
+    def Xform "P_0049"
+    {
+        double3 xformOp:translate = (0.225, 0.1, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Xform "Part" (
+            instanceable = false
+            prepend references = @../../../../assets/parts/usd/crown_good.usda@
+        )
+        {
+        }
+    }
+
+    def Xform "P_0050"
+    {
+        double3 xformOp:translate = (0, 0.125, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Xform "Part" (
+            instanceable = false
+            prepend references = @../../../../assets/parts/usd/crown_good.usda@
+        )
+        {
+        }
+    }
+
+    def Xform "P_0051"
+    {
+        double3 xformOp:translate = (0.025, 0.125, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Xform "Part" (
+            instanceable = false
+            prepend references = @../../../../assets/parts/usd/crown_good.usda@
+        )
+        {
+        }
+    }
+
+    def Xform "P_0052"
+    {
+        double3 xformOp:translate = (0.05, 0.125, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Xform "Part" (
+            instanceable = false
+            prepend references = @../../../../assets/parts/usd/crown_good.usda@
+        )
+        {
+        }
+    }
+
+    def Xform "P_0053"
+    {
+        double3 xformOp:translate = (0.07500000000000001, 0.125, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Xform "Part" (
+            instanceable = false
+            prepend references = @../../../../assets/parts/usd/crown_good.usda@
+        )
+        {
+        }
+    }
+
+    def Xform "P_0054"
+    {
+        double3 xformOp:translate = (0.1, 0.125, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Xform "Part" (
+            instanceable = false
+            prepend references = @../../../../assets/parts/usd/crown_good.usda@
+        )
+        {
+        }
+    }
+
+    def Xform "P_0055"
+    {
+        double3 xformOp:translate = (0.125, 0.125, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Xform "Part" (
+            instanceable = false
+            prepend references = @../../../../assets/parts/usd/crown_good.usda@
+        )
+        {
+        }
+    }
+
+    def Xform "P_0056"
+    {
+        double3 xformOp:translate = (0.15000000000000002, 0.125, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Xform "Part" (
+            instanceable = false
+            prepend references = @../../../../assets/parts/usd/crown_good.usda@
+        )
+        {
+        }
+    }
+
+    def Xform "P_0057"
+    {
+        double3 xformOp:translate = (0.17500000000000002, 0.125, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Xform "Part" (
+            instanceable = false
+            prepend references = @../../../../assets/parts/usd/crown_good.usda@
+        )
+        {
+        }
+    }
+
+    def Xform "P_0058"
+    {
+        double3 xformOp:translate = (0.2, 0.125, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Xform "Part" (
+            instanceable = false
+            prepend references = @../../../../assets/parts/usd/crown_good.usda@
+        )
+        {
+        }
+    }
+
+    def Xform "P_0059"
+    {
+        double3 xformOp:translate = (0.225, 0.125, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Xform "Part" (
+            instanceable = false
+            prepend references = @../../../../assets/parts/usd/crown_good.usda@
+        )
+        {
+        }
+    }
+
+    def Xform "P_0060"
+    {
+        double3 xformOp:translate = (0, 0.15000000000000002, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Xform "Part" (
+            instanceable = false
+            prepend references = @../../../../assets/parts/usd/crown_good.usda@
+        )
+        {
+        }
+    }
+
+    def Xform "P_0061"
+    {
+        double3 xformOp:translate = (0.025, 0.15000000000000002, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Xform "Part" (
+            instanceable = false
+            prepend references = @../../../../assets/parts/usd/crown_good.usda@
+        )
+        {
+        }
+    }
+
+    def Xform "P_0062"
+    {
+        double3 xformOp:translate = (0.05, 0.15000000000000002, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Xform "Part" (
+            instanceable = false
+            prepend references = @../../../../assets/parts/usd/crown_good.usda@
+        )
+        {
+        }
+    }
+
+    def Xform "P_0063"
+    {
+        double3 xformOp:translate = (0.07500000000000001, 0.15000000000000002, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Xform "Part" (
+            instanceable = false
+            prepend references = @../../../../assets/parts/usd/crown_good.usda@
+        )
+        {
+        }
+    }
+
+    def Xform "P_0064"
+    {
+        double3 xformOp:translate = (0.1, 0.15000000000000002, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Xform "Part" (
+            instanceable = false
+            prepend references = @../../../../assets/parts/usd/crown_good.usda@
+        )
+        {
+        }
+    }
+
+    def Xform "P_0065"
+    {
+        double3 xformOp:translate = (0.125, 0.15000000000000002, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Xform "Part" (
+            instanceable = false
+            prepend references = @../../../../assets/parts/usd/crown_good.usda@
+        )
+        {
+        }
+    }
+
+    def Xform "P_0066"
+    {
+        double3 xformOp:translate = (0.15000000000000002, 0.15000000000000002, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Xform "Part" (
+            instanceable = false
+            prepend references = @../../../../assets/parts/usd/crown_good.usda@
+        )
+        {
+        }
+    }
+
+    def Xform "P_0067"
+    {
+        double3 xformOp:translate = (0.17500000000000002, 0.15000000000000002, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Xform "Part" (
+            instanceable = false
+            prepend references = @../../../../assets/parts/usd/crown_good.usda@
+        )
+        {
+        }
+    }
+
+    def Xform "P_0068"
+    {
+        double3 xformOp:translate = (0.2, 0.15000000000000002, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Xform "Part" (
+            instanceable = false
+            prepend references = @../../../../assets/parts/usd/crown_good.usda@
+        )
+        {
+        }
+    }
+
+    def Xform "P_0069"
+    {
+        double3 xformOp:translate = (0.225, 0.15000000000000002, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Xform "Part" (
+            instanceable = false
+            prepend references = @../../../../assets/parts/usd/crown_good.usda@
+        )
+        {
+        }
+    }
+
+    def Xform "P_0070"
+    {
+        double3 xformOp:translate = (0, 0.17500000000000002, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Xform "Part" (
+            instanceable = false
+            prepend references = @../../../../assets/parts/usd/crown_good.usda@
+        )
+        {
+        }
+    }
+
+    def Xform "P_0071"
+    {
+        double3 xformOp:translate = (0.025, 0.17500000000000002, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Xform "Part" (
+            instanceable = false
+            prepend references = @../../../../assets/parts/usd/crown_good.usda@
+        )
+        {
+        }
+    }
+
+    def Xform "P_0072"
+    {
+        double3 xformOp:translate = (0.05, 0.17500000000000002, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Xform "Part" (
+            instanceable = false
+            prepend references = @../../../../assets/parts/usd/crown_good.usda@
+        )
+        {
+        }
+    }
+
+    def Xform "P_0073"
+    {
+        double3 xformOp:translate = (0.07500000000000001, 0.17500000000000002, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Xform "Part" (
+            instanceable = false
+            prepend references = @../../../../assets/parts/usd/crown_good.usda@
+        )
+        {
+        }
+    }
+
+    def Xform "P_0074"
+    {
+        double3 xformOp:translate = (0.1, 0.17500000000000002, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Xform "Part" (
+            instanceable = false
+            prepend references = @../../../../assets/parts/usd/crown_good.usda@
+        )
+        {
+        }
+    }
+
+    def Xform "P_0075"
+    {
+        double3 xformOp:translate = (0.125, 0.17500000000000002, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Xform "Part" (
+            instanceable = false
+            prepend references = @../../../../assets/parts/usd/crown_good.usda@
+        )
+        {
+        }
+    }
+
+    def Xform "P_0076"
+    {
+        double3 xformOp:translate = (0.15000000000000002, 0.17500000000000002, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Xform "Part" (
+            instanceable = false
+            prepend references = @../../../../assets/parts/usd/crown_good.usda@
+        )
+        {
+        }
+    }
+
+    def Xform "P_0077"
+    {
+        double3 xformOp:translate = (0.17500000000000002, 0.17500000000000002, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Xform "Part" (
+            instanceable = false
+            prepend references = @../../../../assets/parts/usd/crown_good.usda@
+        )
+        {
+        }
+    }
+
+    def Xform "P_0078"
+    {
+        double3 xformOp:translate = (0.2, 0.17500000000000002, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Xform "Part" (
+            instanceable = false
+            prepend references = @../../../../assets/parts/usd/crown_good.usda@
+        )
+        {
+        }
+    }
+
+    def Xform "P_0079"
+    {
+        double3 xformOp:translate = (0.225, 0.17500000000000002, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Xform "Part" (
+            instanceable = false
+            prepend references = @../../../../assets/parts/usd/crown_good.usda@
+        )
+        {
+        }
+    }
+
+    def Xform "P_0080"
+    {
+        double3 xformOp:translate = (0, 0.2, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Xform "Part" (
+            instanceable = false
+            prepend references = @../../../../assets/parts/usd/crown_good.usda@
+        )
+        {
+        }
+    }
+
+    def Xform "P_0081"
+    {
+        double3 xformOp:translate = (0.025, 0.2, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Xform "Part" (
+            instanceable = false
+            prepend references = @../../../../assets/parts/usd/crown_good.usda@
+        )
+        {
+        }
+    }
+
+    def Xform "P_0082"
+    {
+        double3 xformOp:translate = (0.05, 0.2, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Xform "Part" (
+            instanceable = false
+            prepend references = @../../../../assets/parts/usd/crown_good.usda@
+        )
+        {
+        }
+    }
+
+    def Xform "P_0083"
+    {
+        double3 xformOp:translate = (0.07500000000000001, 0.2, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Xform "Part" (
+            instanceable = false
+            prepend references = @../../../../assets/parts/usd/crown_good.usda@
+        )
+        {
+        }
+    }
+
+    def Xform "P_0084"
+    {
+        double3 xformOp:translate = (0.1, 0.2, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Xform "Part" (
+            instanceable = false
+            prepend references = @../../../../assets/parts/usd/crown_good.usda@
+        )
+        {
+        }
+    }
+
+    def Xform "P_0085"
+    {
+        double3 xformOp:translate = (0.125, 0.2, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Xform "Part" (
+            instanceable = false
+            prepend references = @../../../../assets/parts/usd/crown_good.usda@
+        )
+        {
+        }
+    }
+
+    def Xform "P_0086"
+    {
+        double3 xformOp:translate = (0.15000000000000002, 0.2, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Xform "Part" (
+            instanceable = false
+            prepend references = @../../../../assets/parts/usd/crown_good.usda@
+        )
+        {
+        }
+    }
+
+    def Xform "P_0087"
+    {
+        double3 xformOp:translate = (0.17500000000000002, 0.2, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Xform "Part" (
+            instanceable = false
+            prepend references = @../../../../assets/parts/usd/crown_good.usda@
+        )
+        {
+        }
+    }
+
+    def Xform "P_0088"
+    {
+        double3 xformOp:translate = (0.2, 0.2, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Xform "Part" (
+            instanceable = false
+            prepend references = @../../../../assets/parts/usd/crown_good.usda@
+        )
+        {
+        }
+    }
+
+    def Xform "P_0089"
+    {
+        double3 xformOp:translate = (0.225, 0.2, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Xform "Part" (
+            instanceable = false
+            prepend references = @../../../../assets/parts/usd/crown_good.usda@
+        )
+        {
+        }
+    }
+
+    def Xform "P_0090"
+    {
+        double3 xformOp:translate = (0, 0.225, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Xform "Part" (
+            instanceable = false
+            prepend references = @../../../../assets/parts/usd/crown_good.usda@
+        )
+        {
+        }
+    }
+
+    def Xform "P_0091"
+    {
+        double3 xformOp:translate = (0.025, 0.225, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Xform "Part" (
+            instanceable = false
+            prepend references = @../../../../assets/parts/usd/crown_good.usda@
+        )
+        {
+        }
+    }
+
+    def Xform "P_0092"
+    {
+        double3 xformOp:translate = (0.05, 0.225, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Xform "Part" (
+            instanceable = false
+            prepend references = @../../../../assets/parts/usd/crown_good.usda@
+        )
+        {
+        }
+    }
+
+    def Xform "P_0093"
+    {
+        double3 xformOp:translate = (0.07500000000000001, 0.225, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Xform "Part" (
+            instanceable = false
+            prepend references = @../../../../assets/parts/usd/crown_good.usda@
+        )
+        {
+        }
+    }
+
+    def Xform "P_0094"
+    {
+        double3 xformOp:translate = (0.1, 0.225, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Xform "Part" (
+            instanceable = false
+            prepend references = @../../../../assets/parts/usd/crown_good.usda@
+        )
+        {
+        }
+    }
+
+    def Xform "P_0095"
+    {
+        double3 xformOp:translate = (0.125, 0.225, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Xform "Part" (
+            instanceable = false
+            prepend references = @../../../../assets/parts/usd/crown_good.usda@
+        )
+        {
+        }
+    }
+
+    def Xform "P_0096"
+    {
+        double3 xformOp:translate = (0.15000000000000002, 0.225, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Xform "Part" (
+            instanceable = false
+            prepend references = @../../../../assets/parts/usd/crown_good.usda@
+        )
+        {
+        }
+    }
+
+    def Xform "P_0097"
+    {
+        double3 xformOp:translate = (0.17500000000000002, 0.225, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Xform "Part" (
+            instanceable = false
+            prepend references = @../../../../assets/parts/usd/crown_good.usda@
+        )
+        {
+        }
+    }
+
+    def Xform "P_0098"
+    {
+        double3 xformOp:translate = (0.2, 0.225, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Xform "Part" (
+            instanceable = false
+            prepend references = @../../../../assets/parts/usd/crown_good.usda@
+        )
+        {
+        }
+    }
+
+    def Xform "P_0099"
+    {
+        double3 xformOp:translate = (0.225, 0.225, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Xform "Part" (
+            instanceable = false
+            prepend references = @../../../../assets/parts/usd/crown_good.usda@
+        )
+        {
+        }
+    }
+
+    def Camera "Camera"
+    {
+        float2 clippingRange = (0.001, 100)
+        matrix4d xformOp:transform = ( (1, 0, -0, 0), (0, 0.7071067811865476, 0.7071067811865476, 0), (0, -0.7071067811865476, 0.7071067811865476, 0), (0.11250000000000002, -0.2875000000000001, 0.4000000000000001, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def DomeLight "Light"
+    {
+        float inputs:intensity = 1000
+    }
+}
+

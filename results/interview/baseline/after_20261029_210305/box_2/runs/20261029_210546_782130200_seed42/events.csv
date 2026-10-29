@@ -1,0 +1,151 @@
+sim_time_s,product_id,event,x,station,detail
+0.0,1,SPAWN,-2.8,,
+1.5,2,SPAWN,-2.8,,
+3.0,3,SPAWN,-2.8,,
+4.5,4,SPAWN,-2.8,,
+4.6,1,INSPECT,-0.5,,
+4.6167,1,VISION,,,good
+6.0,5,SPAWN,-2.8,,
+6.1,2,INSPECT,-0.5,,
+6.1167,2,VISION,,,defect color
+7.5,6,SPAWN,-2.8,,
+7.6,3,INSPECT,-0.5,,
+7.6167,3,VISION,,,defect color
+8.6,1,SORT,1.5,,predicted good
+9.0,7,SPAWN,-2.8,,
+9.1,4,INSPECT,-0.5,,
+9.1,4,VISION,,,defect color
+10.1,2,REJECT,1.5,,predicted defect
+10.1,2,EXIT,1.5,,
+10.5,8,SPAWN,-2.8,,
+10.6,5,INSPECT,-0.5,,
+10.6,5,VISION,,,good
+11.6,3,REJECT,1.5,,predicted defect
+11.6,3,EXIT,1.5,,
+11.6,1,EXIT,3.0,,
+12.0,9,SPAWN,-2.8,,
+12.1,6,INSPECT,-0.5,,
+12.1,6,VISION,,,good
+13.1,4,REJECT,1.5,,predicted defect
+13.1,4,EXIT,1.5,,
+13.5,10,SPAWN,-2.8,,
+13.6,7,INSPECT,-0.5,,
+13.6,7,VISION,,,good
+14.6,5,SORT,1.5,,predicted good
+15.0,11,SPAWN,-2.8,,
+15.1,8,INSPECT,-0.5,,
+15.1,8,VISION,,,defect color
+16.1,6,SORT,1.5,,predicted good
+16.5,12,SPAWN,-2.8,,
+16.6,9,INSPECT,-0.5,,
+16.6,9,VISION,,,good
+17.6,5,EXIT,3.0,,
+17.6,7,SORT,1.5,,predicted good
+18.0,13,SPAWN,-2.8,,
+18.1,10,INSPECT,-0.5,,
+18.1,10,VISION,,,defect color
+19.1,6,EXIT,3.0,,
+19.1,8,REJECT,1.5,,predicted defect
+19.1,8,EXIT,1.5,,
+19.5,14,SPAWN,-2.8,,
+19.6,11,INSPECT,-0.5,,
+19.6,11,VISION,,,defect color
+20.6,7,EXIT,3.0,,
+20.6,9,SORT,1.5,,predicted good
+21.0,15,SPAWN,-2.8,,
+21.1,12,INSPECT,-0.5,,
+21.1,12,VISION,,,good
+22.1,10,REJECT,1.5,,predicted defect
+22.1,10,EXIT,1.5,,
+22.5,16,SPAWN,-2.8,,
+22.6,13,INSPECT,-0.5,,
+22.6167,13,VISION,,,defect color
+23.6,9,EXIT,3.0,,
+23.6,11,REJECT,1.5,,predicted defect
+23.6,11,EXIT,1.5,,
+24.0,17,SPAWN,-2.8,,
+24.1,14,INSPECT,-0.5,,
+24.1167,14,VISION,,,defect color
+25.1,12,SORT,1.5,,predicted good
+25.5,18,SPAWN,-2.8,,
+25.6,15,INSPECT,-0.5,,
+25.6167,15,VISION,,,good
+26.6,13,REJECT,1.5,,predicted defect
+26.6,13,EXIT,1.5,,
+27.0,19,SPAWN,-2.8,,
+27.1,16,INSPECT,-0.5,,
+27.1167,16,VISION,,,good
+28.1,12,EXIT,3.0,,
+28.1,14,REJECT,1.5,,predicted defect
+28.1,14,EXIT,1.5,,
+28.5,20,SPAWN,-2.8,,
+28.6,17,INSPECT,-0.5,,
+28.6167,17,VISION,,,defect color
+29.6,15,SORT,1.5,,predicted good
+30.0,21,SPAWN,-2.8,,
+30.1,18,INSPECT,-0.5,,
+30.1167,18,VISION,,,good
+31.1,16,SORT,1.5,,predicted good
+31.5,22,SPAWN,-2.8,,
+31.6,19,INSPECT,-0.5,,
+31.6167,19,VISION,,,good
+32.6,15,EXIT,3.0,,
+32.6,17,REJECT,1.5,,predicted defect
+32.6,17,EXIT,1.5,,
+33.0,23,SPAWN,-2.8,,
+33.1,20,INSPECT,-0.5,,
+33.1167,20,VISION,,,defect color
+34.1,16,EXIT,3.0,,
+34.1,18,SORT,1.5,,predicted good
+34.5,24,SPAWN,-2.8,,
+34.6,21,INSPECT,-0.5,,
+34.6167,21,VISION,,,defect color
+35.6,19,SORT,1.5,,predicted good
+36.0,25,SPAWN,-2.8,,
+36.1,22,INSPECT,-0.5,,
+36.1167,22,VISION,,,good
+37.1,18,EXIT,3.0,,
+37.1,20,REJECT,1.5,,predicted defect
+37.1,20,EXIT,1.5,,
+37.5,26,SPAWN,-2.8,,
+37.6,23,INSPECT,-0.5,,
+37.6167,23,VISION,,,good
+38.6,19,EXIT,3.0,,
+38.6,21,REJECT,1.5,,predicted defect
+38.6,21,EXIT,1.5,,
+39.0,27,SPAWN,-2.8,,
+39.1,24,INSPECT,-0.5,,
+39.1167,24,VISION,,,defect color
+40.1,22,SORT,1.5,,predicted good
+40.5,28,SPAWN,-2.8,,
+40.6,25,INSPECT,-0.5,,
+40.6167,25,VISION,,,good
+41.6,23,SORT,1.5,,predicted good
+42.0,29,SPAWN,-2.8,,
+42.1,26,INSPECT,-0.5,,
+42.1167,26,VISION,,,good
+43.1,22,EXIT,3.0,,
+43.1,24,REJECT,1.5,,predicted defect
+43.1,24,EXIT,1.5,,
+43.5,30,SPAWN,-2.8,,
+43.6,27,INSPECT,-0.5,,
+43.6167,27,VISION,,,defect color
+44.6,23,EXIT,3.0,,
+44.6,25,SORT,1.5,,predicted good
+45.1,28,INSPECT,-0.5,,
+45.1167,28,VISION,,,defect color
+46.1,26,SORT,1.5,,predicted good
+46.6,29,INSPECT,-0.5,,
+46.6167,29,VISION,,,good
+47.6,25,EXIT,3.0,,
+47.6,27,REJECT,1.5,,predicted defect
+47.6,27,EXIT,1.5,,
+48.1,30,INSPECT,-0.5,,
+48.1167,30,VISION,,,good
+49.1,26,EXIT,3.0,,
+49.1,28,REJECT,1.5,,predicted defect
+49.1,28,EXIT,1.5,,
+50.6,29,SORT,1.5,,predicted good
+52.1,30,SORT,1.5,,predicted good
+53.6,29,EXIT,3.0,,
+55.1,30,EXIT,3.0,,

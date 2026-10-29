@@ -1,0 +1,318 @@
+{
+  "mode": "after",
+  "repeats": 10,
+  "rows": [
+    {
+      "scenario": "reset",
+      "repeat": 0,
+      "stale_callback_applied": false,
+      "injection": "callback held at frame-provider API boundary"
+    },
+    {
+      "scenario": "reset",
+      "repeat": 1,
+      "stale_callback_applied": false,
+      "injection": "callback held at frame-provider API boundary"
+    },
+    {
+      "scenario": "reset",
+      "repeat": 2,
+      "stale_callback_applied": false,
+      "injection": "callback held at frame-provider API boundary"
+    },
+    {
+      "scenario": "reset",
+      "repeat": 3,
+      "stale_callback_applied": false,
+      "injection": "callback held at frame-provider API boundary"
+    },
+    {
+      "scenario": "reset",
+      "repeat": 4,
+      "stale_callback_applied": false,
+      "injection": "callback held at frame-provider API boundary"
+    },
+    {
+      "scenario": "reset",
+      "repeat": 5,
+      "stale_callback_applied": false,
+      "injection": "callback held at frame-provider API boundary"
+    },
+    {
+      "scenario": "reset",
+      "repeat": 6,
+      "stale_callback_applied": false,
+      "injection": "callback held at frame-provider API boundary"
+    },
+    {
+      "scenario": "reset",
+      "repeat": 7,
+      "stale_callback_applied": false,
+      "injection": "callback held at frame-provider API boundary"
+    },
+    {
+      "scenario": "reset",
+      "repeat": 8,
+      "stale_callback_applied": false,
+      "injection": "callback held at frame-provider API boundary"
+    },
+    {
+      "scenario": "reset",
+      "repeat": 9,
+      "stale_callback_applied": false,
+      "injection": "callback held at frame-provider API boundary"
+    },
+    {
+      "scenario": "build",
+      "repeat": 0,
+      "stale_callback_applied": false,
+      "injection": "callback held at frame-provider API boundary"
+    },
+    {
+      "scenario": "build",
+      "repeat": 1,
+      "stale_callback_applied": false,
+      "injection": "callback held at frame-provider API boundary"
+    },
+    {
+      "scenario": "build",
+      "repeat": 2,
+      "stale_callback_applied": false,
+      "injection": "callback held at frame-provider API boundary"
+    },
+    {
+      "scenario": "build",
+      "repeat": 3,
+      "stale_callback_applied": false,
+      "injection": "callback held at frame-provider API boundary"
+    },
+    {
+      "scenario": "build",
+      "repeat": 4,
+      "stale_callback_applied": false,
+      "injection": "callback held at frame-provider API boundary"
+    },
+    {
+      "scenario": "build",
+      "repeat": 5,
+      "stale_callback_applied": false,
+      "injection": "callback held at frame-provider API boundary"
+    },
+    {
+      "scenario": "build",
+      "repeat": 6,
+      "stale_callback_applied": false,
+      "injection": "callback held at frame-provider API boundary"
+    },
+    {
+      "scenario": "build",
+      "repeat": 7,
+      "stale_callback_applied": false,
+      "injection": "callback held at frame-provider API boundary"
+    },
+    {
+      "scenario": "build",
+      "repeat": 8,
+      "stale_callback_applied": false,
+      "injection": "callback held at frame-provider API boundary"
+    },
+    {
+      "scenario": "build",
+      "repeat": 9,
+      "stale_callback_applied": false,
+      "injection": "callback held at frame-provider API boundary"
+    },
+    {
+      "scenario": "external_stage",
+      "repeat": 0,
+      "stale_callback_applied": false,
+      "injection": "callback held at frame-provider API boundary"
+    },
+    {
+      "scenario": "external_stage",
+      "repeat": 1,
+      "stale_callback_applied": false,
+      "injection": "callback held at frame-provider API boundary"
+    },
+    {
+      "scenario": "external_stage",
+      "repeat": 2,
+      "stale_callback_applied": false,
+      "injection": "callback held at frame-provider API boundary"
+    },
+    {
+      "scenario": "external_stage",
+      "repeat": 3,
+      "stale_callback_applied": false,
+      "injection": "callback held at frame-provider API boundary"
+    },
+    {
+      "scenario": "external_stage",
+      "repeat": 4,
+      "stale_callback_applied": false,
+      "injection": "callback held at frame-provider API boundary"
+    },
+    {
+      "scenario": "external_stage",
+      "repeat": 5,
+      "stale_callback_applied": false,
+      "injection": "callback held at frame-provider API boundary"
+    },
+    {
+      "scenario": "external_stage",
+      "repeat": 6,
+      "stale_callback_applied": false,
+      "injection": "callback held at frame-provider API boundary"
+    },
+    {
+      "scenario": "external_stage",
+      "repeat": 7,
+      "stale_callback_applied": false,
+      "injection": "callback held at frame-provider API boundary"
+    },
+    {
+      "scenario": "external_stage",
+      "repeat": 8,
+      "stale_callback_applied": false,
+      "injection": "callback held at frame-provider API boundary"
+    },
+    {
+      "scenario": "external_stage",
+      "repeat": 9,
+      "stale_callback_applied": false,
+      "injection": "callback held at frame-provider API boundary"
+    },
+    {
+      "scenario": "extension_toggle",
+      "repeat": 0,
+      "stale_callback_applied": false,
+      "injection": "callback held at frame-provider API boundary"
+    },
+    {
+      "scenario": "extension_toggle",
+      "repeat": 1,
+      "stale_callback_applied": false,
+      "injection": "callback held at frame-provider API boundary"
+    },
+    {
+      "scenario": "extension_toggle",
+      "repeat": 2,
+      "stale_callback_applied": false,
+      "injection": "callback held at frame-provider API boundary"
+    },
+    {
+      "scenario": "extension_toggle",
+      "repeat": 3,
+      "stale_callback_applied": false,
+      "injection": "callback held at frame-provider API boundary"
+    },
+    {
+      "scenario": "extension_toggle",
+      "repeat": 4,
+      "stale_callback_applied": false,
+      "injection": "callback held at frame-provider API boundary"
+    },
+    {
+      "scenario": "extension_toggle",
+      "repeat": 5,
+      "stale_callback_applied": false,
+      "injection": "callback held at frame-provider API boundary"
+    },
+    {
+      "scenario": "extension_toggle",
+      "repeat": 6,
+      "stale_callback_applied": false,
+      "injection": "callback held at frame-provider API boundary"
+    },
+    {
+      "scenario": "extension_toggle",
+      "repeat": 7,
+      "stale_callback_applied": false,
+      "injection": "callback held at frame-provider API boundary"
+    },
+    {
+      "scenario": "extension_toggle",
+      "repeat": 8,
+      "stale_callback_applied": false,
+      "injection": "callback held at frame-provider API boundary"
+    },
+    {
+      "scenario": "extension_toggle",
+      "repeat": 9,
+      "stale_callback_applied": false,
+      "injection": "callback held at frame-provider API boundary"
+    },
+    {
+      "scenario": "real_pending_reset",
+      "repeat": 0,
+      "delivered_after_reset": false,
+      "pending": 0,
+      "tasks": 0
+    },
+    {
+      "scenario": "real_pending_reset",
+      "repeat": 1,
+      "delivered_after_reset": false,
+      "pending": 0,
+      "tasks": 0
+    },
+    {
+      "scenario": "real_pending_reset",
+      "repeat": 2,
+      "delivered_after_reset": false,
+      "pending": 0,
+      "tasks": 0
+    },
+    {
+      "scenario": "real_pending_reset",
+      "repeat": 3,
+      "delivered_after_reset": false,
+      "pending": 0,
+      "tasks": 0
+    },
+    {
+      "scenario": "real_pending_reset",
+      "repeat": 4,
+      "delivered_after_reset": false,
+      "pending": 0,
+      "tasks": 0
+    },
+    {
+      "scenario": "real_pending_reset",
+      "repeat": 5,
+      "delivered_after_reset": false,
+      "pending": 0,
+      "tasks": 0
+    },
+    {
+      "scenario": "real_pending_reset",
+      "repeat": 6,
+      "delivered_after_reset": false,
+      "pending": 0,
+      "tasks": 0
+    },
+    {
+      "scenario": "real_pending_reset",
+      "repeat": 7,
+      "delivered_after_reset": false,
+      "pending": 0,
+      "tasks": 0
+    },
+    {
+      "scenario": "real_pending_reset",
+      "repeat": 8,
+      "delivered_after_reset": false,
+      "pending": 0,
+      "tasks": 0
+    },
+    {
+      "scenario": "real_pending_reset",
+      "repeat": 9,
+      "delivered_after_reset": false,
+      "pending": 0,
+      "tasks": 0
+    }
+  ],
+  "stale_callbacks_applied": 0,
+  "pass_expected_behavior": true
+}

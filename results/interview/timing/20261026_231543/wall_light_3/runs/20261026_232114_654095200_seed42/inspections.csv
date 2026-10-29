@@ -1,0 +1,7 @@
+run_id,seed,product_id,view,ground_truth,predicted_label,defect_reason,score,mean_hue,area_px,interior_ratio,interior_bright,capture_latency_ms,frame_offset,inspection_latency_ms,simulation_time_s,conveyor_speed,lighting_condition,frame_file,reason,model_label,model_score,model_view,model_latency_ms
+20261026_232114_654095200_seed42,42,1,0,good,good,,1.0,102.71,12224,,,123.68,0,6.63,1.534,1.5,default,frames/P_0001.png,hue match 1.00 >= 0.85,,,,
+20261026_232114_654095200_seed42,42,2,0,defect,defect,color,0.0,7.0,12100,,,107.74,0,0.987,3.039,1.5,default,frames/P_0002.png,hue match 0.00 < 0.85,,,,
+20261026_232114_654095200_seed42,42,3,0,defect,defect,color,0.0,7.0,12263,,,113.76,0,0.933,4.541,1.5,default,frames/P_0003.png,hue match 0.00 < 0.85,,,,
+20261026_232114_654095200_seed42,42,4,0,defect,defect,color,0.0,7.0,12202,,,115.96,0,0.948,6.042,1.5,default,frames/P_0004.png,hue match 0.00 < 0.85,,,,
+20261026_232114_654095200_seed42,42,5,0,good,good,,1.0,102.78,12231,,,117.59,0,0.876,7.537,1.5,default,frames/P_0005.png,hue match 1.00 >= 0.85,,,,
+20261026_232114_654095200_seed42,42,6,0,good,good,,1.0,102.76,12217,,,117.54,0,1.057,9.035,1.5,default,frames/P_0006.png,hue match 1.00 >= 0.85,,,,

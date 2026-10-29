@@ -1,0 +1,30 @@
+﻿[
+    {
+        "before":  "C:\\Users\\PC\\Documents\\01_project\\omniverse\\results\\interview\\baseline\\before_20261026_224621\\box_1\\runs\\20261026_224647_seed42",
+        "repeat":  1,
+        "identical":  true,
+        "part":  "box",
+        "after":  "C:\\Users\\PC\\Documents\\01_project\\omniverse\\results\\interview\\baseline\\after_20261029_211839\\box_1\\runs\\20261029_211859_078875200_seed42"
+    },
+    {
+        "before":  "C:\\Users\\PC\\Documents\\01_project\\omniverse\\results\\interview\\baseline\\before_20261026_224621\\box_2\\runs\\20261026_224838_seed42",
+        "repeat":  2,
+        "identical":  true,
+        "part":  "box",
+        "after":  "C:\\Users\\PC\\Documents\\01_project\\omniverse\\results\\interview\\baseline\\after_20261029_211839\\box_2\\runs\\20261029_212017_851084500_seed42"
+    },
+    {
+        "before":  "C:\\Users\\PC\\Documents\\01_project\\omniverse\\results\\interview\\baseline\\before_20261026_224621\\crown_1\\runs\\20261026_225028_seed42",
+        "repeat":  1,
+        "identical":  true,
+        "part":  "crown",
+        "after":  "C:\\Users\\PC\\Documents\\01_project\\omniverse\\results\\interview\\baseline\\after_20261029_211839\\crown_1\\runs\\20261029_212136_597790900_seed42"
+    },
+    {
+        "before":  "C:\\Users\\PC\\Documents\\01_project\\omniverse\\results\\interview\\baseline\\before_20261026_224621\\crown_2\\runs\\20261026_225741_seed42",
+        "repeat":  2,
+        "identical":  true,
+        "part":  "crown",
+        "after":  "C:\\Users\\PC\\Documents\\01_project\\omniverse\\results\\interview\\baseline\\after_20261029_211839\\crown_2\\runs\\20261029_212701_138627000_seed42"
+    }
+]

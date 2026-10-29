@@ -1,0 +1,69 @@
+{
+  "status": "complete",
+  "run_id": "20261029_210911_533143500_seed42",
+  "products": 30,
+  "sorted": 30,
+  "sort_correct": 13,
+  "rejected": 27,
+  "fail_safe_rejects": 25,
+  "late_results": 0,
+  "frame_mismatches": 0,
+  "stale_frames": 0,
+  "view_retakes": 0,
+  "vision": true,
+  "frame_target_misses": 0,
+  "capture_timeouts": 125,
+  "not_exited": 0,
+  "pending_frames_at_finalize": 0,
+  "simulation_time_s": 276.283,
+  "part": "crown",
+  "throughput_per_hour": 390.9,
+  "line": {
+    "station": "cell",
+    "cycle_s": 8.2,
+    "views": 5,
+    "spawn_interval_s": 9.0,
+    "station_utilization": 0.8904,
+    "station_busy_s": 246.0,
+    "station_exit_blocked_s": 0.0,
+    "queue_max": 0,
+    "queue_mean": 0.0
+  },
+  "timing": {
+    "wall_s": 174.927894,
+    "real_time_factor": 1.5794126814509697,
+    "clock": "perf_counter",
+    "window": "start to final capture drain; excludes stage/setup warmup",
+    "events": {
+      "STATE_APPLIED": 16577,
+      "CAPTURE_REQUESTED": 150,
+      "CAPTURE_RECEIVED": 25,
+      "INSPECTION_DONE": 25,
+      "VERDICT_APPLIED": 30,
+      "TIMEOUT": 125,
+      "RUN_END": 1
+    },
+    "max_pending": 5,
+    "latency_ms": {
+      "capture": {
+        "n": 25,
+        "p50": 155.58460001193453,
+        "p95": 166.79984000511467,
+        "max": 171.87570000533015
+      },
+      "inspection": {
+        "n": 25,
+        "p50": 2.2443999914685264,
+        "p95": 2.7696599951013923,
+        "max": 145.07930001127534
+      },
+      "verdict": {
+        "n": 30,
+        "p50": 1594.1848500006017,
+        "p95": 1700.3590199972678,
+        "max": 1764.0695000009146
+      }
+    }
+  },
+  "wall_throughput_per_hour": 617.3972459761048
+}

@@ -1,0 +1,15 @@
+#usda 1.0
+(
+    defaultPrim = "Part"
+    metersPerUnit = 0.001
+    upAxis = "Z"
+)
+
+def Xform "Part"
+{
+    def Cube "Cube"
+    {
+        double size = 1000
+    }
+}
+

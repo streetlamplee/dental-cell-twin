@@ -1,0 +1,249 @@
+{
+  "passed": true,
+  "coverage": {
+    "timing": {
+      "path": "results\\interview\\timing\\20261026_231543",
+      "rows": [
+        {
+          "case": "fixed_light",
+          "repeat": 1,
+          "correct": 6,
+          "timeouts": 0
+        },
+        {
+          "case": "fixed_light",
+          "repeat": 2,
+          "correct": 6,
+          "timeouts": 0
+        },
+        {
+          "case": "fixed_light",
+          "repeat": 3,
+          "correct": 6,
+          "timeouts": 0
+        },
+        {
+          "case": "fixed_heavy",
+          "repeat": 1,
+          "correct": 6,
+          "timeouts": 0
+        },
+        {
+          "case": "fixed_heavy",
+          "repeat": 2,
+          "correct": 6,
+          "timeouts": 0
+        },
+        {
+          "case": "fixed_heavy",
+          "repeat": 3,
+          "correct": 6,
+          "timeouts": 0
+        },
+        {
+          "case": "wall_light",
+          "repeat": 1,
+          "correct": 6,
+          "timeouts": 0
+        },
+        {
+          "case": "wall_light",
+          "repeat": 2,
+          "correct": 6,
+          "timeouts": 0
+        },
+        {
+          "case": "wall_light",
+          "repeat": 3,
+          "correct": 6,
+          "timeouts": 0
+        },
+        {
+          "case": "wall_heavy",
+          "repeat": 1,
+          "correct": 6,
+          "timeouts": 0
+        },
+        {
+          "case": "wall_heavy",
+          "repeat": 2,
+          "correct": 6,
+          "timeouts": 0
+        },
+        {
+          "case": "wall_heavy",
+          "repeat": 3,
+          "correct": 6,
+          "timeouts": 0
+        },
+        {
+          "case": "delivery_delay",
+          "repeat": 1,
+          "correct": 6,
+          "timeouts": 0
+        },
+        {
+          "case": "delivery_delay",
+          "repeat": 2,
+          "correct": 6,
+          "timeouts": 0
+        },
+        {
+          "case": "delivery_delay",
+          "repeat": 3,
+          "correct": 6,
+          "timeouts": 0
+        },
+        {
+          "case": "wall_timeout",
+          "repeat": 1,
+          "correct": 3,
+          "timeouts": 6
+        },
+        {
+          "case": "wall_timeout",
+          "repeat": 2,
+          "correct": 3,
+          "timeouts": 6
+        },
+        {
+          "case": "wall_timeout",
+          "repeat": 3,
+          "correct": 3,
+          "timeouts": 6
+        },
+        {
+          "case": "update_budget",
+          "repeat": 1,
+          "correct": 3,
+          "timeouts": 6
+        },
+        {
+          "case": "update_budget",
+          "repeat": 2,
+          "correct": 3,
+          "timeouts": 6
+        },
+        {
+          "case": "update_budget",
+          "repeat": 3,
+          "correct": 3,
+          "timeouts": 6
+        }
+      ]
+    },
+    "instancing": {
+      "cpu_samples": 27,
+      "render_runs": [
+        "results\\interview\\instancing\\20261026_230542\\render\\20261026_232759\\reference_10_1\\render.json",
+        "results\\interview\\instancing\\20261026_230542\\render\\20261026_232759\\reference_10_2\\render.json",
+        "results\\interview\\instancing\\20261026_230542\\render\\20261026_232759\\reference_10_3\\render.json",
+        "results\\interview\\instancing\\20261026_230542\\render\\20261026_232759\\instance_10_1\\render.json",
+        "results\\interview\\instancing\\20261026_230542\\render\\20261026_232759\\instance_10_2\\render.json",
+        "results\\interview\\instancing\\20261026_230542\\render\\20261026_232759\\instance_10_3\\render.json",
+        "results\\interview\\instancing\\20261026_230542\\render\\20261026_232759\\deinstanced_10_1\\render.json",
+        "results\\interview\\instancing\\20261026_230542\\render\\20261026_232759\\deinstanced_10_2\\render.json",
+        "results\\interview\\instancing\\20261026_230542\\render\\20261026_232759\\deinstanced_10_3\\render.json",
+        "results\\interview\\instancing\\20261026_230542\\render\\20261026_232759\\reference_50_1\\render.json",
+        "results\\interview\\instancing\\20261026_230542\\render\\20261026_232759\\reference_50_2\\render.json",
+        "results\\interview\\instancing\\20261026_230542\\render\\20261026_232759\\reference_50_3\\render.json",
+        "results\\interview\\instancing\\20261026_230542\\render\\20261026_232759\\instance_50_1\\render.json",
+        "results\\interview\\instancing\\20261026_230542\\render\\20261026_232759\\instance_50_2\\render.json",
+        "results\\interview\\instancing\\20261026_230542\\render\\20261026_232759\\instance_50_3\\render.json",
+        "results\\interview\\instancing\\20261026_230542\\render\\20261026_232759\\deinstanced_50_1\\render.json",
+        "results\\interview\\instancing\\20261026_230542\\render\\20261026_232759\\deinstanced_50_2\\render.json",
+        "results\\interview\\instancing\\20261026_230542\\render\\20261026_232759\\deinstanced_50_3\\render.json",
+        "results\\interview\\instancing\\20261026_230542\\render\\20261026_232759\\reference_100_1\\render.json",
+        "results\\interview\\instancing\\20261026_230542\\render\\20261026_232759\\reference_100_2\\render.json",
+        "results\\interview\\instancing\\20261026_230542\\render\\20261026_232759\\reference_100_3\\render.json",
+        "results\\interview\\instancing\\20261026_230542\\render\\20261026_232759\\instance_100_1\\render.json",
+        "results\\interview\\instancing\\20261026_230542\\render\\20261026_232759\\instance_100_2\\render.json",
+        "results\\interview\\instancing\\20261026_230542\\render\\20261026_232759\\instance_100_3\\render.json",
+        "results\\interview\\instancing\\20261026_230542\\render\\20261026_232759\\deinstanced_100_1\\render.json",
+        "results\\interview\\instancing\\20261026_230542\\render\\20261026_232759\\deinstanced_100_2\\render.json",
+        "results\\interview\\instancing\\20261026_230542\\render\\20261026_232759\\deinstanced_100_3\\render.json"
+      ]
+    },
+    "lifecycle": {
+      "before": "results\\interview\\lifecycle\\before_20261026_230623\\report.json",
+      "after": "results\\interview\\lifecycle\\after_20261026_230958\\report.json",
+      "checks": 50
+    },
+    "native_pending": {
+      "path": "results\\interview\\lifecycle_pending\\20261029_213205\\report.json",
+      "checks": 40,
+      "callback_pending_before_transition": 40,
+      "subscription_checks": 10
+    },
+    "frame_content": {
+      "path": "results\\interview\\frame_content\\20261026_231452\\report.json",
+      "samples": 30
+    },
+    "composition": "results\\interview\\composition\\20261026_225331\\report.json",
+    "lod": {
+      "renders": [
+        "results\\interview\\lod\\20261029_211444\\render\\20261029_211445\\instance_lod0_50_1\\render.json",
+        "results\\interview\\lod\\20261029_211444\\render\\20261029_211445\\instance_lod0_50_2\\render.json",
+        "results\\interview\\lod\\20261029_211444\\render\\20261029_211445\\instance_lod0_50_3\\render.json",
+        "results\\interview\\lod\\20261029_211444\\render\\20261029_211445\\instance_lod3_50_1\\render.json",
+        "results\\interview\\lod\\20261029_211444\\render\\20261029_211445\\instance_lod3_50_2\\render.json",
+        "results\\interview\\lod\\20261029_211444\\render\\20261029_211445\\instance_lod3_50_3\\render.json",
+        "results\\interview\\lod\\20261029_211444\\render\\20261029_211445\\instance_lod4_50_1\\render.json",
+        "results\\interview\\lod\\20261029_211444\\render\\20261029_211445\\instance_lod4_50_2\\render.json",
+        "results\\interview\\lod\\20261029_211444\\render\\20261029_211445\\instance_lod4_50_3\\render.json"
+      ]
+    },
+    "trace_disabled_compatibility": "results\\interview\\compatibility\\20261029_213459\\report.json",
+    "baseline": {
+      "comparisons": 4,
+      "identical": true,
+      "pairs": [
+        {
+          "before": "C:\\Users\\PC\\Documents\\01_project\\omniverse\\results\\interview\\baseline\\before_20261026_224621\\box_1\\runs\\20261026_224647_seed42",
+          "repeat": 1,
+          "identical": true,
+          "part": "box",
+          "after": "C:\\Users\\PC\\Documents\\01_project\\omniverse\\results\\interview\\baseline\\after_20261029_211839\\box_1\\runs\\20261029_211859_078875200_seed42"
+        },
+        {
+          "before": "C:\\Users\\PC\\Documents\\01_project\\omniverse\\results\\interview\\baseline\\before_20261026_224621\\box_2\\runs\\20261026_224838_seed42",
+          "repeat": 2,
+          "identical": true,
+          "part": "box",
+          "after": "C:\\Users\\PC\\Documents\\01_project\\omniverse\\results\\interview\\baseline\\after_20261029_211839\\box_2\\runs\\20261029_212017_851084500_seed42"
+        },
+        {
+          "before": "C:\\Users\\PC\\Documents\\01_project\\omniverse\\results\\interview\\baseline\\before_20261026_224621\\crown_1\\runs\\20261026_225028_seed42",
+          "repeat": 1,
+          "identical": true,
+          "part": "crown",
+          "after": "C:\\Users\\PC\\Documents\\01_project\\omniverse\\results\\interview\\baseline\\after_20261029_211839\\crown_1\\runs\\20261029_212136_597790900_seed42"
+        },
+        {
+          "before": "C:\\Users\\PC\\Documents\\01_project\\omniverse\\results\\interview\\baseline\\before_20261026_224621\\crown_2\\runs\\20261026_225741_seed42",
+          "repeat": 2,
+          "identical": true,
+          "part": "crown",
+          "after": "C:\\Users\\PC\\Documents\\01_project\\omniverse\\results\\interview\\baseline\\after_20261029_211839\\crown_2\\runs\\20261029_212701_138627000_seed42"
+        }
+      ]
+    },
+    "code_checks": {
+      "core_tests": {
+        "step": "core_tests",
+        "started_utc": "2026-10-29T12:17:44.7438748Z",
+        "passed": true
+      },
+      "extension_tests": {
+        "step": "extension_tests",
+        "started_utc": "2026-10-29T12:18:27.5470004Z",
+        "passed": true
+      }
+    }
+  },
+  "historical_capture_label_conflicts": 1,
+  "limitations": [
+    "Acceptance applies to the selected controlled runs. Previously observed content/frame mismatch is preserved and its native root cause remains unresolved."
+  ],
+  "failures": []
+}

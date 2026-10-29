@@ -1,0 +1,109 @@
+{
+  "usd_version": [
+    0,
+    26,
+    11
+  ],
+  "checks": {
+    "transform_collision": {
+      "same_prim": [
+        10.0,
+        0.0,
+        0.0
+      ],
+      "wrapped": [
+        9.9,
+        0.0,
+        0.02
+      ],
+      "same_bbox": {
+        "min": [
+          9.949999999254942,
+          -0.05000000074505806,
+          -0.05000000074505806
+        ],
+        "max": [
+          10.050000000745058,
+          0.05000000074505806,
+          0.05000000074505806
+        ]
+      },
+      "wrapped_bbox": {
+        "min": [
+          9.849999999254942,
+          -0.05000000074505806,
+          -0.03000000074505806
+        ],
+        "max": [
+          9.950000000745058,
+          0.05000000074505806,
+          0.07000000074505806
+        ]
+      },
+      "same_ops": [
+        "xformOp:translate"
+      ]
+    },
+    "layer_reset": {
+      "strong_to_weak": [
+        {
+          "layer": "runtime.usda",
+          "path": "/World.xformOp:translate",
+          "value": "(3, 0, 0)"
+        },
+        {
+          "layer": "layout.usda",
+          "path": "/World.xformOp:translate",
+          "value": "(2, 0, 0)"
+        }
+      ],
+      "after_reset": [
+        1.9,
+        0.0,
+        0.02
+      ]
+    },
+    "variants": {
+      "selection": "red",
+      "source_shared": true,
+      "decision": "keep existing derived files for catalog compatibility; VariantSet is a verified alternative"
+    },
+    "units_and_axes": {
+      "unscaled_bbox": {
+        "min": [
+          -500.0,
+          -500.0,
+          -500.0
+        ],
+        "max": [
+          500.0,
+          500.0,
+          500.0
+        ]
+      },
+      "meters_bbox": {
+        "min": [
+          -0.5000000237487257,
+          -0.5000000237487257,
+          -0.5000000237487257
+        ],
+        "max": [
+          0.5000000237487257,
+          0.5000000237487257,
+          0.5000000237487257
+        ]
+      },
+      "metadata_only": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "explicit_axis_conversion": [
+        0.0,
+        -2.220446049250313e-16,
+        1.0000000000000002
+      ]
+    },
+    "source_hash_unchanged": "68794556d62f886e42fa3397fbdbdf6fb8c60b9c6e0d930e87dd0653f7104bec"
+  }
+}

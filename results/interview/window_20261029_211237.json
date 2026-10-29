@@ -1,0 +1,12 @@
+﻿{
+    "observed_utc":  "2026-10-29T12:12:37.3864687Z",
+    "windows":  [
+                    {
+                        "pid":  26444,
+                        "foreground":  false,
+                        "main_window_handle":  592476,
+                        "minimized":  false,
+                        "visible":  true
+                    }
+                ]
+}

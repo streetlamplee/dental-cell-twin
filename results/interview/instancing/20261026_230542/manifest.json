@@ -1,0 +1,953 @@
+{
+  "cpu": [
+    {
+      "mode": "reference",
+      "count": 10,
+      "repeat": 0,
+      "open_s": 0.01851730002090335,
+      "before": {
+        "rss_bytes": 54378496,
+        "peak_rss_bytes": 54378496
+      },
+      "after": {
+        "rss_bytes": 68468736,
+        "peak_rss_bytes": 68468736
+      },
+      "usd_version": [
+        0,
+        26,
+        11
+      ],
+      "prototype_count": 0,
+      "instance_count": 0,
+      "bbox_min": [
+        -0.005500000261235982,
+        -0.0050000002374872565,
+        0.0
+      ],
+      "bbox_max": [
+        0.005500000261235982,
+        0.0050000002374872565,
+        0.008300000584963718
+      ],
+      "prims": 133,
+      "expanded_prims": 133
+    },
+    {
+      "mode": "reference",
+      "count": 10,
+      "repeat": 1,
+      "open_s": 0.008818699978291988,
+      "before": {
+        "rss_bytes": 54284288,
+        "peak_rss_bytes": 54284288
+      },
+      "after": {
+        "rss_bytes": 67772416,
+        "peak_rss_bytes": 67772416
+      },
+      "usd_version": [
+        0,
+        26,
+        11
+      ],
+      "prototype_count": 0,
+      "instance_count": 0,
+      "bbox_min": [
+        -0.005500000261235982,
+        -0.0050000002374872565,
+        0.0
+      ],
+      "bbox_max": [
+        0.005500000261235982,
+        0.0050000002374872565,
+        0.008300000584963718
+      ],
+      "prims": 133,
+      "expanded_prims": 133
+    },
+    {
+      "mode": "reference",
+      "count": 10,
+      "repeat": 2,
+      "open_s": 0.0382567000342533,
+      "before": {
+        "rss_bytes": 54353920,
+        "peak_rss_bytes": 54353920
+      },
+      "after": {
+        "rss_bytes": 68239360,
+        "peak_rss_bytes": 68239360
+      },
+      "usd_version": [
+        0,
+        26,
+        11
+      ],
+      "prototype_count": 0,
+      "instance_count": 0,
+      "bbox_min": [
+        -0.005500000261235982,
+        -0.0050000002374872565,
+        0.0
+      ],
+      "bbox_max": [
+        0.005500000261235982,
+        0.0050000002374872565,
+        0.008300000584963718
+      ],
+      "prims": 133,
+      "expanded_prims": 133
+    },
+    {
+      "mode": "instance",
+      "count": 10,
+      "repeat": 0,
+      "open_s": 0.04503770009614527,
+      "before": {
+        "rss_bytes": 54435840,
+        "peak_rss_bytes": 54435840
+      },
+      "after": {
+        "rss_bytes": 68112384,
+        "peak_rss_bytes": 68112384
+      },
+      "usd_version": [
+        0,
+        26,
+        11
+      ],
+      "prototype_count": 1,
+      "instance_count": 10,
+      "bbox_min": [
+        -0.005500000261235982,
+        -0.0050000002374872565,
+        0.0
+      ],
+      "bbox_max": [
+        0.005500000261235982,
+        0.0050000002374872565,
+        0.008300000584963718
+      ],
+      "prims": 23,
+      "expanded_prims": 133
+    },
+    {
+      "mode": "instance",
+      "count": 10,
+      "repeat": 1,
+      "open_s": 0.03187339997384697,
+      "before": {
+        "rss_bytes": 54263808,
+        "peak_rss_bytes": 54263808
+      },
+      "after": {
+        "rss_bytes": 67960832,
+        "peak_rss_bytes": 67960832
+      },
+      "usd_version": [
+        0,
+        26,
+        11
+      ],
+      "prototype_count": 1,
+      "instance_count": 10,
+      "bbox_min": [
+        -0.005500000261235982,
+        -0.0050000002374872565,
+        0.0
+      ],
+      "bbox_max": [
+        0.005500000261235982,
+        0.0050000002374872565,
+        0.008300000584963718
+      ],
+      "prims": 23,
+      "expanded_prims": 133
+    },
+    {
+      "mode": "instance",
+      "count": 10,
+      "repeat": 2,
+      "open_s": 0.032822799985297024,
+      "before": {
+        "rss_bytes": 54325248,
+        "peak_rss_bytes": 54325248
+      },
+      "after": {
+        "rss_bytes": 68243456,
+        "peak_rss_bytes": 68243456
+      },
+      "usd_version": [
+        0,
+        26,
+        11
+      ],
+      "prototype_count": 1,
+      "instance_count": 10,
+      "bbox_min": [
+        -0.005500000261235982,
+        -0.0050000002374872565,
+        0.0
+      ],
+      "bbox_max": [
+        0.005500000261235982,
+        0.0050000002374872565,
+        0.008300000584963718
+      ],
+      "prims": 23,
+      "expanded_prims": 133
+    },
+    {
+      "mode": "deinstanced",
+      "count": 10,
+      "repeat": 0,
+      "open_s": 0.03163570002652705,
+      "before": {
+        "rss_bytes": 54423552,
+        "peak_rss_bytes": 54423552
+      },
+      "after": {
+        "rss_bytes": 68882432,
+        "peak_rss_bytes": 68882432
+      },
+      "usd_version": [
+        0,
+        26,
+        11
+      ],
+      "prototype_count": 0,
+      "instance_count": 0,
+      "bbox_min": [
+        -0.005500000261235982,
+        -0.0050000002374872565,
+        0.0
+      ],
+      "bbox_max": [
+        0.005500000261235982,
+        0.0050000002374872565,
+        0.008300000584963718
+      ],
+      "prims": 133,
+      "expanded_prims": 133
+    },
+    {
+      "mode": "deinstanced",
+      "count": 10,
+      "repeat": 1,
+      "open_s": 0.009571700007654727,
+      "before": {
+        "rss_bytes": 54218752,
+        "peak_rss_bytes": 54218752
+      },
+      "after": {
+        "rss_bytes": 68358144,
+        "peak_rss_bytes": 68358144
+      },
+      "usd_version": [
+        0,
+        26,
+        11
+      ],
+      "prototype_count": 0,
+      "instance_count": 0,
+      "bbox_min": [
+        -0.005500000261235982,
+        -0.0050000002374872565,
+        0.0
+      ],
+      "bbox_max": [
+        0.005500000261235982,
+        0.0050000002374872565,
+        0.008300000584963718
+      ],
+      "prims": 133,
+      "expanded_prims": 133
+    },
+    {
+      "mode": "deinstanced",
+      "count": 10,
+      "repeat": 2,
+      "open_s": 0.009463900001719594,
+      "before": {
+        "rss_bytes": 54398976,
+        "peak_rss_bytes": 54398976
+      },
+      "after": {
+        "rss_bytes": 67956736,
+        "peak_rss_bytes": 67956736
+      },
+      "usd_version": [
+        0,
+        26,
+        11
+      ],
+      "prototype_count": 0,
+      "instance_count": 0,
+      "bbox_min": [
+        -0.005500000261235982,
+        -0.0050000002374872565,
+        0.0
+      ],
+      "bbox_max": [
+        0.005500000261235982,
+        0.0050000002374872565,
+        0.008300000584963718
+      ],
+      "prims": 133,
+      "expanded_prims": 133
+    },
+    {
+      "mode": "reference",
+      "count": 50,
+      "repeat": 0,
+      "open_s": 0.02035699994303286,
+      "before": {
+        "rss_bytes": 54362112,
+        "peak_rss_bytes": 54362112
+      },
+      "after": {
+        "rss_bytes": 69259264,
+        "peak_rss_bytes": 69259264
+      },
+      "usd_version": [
+        0,
+        26,
+        11
+      ],
+      "prototype_count": 0,
+      "instance_count": 0,
+      "bbox_min": [
+        -0.005500000261235982,
+        -0.0050000002374872565,
+        0.0
+      ],
+      "bbox_max": [
+        0.005500000261235982,
+        0.0050000002374872565,
+        0.008300000584963718
+      ],
+      "prims": 653,
+      "expanded_prims": 653
+    },
+    {
+      "mode": "reference",
+      "count": 50,
+      "repeat": 1,
+      "open_s": 0.033508699969388545,
+      "before": {
+        "rss_bytes": 54288384,
+        "peak_rss_bytes": 54288384
+      },
+      "after": {
+        "rss_bytes": 69824512,
+        "peak_rss_bytes": 69824512
+      },
+      "usd_version": [
+        0,
+        26,
+        11
+      ],
+      "prototype_count": 0,
+      "instance_count": 0,
+      "bbox_min": [
+        -0.005500000261235982,
+        -0.0050000002374872565,
+        0.0
+      ],
+      "bbox_max": [
+        0.005500000261235982,
+        0.0050000002374872565,
+        0.008300000584963718
+      ],
+      "prims": 653,
+      "expanded_prims": 653
+    },
+    {
+      "mode": "reference",
+      "count": 50,
+      "repeat": 2,
+      "open_s": 0.011098199989646673,
+      "before": {
+        "rss_bytes": 54382592,
+        "peak_rss_bytes": 54382592
+      },
+      "after": {
+        "rss_bytes": 69480448,
+        "peak_rss_bytes": 69480448
+      },
+      "usd_version": [
+        0,
+        26,
+        11
+      ],
+      "prototype_count": 0,
+      "instance_count": 0,
+      "bbox_min": [
+        -0.005500000261235982,
+        -0.0050000002374872565,
+        0.0
+      ],
+      "bbox_max": [
+        0.005500000261235982,
+        0.0050000002374872565,
+        0.008300000584963718
+      ],
+      "prims": 653,
+      "expanded_prims": 653
+    },
+    {
+      "mode": "instance",
+      "count": 50,
+      "repeat": 0,
+      "open_s": 0.04123049997724593,
+      "before": {
+        "rss_bytes": 54226944,
+        "peak_rss_bytes": 54226944
+      },
+      "after": {
+        "rss_bytes": 68419584,
+        "peak_rss_bytes": 68419584
+      },
+      "usd_version": [
+        0,
+        26,
+        11
+      ],
+      "prototype_count": 1,
+      "instance_count": 50,
+      "bbox_min": [
+        -0.005500000261235982,
+        -0.0050000002374872565,
+        0.0
+      ],
+      "bbox_max": [
+        0.005500000261235982,
+        0.0050000002374872565,
+        0.008300000584963718
+      ],
+      "prims": 103,
+      "expanded_prims": 653
+    },
+    {
+      "mode": "instance",
+      "count": 50,
+      "repeat": 1,
+      "open_s": 0.00865259999409318,
+      "before": {
+        "rss_bytes": 54386688,
+        "peak_rss_bytes": 54386688
+      },
+      "after": {
+        "rss_bytes": 67739648,
+        "peak_rss_bytes": 67739648
+      },
+      "usd_version": [
+        0,
+        26,
+        11
+      ],
+      "prototype_count": 1,
+      "instance_count": 50,
+      "bbox_min": [
+        -0.005500000261235982,
+        -0.0050000002374872565,
+        0.0
+      ],
+      "bbox_max": [
+        0.005500000261235982,
+        0.0050000002374872565,
+        0.008300000584963718
+      ],
+      "prims": 103,
+      "expanded_prims": 653
+    },
+    {
+      "mode": "instance",
+      "count": 50,
+      "repeat": 2,
+      "open_s": 0.030934100039303303,
+      "before": {
+        "rss_bytes": 54386688,
+        "peak_rss_bytes": 54386688
+      },
+      "after": {
+        "rss_bytes": 68591616,
+        "peak_rss_bytes": 68591616
+      },
+      "usd_version": [
+        0,
+        26,
+        11
+      ],
+      "prototype_count": 1,
+      "instance_count": 50,
+      "bbox_min": [
+        -0.005500000261235982,
+        -0.0050000002374872565,
+        0.0
+      ],
+      "bbox_max": [
+        0.005500000261235982,
+        0.0050000002374872565,
+        0.008300000584963718
+      ],
+      "prims": 103,
+      "expanded_prims": 653
+    },
+    {
+      "mode": "deinstanced",
+      "count": 50,
+      "repeat": 0,
+      "open_s": 0.019845800008624792,
+      "before": {
+        "rss_bytes": 54456320,
+        "peak_rss_bytes": 54456320
+      },
+      "after": {
+        "rss_bytes": 69312512,
+        "peak_rss_bytes": 69312512
+      },
+      "usd_version": [
+        0,
+        26,
+        11
+      ],
+      "prototype_count": 0,
+      "instance_count": 0,
+      "bbox_min": [
+        -0.005500000261235982,
+        -0.0050000002374872565,
+        0.0
+      ],
+      "bbox_max": [
+        0.005500000261235982,
+        0.0050000002374872565,
+        0.008300000584963718
+      ],
+      "prims": 653,
+      "expanded_prims": 653
+    },
+    {
+      "mode": "deinstanced",
+      "count": 50,
+      "repeat": 1,
+      "open_s": 0.037137100007385015,
+      "before": {
+        "rss_bytes": 54251520,
+        "peak_rss_bytes": 54251520
+      },
+      "after": {
+        "rss_bytes": 69414912,
+        "peak_rss_bytes": 69414912
+      },
+      "usd_version": [
+        0,
+        26,
+        11
+      ],
+      "prototype_count": 0,
+      "instance_count": 0,
+      "bbox_min": [
+        -0.005500000261235982,
+        -0.0050000002374872565,
+        0.0
+      ],
+      "bbox_max": [
+        0.005500000261235982,
+        0.0050000002374872565,
+        0.008300000584963718
+      ],
+      "prims": 653,
+      "expanded_prims": 653
+    },
+    {
+      "mode": "deinstanced",
+      "count": 50,
+      "repeat": 2,
+      "open_s": 0.013353100046515465,
+      "before": {
+        "rss_bytes": 54439936,
+        "peak_rss_bytes": 54439936
+      },
+      "after": {
+        "rss_bytes": 69115904,
+        "peak_rss_bytes": 69115904
+      },
+      "usd_version": [
+        0,
+        26,
+        11
+      ],
+      "prototype_count": 0,
+      "instance_count": 0,
+      "bbox_min": [
+        -0.005500000261235982,
+        -0.0050000002374872565,
+        0.0
+      ],
+      "bbox_max": [
+        0.005500000261235982,
+        0.0050000002374872565,
+        0.008300000584963718
+      ],
+      "prims": 653,
+      "expanded_prims": 653
+    },
+    {
+      "mode": "reference",
+      "count": 100,
+      "repeat": 0,
+      "open_s": 0.04610699997283518,
+      "before": {
+        "rss_bytes": 54489088,
+        "peak_rss_bytes": 54489088
+      },
+      "after": {
+        "rss_bytes": 70864896,
+        "peak_rss_bytes": 70864896
+      },
+      "usd_version": [
+        0,
+        26,
+        11
+      ],
+      "prototype_count": 0,
+      "instance_count": 0,
+      "bbox_min": [
+        -0.005500000261235982,
+        -0.0050000002374872565,
+        0.0
+      ],
+      "bbox_max": [
+        0.005500000261235982,
+        0.0050000002374872565,
+        0.008300000584963718
+      ],
+      "prims": 1303,
+      "expanded_prims": 1303
+    },
+    {
+      "mode": "reference",
+      "count": 100,
+      "repeat": 1,
+      "open_s": 0.037640900001861155,
+      "before": {
+        "rss_bytes": 54214656,
+        "peak_rss_bytes": 54214656
+      },
+      "after": {
+        "rss_bytes": 70660096,
+        "peak_rss_bytes": 70660096
+      },
+      "usd_version": [
+        0,
+        26,
+        11
+      ],
+      "prototype_count": 0,
+      "instance_count": 0,
+      "bbox_min": [
+        -0.005500000261235982,
+        -0.0050000002374872565,
+        0.0
+      ],
+      "bbox_max": [
+        0.005500000261235982,
+        0.0050000002374872565,
+        0.008300000584963718
+      ],
+      "prims": 1303,
+      "expanded_prims": 1303
+    },
+    {
+      "mode": "reference",
+      "count": 100,
+      "repeat": 2,
+      "open_s": 0.015403599943965673,
+      "before": {
+        "rss_bytes": 54337536,
+        "peak_rss_bytes": 54337536
+      },
+      "after": {
+        "rss_bytes": 70610944,
+        "peak_rss_bytes": 70610944
+      },
+      "usd_version": [
+        0,
+        26,
+        11
+      ],
+      "prototype_count": 0,
+      "instance_count": 0,
+      "bbox_min": [
+        -0.005500000261235982,
+        -0.0050000002374872565,
+        0.0
+      ],
+      "bbox_max": [
+        0.005500000261235982,
+        0.0050000002374872565,
+        0.008300000584963718
+      ],
+      "prims": 1303,
+      "expanded_prims": 1303
+    },
+    {
+      "mode": "instance",
+      "count": 100,
+      "repeat": 0,
+      "open_s": 0.041486000060103834,
+      "before": {
+        "rss_bytes": 54259712,
+        "peak_rss_bytes": 54259712
+      },
+      "after": {
+        "rss_bytes": 68915200,
+        "peak_rss_bytes": 68915200
+      },
+      "usd_version": [
+        0,
+        26,
+        11
+      ],
+      "prototype_count": 1,
+      "instance_count": 100,
+      "bbox_min": [
+        -0.005500000261235982,
+        -0.0050000002374872565,
+        0.0
+      ],
+      "bbox_max": [
+        0.005500000261235982,
+        0.0050000002374872565,
+        0.008300000584963718
+      ],
+      "prims": 203,
+      "expanded_prims": 1303
+    },
+    {
+      "mode": "instance",
+      "count": 100,
+      "repeat": 1,
+      "open_s": 0.0334571999264881,
+      "before": {
+        "rss_bytes": 54489088,
+        "peak_rss_bytes": 54489088
+      },
+      "after": {
+        "rss_bytes": 68739072,
+        "peak_rss_bytes": 68739072
+      },
+      "usd_version": [
+        0,
+        26,
+        11
+      ],
+      "prototype_count": 1,
+      "instance_count": 100,
+      "bbox_min": [
+        -0.005500000261235982,
+        -0.0050000002374872565,
+        0.0
+      ],
+      "bbox_max": [
+        0.005500000261235982,
+        0.0050000002374872565,
+        0.008300000584963718
+      ],
+      "prims": 203,
+      "expanded_prims": 1303
+    },
+    {
+      "mode": "instance",
+      "count": 100,
+      "repeat": 2,
+      "open_s": 0.03240069991443306,
+      "before": {
+        "rss_bytes": 54349824,
+        "peak_rss_bytes": 54349824
+      },
+      "after": {
+        "rss_bytes": 68816896,
+        "peak_rss_bytes": 68816896
+      },
+      "usd_version": [
+        0,
+        26,
+        11
+      ],
+      "prototype_count": 1,
+      "instance_count": 100,
+      "bbox_min": [
+        -0.005500000261235982,
+        -0.0050000002374872565,
+        0.0
+      ],
+      "bbox_max": [
+        0.005500000261235982,
+        0.0050000002374872565,
+        0.008300000584963718
+      ],
+      "prims": 203,
+      "expanded_prims": 1303
+    },
+    {
+      "mode": "deinstanced",
+      "count": 100,
+      "repeat": 0,
+      "open_s": 0.0221218999940902,
+      "before": {
+        "rss_bytes": 54296576,
+        "peak_rss_bytes": 54296576
+      },
+      "after": {
+        "rss_bytes": 70283264,
+        "peak_rss_bytes": 70283264
+      },
+      "usd_version": [
+        0,
+        26,
+        11
+      ],
+      "prototype_count": 0,
+      "instance_count": 0,
+      "bbox_min": [
+        -0.005500000261235982,
+        -0.0050000002374872565,
+        0.0
+      ],
+      "bbox_max": [
+        0.005500000261235982,
+        0.0050000002374872565,
+        0.008300000584963718
+      ],
+      "prims": 1303,
+      "expanded_prims": 1303
+    },
+    {
+      "mode": "deinstanced",
+      "count": 100,
+      "repeat": 1,
+      "open_s": 0.02730620000511408,
+      "before": {
+        "rss_bytes": 54448128,
+        "peak_rss_bytes": 54448128
+      },
+      "after": {
+        "rss_bytes": 70225920,
+        "peak_rss_bytes": 70225920
+      },
+      "usd_version": [
+        0,
+        26,
+        11
+      ],
+      "prototype_count": 0,
+      "instance_count": 0,
+      "bbox_min": [
+        -0.005500000261235982,
+        -0.0050000002374872565,
+        0.0
+      ],
+      "bbox_max": [
+        0.005500000261235982,
+        0.0050000002374872565,
+        0.008300000584963718
+      ],
+      "prims": 1303,
+      "expanded_prims": 1303
+    },
+    {
+      "mode": "deinstanced",
+      "count": 100,
+      "repeat": 2,
+      "open_s": 0.03783529996871948,
+      "before": {
+        "rss_bytes": 54476800,
+        "peak_rss_bytes": 54476800
+      },
+      "after": {
+        "rss_bytes": 70840320,
+        "peak_rss_bytes": 70840320
+      },
+      "usd_version": [
+        0,
+        26,
+        11
+      ],
+      "prototype_count": 0,
+      "instance_count": 0,
+      "bbox_min": [
+        -0.005500000261235982,
+        -0.0050000002374872565,
+        0.0
+      ],
+      "bbox_max": [
+        0.005500000261235982,
+        0.0050000002374872565,
+        0.008300000584963718
+      ],
+      "prims": 1303,
+      "expanded_prims": 1303
+    }
+  ],
+  "entries": [
+    {
+      "mode": "reference",
+      "count": 10,
+      "scene": "reference_10.usda"
+    },
+    {
+      "mode": "instance",
+      "count": 10,
+      "scene": "instance_10.usda"
+    },
+    {
+      "mode": "deinstanced",
+      "count": 10,
+      "scene": "deinstanced_10.usda"
+    },
+    {
+      "mode": "reference",
+      "count": 50,
+      "scene": "reference_50.usda"
+    },
+    {
+      "mode": "instance",
+      "count": 50,
+      "scene": "instance_50.usda"
+    },
+    {
+      "mode": "deinstanced",
+      "count": 50,
+      "scene": "deinstanced_50.usda"
+    },
+    {
+      "mode": "reference",
+      "count": 100,
+      "scene": "reference_100.usda"
+    },
+    {
+      "mode": "instance",
+      "count": 100,
+      "scene": "instance_100.usda"
+    },
+    {
+      "mode": "deinstanced",
+      "count": 100,
+      "scene": "deinstanced_100.usda"
+    }
+  ],
+  "edit_check": {
+    "proxy_edit_rejected": true,
+    "error": "\n\tError in 'pxrInternal_v0_26_11__pxrReserved__::UsdStage::_ValidateEditPrim' at line 1697 in file D:\\a\\OpenUSD\\OpenUSD\\pxr\\usd\\usd\\stage.cpp : 'Cannot create property spec at path </World/P_0000/Part/dental_crown/body/Mesh>; authoring to an instance proxy is not allowed.'\n\tError in 'pxrInternal_v0_26_11__pxrReserved__::UsdStage::_ValidateEditPrim' at line 1697 in file D:\\a\\OpenUSD\\OpenUSD\\pxr\\usd\\usd\\stage.cpp : 'Cannot create property spec at path </World/P_0000/Part/dental_crown/body/Mesh>; authoring to an instance proxy is not allowed.'\n\tError in 'pxrInternal_v0_26_11__pxrReserved__::UsdStage::_SetValue' at line 2084 in file D:\\a\\OpenUSD\\OpenUSD\\pxr\\usd\\usd\\stage.cpp : 'Cannot set attribute value.  Failed to create attribute spec </World/P_0000/Part/dental_crown/body/Mesh.primvars:displayColor> in layer @C:/Users/PC/Documents/01_project/omniverse/results/interview/instancing/20261026_230542/edit_check.usda@'",
+    "selected_deinstanced": true,
+    "other_still_instance": true,
+    "selected_mesh_material_bound": true
+  },
+  "environment": {
+    "cache": "fresh worker process; OS filesystem cache uncontrolled",
+    "source": "assets/parts/usd/crown_good.usda"
+  }
+}

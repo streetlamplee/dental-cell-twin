@@ -1,0 +1,36 @@
+{
+  "status": "complete",
+  "wall_s": 10.682683,
+  "real_time_factor": 1.0640273097936577,
+  "clock": "perf_counter",
+  "window": "start to final capture drain; excludes stage/setup warmup",
+  "events": {
+    "STATE_APPLIED": 682,
+    "CAPTURE_REQUESTED": 6,
+    "CAPTURE_RECEIVED": 6,
+    "INSPECTION_DONE": 6,
+    "VERDICT_APPLIED": 6,
+    "RUN_END": 1
+  },
+  "max_pending": 1,
+  "latency_ms": {
+    "capture": {
+      "n": 6,
+      "p50": 510.2275499375537,
+      "p95": 516.7137250246014,
+      "max": 517.0817000325769
+    },
+    "inspection": {
+      "n": 6,
+      "p50": 1.263700076378882,
+      "p95": 6.223625066922978,
+      "max": 7.866100058890879
+    },
+    "verdict": {
+      "n": 6,
+      "p50": 519.5115000242367,
+      "p95": 530.7766000914853,
+      "max": 532.8219000948593
+    }
+  }
+}

@@ -1,0 +1,73 @@
+#usda 1.0
+(
+    defaultPrim = "World"
+    metersPerUnit = 1
+    upAxis = "Z"
+)
+
+def Xform "World"
+{
+    def Xform "P_0000"
+    {
+        double3 xformOp:translate = (0, 0, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Xform "Part" (
+            instanceable = false
+            prepend references = @../../../../assets/parts/usd/crown_good.usda@
+        )
+        {
+            over "dental_crown"
+            {
+                over "body"
+                {
+                    over "Mesh" (
+                        prepend apiSchemas = ["MaterialBindingAPI"]
+                    )
+                    {
+                        rel material:binding = </World/EditedMaterial>
+                        color3f[] primvars:displayColor = [(1, 0, 0)]
+                    }
+                }
+            }
+        }
+    }
+
+    def Xform "P_0001"
+    {
+        double3 xformOp:translate = (0.025, 0, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Xform "Part" (
+            instanceable = true
+            prepend references = @../../../../assets/parts/usd/crown_good.usda@
+        )
+        {
+        }
+    }
+
+    def Camera "Camera"
+    {
+        float2 clippingRange = (0.001, 100)
+        matrix4d xformOp:transform = ( (1, 0, -0, 0), (0, 0.7071067811865475, 0.7071067811865475, 0), (0, -0.7071067811865475, 0.7071067811865475, 0), (0.012499999999999999, -0.15, 0.15, 1) )
+        uniform token[] xformOpOrder = ["xformOp:transform"]
+    }
+
+    def DomeLight "Light"
+    {
+        float inputs:intensity = 1000
+    }
+
+    def Material "EditedMaterial"
+    {
+        token outputs:surface.connect = </World/EditedMaterial/Surface.outputs:surface>
+
+        def Shader "Surface"
+        {
+            uniform token info:id = "UsdPreviewSurface"
+            color3f inputs:diffuseColor = (1, 0, 0)
+            token outputs:surface
+        }
+    }
+}
+

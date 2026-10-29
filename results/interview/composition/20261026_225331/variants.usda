@@ -1,0 +1,33 @@
+#usda 1.0
+(
+    defaultPrim = "Part"
+    metersPerUnit = 1
+    upAxis = "Z"
+)
+
+def Xform "Part" (
+    prepend references = @./asset.usda@
+    variants = {
+        string finish = "red"
+    }
+    prepend variantSets = "finish"
+)
+{
+    variantSet "finish" = {
+        "good" {
+            over "Cube"
+            {
+                color3f[] primvars:displayColor = [(0.8, 0.8, 0.8)]
+            }
+
+        }
+        "red" {
+            over "Cube"
+            {
+                color3f[] primvars:displayColor = [(1, 0, 0)]
+            }
+
+        }
+    }
+}
+

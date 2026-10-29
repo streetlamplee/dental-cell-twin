@@ -1,0 +1,1 @@
+run_id,seed,product_id,view,ground_truth,predicted_label,defect_reason,score,mean_hue,area_px,interior_ratio,interior_bright,capture_latency_ms,frame_offset,inspection_latency_ms,simulation_time_s,conveyor_speed,lighting_condition,frame_file,reason,model_label,model_score,model_view,model_latency_ms

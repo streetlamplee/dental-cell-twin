@@ -1,0 +1,5514 @@
+{
+  "composition": [
+    {
+      "path": "results\\interview\\composition\\20261026_224502\\report.json",
+      "usd_version": [
+        0,
+        26,
+        11
+      ],
+      "checks": {
+        "transform_collision": {
+          "same_prim": [
+            10.0,
+            0.0,
+            0.0
+          ],
+          "wrapped": [
+            9.9,
+            0.0,
+            0.02
+          ],
+          "same_bbox": {
+            "min": [
+              9.949999999254942,
+              -0.05000000074505806,
+              -0.05000000074505806
+            ],
+            "max": [
+              10.050000000745058,
+              0.05000000074505806,
+              0.05000000074505806
+            ]
+          },
+          "wrapped_bbox": {
+            "min": [
+              9.849999999254942,
+              -0.05000000074505806,
+              -0.03000000074505806
+            ],
+            "max": [
+              9.950000000745058,
+              0.05000000074505806,
+              0.07000000074505806
+            ]
+          },
+          "same_ops": [
+            "xformOp:translate"
+          ]
+        },
+        "layer_reset": {
+          "strong_to_weak": [
+            {
+              "layer": "runtime.usda",
+              "path": "/World.xformOp:translate",
+              "value": "(3, 0, 0)"
+            },
+            {
+              "layer": "layout.usda",
+              "path": "/World.xformOp:translate",
+              "value": "(2, 0, 0)"
+            }
+          ],
+          "after_reset": [
+            1.9,
+            0.0,
+            0.02
+          ]
+        },
+        "variants": {
+          "selection": "red",
+          "source_shared": true,
+          "decision": "keep existing derived files for catalog compatibility; VariantSet is a verified alternative"
+        },
+        "units_and_axes": {
+          "unscaled_bbox": {
+            "min": [
+              -500.0,
+              -500.0,
+              -500.0
+            ],
+            "max": [
+              500.0,
+              500.0,
+              500.0
+            ]
+          },
+          "meters_bbox": {
+            "min": [
+              -0.5000000237487257,
+              -0.5000000237487257,
+              -0.5000000237487257
+            ],
+            "max": [
+              0.5000000237487257,
+              0.5000000237487257,
+              0.5000000237487257
+            ]
+          },
+          "metadata_only": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "explicit_axis_conversion": [
+            0.0,
+            -2.220446049250313e-16,
+            1.0000000000000002
+          ]
+        },
+        "source_hash_unchanged": "68794556d62f886e42fa3397fbdbdf6fb8c60b9c6e0d930e87dd0653f7104bec"
+      }
+    },
+    {
+      "path": "results\\interview\\composition\\20261026_225331\\report.json",
+      "usd_version": [
+        0,
+        26,
+        11
+      ],
+      "checks": {
+        "transform_collision": {
+          "same_prim": [
+            10.0,
+            0.0,
+            0.0
+          ],
+          "wrapped": [
+            9.9,
+            0.0,
+            0.02
+          ],
+          "same_bbox": {
+            "min": [
+              9.949999999254942,
+              -0.05000000074505806,
+              -0.05000000074505806
+            ],
+            "max": [
+              10.050000000745058,
+              0.05000000074505806,
+              0.05000000074505806
+            ]
+          },
+          "wrapped_bbox": {
+            "min": [
+              9.849999999254942,
+              -0.05000000074505806,
+              -0.03000000074505806
+            ],
+            "max": [
+              9.950000000745058,
+              0.05000000074505806,
+              0.07000000074505806
+            ]
+          },
+          "same_ops": [
+            "xformOp:translate"
+          ]
+        },
+        "layer_reset": {
+          "strong_to_weak": [
+            {
+              "layer": "runtime.usda",
+              "path": "/World.xformOp:translate",
+              "value": "(3, 0, 0)"
+            },
+            {
+              "layer": "layout.usda",
+              "path": "/World.xformOp:translate",
+              "value": "(2, 0, 0)"
+            }
+          ],
+          "after_reset": [
+            1.9,
+            0.0,
+            0.02
+          ]
+        },
+        "variants": {
+          "selection": "red",
+          "source_shared": true,
+          "decision": "keep existing derived files for catalog compatibility; VariantSet is a verified alternative"
+        },
+        "units_and_axes": {
+          "unscaled_bbox": {
+            "min": [
+              -500.0,
+              -500.0,
+              -500.0
+            ],
+            "max": [
+              500.0,
+              500.0,
+              500.0
+            ]
+          },
+          "meters_bbox": {
+            "min": [
+              -0.5000000237487257,
+              -0.5000000237487257,
+              -0.5000000237487257
+            ],
+            "max": [
+              0.5000000237487257,
+              0.5000000237487257,
+              0.5000000237487257
+            ]
+          },
+          "metadata_only": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "explicit_axis_conversion": [
+            0.0,
+            -2.220446049250313e-16,
+            1.0000000000000002
+          ]
+        },
+        "source_hash_unchanged": "68794556d62f886e42fa3397fbdbdf6fb8c60b9c6e0d930e87dd0653f7104bec"
+      }
+    }
+  ],
+  "instancing": [
+    {
+      "mode": "reference",
+      "count": 10,
+      "scene": "reference_10.usda",
+      "cpu_open_ms": 18.51730002090335,
+      "rss_mib": 65.078125,
+      "render_runs": 3,
+      "update_p50": 10.320000001229346,
+      "update_p95": 11.42674993025139,
+      "kit_rss_mib": 5551.359375,
+      "kit_stage_open_ms": 669.737899908796,
+      "first_viewport_frame_s": 8.207846699981019,
+      "device_gpu_mib": 3198
+    },
+    {
+      "mode": "instance",
+      "count": 10,
+      "scene": "instance_10.usda",
+      "cpu_open_ms": 32.822799985297024,
+      "rss_mib": 64.95703125,
+      "render_runs": 3,
+      "update_p50": 10.18920005299151,
+      "update_p95": 11.23946500592865,
+      "kit_rss_mib": 5584.296875,
+      "kit_stage_open_ms": 668.6488999985158,
+      "first_viewport_frame_s": 8.285131499986164,
+      "device_gpu_mib": 3199
+    },
+    {
+      "mode": "deinstanced",
+      "count": 10,
+      "scene": "deinstanced_10.usda",
+      "cpu_open_ms": 9.571700007654727,
+      "rss_mib": 65.19140625,
+      "render_runs": 3,
+      "update_p50": 10.257249989081174,
+      "update_p95": 11.306129937293008,
+      "kit_rss_mib": 5561.8828125,
+      "kit_stage_open_ms": 617.2476001083851,
+      "first_viewport_frame_s": 8.20919209998101,
+      "device_gpu_mib": 3193
+    },
+    {
+      "mode": "reference",
+      "count": 50,
+      "scene": "reference_50.usda",
+      "cpu_open_ms": 20.35699994303286,
+      "rss_mib": 66.26171875,
+      "render_runs": 3,
+      "update_p50": 10.161400015931576,
+      "update_p95": 11.443595052696764,
+      "kit_rss_mib": 5574.4453125,
+      "kit_stage_open_ms": 679.6126998960972,
+      "first_viewport_frame_s": 8.145737299928442,
+      "device_gpu_mib": 3193
+    },
+    {
+      "mode": "instance",
+      "count": 50,
+      "scene": "instance_50.usda",
+      "cpu_open_ms": 30.934100039303303,
+      "rss_mib": 65.25,
+      "render_runs": 3,
+      "update_p50": 10.125700035132468,
+      "update_p95": 11.243019928224385,
+      "kit_rss_mib": 5566.47265625,
+      "kit_stage_open_ms": 654.3474000645801,
+      "first_viewport_frame_s": 8.110016599996015,
+      "device_gpu_mib": 3199
+    },
+    {
+      "mode": "deinstanced",
+      "count": 50,
+      "scene": "deinstanced_50.usda",
+      "cpu_open_ms": 19.845800008624792,
+      "rss_mib": 66.1015625,
+      "render_runs": 3,
+      "update_p50": 10.149449983146042,
+      "update_p95": 11.490595049690455,
+      "kit_rss_mib": 5576.1875,
+      "kit_stage_open_ms": 720.8045000443235,
+      "first_viewport_frame_s": 8.376812000060454,
+      "device_gpu_mib": 3193
+    },
+    {
+      "mode": "reference",
+      "count": 100,
+      "scene": "reference_100.usda",
+      "cpu_open_ms": 37.640900001861155,
+      "rss_mib": 67.38671875,
+      "render_runs": 3,
+      "update_p50": 10.234199988190085,
+      "update_p95": 11.47900497308001,
+      "kit_rss_mib": 5611.9296875,
+      "kit_stage_open_ms": 703.6219000583515,
+      "first_viewport_frame_s": 8.52555390005,
+      "device_gpu_mib": 3193
+    },
+    {
+      "mode": "instance",
+      "count": 100,
+      "scene": "instance_100.usda",
+      "cpu_open_ms": 33.4571999264881,
+      "rss_mib": 65.62890625,
+      "render_runs": 3,
+      "update_p50": 10.248799982946366,
+      "update_p95": 11.499920021742582,
+      "kit_rss_mib": 5555.21484375,
+      "kit_stage_open_ms": 626.7138998955488,
+      "first_viewport_frame_s": 8.517073699971661,
+      "device_gpu_mib": 3198
+    },
+    {
+      "mode": "deinstanced",
+      "count": 100,
+      "scene": "deinstanced_100.usda",
+      "cpu_open_ms": 27.30620000511408,
+      "rss_mib": 67.02734375,
+      "render_runs": 3,
+      "update_p50": 10.225650039501488,
+      "update_p95": 11.589889990864322,
+      "kit_rss_mib": 5600.27734375,
+      "kit_stage_open_ms": 744.4522000150755,
+      "first_viewport_frame_s": 8.472877799998969,
+      "device_gpu_mib": 3200
+    }
+  ],
+  "timing": [
+    {
+      "path": "results\\interview\\timing\\20261026_231543\\delivery_delay_1\\runs\\20261026_232335_690003200_seed42\\timing.json",
+      "result": {
+        "status": "complete",
+        "run_id": "20261026_232335_690003200_seed42",
+        "products": 6,
+        "sorted": 6,
+        "sort_correct": 6,
+        "rejected": 3,
+        "fail_safe_rejects": 0,
+        "late_results": 0,
+        "frame_mismatches": 0,
+        "stale_frames": 0,
+        "view_retakes": 0,
+        "vision": true,
+        "frame_target_misses": 0,
+        "capture_timeouts": 0,
+        "not_exited": 0,
+        "pending_frames_at_finalize": 0,
+        "simulation_time_s": 11.367,
+        "part": "box",
+        "throughput_per_hour": 1900.3,
+        "timing": {
+          "wall_s": 10.340275,
+          "real_time_factor": 1.0992615232041993,
+          "clock": "perf_counter",
+          "window": "start to final capture drain; excludes stage/setup warmup",
+          "events": {
+            "STATE_APPLIED": 682,
+            "CAPTURE_REQUESTED": 6,
+            "CAPTURE_RECEIVED": 6,
+            "INSPECTION_DONE": 6,
+            "VERDICT_APPLIED": 6,
+            "RUN_END": 1
+          },
+          "max_pending": 1,
+          "latency_ms": {
+            "capture": {
+              "n": 6,
+              "p50": 503.1373500241898,
+              "p95": 511.6059749852866,
+              "max": 513.7560999719426
+            },
+            "inspection": {
+              "n": 6,
+              "p50": 1.1863000108860433,
+              "p95": 5.512275005457923,
+              "max": 6.910099997185171
+            },
+            "verdict": {
+              "n": 6,
+              "p50": 512.3511500423774,
+              "p95": 521.1473249655683,
+              "max": 522.3580999299884
+            }
+          }
+        },
+        "wall_throughput_per_hour": 2088.9192985679783
+      },
+      "status": "complete",
+      "wall_s": 10.340275,
+      "real_time_factor": 1.0992615232041993,
+      "clock": "perf_counter",
+      "window": "start to final capture drain; excludes stage/setup warmup",
+      "events": {
+        "STATE_APPLIED": 682,
+        "CAPTURE_REQUESTED": 6,
+        "CAPTURE_RECEIVED": 6,
+        "INSPECTION_DONE": 6,
+        "VERDICT_APPLIED": 6,
+        "RUN_END": 1
+      },
+      "max_pending": 1,
+      "latency_ms": {
+        "capture": {
+          "n": 6,
+          "p50": 503.1373500241898,
+          "p95": 511.6059749852866,
+          "max": 513.7560999719426
+        },
+        "inspection": {
+          "n": 6,
+          "p50": 1.1863000108860433,
+          "p95": 5.512275005457923,
+          "max": 6.910099997185171
+        },
+        "verdict": {
+          "n": 6,
+          "p50": 512.3511500423774,
+          "p95": 521.1473249655683,
+          "max": 522.3580999299884
+        }
+      },
+      "product_verdict_ms": {
+        "n": 6,
+        "p95": 521.14275,
+        "definition": "first capture request of product to applied verdict; includes unknown/fail-safe; excludes late verdicts"
+      }
+    },
+    {
+      "path": "results\\interview\\timing\\20261026_231543\\delivery_delay_2\\runs\\20261026_232406_908944300_seed42\\timing.json",
+      "result": {
+        "status": "complete",
+        "run_id": "20261026_232406_908944300_seed42",
+        "products": 6,
+        "sorted": 6,
+        "sort_correct": 6,
+        "rejected": 3,
+        "fail_safe_rejects": 0,
+        "late_results": 0,
+        "frame_mismatches": 0,
+        "stale_frames": 0,
+        "view_retakes": 0,
+        "vision": true,
+        "frame_target_misses": 0,
+        "capture_timeouts": 0,
+        "not_exited": 0,
+        "pending_frames_at_finalize": 0,
+        "simulation_time_s": 11.367,
+        "part": "box",
+        "throughput_per_hour": 1900.3,
+        "timing": {
+          "wall_s": 10.682683,
+          "real_time_factor": 1.0640273097936577,
+          "clock": "perf_counter",
+          "window": "start to final capture drain; excludes stage/setup warmup",
+          "events": {
+            "STATE_APPLIED": 682,
+            "CAPTURE_REQUESTED": 6,
+            "CAPTURE_RECEIVED": 6,
+            "INSPECTION_DONE": 6,
+            "VERDICT_APPLIED": 6,
+            "RUN_END": 1
+          },
+          "max_pending": 1,
+          "latency_ms": {
+            "capture": {
+              "n": 6,
+              "p50": 510.2275499375537,
+              "p95": 516.7137250246014,
+              "max": 517.0817000325769
+            },
+            "inspection": {
+              "n": 6,
+              "p50": 1.263700076378882,
+              "p95": 6.223625066922978,
+              "max": 7.866100058890879
+            },
+            "verdict": {
+              "n": 6,
+              "p50": 519.5115000242367,
+              "p95": 530.7766000914853,
+              "max": 532.8219000948593
+            }
+          }
+        },
+        "wall_throughput_per_hour": 2021.9639579307932
+      },
+      "status": "complete",
+      "wall_s": 10.682683,
+      "real_time_factor": 1.0640273097936577,
+      "clock": "perf_counter",
+      "window": "start to final capture drain; excludes stage/setup warmup",
+      "events": {
+        "STATE_APPLIED": 682,
+        "CAPTURE_REQUESTED": 6,
+        "CAPTURE_RECEIVED": 6,
+        "INSPECTION_DONE": 6,
+        "VERDICT_APPLIED": 6,
+        "RUN_END": 1
+      },
+      "max_pending": 1,
+      "latency_ms": {
+        "capture": {
+          "n": 6,
+          "p50": 510.2275499375537,
+          "p95": 516.7137250246014,
+          "max": 517.0817000325769
+        },
+        "inspection": {
+          "n": 6,
+          "p50": 1.263700076378882,
+          "p95": 6.223625066922978,
+          "max": 7.866100058890879
+        },
+        "verdict": {
+          "n": 6,
+          "p50": 519.5115000242367,
+          "p95": 530.7766000914853,
+          "max": 532.8219000948593
+        }
+      },
+      "product_verdict_ms": {
+        "n": 6,
+        "p95": 530.7735,
+        "definition": "first capture request of product to applied verdict; includes unknown/fail-safe; excludes late verdicts"
+      }
+    },
+    {
+      "path": "results\\interview\\timing\\20261026_231543\\delivery_delay_3\\runs\\20261026_232438_447279800_seed42\\timing.json",
+      "result": {
+        "status": "complete",
+        "run_id": "20261026_232438_447279800_seed42",
+        "products": 6,
+        "sorted": 6,
+        "sort_correct": 6,
+        "rejected": 3,
+        "fail_safe_rejects": 0,
+        "late_results": 0,
+        "frame_mismatches": 0,
+        "stale_frames": 0,
+        "view_retakes": 0,
+        "vision": true,
+        "frame_target_misses": 0,
+        "capture_timeouts": 0,
+        "not_exited": 0,
+        "pending_frames_at_finalize": 0,
+        "simulation_time_s": 11.367,
+        "part": "box",
+        "throughput_per_hour": 1900.3,
+        "timing": {
+          "wall_s": 10.430578,
+          "real_time_factor": 1.089744669529428,
+          "clock": "perf_counter",
+          "window": "start to final capture drain; excludes stage/setup warmup",
+          "events": {
+            "STATE_APPLIED": 682,
+            "CAPTURE_REQUESTED": 6,
+            "CAPTURE_RECEIVED": 6,
+            "INSPECTION_DONE": 6,
+            "VERDICT_APPLIED": 6,
+            "RUN_END": 1
+          },
+          "max_pending": 1,
+          "latency_ms": {
+            "capture": {
+              "n": 6,
+              "p50": 510.0729499827139,
+              "p95": 512.4724749475718,
+              "max": 512.966699898243
+            },
+            "inspection": {
+              "n": 6,
+              "p50": 1.281549979466945,
+              "p95": 5.975475040031597,
+              "max": 7.470100070349872
+            },
+            "verdict": {
+              "n": 6,
+              "p50": 519.1386499791406,
+              "p95": 524.0701250440907,
+              "max": 525.1727000577375
+            }
+          }
+        },
+        "wall_throughput_per_hour": 2070.8344254747917
+      },
+      "status": "complete",
+      "wall_s": 10.430578,
+      "real_time_factor": 1.089744669529428,
+      "clock": "perf_counter",
+      "window": "start to final capture drain; excludes stage/setup warmup",
+      "events": {
+        "STATE_APPLIED": 682,
+        "CAPTURE_REQUESTED": 6,
+        "CAPTURE_RECEIVED": 6,
+        "INSPECTION_DONE": 6,
+        "VERDICT_APPLIED": 6,
+        "RUN_END": 1
+      },
+      "max_pending": 1,
+      "latency_ms": {
+        "capture": {
+          "n": 6,
+          "p50": 510.0729499827139,
+          "p95": 512.4724749475718,
+          "max": 512.966699898243
+        },
+        "inspection": {
+          "n": 6,
+          "p50": 1.281549979466945,
+          "p95": 5.975475040031597,
+          "max": 7.470100070349872
+        },
+        "verdict": {
+          "n": 6,
+          "p50": 519.1386499791406,
+          "p95": 524.0701250440907,
+          "max": 525.1727000577375
+        }
+      },
+      "product_verdict_ms": {
+        "n": 6,
+        "p95": 524.06725,
+        "definition": "first capture request of product to applied verdict; includes unknown/fail-safe; excludes late verdicts"
+      }
+    },
+    {
+      "path": "results\\interview\\timing\\20261026_231543\\fixed_heavy_1\\runs\\20261026_231753_631086300_seed42\\timing.json",
+      "result": {
+        "status": "complete",
+        "run_id": "20261026_231753_631086300_seed42",
+        "products": 6,
+        "sorted": 6,
+        "sort_correct": 6,
+        "rejected": 3,
+        "fail_safe_rejects": 0,
+        "late_results": 0,
+        "frame_mismatches": 0,
+        "stale_frames": 0,
+        "view_retakes": 0,
+        "vision": true,
+        "frame_target_misses": 0,
+        "capture_timeouts": 0,
+        "not_exited": 0,
+        "pending_frames_at_finalize": 0,
+        "simulation_time_s": 11.367,
+        "part": "box",
+        "throughput_per_hour": 1900.3,
+        "timing": {
+          "wall_s": 18.75769,
+          "real_time_factor": 0.6059736986730965,
+          "clock": "perf_counter",
+          "window": "start to final capture drain; excludes stage/setup warmup",
+          "events": {
+            "STATE_APPLIED": 682,
+            "CAPTURE_REQUESTED": 6,
+            "CAPTURE_RECEIVED": 6,
+            "INSPECTION_DONE": 6,
+            "VERDICT_APPLIED": 6,
+            "RUN_END": 1
+          },
+          "max_pending": 1,
+          "latency_ms": {
+            "capture": {
+              "n": 6,
+              "p50": 214.75600003032014,
+              "p95": 218.57615001499653,
+              "max": 218.81250001024455
+            },
+            "inspection": {
+              "n": 6,
+              "p50": 1.316749956458807,
+              "p95": 5.41680003516376,
+              "max": 6.764700054191053
+            },
+            "verdict": {
+              "n": 6,
+              "p50": 224.52554997289553,
+              "p95": 227.94162499485537,
+              "max": 228.27149997465312
+            }
+          }
+        },
+        "wall_throughput_per_hour": 1151.5277200977305
+      },
+      "status": "complete",
+      "wall_s": 18.75769,
+      "real_time_factor": 0.6059736986730965,
+      "clock": "perf_counter",
+      "window": "start to final capture drain; excludes stage/setup warmup",
+      "events": {
+        "STATE_APPLIED": 682,
+        "CAPTURE_REQUESTED": 6,
+        "CAPTURE_RECEIVED": 6,
+        "INSPECTION_DONE": 6,
+        "VERDICT_APPLIED": 6,
+        "RUN_END": 1
+      },
+      "max_pending": 1,
+      "latency_ms": {
+        "capture": {
+          "n": 6,
+          "p50": 214.75600003032014,
+          "p95": 218.57615001499653,
+          "max": 218.81250001024455
+        },
+        "inspection": {
+          "n": 6,
+          "p50": 1.316749956458807,
+          "p95": 5.41680003516376,
+          "max": 6.764700054191053
+        },
+        "verdict": {
+          "n": 6,
+          "p50": 224.52554997289553,
+          "p95": 227.94162499485537,
+          "max": 228.27149997465312
+        }
+      },
+      "product_verdict_ms": {
+        "n": 6,
+        "p95": 227.93775000000028,
+        "definition": "first capture request of product to applied verdict; includes unknown/fail-safe; excludes late verdicts"
+      }
+    },
+    {
+      "path": "results\\interview\\timing\\20261026_231543\\fixed_heavy_2\\runs\\20261026_231841_084216600_seed42\\timing.json",
+      "result": {
+        "status": "complete",
+        "run_id": "20261026_231841_084216600_seed42",
+        "products": 6,
+        "sorted": 6,
+        "sort_correct": 6,
+        "rejected": 3,
+        "fail_safe_rejects": 0,
+        "late_results": 0,
+        "frame_mismatches": 0,
+        "stale_frames": 0,
+        "view_retakes": 0,
+        "vision": true,
+        "frame_target_misses": 0,
+        "capture_timeouts": 0,
+        "not_exited": 0,
+        "pending_frames_at_finalize": 0,
+        "simulation_time_s": 11.367,
+        "part": "box",
+        "throughput_per_hour": 1900.3,
+        "timing": {
+          "wall_s": 18.537905,
+          "real_time_factor": 0.6131581031754177,
+          "clock": "perf_counter",
+          "window": "start to final capture drain; excludes stage/setup warmup",
+          "events": {
+            "STATE_APPLIED": 682,
+            "CAPTURE_REQUESTED": 6,
+            "CAPTURE_RECEIVED": 6,
+            "INSPECTION_DONE": 6,
+            "VERDICT_APPLIED": 6,
+            "RUN_END": 1
+          },
+          "max_pending": 1,
+          "latency_ms": {
+            "capture": {
+              "n": 6,
+              "p50": 208.88029993511736,
+              "p95": 212.48405004735105,
+              "max": 213.38950004428625
+            },
+            "inspection": {
+              "n": 6,
+              "p50": 1.2884499737992883,
+              "p95": 5.721599969547242,
+              "max": 7.105799973942339
+            },
+            "verdict": {
+              "n": 6,
+              "p50": 216.67429996887222,
+              "p95": 220.7576499786228,
+              "max": 221.42299998085946
+            }
+          }
+        },
+        "wall_throughput_per_hour": 1165.1802077958648
+      },
+      "status": "complete",
+      "wall_s": 18.537905,
+      "real_time_factor": 0.6131581031754177,
+      "clock": "perf_counter",
+      "window": "start to final capture drain; excludes stage/setup warmup",
+      "events": {
+        "STATE_APPLIED": 682,
+        "CAPTURE_REQUESTED": 6,
+        "CAPTURE_RECEIVED": 6,
+        "INSPECTION_DONE": 6,
+        "VERDICT_APPLIED": 6,
+        "RUN_END": 1
+      },
+      "max_pending": 1,
+      "latency_ms": {
+        "capture": {
+          "n": 6,
+          "p50": 208.88029993511736,
+          "p95": 212.48405004735105,
+          "max": 213.38950004428625
+        },
+        "inspection": {
+          "n": 6,
+          "p50": 1.2884499737992883,
+          "p95": 5.721599969547242,
+          "max": 7.105799973942339
+        },
+        "verdict": {
+          "n": 6,
+          "p50": 216.67429996887222,
+          "p95": 220.7576499786228,
+          "max": 221.42299998085946
+        }
+      },
+      "product_verdict_ms": {
+        "n": 6,
+        "p95": 220.7545000000002,
+        "definition": "first capture request of product to applied verdict; includes unknown/fail-safe; excludes late verdicts"
+      }
+    },
+    {
+      "path": "results\\interview\\timing\\20261026_231543\\fixed_heavy_3\\runs\\20261026_231925_747552900_seed42\\timing.json",
+      "result": {
+        "status": "complete",
+        "run_id": "20261026_231925_747552900_seed42",
+        "products": 6,
+        "sorted": 6,
+        "sort_correct": 6,
+        "rejected": 3,
+        "fail_safe_rejects": 0,
+        "late_results": 0,
+        "frame_mismatches": 0,
+        "stale_frames": 0,
+        "view_retakes": 0,
+        "vision": true,
+        "frame_target_misses": 0,
+        "capture_timeouts": 0,
+        "not_exited": 0,
+        "pending_frames_at_finalize": 0,
+        "simulation_time_s": 11.367,
+        "part": "box",
+        "throughput_per_hour": 1900.3,
+        "timing": {
+          "wall_s": 18.089847,
+          "real_time_factor": 0.628345100400776,
+          "clock": "perf_counter",
+          "window": "start to final capture drain; excludes stage/setup warmup",
+          "events": {
+            "STATE_APPLIED": 682,
+            "CAPTURE_REQUESTED": 6,
+            "CAPTURE_RECEIVED": 6,
+            "INSPECTION_DONE": 6,
+            "VERDICT_APPLIED": 6,
+            "RUN_END": 1
+          },
+          "max_pending": 1,
+          "latency_ms": {
+            "capture": {
+              "n": 6,
+              "p50": 208.69469997705892,
+              "p95": 209.22797502134927,
+              "max": 209.28619999904186
+            },
+            "inspection": {
+              "n": 6,
+              "p50": 1.2376999948173761,
+              "p95": 4.927499976474792,
+              "max": 6.115900003351271
+            },
+            "verdict": {
+              "n": 6,
+              "p50": 216.92179999081418,
+              "p95": 221.2216500483919,
+              "max": 222.57760004140437
+            }
+          }
+        },
+        "wall_throughput_per_hour": 1194.0399495916135
+      },
+      "status": "complete",
+      "wall_s": 18.089847,
+      "real_time_factor": 0.628345100400776,
+      "clock": "perf_counter",
+      "window": "start to final capture drain; excludes stage/setup warmup",
+      "events": {
+        "STATE_APPLIED": 682,
+        "CAPTURE_REQUESTED": 6,
+        "CAPTURE_RECEIVED": 6,
+        "INSPECTION_DONE": 6,
+        "VERDICT_APPLIED": 6,
+        "RUN_END": 1
+      },
+      "max_pending": 1,
+      "latency_ms": {
+        "capture": {
+          "n": 6,
+          "p50": 208.69469997705892,
+          "p95": 209.22797502134927,
+          "max": 209.28619999904186
+        },
+        "inspection": {
+          "n": 6,
+          "p50": 1.2376999948173761,
+          "p95": 4.927499976474792,
+          "max": 6.115900003351271
+        },
+        "verdict": {
+          "n": 6,
+          "p50": 216.92179999081418,
+          "p95": 221.2216500483919,
+          "max": 222.57760004140437
+        }
+      },
+      "product_verdict_ms": {
+        "n": 6,
+        "p95": 221.21800000000025,
+        "definition": "first capture request of product to applied verdict; includes unknown/fail-safe; excludes late verdicts"
+      }
+    },
+    {
+      "path": "results\\interview\\timing\\20261026_231543\\fixed_light_1\\runs\\20261026_231606_936439300_seed42\\timing.json",
+      "result": {
+        "status": "complete",
+        "run_id": "20261026_231606_936439300_seed42",
+        "products": 6,
+        "sorted": 6,
+        "sort_correct": 6,
+        "rejected": 3,
+        "fail_safe_rejects": 0,
+        "late_results": 0,
+        "frame_mismatches": 0,
+        "stale_frames": 0,
+        "view_retakes": 0,
+        "vision": true,
+        "frame_target_misses": 0,
+        "capture_timeouts": 0,
+        "not_exited": 0,
+        "pending_frames_at_finalize": 0,
+        "simulation_time_s": 11.367,
+        "part": "box",
+        "throughput_per_hour": 1900.3,
+        "timing": {
+          "wall_s": 11.45768,
+          "real_time_factor": 0.9920565912378196,
+          "clock": "perf_counter",
+          "window": "start to final capture drain; excludes stage/setup warmup",
+          "events": {
+            "STATE_APPLIED": 682,
+            "CAPTURE_REQUESTED": 6,
+            "CAPTURE_RECEIVED": 6,
+            "INSPECTION_DONE": 6,
+            "VERDICT_APPLIED": 6,
+            "RUN_END": 1
+          },
+          "max_pending": 1,
+          "latency_ms": {
+            "capture": {
+              "n": 6,
+              "p50": 125.69670000812039,
+              "p95": 152.42867494816892,
+              "max": 158.93209993373603
+            },
+            "inspection": {
+              "n": 6,
+              "p50": 1.3415999710559845,
+              "p95": 6.829749996541068,
+              "max": 8.653299999423325
+            },
+            "verdict": {
+              "n": 6,
+              "p50": 134.15635004639626,
+              "p95": 162.97062498051673,
+              "max": 167.3020999878645
+            }
+          }
+        },
+        "wall_throughput_per_hour": 1885.1983996760252
+      },
+      "status": "complete",
+      "wall_s": 11.45768,
+      "real_time_factor": 0.9920565912378196,
+      "clock": "perf_counter",
+      "window": "start to final capture drain; excludes stage/setup warmup",
+      "events": {
+        "STATE_APPLIED": 682,
+        "CAPTURE_REQUESTED": 6,
+        "CAPTURE_RECEIVED": 6,
+        "INSPECTION_DONE": 6,
+        "VERDICT_APPLIED": 6,
+        "RUN_END": 1
+      },
+      "max_pending": 1,
+      "latency_ms": {
+        "capture": {
+          "n": 6,
+          "p50": 125.69670000812039,
+          "p95": 152.42867494816892,
+          "max": 158.93209993373603
+        },
+        "inspection": {
+          "n": 6,
+          "p50": 1.3415999710559845,
+          "p95": 6.829749996541068,
+          "max": 8.653299999423325
+        },
+        "verdict": {
+          "n": 6,
+          "p50": 134.15635004639626,
+          "p95": 162.97062498051673,
+          "max": 167.3020999878645
+        }
+      },
+      "product_verdict_ms": {
+        "n": 6,
+        "p95": 162.96649999999977,
+        "definition": "first capture request of product to applied verdict; includes unknown/fail-safe; excludes late verdicts"
+      }
+    },
+    {
+      "path": "results\\interview\\timing\\20261026_231543\\fixed_light_2\\runs\\20261026_231641_570316500_seed42\\timing.json",
+      "result": {
+        "status": "complete",
+        "run_id": "20261026_231641_570316500_seed42",
+        "products": 6,
+        "sorted": 6,
+        "sort_correct": 6,
+        "rejected": 3,
+        "fail_safe_rejects": 0,
+        "late_results": 0,
+        "frame_mismatches": 0,
+        "stale_frames": 0,
+        "view_retakes": 0,
+        "vision": true,
+        "frame_target_misses": 0,
+        "capture_timeouts": 0,
+        "not_exited": 0,
+        "pending_frames_at_finalize": 0,
+        "simulation_time_s": 11.367,
+        "part": "box",
+        "throughput_per_hour": 1900.3,
+        "timing": {
+          "wall_s": 11.210854,
+          "real_time_factor": 1.01389835813936,
+          "clock": "perf_counter",
+          "window": "start to final capture drain; excludes stage/setup warmup",
+          "events": {
+            "STATE_APPLIED": 682,
+            "CAPTURE_REQUESTED": 6,
+            "CAPTURE_RECEIVED": 6,
+            "INSPECTION_DONE": 6,
+            "VERDICT_APPLIED": 6,
+            "RUN_END": 1
+          },
+          "max_pending": 1,
+          "latency_ms": {
+            "capture": {
+              "n": 6,
+              "p50": 123.13244998222217,
+              "p95": 128.47175006754696,
+              "max": 129.21340006869286
+            },
+            "inspection": {
+              "n": 6,
+              "p50": 1.2108000228181481,
+              "p95": 6.643200031248853,
+              "max": 8.24380002450198
+            },
+            "verdict": {
+              "n": 6,
+              "p50": 134.0293499524705,
+              "p95": 137.17767503112555,
+              "max": 138.00100004300475
+            }
+          }
+        },
+        "wall_throughput_per_hour": 1926.7042457247237
+      },
+      "status": "complete",
+      "wall_s": 11.210854,
+      "real_time_factor": 1.01389835813936,
+      "clock": "perf_counter",
+      "window": "start to final capture drain; excludes stage/setup warmup",
+      "events": {
+        "STATE_APPLIED": 682,
+        "CAPTURE_REQUESTED": 6,
+        "CAPTURE_RECEIVED": 6,
+        "INSPECTION_DONE": 6,
+        "VERDICT_APPLIED": 6,
+        "RUN_END": 1
+      },
+      "max_pending": 1,
+      "latency_ms": {
+        "capture": {
+          "n": 6,
+          "p50": 123.13244998222217,
+          "p95": 128.47175006754696,
+          "max": 129.21340006869286
+        },
+        "inspection": {
+          "n": 6,
+          "p50": 1.2108000228181481,
+          "p95": 6.643200031248853,
+          "max": 8.24380002450198
+        },
+        "verdict": {
+          "n": 6,
+          "p50": 134.0293499524705,
+          "p95": 137.17767503112555,
+          "max": 138.00100004300475
+        }
+      },
+      "product_verdict_ms": {
+        "n": 6,
+        "p95": 137.17449999999968,
+        "definition": "first capture request of product to applied verdict; includes unknown/fail-safe; excludes late verdicts"
+      }
+    },
+    {
+      "path": "results\\interview\\timing\\20261026_231543\\fixed_light_3\\runs\\20261026_231716_141983700_seed42\\timing.json",
+      "result": {
+        "status": "complete",
+        "run_id": "20261026_231716_141983700_seed42",
+        "products": 6,
+        "sorted": 6,
+        "sort_correct": 6,
+        "rejected": 3,
+        "fail_safe_rejects": 0,
+        "late_results": 0,
+        "frame_mismatches": 0,
+        "stale_frames": 0,
+        "view_retakes": 0,
+        "vision": true,
+        "frame_target_misses": 0,
+        "capture_timeouts": 0,
+        "not_exited": 0,
+        "pending_frames_at_finalize": 0,
+        "simulation_time_s": 11.367,
+        "part": "box",
+        "throughput_per_hour": 1900.3,
+        "timing": {
+          "wall_s": 11.226144,
+          "real_time_factor": 1.0125174293333292,
+          "clock": "perf_counter",
+          "window": "start to final capture drain; excludes stage/setup warmup",
+          "events": {
+            "STATE_APPLIED": 682,
+            "CAPTURE_REQUESTED": 6,
+            "CAPTURE_RECEIVED": 6,
+            "INSPECTION_DONE": 6,
+            "VERDICT_APPLIED": 6,
+            "RUN_END": 1
+          },
+          "max_pending": 1,
+          "latency_ms": {
+            "capture": {
+              "n": 6,
+              "p50": 120.16069999663159,
+              "p95": 125.28010000823997,
+              "max": 125.94769999850541
+            },
+            "inspection": {
+              "n": 6,
+              "p50": 1.4772500144317746,
+              "p95": 5.567299987887964,
+              "max": 6.850000005215406
+            },
+            "verdict": {
+              "n": 6,
+              "p50": 129.43614996038377,
+              "p95": 137.75940000778064,
+              "max": 138.6210999917239
+            }
+          }
+        },
+        "wall_throughput_per_hour": 1924.080075937027
+      },
+      "status": "complete",
+      "wall_s": 11.226144,
+      "real_time_factor": 1.0125174293333292,
+      "clock": "perf_counter",
+      "window": "start to final capture drain; excludes stage/setup warmup",
+      "events": {
+        "STATE_APPLIED": 682,
+        "CAPTURE_REQUESTED": 6,
+        "CAPTURE_RECEIVED": 6,
+        "INSPECTION_DONE": 6,
+        "VERDICT_APPLIED": 6,
+        "RUN_END": 1
+      },
+      "max_pending": 1,
+      "latency_ms": {
+        "capture": {
+          "n": 6,
+          "p50": 120.16069999663159,
+          "p95": 125.28010000823997,
+          "max": 125.94769999850541
+        },
+        "inspection": {
+          "n": 6,
+          "p50": 1.4772500144317746,
+          "p95": 5.567299987887964,
+          "max": 6.850000005215406
+        },
+        "verdict": {
+          "n": 6,
+          "p50": 129.43614996038377,
+          "p95": 137.75940000778064,
+          "max": 138.6210999917239
+        }
+      },
+      "product_verdict_ms": {
+        "n": 6,
+        "p95": 137.75550000000035,
+        "definition": "first capture request of product to applied verdict; includes unknown/fail-safe; excludes late verdicts"
+      }
+    },
+    {
+      "path": "results\\interview\\timing\\20261026_231543\\update_budget_1\\runs\\20261026_232646_593744100_seed42\\timing.json",
+      "result": {
+        "status": "complete",
+        "run_id": "20261026_232646_593744100_seed42",
+        "products": 6,
+        "sorted": 6,
+        "sort_correct": 3,
+        "rejected": 6,
+        "fail_safe_rejects": 6,
+        "late_results": 0,
+        "frame_mismatches": 0,
+        "stale_frames": 0,
+        "view_retakes": 0,
+        "vision": true,
+        "frame_target_misses": 0,
+        "capture_timeouts": 6,
+        "not_exited": 0,
+        "pending_frames_at_finalize": 0,
+        "simulation_time_s": 10.367,
+        "part": "box",
+        "throughput_per_hour": 2083.6,
+        "timing": {
+          "wall_s": 9.587366,
+          "real_time_factor": 1.0812841035122156,
+          "clock": "perf_counter",
+          "window": "start to final capture drain; excludes stage/setup warmup",
+          "events": {
+            "STATE_APPLIED": 622,
+            "CAPTURE_REQUESTED": 6,
+            "TIMEOUT": 6,
+            "VERDICT_APPLIED": 6,
+            "RUN_END": 1
+          },
+          "max_pending": 1,
+          "latency_ms": {
+            "capture": {
+              "n": 0,
+              "p50": null,
+              "p95": null,
+              "max": null
+            },
+            "inspection": {
+              "n": 0,
+              "p50": null,
+              "p95": null,
+              "max": null
+            },
+            "verdict": {
+              "n": 6,
+              "p50": 38.65095000946894,
+              "p95": 53.8332499563694,
+              "max": 57.17239994555712
+            }
+          }
+        },
+        "wall_throughput_per_hour": 2252.964995808025
+      },
+      "status": "complete",
+      "wall_s": 9.587366,
+      "real_time_factor": 1.0812841035122156,
+      "clock": "perf_counter",
+      "window": "start to final capture drain; excludes stage/setup warmup",
+      "events": {
+        "STATE_APPLIED": 622,
+        "CAPTURE_REQUESTED": 6,
+        "TIMEOUT": 6,
+        "VERDICT_APPLIED": 6,
+        "RUN_END": 1
+      },
+      "max_pending": 1,
+      "latency_ms": {
+        "capture": {
+          "n": 0,
+          "p50": null,
+          "p95": null,
+          "max": null
+        },
+        "inspection": {
+          "n": 0,
+          "p50": null,
+          "p95": null,
+          "max": null
+        },
+        "verdict": {
+          "n": 6,
+          "p50": 38.65095000946894,
+          "p95": 53.8332499563694,
+          "max": 57.17239994555712
+        }
+      },
+      "product_verdict_ms": {
+        "n": 6,
+        "p95": 53.82975000000023,
+        "definition": "first capture request of product to applied verdict; includes unknown/fail-safe; excludes late verdicts"
+      }
+    },
+    {
+      "path": "results\\interview\\timing\\20261026_231543\\update_budget_2\\runs\\20261026_232718_399051700_seed42\\timing.json",
+      "result": {
+        "status": "complete",
+        "run_id": "20261026_232718_399051700_seed42",
+        "products": 6,
+        "sorted": 6,
+        "sort_correct": 3,
+        "rejected": 6,
+        "fail_safe_rejects": 6,
+        "late_results": 0,
+        "frame_mismatches": 0,
+        "stale_frames": 0,
+        "view_retakes": 0,
+        "vision": true,
+        "frame_target_misses": 0,
+        "capture_timeouts": 6,
+        "not_exited": 0,
+        "pending_frames_at_finalize": 0,
+        "simulation_time_s": 10.367,
+        "part": "box",
+        "throughput_per_hour": 2083.6,
+        "timing": {
+          "wall_s": 9.584308,
+          "real_time_factor": 1.0816291691998057,
+          "clock": "perf_counter",
+          "window": "start to final capture drain; excludes stage/setup warmup",
+          "events": {
+            "STATE_APPLIED": 622,
+            "CAPTURE_REQUESTED": 6,
+            "TIMEOUT": 6,
+            "VERDICT_APPLIED": 6,
+            "RUN_END": 1
+          },
+          "max_pending": 1,
+          "latency_ms": {
+            "capture": {
+              "n": 0,
+              "p50": null,
+              "p95": null,
+              "max": null
+            },
+            "inspection": {
+              "n": 0,
+              "p50": null,
+              "p95": null,
+              "max": null
+            },
+            "verdict": {
+              "n": 6,
+              "p50": 38.26960001606494,
+              "p95": 42.27827503927983,
+              "max": 42.46130003593862
+            }
+          }
+        },
+        "wall_throughput_per_hour": 2253.6838340337144
+      },
+      "status": "complete",
+      "wall_s": 9.584308,
+      "real_time_factor": 1.0816291691998057,
+      "clock": "perf_counter",
+      "window": "start to final capture drain; excludes stage/setup warmup",
+      "events": {
+        "STATE_APPLIED": 622,
+        "CAPTURE_REQUESTED": 6,
+        "TIMEOUT": 6,
+        "VERDICT_APPLIED": 6,
+        "RUN_END": 1
+      },
+      "max_pending": 1,
+      "latency_ms": {
+        "capture": {
+          "n": 0,
+          "p50": null,
+          "p95": null,
+          "max": null
+        },
+        "inspection": {
+          "n": 0,
+          "p50": null,
+          "p95": null,
+          "max": null
+        },
+        "verdict": {
+          "n": 6,
+          "p50": 38.26960001606494,
+          "p95": 42.27827503927983,
+          "max": 42.46130003593862
+        }
+      },
+      "product_verdict_ms": {
+        "n": 6,
+        "p95": 42.27524999999987,
+        "definition": "first capture request of product to applied verdict; includes unknown/fail-safe; excludes late verdicts"
+      }
+    },
+    {
+      "path": "results\\interview\\timing\\20261026_231543\\update_budget_3\\runs\\20261026_232748_811110900_seed42\\timing.json",
+      "result": {
+        "status": "complete",
+        "run_id": "20261026_232748_811110900_seed42",
+        "products": 6,
+        "sorted": 6,
+        "sort_correct": 3,
+        "rejected": 6,
+        "fail_safe_rejects": 6,
+        "late_results": 0,
+        "frame_mismatches": 0,
+        "stale_frames": 0,
+        "view_retakes": 0,
+        "vision": true,
+        "frame_target_misses": 0,
+        "capture_timeouts": 6,
+        "not_exited": 0,
+        "pending_frames_at_finalize": 0,
+        "simulation_time_s": 10.367,
+        "part": "box",
+        "throughput_per_hour": 2083.6,
+        "timing": {
+          "wall_s": 9.741891,
+          "real_time_factor": 1.0641328616127335,
+          "clock": "perf_counter",
+          "window": "start to final capture drain; excludes stage/setup warmup",
+          "events": {
+            "STATE_APPLIED": 622,
+            "CAPTURE_REQUESTED": 6,
+            "TIMEOUT": 6,
+            "VERDICT_APPLIED": 6,
+            "RUN_END": 1
+          },
+          "max_pending": 1,
+          "latency_ms": {
+            "capture": {
+              "n": 0,
+              "p50": null,
+              "p95": null,
+              "max": null
+            },
+            "inspection": {
+              "n": 0,
+              "p50": null,
+              "p95": null,
+              "max": null
+            },
+            "verdict": {
+              "n": 6,
+              "p50": 39.27689994452521,
+              "p95": 44.41637502168305,
+              "max": 45.25870003271848
+            }
+          }
+        },
+        "wall_throughput_per_hour": 2217.2286674116963
+      },
+      "status": "complete",
+      "wall_s": 9.741891,
+      "real_time_factor": 1.0641328616127335,
+      "clock": "perf_counter",
+      "window": "start to final capture drain; excludes stage/setup warmup",
+      "events": {
+        "STATE_APPLIED": 622,
+        "CAPTURE_REQUESTED": 6,
+        "TIMEOUT": 6,
+        "VERDICT_APPLIED": 6,
+        "RUN_END": 1
+      },
+      "max_pending": 1,
+      "latency_ms": {
+        "capture": {
+          "n": 0,
+          "p50": null,
+          "p95": null,
+          "max": null
+        },
+        "inspection": {
+          "n": 0,
+          "p50": null,
+          "p95": null,
+          "max": null
+        },
+        "verdict": {
+          "n": 6,
+          "p50": 39.27689994452521,
+          "p95": 44.41637502168305,
+          "max": 45.25870003271848
+        }
+      },
+      "product_verdict_ms": {
+        "n": 6,
+        "p95": 44.41374999999992,
+        "definition": "first capture request of product to applied verdict; includes unknown/fail-safe; excludes late verdicts"
+      }
+    },
+    {
+      "path": "results\\interview\\timing\\20261026_231543\\wall_heavy_1\\runs\\20261026_232150_183562900_seed42\\timing.json",
+      "result": {
+        "status": "complete",
+        "run_id": "20261026_232150_183562900_seed42",
+        "products": 6,
+        "sorted": 6,
+        "sort_correct": 6,
+        "rejected": 3,
+        "fail_safe_rejects": 0,
+        "late_results": 0,
+        "frame_mismatches": 0,
+        "stale_frames": 0,
+        "view_retakes": 0,
+        "vision": true,
+        "frame_target_misses": 0,
+        "capture_timeouts": 0,
+        "not_exited": 0,
+        "pending_frames_at_finalize": 0,
+        "simulation_time_s": 11.376,
+        "part": "box",
+        "throughput_per_hour": 1898.7,
+        "timing": {
+          "wall_s": 11.36446,
+          "real_time_factor": 1.0010188077789828,
+          "clock": "perf_counter",
+          "window": "start to final capture drain; excludes stage/setup warmup",
+          "events": {
+            "STATE_APPLIED": 445,
+            "CAPTURE_REQUESTED": 6,
+            "CAPTURE_RECEIVED": 6,
+            "INSPECTION_DONE": 6,
+            "VERDICT_APPLIED": 6,
+            "RUN_END": 1
+          },
+          "max_pending": 1,
+          "latency_ms": {
+            "capture": {
+              "n": 6,
+              "p50": 196.6475499793887,
+              "p95": 198.7912000331562,
+              "max": 199.07510001212358
+            },
+            "inspection": {
+              "n": 6,
+              "p50": 1.3223999994806945,
+              "p95": 5.05390003672801,
+              "max": 6.244400050491095
+            },
+            "verdict": {
+              "n": 6,
+              "p50": 204.6547999489121,
+              "p95": 207.3278749594465,
+              "max": 207.67079992219806
+            }
+          }
+        },
+        "wall_throughput_per_hour": 1900.6622400008448
+      },
+      "status": "complete",
+      "wall_s": 11.36446,
+      "real_time_factor": 1.0010188077789828,
+      "clock": "perf_counter",
+      "window": "start to final capture drain; excludes stage/setup warmup",
+      "events": {
+        "STATE_APPLIED": 445,
+        "CAPTURE_REQUESTED": 6,
+        "CAPTURE_RECEIVED": 6,
+        "INSPECTION_DONE": 6,
+        "VERDICT_APPLIED": 6,
+        "RUN_END": 1
+      },
+      "max_pending": 1,
+      "latency_ms": {
+        "capture": {
+          "n": 6,
+          "p50": 196.6475499793887,
+          "p95": 198.7912000331562,
+          "max": 199.07510001212358
+        },
+        "inspection": {
+          "n": 6,
+          "p50": 1.3223999994806945,
+          "p95": 5.05390003672801,
+          "max": 6.244400050491095
+        },
+        "verdict": {
+          "n": 6,
+          "p50": 204.6547999489121,
+          "p95": 207.3278749594465,
+          "max": 207.67079992219806
+        }
+      },
+      "product_verdict_ms": {
+        "n": 6,
+        "p95": 207.32525,
+        "definition": "first capture request of product to applied verdict; includes unknown/fail-safe; excludes late verdicts"
+      }
+    },
+    {
+      "path": "results\\interview\\timing\\20261026_231543\\wall_heavy_2\\runs\\20261026_232229_792447400_seed42\\timing.json",
+      "result": {
+        "status": "complete",
+        "run_id": "20261026_232229_792447400_seed42",
+        "products": 6,
+        "sorted": 6,
+        "sort_correct": 6,
+        "rejected": 3,
+        "fail_safe_rejects": 0,
+        "late_results": 0,
+        "frame_mismatches": 0,
+        "stale_frames": 0,
+        "view_retakes": 0,
+        "vision": true,
+        "frame_target_misses": 0,
+        "capture_timeouts": 0,
+        "not_exited": 0,
+        "pending_frames_at_finalize": 0,
+        "simulation_time_s": 11.367,
+        "part": "box",
+        "throughput_per_hour": 1900.2,
+        "timing": {
+          "wall_s": 11.357477,
+          "real_time_factor": 1.000871434763244,
+          "clock": "perf_counter",
+          "window": "start to final capture drain; excludes stage/setup warmup",
+          "events": {
+            "STATE_APPLIED": 449,
+            "CAPTURE_REQUESTED": 6,
+            "CAPTURE_RECEIVED": 6,
+            "INSPECTION_DONE": 6,
+            "VERDICT_APPLIED": 6,
+            "RUN_END": 1
+          },
+          "max_pending": 1,
+          "latency_ms": {
+            "capture": {
+              "n": 6,
+              "p50": 197.35469995066524,
+              "p95": 201.42364999628626,
+              "max": 202.32889999169856
+            },
+            "inspection": {
+              "n": 6,
+              "p50": 1.2145499931648374,
+              "p95": 5.447174946311861,
+              "max": 6.84189994353801
+            },
+            "verdict": {
+              "n": 6,
+              "p50": 206.42955001676455,
+              "p95": 210.1863749558106,
+              "max": 210.34569991752505
+            }
+          }
+        },
+        "wall_throughput_per_hour": 1901.8308379581133
+      },
+      "status": "complete",
+      "wall_s": 11.357477,
+      "real_time_factor": 1.000871434763244,
+      "clock": "perf_counter",
+      "window": "start to final capture drain; excludes stage/setup warmup",
+      "events": {
+        "STATE_APPLIED": 449,
+        "CAPTURE_REQUESTED": 6,
+        "CAPTURE_RECEIVED": 6,
+        "INSPECTION_DONE": 6,
+        "VERDICT_APPLIED": 6,
+        "RUN_END": 1
+      },
+      "max_pending": 1,
+      "latency_ms": {
+        "capture": {
+          "n": 6,
+          "p50": 197.35469995066524,
+          "p95": 201.42364999628626,
+          "max": 202.32889999169856
+        },
+        "inspection": {
+          "n": 6,
+          "p50": 1.2145499931648374,
+          "p95": 5.447174946311861,
+          "max": 6.84189994353801
+        },
+        "verdict": {
+          "n": 6,
+          "p50": 206.42955001676455,
+          "p95": 210.1863749558106,
+          "max": 210.34569991752505
+        }
+      },
+      "product_verdict_ms": {
+        "n": 6,
+        "p95": 210.18349999999998,
+        "definition": "first capture request of product to applied verdict; includes unknown/fail-safe; excludes late verdicts"
+      }
+    },
+    {
+      "path": "results\\interview\\timing\\20261026_231543\\wall_heavy_3\\runs\\20261026_232303_608636900_seed42\\timing.json",
+      "result": {
+        "status": "complete",
+        "run_id": "20261026_232303_608636900_seed42",
+        "products": 6,
+        "sorted": 6,
+        "sort_correct": 6,
+        "rejected": 3,
+        "fail_safe_rejects": 0,
+        "late_results": 0,
+        "frame_mismatches": 0,
+        "stale_frames": 0,
+        "view_retakes": 0,
+        "vision": true,
+        "frame_target_misses": 0,
+        "capture_timeouts": 0,
+        "not_exited": 0,
+        "pending_frames_at_finalize": 0,
+        "simulation_time_s": 11.388,
+        "part": "box",
+        "throughput_per_hour": 1896.8,
+        "timing": {
+          "wall_s": 11.380635,
+          "real_time_factor": 1.0006161958328745,
+          "clock": "perf_counter",
+          "window": "start to final capture drain; excludes stage/setup warmup",
+          "events": {
+            "STATE_APPLIED": 451,
+            "CAPTURE_REQUESTED": 6,
+            "CAPTURE_RECEIVED": 6,
+            "INSPECTION_DONE": 6,
+            "VERDICT_APPLIED": 6,
+            "RUN_END": 1
+          },
+          "max_pending": 1,
+          "latency_ms": {
+            "capture": {
+              "n": 6,
+              "p50": 198.03330005379394,
+              "p95": 204.40389995928854,
+              "max": 206.20819996111095
+            },
+            "inspection": {
+              "n": 6,
+              "p50": 1.1591999791562557,
+              "p95": 5.309200059855357,
+              "max": 6.677600089460611
+            },
+            "verdict": {
+              "n": 6,
+              "p50": 205.86794998962432,
+              "p95": 216.90477497759275,
+              "max": 220.3375999815762
+            }
+          }
+        },
+        "wall_throughput_per_hour": 1897.9608782813964
+      },
+      "status": "complete",
+      "wall_s": 11.380635,
+      "real_time_factor": 1.0006161958328745,
+      "clock": "perf_counter",
+      "window": "start to final capture drain; excludes stage/setup warmup",
+      "events": {
+        "STATE_APPLIED": 451,
+        "CAPTURE_REQUESTED": 6,
+        "CAPTURE_RECEIVED": 6,
+        "INSPECTION_DONE": 6,
+        "VERDICT_APPLIED": 6,
+        "RUN_END": 1
+      },
+      "max_pending": 1,
+      "latency_ms": {
+        "capture": {
+          "n": 6,
+          "p50": 198.03330005379394,
+          "p95": 204.40389995928854,
+          "max": 206.20819996111095
+        },
+        "inspection": {
+          "n": 6,
+          "p50": 1.1591999791562557,
+          "p95": 5.309200059855357,
+          "max": 6.677600089460611
+        },
+        "verdict": {
+          "n": 6,
+          "p50": 205.86794998962432,
+          "p95": 216.90477497759275,
+          "max": 220.3375999815762
+        }
+      },
+      "product_verdict_ms": {
+        "n": 6,
+        "p95": 216.9012499999999,
+        "definition": "first capture request of product to applied verdict; includes unknown/fail-safe; excludes late verdicts"
+      }
+    },
+    {
+      "path": "results\\interview\\timing\\20261026_231543\\wall_light_1\\runs\\20261026_232008_375530800_seed42\\timing.json",
+      "result": {
+        "status": "complete",
+        "run_id": "20261026_232008_375530800_seed42",
+        "products": 6,
+        "sorted": 6,
+        "sort_correct": 6,
+        "rejected": 3,
+        "fail_safe_rejects": 0,
+        "late_results": 0,
+        "frame_mismatches": 0,
+        "stale_frames": 0,
+        "view_retakes": 0,
+        "vision": true,
+        "frame_target_misses": 0,
+        "capture_timeouts": 0,
+        "not_exited": 0,
+        "pending_frames_at_finalize": 0,
+        "simulation_time_s": 11.379,
+        "part": "box",
+        "throughput_per_hour": 1898.2,
+        "timing": {
+          "wall_s": 11.371932,
+          "real_time_factor": 1.000622277751634,
+          "clock": "perf_counter",
+          "window": "start to final capture drain; excludes stage/setup warmup",
+          "events": {
+            "STATE_APPLIED": 693,
+            "CAPTURE_REQUESTED": 6,
+            "CAPTURE_RECEIVED": 6,
+            "INSPECTION_DONE": 6,
+            "VERDICT_APPLIED": 6,
+            "RUN_END": 1
+          },
+          "max_pending": 1,
+          "latency_ms": {
+            "capture": {
+              "n": 6,
+              "p50": 123.82434995379299,
+              "p95": 128.84897497133352,
+              "max": 129.44409996271133
+            },
+            "inspection": {
+              "n": 6,
+              "p50": 1.289249979890883,
+              "p95": 6.107950088335201,
+              "max": 7.701300084590912
+            },
+            "verdict": {
+              "n": 6,
+              "p50": 135.66025003092363,
+              "p95": 140.04032497177832,
+              "max": 141.00239996332675
+            }
+          }
+        },
+        "wall_throughput_per_hour": 1899.4133978289708
+      },
+      "status": "complete",
+      "wall_s": 11.371932,
+      "real_time_factor": 1.000622277751634,
+      "clock": "perf_counter",
+      "window": "start to final capture drain; excludes stage/setup warmup",
+      "events": {
+        "STATE_APPLIED": 693,
+        "CAPTURE_REQUESTED": 6,
+        "CAPTURE_RECEIVED": 6,
+        "INSPECTION_DONE": 6,
+        "VERDICT_APPLIED": 6,
+        "RUN_END": 1
+      },
+      "max_pending": 1,
+      "latency_ms": {
+        "capture": {
+          "n": 6,
+          "p50": 123.82434995379299,
+          "p95": 128.84897497133352,
+          "max": 129.44409996271133
+        },
+        "inspection": {
+          "n": 6,
+          "p50": 1.289249979890883,
+          "p95": 6.107950088335201,
+          "max": 7.701300084590912
+        },
+        "verdict": {
+          "n": 6,
+          "p50": 135.66025003092363,
+          "p95": 140.04032497177832,
+          "max": 141.00239996332675
+        }
+      },
+      "product_verdict_ms": {
+        "n": 6,
+        "p95": 140.03600000000017,
+        "definition": "first capture request of product to applied verdict; includes unknown/fail-safe; excludes late verdicts"
+      }
+    },
+    {
+      "path": "results\\interview\\timing\\20261026_231543\\wall_light_2\\runs\\20261026_232042_359635400_seed42\\timing.json",
+      "result": {
+        "status": "complete",
+        "run_id": "20261026_232042_359635400_seed42",
+        "products": 6,
+        "sorted": 6,
+        "sort_correct": 6,
+        "rejected": 3,
+        "fail_safe_rejects": 0,
+        "late_results": 0,
+        "frame_mismatches": 0,
+        "stale_frames": 0,
+        "view_retakes": 0,
+        "vision": true,
+        "frame_target_misses": 0,
+        "capture_timeouts": 0,
+        "not_exited": 0,
+        "pending_frames_at_finalize": 0,
+        "simulation_time_s": 11.379,
+        "part": "box",
+        "throughput_per_hour": 1898.3,
+        "timing": {
+          "wall_s": 11.364567,
+          "real_time_factor": 1.001237865006006,
+          "clock": "perf_counter",
+          "window": "start to final capture drain; excludes stage/setup warmup",
+          "events": {
+            "STATE_APPLIED": 682,
+            "CAPTURE_REQUESTED": 6,
+            "CAPTURE_RECEIVED": 6,
+            "INSPECTION_DONE": 6,
+            "VERDICT_APPLIED": 6,
+            "RUN_END": 1
+          },
+          "max_pending": 1,
+          "latency_ms": {
+            "capture": {
+              "n": 6,
+              "p50": 128.4540499909781,
+              "p95": 133.48500008578412,
+              "max": 134.97890008147806
+            },
+            "inspection": {
+              "n": 6,
+              "p50": 1.3226000010035932,
+              "p95": 5.853099923115224,
+              "max": 7.343899924308062
+            },
+            "verdict": {
+              "n": 6,
+              "p50": 137.70065002609044,
+              "p95": 145.61707494431175,
+              "max": 146.36279991827905
+            }
+          }
+        },
+        "wall_throughput_per_hour": 1900.644344830736
+      },
+      "status": "complete",
+      "wall_s": 11.364567,
+      "real_time_factor": 1.001237865006006,
+      "clock": "perf_counter",
+      "window": "start to final capture drain; excludes stage/setup warmup",
+      "events": {
+        "STATE_APPLIED": 682,
+        "CAPTURE_REQUESTED": 6,
+        "CAPTURE_RECEIVED": 6,
+        "INSPECTION_DONE": 6,
+        "VERDICT_APPLIED": 6,
+        "RUN_END": 1
+      },
+      "max_pending": 1,
+      "latency_ms": {
+        "capture": {
+          "n": 6,
+          "p50": 128.4540499909781,
+          "p95": 133.48500008578412,
+          "max": 134.97890008147806
+        },
+        "inspection": {
+          "n": 6,
+          "p50": 1.3226000010035932,
+          "p95": 5.853099923115224,
+          "max": 7.343899924308062
+        },
+        "verdict": {
+          "n": 6,
+          "p50": 137.70065002609044,
+          "p95": 145.61707494431175,
+          "max": 146.36279991827905
+        }
+      },
+      "product_verdict_ms": {
+        "n": 6,
+        "p95": 145.61349999999993,
+        "definition": "first capture request of product to applied verdict; includes unknown/fail-safe; excludes late verdicts"
+      }
+    },
+    {
+      "path": "results\\interview\\timing\\20261026_231543\\wall_light_3\\runs\\20261026_232114_654095200_seed42\\timing.json",
+      "result": {
+        "status": "complete",
+        "run_id": "20261026_232114_654095200_seed42",
+        "products": 6,
+        "sorted": 6,
+        "sort_correct": 6,
+        "rejected": 3,
+        "fail_safe_rejects": 0,
+        "late_results": 0,
+        "frame_mismatches": 0,
+        "stale_frames": 0,
+        "view_retakes": 0,
+        "vision": true,
+        "frame_target_misses": 0,
+        "capture_timeouts": 0,
+        "not_exited": 0,
+        "pending_frames_at_finalize": 0,
+        "simulation_time_s": 11.371,
+        "part": "box",
+        "throughput_per_hour": 1899.5,
+        "timing": {
+          "wall_s": 11.362109,
+          "real_time_factor": 1.000811794691857,
+          "clock": "perf_counter",
+          "window": "start to final capture drain; excludes stage/setup warmup",
+          "events": {
+            "STATE_APPLIED": 739,
+            "CAPTURE_REQUESTED": 6,
+            "CAPTURE_RECEIVED": 6,
+            "INSPECTION_DONE": 6,
+            "VERDICT_APPLIED": 6,
+            "RUN_END": 1
+          },
+          "max_pending": 1,
+          "latency_ms": {
+            "capture": {
+              "n": 6,
+              "p50": 116.74809997202829,
+              "p95": 122.16522498056293,
+              "max": 123.68409999180585
+            },
+            "inspection": {
+              "n": 6,
+              "p50": 1.1543000000528991,
+              "p95": 5.541650054510683,
+              "max": 6.98000006377697
+            },
+            "verdict": {
+              "n": 6,
+              "p50": 124.60099998861551,
+              "p95": 135.33180000376888,
+              "max": 138.484499999322
+            }
+          }
+        },
+        "wall_throughput_per_hour": 1901.0555170699383
+      },
+      "status": "complete",
+      "wall_s": 11.362109,
+      "real_time_factor": 1.000811794691857,
+      "clock": "perf_counter",
+      "window": "start to final capture drain; excludes stage/setup warmup",
+      "events": {
+        "STATE_APPLIED": 739,
+        "CAPTURE_REQUESTED": 6,
+        "CAPTURE_RECEIVED": 6,
+        "INSPECTION_DONE": 6,
+        "VERDICT_APPLIED": 6,
+        "RUN_END": 1
+      },
+      "max_pending": 1,
+      "latency_ms": {
+        "capture": {
+          "n": 6,
+          "p50": 116.74809997202829,
+          "p95": 122.16522498056293,
+          "max": 123.68409999180585
+        },
+        "inspection": {
+          "n": 6,
+          "p50": 1.1543000000528991,
+          "p95": 5.541650054510683,
+          "max": 6.98000006377697
+        },
+        "verdict": {
+          "n": 6,
+          "p50": 124.60099998861551,
+          "p95": 135.33180000376888,
+          "max": 138.484499999322
+        }
+      },
+      "product_verdict_ms": {
+        "n": 6,
+        "p95": 135.32850000000008,
+        "definition": "first capture request of product to applied verdict; includes unknown/fail-safe; excludes late verdicts"
+      }
+    },
+    {
+      "path": "results\\interview\\timing\\20261026_231543\\wall_timeout_1\\runs\\20261026_232509_908742100_seed42\\timing.json",
+      "result": {
+        "status": "complete",
+        "run_id": "20261026_232509_908742100_seed42",
+        "products": 6,
+        "sorted": 6,
+        "sort_correct": 3,
+        "rejected": 6,
+        "fail_safe_rejects": 6,
+        "late_results": 0,
+        "frame_mismatches": 0,
+        "stale_frames": 0,
+        "view_retakes": 0,
+        "vision": true,
+        "frame_target_misses": 0,
+        "capture_timeouts": 6,
+        "not_exited": 0,
+        "pending_frames_at_finalize": 0,
+        "simulation_time_s": 10.367,
+        "part": "box",
+        "throughput_per_hour": 2083.6,
+        "timing": {
+          "wall_s": 9.759076,
+          "real_time_factor": 1.062259058033842,
+          "clock": "perf_counter",
+          "window": "start to final capture drain; excludes stage/setup warmup",
+          "events": {
+            "STATE_APPLIED": 622,
+            "CAPTURE_REQUESTED": 6,
+            "TIMEOUT": 6,
+            "VERDICT_APPLIED": 6,
+            "RUN_END": 1
+          },
+          "max_pending": 1,
+          "latency_ms": {
+            "capture": {
+              "n": 0,
+              "p50": null,
+              "p95": null,
+              "max": null
+            },
+            "inspection": {
+              "n": 0,
+              "p50": null,
+              "p95": null,
+              "max": null
+            },
+            "verdict": {
+              "n": 6,
+              "p50": 312.6102500827983,
+              "p95": 314.1517000331078,
+              "max": 314.4754000240937
+            }
+          }
+        },
+        "wall_throughput_per_hour": 2213.324294226216
+      },
+      "status": "complete",
+      "wall_s": 9.759076,
+      "real_time_factor": 1.062259058033842,
+      "clock": "perf_counter",
+      "window": "start to final capture drain; excludes stage/setup warmup",
+      "events": {
+        "STATE_APPLIED": 622,
+        "CAPTURE_REQUESTED": 6,
+        "TIMEOUT": 6,
+        "VERDICT_APPLIED": 6,
+        "RUN_END": 1
+      },
+      "max_pending": 1,
+      "latency_ms": {
+        "capture": {
+          "n": 0,
+          "p50": null,
+          "p95": null,
+          "max": null
+        },
+        "inspection": {
+          "n": 0,
+          "p50": null,
+          "p95": null,
+          "max": null
+        },
+        "verdict": {
+          "n": 6,
+          "p50": 312.6102500827983,
+          "p95": 314.1517000331078,
+          "max": 314.4754000240937
+        }
+      },
+      "product_verdict_ms": {
+        "n": 6,
+        "p95": 314.1485000000002,
+        "definition": "first capture request of product to applied verdict; includes unknown/fail-safe; excludes late verdicts"
+      }
+    },
+    {
+      "path": "results\\interview\\timing\\20261026_231543\\wall_timeout_2\\runs\\20261026_232542_544459200_seed42\\timing.json",
+      "result": {
+        "status": "complete",
+        "run_id": "20261026_232542_544459200_seed42",
+        "products": 6,
+        "sorted": 6,
+        "sort_correct": 3,
+        "rejected": 6,
+        "fail_safe_rejects": 6,
+        "late_results": 0,
+        "frame_mismatches": 0,
+        "stale_frames": 0,
+        "view_retakes": 0,
+        "vision": true,
+        "frame_target_misses": 0,
+        "capture_timeouts": 6,
+        "not_exited": 0,
+        "pending_frames_at_finalize": 0,
+        "simulation_time_s": 10.367,
+        "part": "box",
+        "throughput_per_hour": 2083.6,
+        "timing": {
+          "wall_s": 9.471296,
+          "real_time_factor": 1.0945351678529565,
+          "clock": "perf_counter",
+          "window": "start to final capture drain; excludes stage/setup warmup",
+          "events": {
+            "STATE_APPLIED": 622,
+            "CAPTURE_REQUESTED": 6,
+            "TIMEOUT": 6,
+            "VERDICT_APPLIED": 6,
+            "RUN_END": 1
+          },
+          "max_pending": 1,
+          "latency_ms": {
+            "capture": {
+              "n": 0,
+              "p50": null,
+              "p95": null,
+              "max": null
+            },
+            "inspection": {
+              "n": 0,
+              "p50": null,
+              "p95": null,
+              "max": null
+            },
+            "verdict": {
+              "n": 6,
+              "p50": 311.32144993171096,
+              "p95": 330.47004995751195,
+              "max": 335.7642999617383
+            }
+          }
+        },
+        "wall_throughput_per_hour": 2280.574907594483
+      },
+      "status": "complete",
+      "wall_s": 9.471296,
+      "real_time_factor": 1.0945351678529565,
+      "clock": "perf_counter",
+      "window": "start to final capture drain; excludes stage/setup warmup",
+      "events": {
+        "STATE_APPLIED": 622,
+        "CAPTURE_REQUESTED": 6,
+        "TIMEOUT": 6,
+        "VERDICT_APPLIED": 6,
+        "RUN_END": 1
+      },
+      "max_pending": 1,
+      "latency_ms": {
+        "capture": {
+          "n": 0,
+          "p50": null,
+          "p95": null,
+          "max": null
+        },
+        "inspection": {
+          "n": 0,
+          "p50": null,
+          "p95": null,
+          "max": null
+        },
+        "verdict": {
+          "n": 6,
+          "p50": 311.32144993171096,
+          "p95": 330.47004995751195,
+          "max": 335.7642999617383
+        }
+      },
+      "product_verdict_ms": {
+        "n": 6,
+        "p95": 330.46674999999993,
+        "definition": "first capture request of product to applied verdict; includes unknown/fail-safe; excludes late verdicts"
+      }
+    },
+    {
+      "path": "results\\interview\\timing\\20261026_231543\\wall_timeout_3\\runs\\20261026_232614_339324300_seed42\\timing.json",
+      "result": {
+        "status": "complete",
+        "run_id": "20261026_232614_339324300_seed42",
+        "products": 6,
+        "sorted": 6,
+        "sort_correct": 3,
+        "rejected": 6,
+        "fail_safe_rejects": 6,
+        "late_results": 0,
+        "frame_mismatches": 0,
+        "stale_frames": 0,
+        "view_retakes": 0,
+        "vision": true,
+        "frame_target_misses": 0,
+        "capture_timeouts": 6,
+        "not_exited": 0,
+        "pending_frames_at_finalize": 0,
+        "simulation_time_s": 10.367,
+        "part": "box",
+        "throughput_per_hour": 2083.6,
+        "timing": {
+          "wall_s": 9.552,
+          "real_time_factor": 1.0852875488657678,
+          "clock": "perf_counter",
+          "window": "start to final capture drain; excludes stage/setup warmup",
+          "events": {
+            "STATE_APPLIED": 622,
+            "CAPTURE_REQUESTED": 6,
+            "TIMEOUT": 6,
+            "VERDICT_APPLIED": 6,
+            "RUN_END": 1
+          },
+          "max_pending": 1,
+          "latency_ms": {
+            "capture": {
+              "n": 0,
+              "p50": null,
+              "p95": null,
+              "max": null
+            },
+            "inspection": {
+              "n": 0,
+              "p50": null,
+              "p95": null,
+              "max": null
+            },
+            "verdict": {
+              "n": 6,
+              "p50": 307.29070003144443,
+              "p95": 315.0034000282176,
+              "max": 316.3728000363335
+            }
+          }
+        },
+        "wall_throughput_per_hour": 2261.306532663317
+      },
+      "status": "complete",
+      "wall_s": 9.552,
+      "real_time_factor": 1.0852875488657678,
+      "clock": "perf_counter",
+      "window": "start to final capture drain; excludes stage/setup warmup",
+      "events": {
+        "STATE_APPLIED": 622,
+        "CAPTURE_REQUESTED": 6,
+        "TIMEOUT": 6,
+        "VERDICT_APPLIED": 6,
+        "RUN_END": 1
+      },
+      "max_pending": 1,
+      "latency_ms": {
+        "capture": {
+          "n": 0,
+          "p50": null,
+          "p95": null,
+          "max": null
+        },
+        "inspection": {
+          "n": 0,
+          "p50": null,
+          "p95": null,
+          "max": null
+        },
+        "verdict": {
+          "n": 6,
+          "p50": 307.29070003144443,
+          "p95": 315.0034000282176,
+          "max": 316.3728000363335
+        }
+      },
+      "product_verdict_ms": {
+        "n": 6,
+        "p95": 314.99974999999995,
+        "definition": "first capture request of product to applied verdict; includes unknown/fail-safe; excludes late verdicts"
+      }
+    },
+    {
+      "path": "results\\interview\\baseline\\after_20261026_233733\\box_1\\runs\\20261026_233756_279165900_seed42\\timing.json",
+      "result": {
+        "status": "complete",
+        "run_id": "20261026_233756_279165900_seed42",
+        "products": 30,
+        "sorted": 30,
+        "sort_correct": 30,
+        "rejected": 13,
+        "fail_safe_rejects": 0,
+        "late_results": 0,
+        "frame_mismatches": 0,
+        "stale_frames": 0,
+        "view_retakes": 0,
+        "vision": true,
+        "frame_target_misses": 0,
+        "capture_timeouts": 0,
+        "not_exited": 0,
+        "pending_frames_at_finalize": 0,
+        "simulation_time_s": 55.117,
+        "part": "box",
+        "throughput_per_hour": 1959.5,
+        "timing": {
+          "wall_s": 58.57093,
+          "real_time_factor": 0.941024278377309,
+          "clock": "perf_counter",
+          "window": "start to final capture drain; excludes stage/setup warmup",
+          "events": {
+            "STATE_APPLIED": 3307,
+            "CAPTURE_REQUESTED": 30,
+            "CAPTURE_RECEIVED": 30,
+            "INSPECTION_DONE": 30,
+            "VERDICT_APPLIED": 30,
+            "RUN_END": 1
+          },
+          "max_pending": 1,
+          "latency_ms": {
+            "capture": {
+              "n": 30,
+              "p50": 136.92164997337386,
+              "p95": 145.24477004888467,
+              "max": 145.99069999530911
+            },
+            "inspection": {
+              "n": 30,
+              "p50": 1.1601499863900244,
+              "p95": 1.3368900050409138,
+              "max": 6.791199906729162
+            },
+            "verdict": {
+              "n": 30,
+              "p50": 144.9781499686651,
+              "p95": 153.06799498503096,
+              "max": 154.0351000148803
+            }
+          }
+        },
+        "wall_throughput_per_hour": 1843.918134815343
+      },
+      "status": "complete",
+      "wall_s": 58.57093,
+      "real_time_factor": 0.941024278377309,
+      "clock": "perf_counter",
+      "window": "start to final capture drain; excludes stage/setup warmup",
+      "events": {
+        "STATE_APPLIED": 3307,
+        "CAPTURE_REQUESTED": 30,
+        "CAPTURE_RECEIVED": 30,
+        "INSPECTION_DONE": 30,
+        "VERDICT_APPLIED": 30,
+        "RUN_END": 1
+      },
+      "max_pending": 1,
+      "latency_ms": {
+        "capture": {
+          "n": 30,
+          "p50": 136.92164997337386,
+          "p95": 145.24477004888467,
+          "max": 145.99069999530911
+        },
+        "inspection": {
+          "n": 30,
+          "p50": 1.1601499863900244,
+          "p95": 1.3368900050409138,
+          "max": 6.791199906729162
+        },
+        "verdict": {
+          "n": 30,
+          "p50": 144.9781499686651,
+          "p95": 153.06799498503096,
+          "max": 154.0351000148803
+        }
+      },
+      "product_verdict_ms": {
+        "n": 30,
+        "p95": 153.06479999999834,
+        "definition": "first capture request of product to applied verdict; includes unknown/fail-safe; excludes late verdicts"
+      }
+    },
+    {
+      "path": "results\\interview\\baseline\\after_20261026_233733\\box_2\\runs\\20261026_233916_283357600_seed42\\timing.json",
+      "result": {
+        "status": "complete",
+        "run_id": "20261026_233916_283357600_seed42",
+        "products": 30,
+        "sorted": 30,
+        "sort_correct": 30,
+        "rejected": 13,
+        "fail_safe_rejects": 0,
+        "late_results": 0,
+        "frame_mismatches": 0,
+        "stale_frames": 0,
+        "view_retakes": 0,
+        "vision": true,
+        "frame_target_misses": 0,
+        "capture_timeouts": 0,
+        "not_exited": 0,
+        "pending_frames_at_finalize": 0,
+        "simulation_time_s": 55.117,
+        "part": "box",
+        "throughput_per_hour": 1959.5,
+        "timing": {
+          "wall_s": 57.919202,
+          "real_time_factor": 0.9516130123132308,
+          "clock": "perf_counter",
+          "window": "start to final capture drain; excludes stage/setup warmup",
+          "events": {
+            "STATE_APPLIED": 3307,
+            "CAPTURE_REQUESTED": 30,
+            "CAPTURE_RECEIVED": 30,
+            "INSPECTION_DONE": 30,
+            "VERDICT_APPLIED": 30,
+            "RUN_END": 1
+          },
+          "max_pending": 1,
+          "latency_ms": {
+            "capture": {
+              "n": 30,
+              "p50": 134.9643999710679,
+              "p95": 139.91994498646818,
+              "max": 147.07599999383092
+            },
+            "inspection": {
+              "n": 30,
+              "p50": 1.1707500088959932,
+              "p95": 1.3571699615567923,
+              "max": 5.878900061361492
+            },
+            "verdict": {
+              "n": 30,
+              "p50": 142.99895003205165,
+              "p95": 149.2175150080584,
+              "max": 155.31059994827956
+            }
+          }
+        },
+        "wall_throughput_per_hour": 1864.6665746534284
+      },
+      "status": "complete",
+      "wall_s": 57.919202,
+      "real_time_factor": 0.9516130123132308,
+      "clock": "perf_counter",
+      "window": "start to final capture drain; excludes stage/setup warmup",
+      "events": {
+        "STATE_APPLIED": 3307,
+        "CAPTURE_REQUESTED": 30,
+        "CAPTURE_RECEIVED": 30,
+        "INSPECTION_DONE": 30,
+        "VERDICT_APPLIED": 30,
+        "RUN_END": 1
+      },
+      "max_pending": 1,
+      "latency_ms": {
+        "capture": {
+          "n": 30,
+          "p50": 134.9643999710679,
+          "p95": 139.91994498646818,
+          "max": 147.07599999383092
+        },
+        "inspection": {
+          "n": 30,
+          "p50": 1.1707500088959932,
+          "p95": 1.3571699615567923,
+          "max": 5.878900061361492
+        },
+        "verdict": {
+          "n": 30,
+          "p50": 142.99895003205165,
+          "p95": 149.2175150080584,
+          "max": 155.31059994827956
+        }
+      },
+      "product_verdict_ms": {
+        "n": 30,
+        "p95": 149.2136500000008,
+        "definition": "first capture request of product to applied verdict; includes unknown/fail-safe; excludes late verdicts"
+      }
+    },
+    {
+      "path": "results\\interview\\baseline\\after_20261029_210305\\box_1\\runs\\20261029_210402_399861200_seed42\\timing.json",
+      "result": {
+        "status": "complete",
+        "run_id": "20261029_210402_399861200_seed42",
+        "products": 30,
+        "sorted": 30,
+        "sort_correct": 30,
+        "rejected": 13,
+        "fail_safe_rejects": 0,
+        "late_results": 0,
+        "frame_mismatches": 0,
+        "stale_frames": 0,
+        "view_retakes": 0,
+        "vision": true,
+        "frame_target_misses": 0,
+        "capture_timeouts": 0,
+        "not_exited": 0,
+        "pending_frames_at_finalize": 0,
+        "simulation_time_s": 55.117,
+        "part": "box",
+        "throughput_per_hour": 1959.5,
+        "timing": {
+          "wall_s": 69.808161,
+          "real_time_factor": 0.7895447471330547,
+          "clock": "perf_counter",
+          "window": "start to final capture drain; excludes stage/setup warmup",
+          "events": {
+            "STATE_APPLIED": 3307,
+            "CAPTURE_REQUESTED": 30,
+            "CAPTURE_RECEIVED": 30,
+            "INSPECTION_DONE": 30,
+            "VERDICT_APPLIED": 30,
+            "RUN_END": 1
+          },
+          "max_pending": 1,
+          "latency_ms": {
+            "capture": {
+              "n": 30,
+              "p50": 161.4925499961828,
+              "p95": 168.43492499829154,
+              "max": 170.4271000053268
+            },
+            "inspection": {
+              "n": 30,
+              "p50": 1.314700006332714,
+              "p95": 1.692089997959556,
+              "max": 39.52360000403132
+            },
+            "verdict": {
+              "n": 30,
+              "p50": 170.31529999076156,
+              "p95": 179.28720499403425,
+              "max": 221.90380000392906
+            }
+          }
+        },
+        "wall_throughput_per_hour": 1547.097050730215
+      },
+      "status": "complete",
+      "wall_s": 69.808161,
+      "real_time_factor": 0.7895447471330547,
+      "clock": "perf_counter",
+      "window": "start to final capture drain; excludes stage/setup warmup",
+      "events": {
+        "STATE_APPLIED": 3307,
+        "CAPTURE_REQUESTED": 30,
+        "CAPTURE_RECEIVED": 30,
+        "INSPECTION_DONE": 30,
+        "VERDICT_APPLIED": 30,
+        "RUN_END": 1
+      },
+      "max_pending": 1,
+      "latency_ms": {
+        "capture": {
+          "n": 30,
+          "p50": 161.4925499961828,
+          "p95": 168.43492499829154,
+          "max": 170.4271000053268
+        },
+        "inspection": {
+          "n": 30,
+          "p50": 1.314700006332714,
+          "p95": 1.692089997959556,
+          "max": 39.52360000403132
+        },
+        "verdict": {
+          "n": 30,
+          "p50": 170.31529999076156,
+          "p95": 179.28720499403425,
+          "max": 221.90380000392906
+        }
+      },
+      "product_verdict_ms": {
+        "n": 30,
+        "p95": 179.28349999999895,
+        "definition": "first capture request of product to applied verdict; includes unknown/fail-safe; excludes late verdicts"
+      }
+    },
+    {
+      "path": "results\\interview\\baseline\\after_20261029_210305\\box_2\\runs\\20261029_210546_782130200_seed42\\timing.json",
+      "result": {
+        "status": "complete",
+        "run_id": "20261029_210546_782130200_seed42",
+        "products": 30,
+        "sorted": 30,
+        "sort_correct": 29,
+        "rejected": 14,
+        "fail_safe_rejects": 0,
+        "late_results": 0,
+        "frame_mismatches": 0,
+        "stale_frames": 1,
+        "view_retakes": 0,
+        "vision": true,
+        "frame_target_misses": 0,
+        "capture_timeouts": 0,
+        "not_exited": 0,
+        "pending_frames_at_finalize": 0,
+        "simulation_time_s": 55.117,
+        "part": "box",
+        "throughput_per_hour": 1959.5,
+        "timing": {
+          "wall_s": 68.176157,
+          "real_time_factor": 0.8084449046827716,
+          "clock": "perf_counter",
+          "window": "start to final capture drain; excludes stage/setup warmup",
+          "events": {
+            "STATE_APPLIED": 3307,
+            "CAPTURE_REQUESTED": 30,
+            "CAPTURE_RECEIVED": 30,
+            "INSPECTION_DONE": 30,
+            "VERDICT_APPLIED": 30,
+            "RUN_END": 1
+          },
+          "max_pending": 1,
+          "latency_ms": {
+            "capture": {
+              "n": 30,
+              "p50": 159.21750000416068,
+              "p95": 172.6067050025449,
+              "max": 181.76039999525528
+            },
+            "inspection": {
+              "n": 30,
+              "p50": 1.2369499963824637,
+              "p95": 1.6778699973656332,
+              "max": 7.671899991692044
+            },
+            "verdict": {
+              "n": 30,
+              "p50": 167.4834999939776,
+              "p95": 181.63554000348086,
+              "max": 192.28689999727067
+            }
+          }
+        },
+        "wall_throughput_per_hour": 1584.1315314971478
+      },
+      "status": "complete",
+      "wall_s": 68.176157,
+      "real_time_factor": 0.8084449046827716,
+      "clock": "perf_counter",
+      "window": "start to final capture drain; excludes stage/setup warmup",
+      "events": {
+        "STATE_APPLIED": 3307,
+        "CAPTURE_REQUESTED": 30,
+        "CAPTURE_RECEIVED": 30,
+        "INSPECTION_DONE": 30,
+        "VERDICT_APPLIED": 30,
+        "RUN_END": 1
+      },
+      "max_pending": 1,
+      "latency_ms": {
+        "capture": {
+          "n": 30,
+          "p50": 159.21750000416068,
+          "p95": 172.6067050025449,
+          "max": 181.76039999525528
+        },
+        "inspection": {
+          "n": 30,
+          "p50": 1.2369499963824637,
+          "p95": 1.6778699973656332,
+          "max": 7.671899991692044
+        },
+        "verdict": {
+          "n": 30,
+          "p50": 167.4834999939776,
+          "p95": 181.63554000348086,
+          "max": 192.28689999727067
+        }
+      },
+      "product_verdict_ms": {
+        "n": 30,
+        "p95": 181.63184999999942,
+        "definition": "first capture request of product to applied verdict; includes unknown/fail-safe; excludes late verdicts"
+      }
+    },
+    {
+      "path": "results\\interview\\baseline\\after_20261029_210305\\crown_1\\runs\\20261029_210911_533143500_seed42\\timing.json",
+      "result": {
+        "status": "complete",
+        "run_id": "20261029_210911_533143500_seed42",
+        "products": 30,
+        "sorted": 30,
+        "sort_correct": 13,
+        "rejected": 27,
+        "fail_safe_rejects": 25,
+        "late_results": 0,
+        "frame_mismatches": 0,
+        "stale_frames": 0,
+        "view_retakes": 0,
+        "vision": true,
+        "frame_target_misses": 0,
+        "capture_timeouts": 125,
+        "not_exited": 0,
+        "pending_frames_at_finalize": 0,
+        "simulation_time_s": 276.283,
+        "part": "crown",
+        "throughput_per_hour": 390.9,
+        "line": {
+          "station": "cell",
+          "cycle_s": 8.2,
+          "views": 5,
+          "spawn_interval_s": 9.0,
+          "station_utilization": 0.8904,
+          "station_busy_s": 246.0,
+          "station_exit_blocked_s": 0.0,
+          "queue_max": 0,
+          "queue_mean": 0.0
+        },
+        "timing": {
+          "wall_s": 174.927894,
+          "real_time_factor": 1.5794126814509697,
+          "clock": "perf_counter",
+          "window": "start to final capture drain; excludes stage/setup warmup",
+          "events": {
+            "STATE_APPLIED": 16577,
+            "CAPTURE_REQUESTED": 150,
+            "CAPTURE_RECEIVED": 25,
+            "INSPECTION_DONE": 25,
+            "VERDICT_APPLIED": 30,
+            "TIMEOUT": 125,
+            "RUN_END": 1
+          },
+          "max_pending": 5,
+          "latency_ms": {
+            "capture": {
+              "n": 25,
+              "p50": 155.58460001193453,
+              "p95": 166.79984000511467,
+              "max": 171.87570000533015
+            },
+            "inspection": {
+              "n": 25,
+              "p50": 2.2443999914685264,
+              "p95": 2.7696599951013923,
+              "max": 145.07930001127534
+            },
+            "verdict": {
+              "n": 30,
+              "p50": 1594.1848500006017,
+              "p95": 1700.3590199972678,
+              "max": 1764.0695000009146
+            }
+          }
+        },
+        "wall_throughput_per_hour": 617.3972459761048
+      },
+      "status": "complete",
+      "wall_s": 174.927894,
+      "real_time_factor": 1.5794126814509697,
+      "clock": "perf_counter",
+      "window": "start to final capture drain; excludes stage/setup warmup",
+      "events": {
+        "STATE_APPLIED": 16577,
+        "CAPTURE_REQUESTED": 150,
+        "CAPTURE_RECEIVED": 25,
+        "INSPECTION_DONE": 25,
+        "VERDICT_APPLIED": 30,
+        "TIMEOUT": 125,
+        "RUN_END": 1
+      },
+      "max_pending": 5,
+      "latency_ms": {
+        "capture": {
+          "n": 25,
+          "p50": 155.58460001193453,
+          "p95": 166.79984000511467,
+          "max": 171.87570000533015
+        },
+        "inspection": {
+          "n": 25,
+          "p50": 2.2443999914685264,
+          "p95": 2.7696599951013923,
+          "max": 145.07930001127534
+        },
+        "verdict": {
+          "n": 30,
+          "p50": 1594.1848500006017,
+          "p95": 1700.3590199972678,
+          "max": 1764.0695000009146
+        }
+      },
+      "product_verdict_ms": {
+        "n": 30,
+        "p95": 3804.129449999999,
+        "definition": "first capture request of product to applied verdict; includes unknown/fail-safe; excludes late verdicts"
+      }
+    },
+    {
+      "path": "results\\interview\\baseline\\after_20261029_211839\\box_1\\runs\\20261029_211859_078875200_seed42\\timing.json",
+      "result": {
+        "status": "complete",
+        "run_id": "20261029_211859_078875200_seed42",
+        "products": 30,
+        "sorted": 30,
+        "sort_correct": 30,
+        "rejected": 13,
+        "fail_safe_rejects": 0,
+        "late_results": 0,
+        "frame_mismatches": 0,
+        "stale_frames": 0,
+        "view_retakes": 0,
+        "vision": true,
+        "frame_target_misses": 0,
+        "capture_timeouts": 0,
+        "not_exited": 0,
+        "pending_frames_at_finalize": 0,
+        "simulation_time_s": 55.117,
+        "part": "box",
+        "throughput_per_hour": 1959.5,
+        "timing": {
+          "wall_s": 57.822209,
+          "real_time_factor": 0.9532092862683939,
+          "clock": "perf_counter",
+          "window": "start to final capture drain; excludes stage/setup warmup",
+          "events": {
+            "STATE_APPLIED": 3307,
+            "CAPTURE_REQUESTED": 30,
+            "CAPTURE_RECEIVED": 30,
+            "INSPECTION_DONE": 30,
+            "VERDICT_APPLIED": 30,
+            "RUN_END": 1
+          },
+          "max_pending": 1,
+          "latency_ms": {
+            "capture": {
+              "n": 30,
+              "p50": 134.81490000413032,
+              "p95": 136.50559999223333,
+              "max": 136.91339999786578
+            },
+            "inspection": {
+              "n": 30,
+              "p50": 1.1092999993707053,
+              "p95": 1.372739998623729,
+              "max": 6.284899995080195
+            },
+            "verdict": {
+              "n": 30,
+              "p50": 142.5349500059383,
+              "p95": 144.89500999843585,
+              "max": 148.8390000013169
+            }
+          }
+        },
+        "wall_throughput_per_hour": 1867.7944317208635
+      },
+      "status": "complete",
+      "wall_s": 57.822209,
+      "real_time_factor": 0.9532092862683939,
+      "clock": "perf_counter",
+      "window": "start to final capture drain; excludes stage/setup warmup",
+      "events": {
+        "STATE_APPLIED": 3307,
+        "CAPTURE_REQUESTED": 30,
+        "CAPTURE_RECEIVED": 30,
+        "INSPECTION_DONE": 30,
+        "VERDICT_APPLIED": 30,
+        "RUN_END": 1
+      },
+      "max_pending": 1,
+      "latency_ms": {
+        "capture": {
+          "n": 30,
+          "p50": 134.81490000413032,
+          "p95": 136.50559999223333,
+          "max": 136.91339999786578
+        },
+        "inspection": {
+          "n": 30,
+          "p50": 1.1092999993707053,
+          "p95": 1.372739998623729,
+          "max": 6.284899995080195
+        },
+        "verdict": {
+          "n": 30,
+          "p50": 142.5349500059383,
+          "p95": 144.89500999843585,
+          "max": 148.8390000013169
+        }
+      },
+      "product_verdict_ms": {
+        "n": 30,
+        "p95": 144.89200000000304,
+        "definition": "first capture request of product to applied verdict; includes unknown/fail-safe; excludes late verdicts"
+      }
+    },
+    {
+      "path": "results\\interview\\baseline\\after_20261029_211839\\box_2\\runs\\20261029_212017_851084500_seed42\\timing.json",
+      "result": {
+        "status": "complete",
+        "run_id": "20261029_212017_851084500_seed42",
+        "products": 30,
+        "sorted": 30,
+        "sort_correct": 30,
+        "rejected": 13,
+        "fail_safe_rejects": 0,
+        "late_results": 0,
+        "frame_mismatches": 0,
+        "stale_frames": 0,
+        "view_retakes": 0,
+        "vision": true,
+        "frame_target_misses": 0,
+        "capture_timeouts": 0,
+        "not_exited": 0,
+        "pending_frames_at_finalize": 0,
+        "simulation_time_s": 55.117,
+        "part": "box",
+        "throughput_per_hour": 1959.5,
+        "timing": {
+          "wall_s": 57.891017,
+          "real_time_factor": 0.9520763192163639,
+          "clock": "perf_counter",
+          "window": "start to final capture drain; excludes stage/setup warmup",
+          "events": {
+            "STATE_APPLIED": 3307,
+            "CAPTURE_REQUESTED": 30,
+            "CAPTURE_RECEIVED": 30,
+            "INSPECTION_DONE": 30,
+            "VERDICT_APPLIED": 30,
+            "RUN_END": 1
+          },
+          "max_pending": 1,
+          "latency_ms": {
+            "capture": {
+              "n": 30,
+              "p50": 134.89719999779481,
+              "p95": 136.50579000241123,
+              "max": 137.6421000022674
+            },
+            "inspection": {
+              "n": 30,
+              "p50": 1.161500003945548,
+              "p95": 1.35148500194191,
+              "max": 6.806299992604181
+            },
+            "verdict": {
+              "n": 30,
+              "p50": 142.75070001167478,
+              "p95": 145.37126999421162,
+              "max": 149.22559999104124
+            }
+          }
+        },
+        "wall_throughput_per_hour": 1865.5744120024701
+      },
+      "status": "complete",
+      "wall_s": 57.891017,
+      "real_time_factor": 0.9520763192163639,
+      "clock": "perf_counter",
+      "window": "start to final capture drain; excludes stage/setup warmup",
+      "events": {
+        "STATE_APPLIED": 3307,
+        "CAPTURE_REQUESTED": 30,
+        "CAPTURE_RECEIVED": 30,
+        "INSPECTION_DONE": 30,
+        "VERDICT_APPLIED": 30,
+        "RUN_END": 1
+      },
+      "max_pending": 1,
+      "latency_ms": {
+        "capture": {
+          "n": 30,
+          "p50": 134.89719999779481,
+          "p95": 136.50579000241123,
+          "max": 137.6421000022674
+        },
+        "inspection": {
+          "n": 30,
+          "p50": 1.161500003945548,
+          "p95": 1.35148500194191,
+          "max": 6.806299992604181
+        },
+        "verdict": {
+          "n": 30,
+          "p50": 142.75070001167478,
+          "p95": 145.37126999421162,
+          "max": 149.22559999104124
+        }
+      },
+      "product_verdict_ms": {
+        "n": 30,
+        "p95": 145.36845000000048,
+        "definition": "first capture request of product to applied verdict; includes unknown/fail-safe; excludes late verdicts"
+      }
+    },
+    {
+      "path": "results\\interview\\baseline\\after_20261029_211839\\crown_1\\runs\\20261029_212136_597790900_seed42\\timing.json",
+      "result": {
+        "status": "complete",
+        "run_id": "20261029_212136_597790900_seed42",
+        "products": 30,
+        "sorted": 30,
+        "sort_correct": 30,
+        "rejected": 10,
+        "fail_safe_rejects": 0,
+        "late_results": 0,
+        "frame_mismatches": 0,
+        "stale_frames": 0,
+        "view_retakes": 1,
+        "vision": true,
+        "frame_target_misses": 0,
+        "capture_timeouts": 0,
+        "not_exited": 0,
+        "pending_frames_at_finalize": 0,
+        "simulation_time_s": 279.283,
+        "part": "crown",
+        "throughput_per_hour": 386.7,
+        "line": {
+          "station": "cell",
+          "cycle_s": 8.2,
+          "views": 5,
+          "spawn_interval_s": 9.0,
+          "station_utilization": 0.8808,
+          "station_busy_s": 246.0,
+          "station_exit_blocked_s": 0.0,
+          "queue_max": 0,
+          "queue_mean": 0.0
+        },
+        "timing": {
+          "wall_s": 303.766464,
+          "real_time_factor": 0.9194014693254873,
+          "clock": "perf_counter",
+          "window": "start to final capture drain; excludes stage/setup warmup",
+          "events": {
+            "STATE_APPLIED": 16757,
+            "CAPTURE_REQUESTED": 151,
+            "CAPTURE_RECEIVED": 151,
+            "INSPECTION_DONE": 150,
+            "VERDICT_APPLIED": 30,
+            "RUN_END": 1
+          },
+          "max_pending": 1,
+          "latency_ms": {
+            "capture": {
+              "n": 151,
+              "p50": 147.51609999802895,
+              "p95": 155.45279999787454,
+              "max": 174.0775000071153
+            },
+            "inspection": {
+              "n": 150,
+              "p50": 2.1234000014374033,
+              "p95": 2.4010849978367332,
+              "max": 105.03109999990556
+            },
+            "verdict": {
+              "n": 30,
+              "p50": 169.3167999983416,
+              "p95": 177.24768500265782,
+              "max": 195.99700000253506
+            }
+          }
+        },
+        "wall_throughput_per_hour": 355.5362846110623
+      },
+      "status": "complete",
+      "wall_s": 303.766464,
+      "real_time_factor": 0.9194014693254873,
+      "clock": "perf_counter",
+      "window": "start to final capture drain; excludes stage/setup warmup",
+      "events": {
+        "STATE_APPLIED": 16757,
+        "CAPTURE_REQUESTED": 151,
+        "CAPTURE_RECEIVED": 151,
+        "INSPECTION_DONE": 150,
+        "VERDICT_APPLIED": 30,
+        "RUN_END": 1
+      },
+      "max_pending": 1,
+      "latency_ms": {
+        "capture": {
+          "n": 151,
+          "p50": 147.51609999802895,
+          "p95": 155.45279999787454,
+          "max": 174.0775000071153
+        },
+        "inspection": {
+          "n": 150,
+          "p50": 2.1234000014374033,
+          "p95": 2.4010849978367332,
+          "max": 105.03109999990556
+        },
+        "verdict": {
+          "n": 30,
+          "p50": 169.3167999983416,
+          "p95": 177.24768500265782,
+          "max": 195.99700000253506
+        }
+      },
+      "product_verdict_ms": {
+        "n": 30,
+        "p95": 3619.374449999996,
+        "definition": "first capture request of product to applied verdict; includes unknown/fail-safe; excludes late verdicts"
+      }
+    },
+    {
+      "path": "results\\interview\\baseline\\after_20261029_211839\\crown_2\\runs\\20261029_212701_138627000_seed42\\timing.json",
+      "result": {
+        "status": "complete",
+        "run_id": "20261029_212701_138627000_seed42",
+        "products": 30,
+        "sorted": 30,
+        "sort_correct": 30,
+        "rejected": 10,
+        "fail_safe_rejects": 0,
+        "late_results": 0,
+        "frame_mismatches": 0,
+        "stale_frames": 0,
+        "view_retakes": 2,
+        "vision": true,
+        "frame_target_misses": 0,
+        "capture_timeouts": 0,
+        "not_exited": 0,
+        "pending_frames_at_finalize": 0,
+        "simulation_time_s": 279.283,
+        "part": "crown",
+        "throughput_per_hour": 386.7,
+        "line": {
+          "station": "cell",
+          "cycle_s": 8.2,
+          "views": 5,
+          "spawn_interval_s": 9.0,
+          "station_utilization": 0.8808,
+          "station_busy_s": 246.0,
+          "station_exit_blocked_s": 0.0,
+          "queue_max": 0,
+          "queue_mean": 0.0
+        },
+        "timing": {
+          "wall_s": 303.053632,
+          "real_time_factor": 0.9215640519264285,
+          "clock": "perf_counter",
+          "window": "start to final capture drain; excludes stage/setup warmup",
+          "events": {
+            "STATE_APPLIED": 16757,
+            "CAPTURE_REQUESTED": 152,
+            "CAPTURE_RECEIVED": 152,
+            "INSPECTION_DONE": 150,
+            "VERDICT_APPLIED": 30,
+            "RUN_END": 1
+          },
+          "max_pending": 1,
+          "latency_ms": {
+            "capture": {
+              "n": 152,
+              "p50": 148.37310000439174,
+              "p95": 151.60965500108432,
+              "max": 155.51459998823702
+            },
+            "inspection": {
+              "n": 150,
+              "p50": 2.1425000013550743,
+              "p95": 2.3994849980226722,
+              "max": 102.8602000005776
+            },
+            "verdict": {
+              "n": 30,
+              "p50": 169.80865000368794,
+              "p95": 173.87991999930819,
+              "max": 176.0848999983864
+            }
+          }
+        },
+        "wall_throughput_per_hour": 356.3725644443027
+      },
+      "status": "complete",
+      "wall_s": 303.053632,
+      "real_time_factor": 0.9215640519264285,
+      "clock": "perf_counter",
+      "window": "start to final capture drain; excludes stage/setup warmup",
+      "events": {
+        "STATE_APPLIED": 16757,
+        "CAPTURE_REQUESTED": 152,
+        "CAPTURE_RECEIVED": 152,
+        "INSPECTION_DONE": 150,
+        "VERDICT_APPLIED": 30,
+        "RUN_END": 1
+      },
+      "max_pending": 1,
+      "latency_ms": {
+        "capture": {
+          "n": 152,
+          "p50": 148.37310000439174,
+          "p95": 151.60965500108432,
+          "max": 155.51459998823702
+        },
+        "inspection": {
+          "n": 150,
+          "p50": 2.1425000013550743,
+          "p95": 2.3994849980226722,
+          "max": 102.8602000005776
+        },
+        "verdict": {
+          "n": 30,
+          "p50": 169.80865000368794,
+          "p95": 173.87991999930819,
+          "max": 176.0848999983864
+        }
+      },
+      "product_verdict_ms": {
+        "n": 30,
+        "p95": 3664.6771500000013,
+        "definition": "first capture request of product to applied verdict; includes unknown/fail-safe; excludes late verdicts"
+      }
+    }
+  ],
+  "lifecycle": [
+    {
+      "path": "results\\interview\\lifecycle\\after_20261026_230859\\report.json",
+      "mode": "after",
+      "repeats": 1,
+      "rows": [
+        {
+          "scenario": "reset",
+          "repeat": 0,
+          "stale_callback_applied": false,
+          "injection": "callback held at frame-provider API boundary"
+        },
+        {
+          "scenario": "build",
+          "repeat": 0,
+          "stale_callback_applied": false,
+          "injection": "callback held at frame-provider API boundary"
+        },
+        {
+          "scenario": "external_stage",
+          "repeat": 0,
+          "stale_callback_applied": false,
+          "injection": "callback held at frame-provider API boundary"
+        },
+        {
+          "scenario": "extension_toggle",
+          "repeat": 0,
+          "stale_callback_applied": false,
+          "injection": "callback held at frame-provider API boundary"
+        },
+        {
+          "scenario": "real_pending_reset",
+          "repeat": 0,
+          "delivered_after_reset": false,
+          "pending": 0,
+          "tasks": 0
+        }
+      ],
+      "stale_callbacks_applied": 0,
+      "pass_expected_behavior": true
+    },
+    {
+      "path": "results\\interview\\lifecycle\\after_20261026_230958\\report.json",
+      "mode": "after",
+      "repeats": 10,
+      "rows": [
+        {
+          "scenario": "reset",
+          "repeat": 0,
+          "stale_callback_applied": false,
+          "injection": "callback held at frame-provider API boundary"
+        },
+        {
+          "scenario": "reset",
+          "repeat": 1,
+          "stale_callback_applied": false,
+          "injection": "callback held at frame-provider API boundary"
+        },
+        {
+          "scenario": "reset",
+          "repeat": 2,
+          "stale_callback_applied": false,
+          "injection": "callback held at frame-provider API boundary"
+        },
+        {
+          "scenario": "reset",
+          "repeat": 3,
+          "stale_callback_applied": false,
+          "injection": "callback held at frame-provider API boundary"
+        },
+        {
+          "scenario": "reset",
+          "repeat": 4,
+          "stale_callback_applied": false,
+          "injection": "callback held at frame-provider API boundary"
+        },
+        {
+          "scenario": "reset",
+          "repeat": 5,
+          "stale_callback_applied": false,
+          "injection": "callback held at frame-provider API boundary"
+        },
+        {
+          "scenario": "reset",
+          "repeat": 6,
+          "stale_callback_applied": false,
+          "injection": "callback held at frame-provider API boundary"
+        },
+        {
+          "scenario": "reset",
+          "repeat": 7,
+          "stale_callback_applied": false,
+          "injection": "callback held at frame-provider API boundary"
+        },
+        {
+          "scenario": "reset",
+          "repeat": 8,
+          "stale_callback_applied": false,
+          "injection": "callback held at frame-provider API boundary"
+        },
+        {
+          "scenario": "reset",
+          "repeat": 9,
+          "stale_callback_applied": false,
+          "injection": "callback held at frame-provider API boundary"
+        },
+        {
+          "scenario": "build",
+          "repeat": 0,
+          "stale_callback_applied": false,
+          "injection": "callback held at frame-provider API boundary"
+        },
+        {
+          "scenario": "build",
+          "repeat": 1,
+          "stale_callback_applied": false,
+          "injection": "callback held at frame-provider API boundary"
+        },
+        {
+          "scenario": "build",
+          "repeat": 2,
+          "stale_callback_applied": false,
+          "injection": "callback held at frame-provider API boundary"
+        },
+        {
+          "scenario": "build",
+          "repeat": 3,
+          "stale_callback_applied": false,
+          "injection": "callback held at frame-provider API boundary"
+        },
+        {
+          "scenario": "build",
+          "repeat": 4,
+          "stale_callback_applied": false,
+          "injection": "callback held at frame-provider API boundary"
+        },
+        {
+          "scenario": "build",
+          "repeat": 5,
+          "stale_callback_applied": false,
+          "injection": "callback held at frame-provider API boundary"
+        },
+        {
+          "scenario": "build",
+          "repeat": 6,
+          "stale_callback_applied": false,
+          "injection": "callback held at frame-provider API boundary"
+        },
+        {
+          "scenario": "build",
+          "repeat": 7,
+          "stale_callback_applied": false,
+          "injection": "callback held at frame-provider API boundary"
+        },
+        {
+          "scenario": "build",
+          "repeat": 8,
+          "stale_callback_applied": false,
+          "injection": "callback held at frame-provider API boundary"
+        },
+        {
+          "scenario": "build",
+          "repeat": 9,
+          "stale_callback_applied": false,
+          "injection": "callback held at frame-provider API boundary"
+        },
+        {
+          "scenario": "external_stage",
+          "repeat": 0,
+          "stale_callback_applied": false,
+          "injection": "callback held at frame-provider API boundary"
+        },
+        {
+          "scenario": "external_stage",
+          "repeat": 1,
+          "stale_callback_applied": false,
+          "injection": "callback held at frame-provider API boundary"
+        },
+        {
+          "scenario": "external_stage",
+          "repeat": 2,
+          "stale_callback_applied": false,
+          "injection": "callback held at frame-provider API boundary"
+        },
+        {
+          "scenario": "external_stage",
+          "repeat": 3,
+          "stale_callback_applied": false,
+          "injection": "callback held at frame-provider API boundary"
+        },
+        {
+          "scenario": "external_stage",
+          "repeat": 4,
+          "stale_callback_applied": false,
+          "injection": "callback held at frame-provider API boundary"
+        },
+        {
+          "scenario": "external_stage",
+          "repeat": 5,
+          "stale_callback_applied": false,
+          "injection": "callback held at frame-provider API boundary"
+        },
+        {
+          "scenario": "external_stage",
+          "repeat": 6,
+          "stale_callback_applied": false,
+          "injection": "callback held at frame-provider API boundary"
+        },
+        {
+          "scenario": "external_stage",
+          "repeat": 7,
+          "stale_callback_applied": false,
+          "injection": "callback held at frame-provider API boundary"
+        },
+        {
+          "scenario": "external_stage",
+          "repeat": 8,
+          "stale_callback_applied": false,
+          "injection": "callback held at frame-provider API boundary"
+        },
+        {
+          "scenario": "external_stage",
+          "repeat": 9,
+          "stale_callback_applied": false,
+          "injection": "callback held at frame-provider API boundary"
+        },
+        {
+          "scenario": "extension_toggle",
+          "repeat": 0,
+          "stale_callback_applied": false,
+          "injection": "callback held at frame-provider API boundary"
+        },
+        {
+          "scenario": "extension_toggle",
+          "repeat": 1,
+          "stale_callback_applied": false,
+          "injection": "callback held at frame-provider API boundary"
+        },
+        {
+          "scenario": "extension_toggle",
+          "repeat": 2,
+          "stale_callback_applied": false,
+          "injection": "callback held at frame-provider API boundary"
+        },
+        {
+          "scenario": "extension_toggle",
+          "repeat": 3,
+          "stale_callback_applied": false,
+          "injection": "callback held at frame-provider API boundary"
+        },
+        {
+          "scenario": "extension_toggle",
+          "repeat": 4,
+          "stale_callback_applied": false,
+          "injection": "callback held at frame-provider API boundary"
+        },
+        {
+          "scenario": "extension_toggle",
+          "repeat": 5,
+          "stale_callback_applied": false,
+          "injection": "callback held at frame-provider API boundary"
+        },
+        {
+          "scenario": "extension_toggle",
+          "repeat": 6,
+          "stale_callback_applied": false,
+          "injection": "callback held at frame-provider API boundary"
+        },
+        {
+          "scenario": "extension_toggle",
+          "repeat": 7,
+          "stale_callback_applied": false,
+          "injection": "callback held at frame-provider API boundary"
+        },
+        {
+          "scenario": "extension_toggle",
+          "repeat": 8,
+          "stale_callback_applied": false,
+          "injection": "callback held at frame-provider API boundary"
+        },
+        {
+          "scenario": "extension_toggle",
+          "repeat": 9,
+          "stale_callback_applied": false,
+          "injection": "callback held at frame-provider API boundary"
+        },
+        {
+          "scenario": "real_pending_reset",
+          "repeat": 0,
+          "delivered_after_reset": false,
+          "pending": 0,
+          "tasks": 0
+        },
+        {
+          "scenario": "real_pending_reset",
+          "repeat": 1,
+          "delivered_after_reset": false,
+          "pending": 0,
+          "tasks": 0
+        },
+        {
+          "scenario": "real_pending_reset",
+          "repeat": 2,
+          "delivered_after_reset": false,
+          "pending": 0,
+          "tasks": 0
+        },
+        {
+          "scenario": "real_pending_reset",
+          "repeat": 3,
+          "delivered_after_reset": false,
+          "pending": 0,
+          "tasks": 0
+        },
+        {
+          "scenario": "real_pending_reset",
+          "repeat": 4,
+          "delivered_after_reset": false,
+          "pending": 0,
+          "tasks": 0
+        },
+        {
+          "scenario": "real_pending_reset",
+          "repeat": 5,
+          "delivered_after_reset": false,
+          "pending": 0,
+          "tasks": 0
+        },
+        {
+          "scenario": "real_pending_reset",
+          "repeat": 6,
+          "delivered_after_reset": false,
+          "pending": 0,
+          "tasks": 0
+        },
+        {
+          "scenario": "real_pending_reset",
+          "repeat": 7,
+          "delivered_after_reset": false,
+          "pending": 0,
+          "tasks": 0
+        },
+        {
+          "scenario": "real_pending_reset",
+          "repeat": 8,
+          "delivered_after_reset": false,
+          "pending": 0,
+          "tasks": 0
+        },
+        {
+          "scenario": "real_pending_reset",
+          "repeat": 9,
+          "delivered_after_reset": false,
+          "pending": 0,
+          "tasks": 0
+        }
+      ],
+      "stale_callbacks_applied": 0,
+      "pass_expected_behavior": true
+    },
+    {
+      "path": "results\\interview\\lifecycle\\before_20261026_230623\\report.json",
+      "mode": "before",
+      "repeats": 10,
+      "rows": [
+        {
+          "scenario": "reset",
+          "repeat": 0,
+          "stale_callback_applied": true,
+          "injection": "callback held at frame-provider API boundary"
+        },
+        {
+          "scenario": "reset",
+          "repeat": 1,
+          "stale_callback_applied": true,
+          "injection": "callback held at frame-provider API boundary"
+        },
+        {
+          "scenario": "reset",
+          "repeat": 2,
+          "stale_callback_applied": true,
+          "injection": "callback held at frame-provider API boundary"
+        },
+        {
+          "scenario": "reset",
+          "repeat": 3,
+          "stale_callback_applied": true,
+          "injection": "callback held at frame-provider API boundary"
+        },
+        {
+          "scenario": "reset",
+          "repeat": 4,
+          "stale_callback_applied": true,
+          "injection": "callback held at frame-provider API boundary"
+        },
+        {
+          "scenario": "reset",
+          "repeat": 5,
+          "stale_callback_applied": true,
+          "injection": "callback held at frame-provider API boundary"
+        },
+        {
+          "scenario": "reset",
+          "repeat": 6,
+          "stale_callback_applied": true,
+          "injection": "callback held at frame-provider API boundary"
+        },
+        {
+          "scenario": "reset",
+          "repeat": 7,
+          "stale_callback_applied": true,
+          "injection": "callback held at frame-provider API boundary"
+        },
+        {
+          "scenario": "reset",
+          "repeat": 8,
+          "stale_callback_applied": true,
+          "injection": "callback held at frame-provider API boundary"
+        },
+        {
+          "scenario": "reset",
+          "repeat": 9,
+          "stale_callback_applied": true,
+          "injection": "callback held at frame-provider API boundary"
+        }
+      ],
+      "stale_callbacks_applied": 10,
+      "pass_expected_behavior": true,
+      "source_snapshot": "C:\\Users\\PC\\Documents\\01_project\\omniverse\\results\\interview\\source_before\\20261026_225638"
+    }
+  ],
+  "frame_content": [
+    {
+      "path": "results\\interview\\frame_content\\20261026_231452\\report.json",
+      "samples": [
+        {
+          "requested_frame": 360,
+          "returned_frame": 360,
+          "expected_code": 360,
+          "decoded_code": 360,
+          "undecodable": false,
+          "matches": true,
+          "means": [
+            0.0,
+            0.0,
+            0.0,
+            252.0,
+            0.0,
+            252.0,
+            252.0,
+            0.0,
+            252.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "latency_ms": 110.48330005723983,
+          "identical_pixels": false
+        },
+        {
+          "requested_frame": 375,
+          "returned_frame": 375,
+          "expected_code": 375,
+          "decoded_code": 375,
+          "undecodable": false,
+          "matches": true,
+          "means": [
+            252.0,
+            252.0,
+            252.0,
+            0.0,
+            252.0,
+            252.0,
+            252.0,
+            0.0,
+            252.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "latency_ms": 114.42320002242923,
+          "identical_pixels": false
+        },
+        {
+          "requested_frame": 390,
+          "returned_frame": 390,
+          "expected_code": 390,
+          "decoded_code": 390,
+          "undecodable": false,
+          "matches": true,
+          "means": [
+            0.0,
+            252.0,
+            252.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            252.0,
+            252.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "latency_ms": 118.10479999985546,
+          "identical_pixels": false
+        },
+        {
+          "requested_frame": 405,
+          "returned_frame": 405,
+          "expected_code": 405,
+          "decoded_code": 405,
+          "undecodable": false,
+          "matches": true,
+          "means": [
+            252.0,
+            0.0,
+            252.0,
+            0.0,
+            252.0,
+            0.0,
+            0.0,
+            252.0,
+            252.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "latency_ms": 114.02590002398938,
+          "identical_pixels": false
+        },
+        {
+          "requested_frame": 420,
+          "returned_frame": 420,
+          "expected_code": 420,
+          "decoded_code": 420,
+          "undecodable": false,
+          "matches": true,
+          "means": [
+            0.0,
+            0.0,
+            252.0,
+            0.0,
+            0.0,
+            252.0,
+            0.0,
+            252.0,
+            252.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "latency_ms": 108.40829997323453,
+          "identical_pixels": false
+        },
+        {
+          "requested_frame": 435,
+          "returned_frame": 435,
+          "expected_code": 435,
+          "decoded_code": 435,
+          "undecodable": false,
+          "matches": true,
+          "means": [
+            252.0,
+            252.0,
+            0.0,
+            0.0,
+            252.0,
+            252.0,
+            0.0,
+            252.0,
+            252.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "latency_ms": 114.9583999067545,
+          "identical_pixels": false
+        },
+        {
+          "requested_frame": 450,
+          "returned_frame": 450,
+          "expected_code": 450,
+          "decoded_code": 450,
+          "undecodable": false,
+          "matches": true,
+          "means": [
+            0.0,
+            252.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            252.0,
+            252.0,
+            252.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "latency_ms": 105.03840004093945,
+          "identical_pixels": false
+        },
+        {
+          "requested_frame": 465,
+          "returned_frame": 465,
+          "expected_code": 465,
+          "decoded_code": 465,
+          "undecodable": false,
+          "matches": true,
+          "means": [
+            252.0,
+            0.0,
+            0.0,
+            0.0,
+            252.0,
+            0.0,
+            252.0,
+            252.0,
+            252.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "latency_ms": 109.73060003016144,
+          "identical_pixels": false
+        },
+        {
+          "requested_frame": 480,
+          "returned_frame": 480,
+          "expected_code": 480,
+          "decoded_code": 480,
+          "undecodable": false,
+          "matches": true,
+          "means": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            252.0,
+            252.0,
+            252.0,
+            252.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "latency_ms": 113.30560001078993,
+          "identical_pixels": false
+        },
+        {
+          "requested_frame": 495,
+          "returned_frame": 495,
+          "expected_code": 495,
+          "decoded_code": 495,
+          "undecodable": false,
+          "matches": true,
+          "means": [
+            252.0,
+            252.0,
+            252.0,
+            252.0,
+            0.0,
+            252.0,
+            252.0,
+            252.0,
+            252.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "latency_ms": 107.45050001423806,
+          "identical_pixels": false
+        },
+        {
+          "requested_frame": 510,
+          "returned_frame": 510,
+          "expected_code": 510,
+          "decoded_code": 510,
+          "undecodable": false,
+          "matches": true,
+          "means": [
+            0.0,
+            252.0,
+            252.0,
+            252.0,
+            252.0,
+            252.0,
+            252.0,
+            252.0,
+            252.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "latency_ms": 112.55149997305125,
+          "identical_pixels": false
+        },
+        {
+          "requested_frame": 525,
+          "returned_frame": 525,
+          "expected_code": 525,
+          "decoded_code": 525,
+          "undecodable": false,
+          "matches": true,
+          "means": [
+            252.0,
+            0.0,
+            252.0,
+            252.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            252.0,
+            0.0,
+            0.0
+          ],
+          "latency_ms": 115.58360001072288,
+          "identical_pixels": false
+        },
+        {
+          "requested_frame": 540,
+          "returned_frame": 540,
+          "expected_code": 540,
+          "decoded_code": 540,
+          "undecodable": false,
+          "matches": true,
+          "means": [
+            0.0,
+            0.0,
+            252.0,
+            252.0,
+            252.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            252.0,
+            0.0,
+            0.0
+          ],
+          "latency_ms": 112.49640001915395,
+          "identical_pixels": false
+        },
+        {
+          "requested_frame": 555,
+          "returned_frame": 555,
+          "expected_code": 555,
+          "decoded_code": 555,
+          "undecodable": false,
+          "matches": true,
+          "means": [
+            252.0,
+            252.0,
+            0.0,
+            252.0,
+            0.0,
+            252.0,
+            0.0,
+            0.0,
+            0.0,
+            252.0,
+            0.0,
+            0.0
+          ],
+          "latency_ms": 109.9819999653846,
+          "identical_pixels": false
+        },
+        {
+          "requested_frame": 570,
+          "returned_frame": 570,
+          "expected_code": 570,
+          "decoded_code": 570,
+          "undecodable": false,
+          "matches": true,
+          "means": [
+            0.0,
+            252.0,
+            0.0,
+            252.0,
+            252.0,
+            252.0,
+            0.0,
+            0.0,
+            0.0,
+            252.0,
+            0.0,
+            0.0
+          ],
+          "latency_ms": 114.23710000235587,
+          "identical_pixels": false
+        },
+        {
+          "requested_frame": 585,
+          "returned_frame": 585,
+          "expected_code": 585,
+          "decoded_code": 585,
+          "undecodable": false,
+          "matches": true,
+          "means": [
+            252.0,
+            0.0,
+            0.0,
+            252.0,
+            0.0,
+            0.0,
+            252.0,
+            0.0,
+            0.0,
+            252.0,
+            0.0,
+            0.0
+          ],
+          "latency_ms": 115.53030007053167,
+          "identical_pixels": false
+        },
+        {
+          "requested_frame": 600,
+          "returned_frame": 600,
+          "expected_code": 600,
+          "decoded_code": 600,
+          "undecodable": false,
+          "matches": true,
+          "means": [
+            0.0,
+            0.0,
+            0.0,
+            252.0,
+            252.0,
+            0.0,
+            252.0,
+            0.0,
+            0.0,
+            252.0,
+            0.0,
+            0.0
+          ],
+          "latency_ms": 107.9116000328213,
+          "identical_pixels": false
+        },
+        {
+          "requested_frame": 615,
+          "returned_frame": 615,
+          "expected_code": 615,
+          "decoded_code": 615,
+          "undecodable": false,
+          "matches": true,
+          "means": [
+            252.0,
+            252.0,
+            252.0,
+            0.0,
+            0.0,
+            252.0,
+            252.0,
+            0.0,
+            0.0,
+            252.0,
+            0.0,
+            0.0
+          ],
+          "latency_ms": 113.12069999985397,
+          "identical_pixels": false
+        },
+        {
+          "requested_frame": 630,
+          "returned_frame": 630,
+          "expected_code": 630,
+          "decoded_code": 630,
+          "undecodable": false,
+          "matches": true,
+          "means": [
+            0.0,
+            252.0,
+            252.0,
+            0.0,
+            252.0,
+            252.0,
+            252.0,
+            0.0,
+            0.0,
+            252.0,
+            0.0,
+            0.0
+          ],
+          "latency_ms": 111.48139997385442,
+          "identical_pixels": false
+        },
+        {
+          "requested_frame": 645,
+          "returned_frame": 645,
+          "expected_code": 645,
+          "decoded_code": 645,
+          "undecodable": false,
+          "matches": true,
+          "means": [
+            252.0,
+            0.0,
+            252.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            252.0,
+            0.0,
+            252.0,
+            0.0,
+            0.0
+          ],
+          "latency_ms": 119.73320005927235,
+          "identical_pixels": false
+        },
+        {
+          "requested_frame": 660,
+          "returned_frame": 660,
+          "expected_code": 660,
+          "decoded_code": 660,
+          "undecodable": false,
+          "matches": true,
+          "means": [
+            0.0,
+            0.0,
+            252.0,
+            0.0,
+            252.0,
+            0.0,
+            0.0,
+            252.0,
+            0.0,
+            252.0,
+            0.0,
+            0.0
+          ],
+          "latency_ms": 112.96339996624738,
+          "identical_pixels": false
+        },
+        {
+          "requested_frame": 675,
+          "returned_frame": 675,
+          "expected_code": 675,
+          "decoded_code": 675,
+          "undecodable": false,
+          "matches": true,
+          "means": [
+            252.0,
+            252.0,
+            0.0,
+            0.0,
+            0.0,
+            252.0,
+            0.0,
+            252.0,
+            0.0,
+            252.0,
+            0.0,
+            0.0
+          ],
+          "latency_ms": 112.51980008091778,
+          "identical_pixels": false
+        },
+        {
+          "requested_frame": 690,
+          "returned_frame": 690,
+          "expected_code": 690,
+          "decoded_code": 690,
+          "undecodable": false,
+          "matches": true,
+          "means": [
+            0.0,
+            252.0,
+            0.0,
+            0.0,
+            252.0,
+            252.0,
+            0.0,
+            252.0,
+            0.0,
+            252.0,
+            0.0,
+            0.0
+          ],
+          "latency_ms": 117.41900001652539,
+          "identical_pixels": false
+        },
+        {
+          "requested_frame": 705,
+          "returned_frame": 705,
+          "expected_code": 705,
+          "decoded_code": 705,
+          "undecodable": false,
+          "matches": true,
+          "means": [
+            252.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            252.0,
+            252.0,
+            0.0,
+            252.0,
+            0.0,
+            0.0
+          ],
+          "latency_ms": 100.81540001556277,
+          "identical_pixels": false
+        },
+        {
+          "requested_frame": 720,
+          "returned_frame": 720,
+          "expected_code": 720,
+          "decoded_code": 720,
+          "undecodable": false,
+          "matches": true,
+          "means": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            252.0,
+            0.0,
+            252.0,
+            252.0,
+            0.0,
+            252.0,
+            0.0,
+            0.0
+          ],
+          "latency_ms": 109.14269997738302,
+          "identical_pixels": false
+        },
+        {
+          "requested_frame": 735,
+          "returned_frame": 735,
+          "expected_code": 735,
+          "decoded_code": 735,
+          "undecodable": false,
+          "matches": true,
+          "means": [
+            252.0,
+            252.0,
+            252.0,
+            252.0,
+            252.0,
+            0.0,
+            252.0,
+            252.0,
+            0.0,
+            252.0,
+            0.0,
+            0.0
+          ],
+          "latency_ms": 108.84050000458956,
+          "identical_pixels": false
+        },
+        {
+          "requested_frame": 750,
+          "returned_frame": 750,
+          "expected_code": 750,
+          "decoded_code": 750,
+          "undecodable": false,
+          "matches": true,
+          "means": [
+            0.0,
+            252.0,
+            252.0,
+            252.0,
+            0.0,
+            252.0,
+            252.0,
+            252.0,
+            0.0,
+            252.0,
+            0.0,
+            0.0
+          ],
+          "latency_ms": 111.18440004065633,
+          "identical_pixels": false
+        },
+        {
+          "requested_frame": 765,
+          "returned_frame": 765,
+          "expected_code": 765,
+          "decoded_code": 765,
+          "undecodable": false,
+          "matches": true,
+          "means": [
+            252.0,
+            0.0,
+            252.0,
+            252.0,
+            252.0,
+            252.0,
+            252.0,
+            252.0,
+            0.0,
+            252.0,
+            0.0,
+            0.0
+          ],
+          "latency_ms": 113.13199996948242,
+          "identical_pixels": false
+        },
+        {
+          "requested_frame": 780,
+          "returned_frame": 780,
+          "expected_code": 780,
+          "decoded_code": 780,
+          "undecodable": false,
+          "matches": true,
+          "means": [
+            0.0,
+            0.0,
+            252.0,
+            252.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            252.0,
+            252.0,
+            0.0,
+            0.0
+          ],
+          "latency_ms": 114.06490008812398,
+          "identical_pixels": false
+        },
+        {
+          "requested_frame": 795,
+          "returned_frame": 795,
+          "expected_code": 795,
+          "decoded_code": 795,
+          "undecodable": false,
+          "matches": true,
+          "means": [
+            252.0,
+            252.0,
+            0.0,
+            252.0,
+            252.0,
+            0.0,
+            0.0,
+            0.0,
+            252.0,
+            252.0,
+            0.0,
+            0.0
+          ],
+          "latency_ms": 110.86940008681267,
+          "identical_pixels": false
+        }
+      ],
+      "mismatches": 0,
+      "undecodable": 0,
+      "errors": 0,
+      "calibration": {
+        "black": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "white": [
+          252.0,
+          252.0,
+          252.0,
+          252.0,
+          252.0,
+          252.0,
+          252.0,
+          252.0,
+          252.0,
+          252.0,
+          252.0,
+          252.0
+        ]
+      },
+      "note": "dedicated transform-coded emissive marker scene; no production inspection or model inputs"
+    }
+  ],
+  "lod": [
+    {
+      "lod": 0,
+      "runs": 3,
+      "update_p50": 10.16594999236986,
+      "update_p95": 11.188484991726,
+      "rss_mib": 5556.78515625
+    },
+    {
+      "lod": 3,
+      "runs": 3,
+      "update_p50": 10.287349992722739,
+      "update_p95": 11.372164992644684,
+      "rss_mib": 5546.25
+    },
+    {
+      "lod": 4,
+      "runs": 3,
+      "update_p50": 10.313049991964363,
+      "update_p95": 12.422614996467018,
+      "rss_mib": 5567.26953125
+    }
+  ],
+  "lifecycle_pending": [
+    {
+      "path": "results\\interview\\lifecycle_pending\\20261029_211207\\report.json",
+      "passed": true,
+      "rows": [
+        {
+          "scenario": "reset",
+          "repeat": 0,
+          "native_scheduled": true,
+          "native_received_before_transition": false,
+          "delivery_after_transition": [],
+          "pending": 0,
+          "tasks": 0
+        },
+        {
+          "scenario": "reset",
+          "repeat": 1,
+          "native_scheduled": true,
+          "native_received_before_transition": false,
+          "delivery_after_transition": [],
+          "pending": 0,
+          "tasks": 0
+        },
+        {
+          "scenario": "reset",
+          "repeat": 2,
+          "native_scheduled": true,
+          "native_received_before_transition": false,
+          "delivery_after_transition": [],
+          "pending": 0,
+          "tasks": 0
+        },
+        {
+          "scenario": "reset",
+          "repeat": 3,
+          "native_scheduled": true,
+          "native_received_before_transition": false,
+          "delivery_after_transition": [],
+          "pending": 0,
+          "tasks": 0
+        },
+        {
+          "scenario": "reset",
+          "repeat": 4,
+          "native_scheduled": true,
+          "native_received_before_transition": false,
+          "delivery_after_transition": [],
+          "pending": 0,
+          "tasks": 0
+        },
+        {
+          "scenario": "reset",
+          "repeat": 5,
+          "native_scheduled": true,
+          "native_received_before_transition": false,
+          "delivery_after_transition": [],
+          "pending": 0,
+          "tasks": 0
+        },
+        {
+          "scenario": "reset",
+          "repeat": 6,
+          "native_scheduled": true,
+          "native_received_before_transition": false,
+          "delivery_after_transition": [],
+          "pending": 0,
+          "tasks": 0
+        },
+        {
+          "scenario": "reset",
+          "repeat": 7,
+          "native_scheduled": true,
+          "native_received_before_transition": false,
+          "delivery_after_transition": [],
+          "pending": 0,
+          "tasks": 0
+        },
+        {
+          "scenario": "reset",
+          "repeat": 8,
+          "native_scheduled": true,
+          "native_received_before_transition": false,
+          "delivery_after_transition": [],
+          "pending": 0,
+          "tasks": 0
+        },
+        {
+          "scenario": "reset",
+          "repeat": 9,
+          "native_scheduled": true,
+          "native_received_before_transition": false,
+          "delivery_after_transition": [],
+          "pending": 0,
+          "tasks": 0
+        },
+        {
+          "scenario": "build",
+          "repeat": 0,
+          "native_scheduled": true,
+          "native_received_before_transition": false,
+          "delivery_after_transition": [],
+          "pending": 0,
+          "tasks": 0
+        },
+        {
+          "scenario": "build",
+          "repeat": 1,
+          "native_scheduled": true,
+          "native_received_before_transition": false,
+          "delivery_after_transition": [],
+          "pending": 0,
+          "tasks": 0
+        },
+        {
+          "scenario": "build",
+          "repeat": 2,
+          "native_scheduled": true,
+          "native_received_before_transition": false,
+          "delivery_after_transition": [],
+          "pending": 0,
+          "tasks": 0
+        },
+        {
+          "scenario": "build",
+          "repeat": 3,
+          "native_scheduled": true,
+          "native_received_before_transition": false,
+          "delivery_after_transition": [],
+          "pending": 0,
+          "tasks": 0
+        },
+        {
+          "scenario": "build",
+          "repeat": 4,
+          "native_scheduled": true,
+          "native_received_before_transition": false,
+          "delivery_after_transition": [],
+          "pending": 0,
+          "tasks": 0
+        },
+        {
+          "scenario": "build",
+          "repeat": 5,
+          "native_scheduled": true,
+          "native_received_before_transition": false,
+          "delivery_after_transition": [],
+          "pending": 0,
+          "tasks": 0
+        },
+        {
+          "scenario": "build",
+          "repeat": 6,
+          "native_scheduled": true,
+          "native_received_before_transition": false,
+          "delivery_after_transition": [],
+          "pending": 0,
+          "tasks": 0
+        },
+        {
+          "scenario": "build",
+          "repeat": 7,
+          "native_scheduled": true,
+          "native_received_before_transition": false,
+          "delivery_after_transition": [],
+          "pending": 0,
+          "tasks": 0
+        },
+        {
+          "scenario": "build",
+          "repeat": 8,
+          "native_scheduled": true,
+          "native_received_before_transition": false,
+          "delivery_after_transition": [],
+          "pending": 0,
+          "tasks": 0
+        },
+        {
+          "scenario": "build",
+          "repeat": 9,
+          "native_scheduled": true,
+          "native_received_before_transition": false,
+          "delivery_after_transition": [],
+          "pending": 0,
+          "tasks": 0
+        },
+        {
+          "scenario": "external_stage",
+          "repeat": 0,
+          "native_scheduled": true,
+          "native_received_before_transition": false,
+          "delivery_after_transition": [],
+          "pending": 0,
+          "tasks": 0
+        },
+        {
+          "scenario": "external_stage",
+          "repeat": 1,
+          "native_scheduled": true,
+          "native_received_before_transition": false,
+          "delivery_after_transition": [],
+          "pending": 0,
+          "tasks": 0
+        },
+        {
+          "scenario": "external_stage",
+          "repeat": 2,
+          "native_scheduled": true,
+          "native_received_before_transition": false,
+          "delivery_after_transition": [],
+          "pending": 0,
+          "tasks": 0
+        },
+        {
+          "scenario": "external_stage",
+          "repeat": 3,
+          "native_scheduled": true,
+          "native_received_before_transition": false,
+          "delivery_after_transition": [],
+          "pending": 0,
+          "tasks": 0
+        },
+        {
+          "scenario": "external_stage",
+          "repeat": 4,
+          "native_scheduled": true,
+          "native_received_before_transition": false,
+          "delivery_after_transition": [],
+          "pending": 0,
+          "tasks": 0
+        },
+        {
+          "scenario": "external_stage",
+          "repeat": 5,
+          "native_scheduled": true,
+          "native_received_before_transition": false,
+          "delivery_after_transition": [],
+          "pending": 0,
+          "tasks": 0
+        },
+        {
+          "scenario": "external_stage",
+          "repeat": 6,
+          "native_scheduled": true,
+          "native_received_before_transition": false,
+          "delivery_after_transition": [],
+          "pending": 0,
+          "tasks": 0
+        },
+        {
+          "scenario": "external_stage",
+          "repeat": 7,
+          "native_scheduled": true,
+          "native_received_before_transition": false,
+          "delivery_after_transition": [],
+          "pending": 0,
+          "tasks": 0
+        },
+        {
+          "scenario": "external_stage",
+          "repeat": 8,
+          "native_scheduled": true,
+          "native_received_before_transition": false,
+          "delivery_after_transition": [],
+          "pending": 0,
+          "tasks": 0
+        },
+        {
+          "scenario": "external_stage",
+          "repeat": 9,
+          "native_scheduled": true,
+          "native_received_before_transition": false,
+          "delivery_after_transition": [],
+          "pending": 0,
+          "tasks": 0
+        },
+        {
+          "scenario": "extension_toggle",
+          "repeat": 0,
+          "native_scheduled": true,
+          "native_received_before_transition": false,
+          "delivery_after_transition": [],
+          "pending": 0,
+          "tasks": 0
+        },
+        {
+          "scenario": "extension_toggle",
+          "repeat": 1,
+          "native_scheduled": true,
+          "native_received_before_transition": false,
+          "delivery_after_transition": [],
+          "pending": 0,
+          "tasks": 0
+        },
+        {
+          "scenario": "extension_toggle",
+          "repeat": 2,
+          "native_scheduled": true,
+          "native_received_before_transition": false,
+          "delivery_after_transition": [],
+          "pending": 0,
+          "tasks": 0
+        },
+        {
+          "scenario": "extension_toggle",
+          "repeat": 3,
+          "native_scheduled": true,
+          "native_received_before_transition": false,
+          "delivery_after_transition": [],
+          "pending": 0,
+          "tasks": 0
+        },
+        {
+          "scenario": "extension_toggle",
+          "repeat": 4,
+          "native_scheduled": true,
+          "native_received_before_transition": false,
+          "delivery_after_transition": [],
+          "pending": 0,
+          "tasks": 0
+        },
+        {
+          "scenario": "extension_toggle",
+          "repeat": 5,
+          "native_scheduled": true,
+          "native_received_before_transition": false,
+          "delivery_after_transition": [],
+          "pending": 0,
+          "tasks": 0
+        },
+        {
+          "scenario": "extension_toggle",
+          "repeat": 6,
+          "native_scheduled": true,
+          "native_received_before_transition": false,
+          "delivery_after_transition": [],
+          "pending": 0,
+          "tasks": 0
+        },
+        {
+          "scenario": "extension_toggle",
+          "repeat": 7,
+          "native_scheduled": true,
+          "native_received_before_transition": false,
+          "delivery_after_transition": [],
+          "pending": 0,
+          "tasks": 0
+        },
+        {
+          "scenario": "extension_toggle",
+          "repeat": 8,
+          "native_scheduled": true,
+          "native_received_before_transition": false,
+          "delivery_after_transition": [],
+          "pending": 0,
+          "tasks": 0
+        },
+        {
+          "scenario": "extension_toggle",
+          "repeat": 9,
+          "native_scheduled": true,
+          "native_received_before_transition": false,
+          "delivery_after_transition": [],
+          "pending": 0,
+          "tasks": 0
+        }
+      ],
+      "native_callback_pending_before_transition": 40
+    },
+    {
+      "path": "results\\interview\\lifecycle_pending\\20261029_213205\\report.json",
+      "passed": true,
+      "rows": [
+        {
+          "scenario": "reset",
+          "repeat": 0,
+          "native_scheduled": true,
+          "native_received_before_transition": false,
+          "delivery_after_transition": [],
+          "pending": 0,
+          "tasks": 0,
+          "subscription_probe": null
+        },
+        {
+          "scenario": "reset",
+          "repeat": 1,
+          "native_scheduled": true,
+          "native_received_before_transition": false,
+          "delivery_after_transition": [],
+          "pending": 0,
+          "tasks": 0,
+          "subscription_probe": null
+        },
+        {
+          "scenario": "reset",
+          "repeat": 2,
+          "native_scheduled": true,
+          "native_received_before_transition": false,
+          "delivery_after_transition": [],
+          "pending": 0,
+          "tasks": 0,
+          "subscription_probe": null
+        },
+        {
+          "scenario": "reset",
+          "repeat": 3,
+          "native_scheduled": true,
+          "native_received_before_transition": false,
+          "delivery_after_transition": [],
+          "pending": 0,
+          "tasks": 0,
+          "subscription_probe": null
+        },
+        {
+          "scenario": "reset",
+          "repeat": 4,
+          "native_scheduled": true,
+          "native_received_before_transition": false,
+          "delivery_after_transition": [],
+          "pending": 0,
+          "tasks": 0,
+          "subscription_probe": null
+        },
+        {
+          "scenario": "reset",
+          "repeat": 5,
+          "native_scheduled": true,
+          "native_received_before_transition": false,
+          "delivery_after_transition": [],
+          "pending": 0,
+          "tasks": 0,
+          "subscription_probe": null
+        },
+        {
+          "scenario": "reset",
+          "repeat": 6,
+          "native_scheduled": true,
+          "native_received_before_transition": false,
+          "delivery_after_transition": [],
+          "pending": 0,
+          "tasks": 0,
+          "subscription_probe": null
+        },
+        {
+          "scenario": "reset",
+          "repeat": 7,
+          "native_scheduled": true,
+          "native_received_before_transition": false,
+          "delivery_after_transition": [],
+          "pending": 0,
+          "tasks": 0,
+          "subscription_probe": null
+        },
+        {
+          "scenario": "reset",
+          "repeat": 8,
+          "native_scheduled": true,
+          "native_received_before_transition": false,
+          "delivery_after_transition": [],
+          "pending": 0,
+          "tasks": 0,
+          "subscription_probe": null
+        },
+        {
+          "scenario": "reset",
+          "repeat": 9,
+          "native_scheduled": true,
+          "native_received_before_transition": false,
+          "delivery_after_transition": [],
+          "pending": 0,
+          "tasks": 0,
+          "subscription_probe": null
+        },
+        {
+          "scenario": "build",
+          "repeat": 0,
+          "native_scheduled": true,
+          "native_received_before_transition": false,
+          "delivery_after_transition": [],
+          "pending": 0,
+          "tasks": 0,
+          "subscription_probe": null
+        },
+        {
+          "scenario": "build",
+          "repeat": 1,
+          "native_scheduled": true,
+          "native_received_before_transition": false,
+          "delivery_after_transition": [],
+          "pending": 0,
+          "tasks": 0,
+          "subscription_probe": null
+        },
+        {
+          "scenario": "build",
+          "repeat": 2,
+          "native_scheduled": true,
+          "native_received_before_transition": false,
+          "delivery_after_transition": [],
+          "pending": 0,
+          "tasks": 0,
+          "subscription_probe": null
+        },
+        {
+          "scenario": "build",
+          "repeat": 3,
+          "native_scheduled": true,
+          "native_received_before_transition": false,
+          "delivery_after_transition": [],
+          "pending": 0,
+          "tasks": 0,
+          "subscription_probe": null
+        },
+        {
+          "scenario": "build",
+          "repeat": 4,
+          "native_scheduled": true,
+          "native_received_before_transition": false,
+          "delivery_after_transition": [],
+          "pending": 0,
+          "tasks": 0,
+          "subscription_probe": null
+        },
+        {
+          "scenario": "build",
+          "repeat": 5,
+          "native_scheduled": true,
+          "native_received_before_transition": false,
+          "delivery_after_transition": [],
+          "pending": 0,
+          "tasks": 0,
+          "subscription_probe": null
+        },
+        {
+          "scenario": "build",
+          "repeat": 6,
+          "native_scheduled": true,
+          "native_received_before_transition": false,
+          "delivery_after_transition": [],
+          "pending": 0,
+          "tasks": 0,
+          "subscription_probe": null
+        },
+        {
+          "scenario": "build",
+          "repeat": 7,
+          "native_scheduled": true,
+          "native_received_before_transition": false,
+          "delivery_after_transition": [],
+          "pending": 0,
+          "tasks": 0,
+          "subscription_probe": null
+        },
+        {
+          "scenario": "build",
+          "repeat": 8,
+          "native_scheduled": true,
+          "native_received_before_transition": false,
+          "delivery_after_transition": [],
+          "pending": 0,
+          "tasks": 0,
+          "subscription_probe": null
+        },
+        {
+          "scenario": "build",
+          "repeat": 9,
+          "native_scheduled": true,
+          "native_received_before_transition": false,
+          "delivery_after_transition": [],
+          "pending": 0,
+          "tasks": 0,
+          "subscription_probe": null
+        },
+        {
+          "scenario": "external_stage",
+          "repeat": 0,
+          "native_scheduled": true,
+          "native_received_before_transition": false,
+          "delivery_after_transition": [],
+          "pending": 0,
+          "tasks": 0,
+          "subscription_probe": null
+        },
+        {
+          "scenario": "external_stage",
+          "repeat": 1,
+          "native_scheduled": true,
+          "native_received_before_transition": false,
+          "delivery_after_transition": [],
+          "pending": 0,
+          "tasks": 0,
+          "subscription_probe": null
+        },
+        {
+          "scenario": "external_stage",
+          "repeat": 2,
+          "native_scheduled": true,
+          "native_received_before_transition": false,
+          "delivery_after_transition": [],
+          "pending": 0,
+          "tasks": 0,
+          "subscription_probe": null
+        },
+        {
+          "scenario": "external_stage",
+          "repeat": 3,
+          "native_scheduled": true,
+          "native_received_before_transition": false,
+          "delivery_after_transition": [],
+          "pending": 0,
+          "tasks": 0,
+          "subscription_probe": null
+        },
+        {
+          "scenario": "external_stage",
+          "repeat": 4,
+          "native_scheduled": true,
+          "native_received_before_transition": false,
+          "delivery_after_transition": [],
+          "pending": 0,
+          "tasks": 0,
+          "subscription_probe": null
+        },
+        {
+          "scenario": "external_stage",
+          "repeat": 5,
+          "native_scheduled": true,
+          "native_received_before_transition": false,
+          "delivery_after_transition": [],
+          "pending": 0,
+          "tasks": 0,
+          "subscription_probe": null
+        },
+        {
+          "scenario": "external_stage",
+          "repeat": 6,
+          "native_scheduled": true,
+          "native_received_before_transition": false,
+          "delivery_after_transition": [],
+          "pending": 0,
+          "tasks": 0,
+          "subscription_probe": null
+        },
+        {
+          "scenario": "external_stage",
+          "repeat": 7,
+          "native_scheduled": true,
+          "native_received_before_transition": false,
+          "delivery_after_transition": [],
+          "pending": 0,
+          "tasks": 0,
+          "subscription_probe": null
+        },
+        {
+          "scenario": "external_stage",
+          "repeat": 8,
+          "native_scheduled": true,
+          "native_received_before_transition": false,
+          "delivery_after_transition": [],
+          "pending": 0,
+          "tasks": 0,
+          "subscription_probe": null
+        },
+        {
+          "scenario": "external_stage",
+          "repeat": 9,
+          "native_scheduled": true,
+          "native_received_before_transition": false,
+          "delivery_after_transition": [],
+          "pending": 0,
+          "tasks": 0,
+          "subscription_probe": null
+        },
+        {
+          "scenario": "extension_toggle",
+          "repeat": 0,
+          "native_scheduled": true,
+          "native_received_before_transition": false,
+          "delivery_after_transition": [],
+          "pending": 0,
+          "tasks": 0,
+          "subscription_probe": {
+            "sim_delta_s": 0.3333333333333333,
+            "app_update_delta": 20,
+            "fixed_dt": 0.016666666666666666,
+            "one_step_per_update": true
+          }
+        },
+        {
+          "scenario": "extension_toggle",
+          "repeat": 1,
+          "native_scheduled": true,
+          "native_received_before_transition": false,
+          "delivery_after_transition": [],
+          "pending": 0,
+          "tasks": 0,
+          "subscription_probe": {
+            "sim_delta_s": 0.3333333333333333,
+            "app_update_delta": 20,
+            "fixed_dt": 0.016666666666666666,
+            "one_step_per_update": true
+          }
+        },
+        {
+          "scenario": "extension_toggle",
+          "repeat": 2,
+          "native_scheduled": true,
+          "native_received_before_transition": false,
+          "delivery_after_transition": [],
+          "pending": 0,
+          "tasks": 0,
+          "subscription_probe": {
+            "sim_delta_s": 0.3333333333333333,
+            "app_update_delta": 20,
+            "fixed_dt": 0.016666666666666666,
+            "one_step_per_update": true
+          }
+        },
+        {
+          "scenario": "extension_toggle",
+          "repeat": 3,
+          "native_scheduled": true,
+          "native_received_before_transition": false,
+          "delivery_after_transition": [],
+          "pending": 0,
+          "tasks": 0,
+          "subscription_probe": {
+            "sim_delta_s": 0.3333333333333333,
+            "app_update_delta": 20,
+            "fixed_dt": 0.016666666666666666,
+            "one_step_per_update": true
+          }
+        },
+        {
+          "scenario": "extension_toggle",
+          "repeat": 4,
+          "native_scheduled": true,
+          "native_received_before_transition": false,
+          "delivery_after_transition": [],
+          "pending": 0,
+          "tasks": 0,
+          "subscription_probe": {
+            "sim_delta_s": 0.3333333333333333,
+            "app_update_delta": 20,
+            "fixed_dt": 0.016666666666666666,
+            "one_step_per_update": true
+          }
+        },
+        {
+          "scenario": "extension_toggle",
+          "repeat": 5,
+          "native_scheduled": true,
+          "native_received_before_transition": false,
+          "delivery_after_transition": [],
+          "pending": 0,
+          "tasks": 0,
+          "subscription_probe": {
+            "sim_delta_s": 0.3333333333333333,
+            "app_update_delta": 20,
+            "fixed_dt": 0.016666666666666666,
+            "one_step_per_update": true
+          }
+        },
+        {
+          "scenario": "extension_toggle",
+          "repeat": 6,
+          "native_scheduled": true,
+          "native_received_before_transition": false,
+          "delivery_after_transition": [],
+          "pending": 0,
+          "tasks": 0,
+          "subscription_probe": {
+            "sim_delta_s": 0.3333333333333333,
+            "app_update_delta": 20,
+            "fixed_dt": 0.016666666666666666,
+            "one_step_per_update": true
+          }
+        },
+        {
+          "scenario": "extension_toggle",
+          "repeat": 7,
+          "native_scheduled": true,
+          "native_received_before_transition": false,
+          "delivery_after_transition": [],
+          "pending": 0,
+          "tasks": 0,
+          "subscription_probe": {
+            "sim_delta_s": 0.3333333333333333,
+            "app_update_delta": 20,
+            "fixed_dt": 0.016666666666666666,
+            "one_step_per_update": true
+          }
+        },
+        {
+          "scenario": "extension_toggle",
+          "repeat": 8,
+          "native_scheduled": true,
+          "native_received_before_transition": false,
+          "delivery_after_transition": [],
+          "pending": 0,
+          "tasks": 0,
+          "subscription_probe": {
+            "sim_delta_s": 0.3333333333333333,
+            "app_update_delta": 20,
+            "fixed_dt": 0.016666666666666666,
+            "one_step_per_update": true
+          }
+        },
+        {
+          "scenario": "extension_toggle",
+          "repeat": 9,
+          "native_scheduled": true,
+          "native_received_before_transition": false,
+          "delivery_after_transition": [],
+          "pending": 0,
+          "tasks": 0,
+          "subscription_probe": {
+            "sim_delta_s": 0.3333333333333333,
+            "app_update_delta": 20,
+            "fixed_dt": 0.016666666666666666,
+            "one_step_per_update": true
+          }
+        }
+      ],
+      "native_callback_pending_before_transition": 40
+    }
+  ],
+  "baseline_comparisons": [
+    {
+      "before": "C:\\Users\\PC\\Documents\\01_project\\omniverse\\results\\interview\\baseline\\before_20261026_224621\\box_1\\runs\\20261026_224647_seed42",
+      "repeat": 1,
+      "identical": true,
+      "part": "box",
+      "after": "C:\\Users\\PC\\Documents\\01_project\\omniverse\\results\\interview\\baseline\\after_20261029_211839\\box_1\\runs\\20261029_211859_078875200_seed42"
+    },
+    {
+      "before": "C:\\Users\\PC\\Documents\\01_project\\omniverse\\results\\interview\\baseline\\before_20261026_224621\\box_2\\runs\\20261026_224838_seed42",
+      "repeat": 2,
+      "identical": true,
+      "part": "box",
+      "after": "C:\\Users\\PC\\Documents\\01_project\\omniverse\\results\\interview\\baseline\\after_20261029_211839\\box_2\\runs\\20261029_212017_851084500_seed42"
+    },
+    {
+      "before": "C:\\Users\\PC\\Documents\\01_project\\omniverse\\results\\interview\\baseline\\before_20261026_224621\\crown_1\\runs\\20261026_225028_seed42",
+      "repeat": 1,
+      "identical": true,
+      "part": "crown",
+      "after": "C:\\Users\\PC\\Documents\\01_project\\omniverse\\results\\interview\\baseline\\after_20261029_211839\\crown_1\\runs\\20261029_212136_597790900_seed42"
+    },
+    {
+      "before": "C:\\Users\\PC\\Documents\\01_project\\omniverse\\results\\interview\\baseline\\before_20261026_224621\\crown_2\\runs\\20261026_225741_seed42",
+      "repeat": 2,
+      "identical": true,
+      "part": "crown",
+      "after": "C:\\Users\\PC\\Documents\\01_project\\omniverse\\results\\interview\\baseline\\after_20261029_211839\\crown_2\\runs\\20261029_212701_138627000_seed42"
+    }
+  ],
+  "capture_duplicates": {
+    "rows": [
+      {
+        "run": "results\\interview\\baseline\\after_20261029_210305\\box_2\\runs\\20261029_210546_782130200_seed42",
+        "previous_product": "20",
+        "product": "21",
+        "previous_ground_truth": "defect",
+        "ground_truth": "good",
+        "prediction": "defect",
+        "png_bytes_identical": true,
+        "png_sha256": "baa25a573a9e315a996c9a822105003dc82d550d3fce2695756bbb5c9f51379f",
+        "previous_frame": "results\\interview\\baseline\\after_20261029_210305\\box_2\\runs\\20261029_210546_782130200_seed42\\frames\\P_0020.png",
+        "frame": "results\\interview\\baseline\\after_20261029_210305\\box_2\\runs\\20261029_210546_782130200_seed42\\frames\\P_0021.png",
+        "previous_target": "2427",
+        "target": "2517",
+        "captured": "2517",
+        "rgb_digest": "874e0092d4a6eed84c5a004f228c8d1d",
+        "conflicting_expected_labels": true
+      }
+    ],
+    "identical_pairs": 1,
+    "conflicting_expected_labels": 1,
+    "note": "Offline evidence only. Identical pixels can be legitimate; label conflict does not identify the native renderer root cause. No ground-truth information enters the inspector."
+  },
+  "timing_conditions": [
+    {
+      "condition": "delivery_delay",
+      "runs": 3,
+      "rtf_median": 1.089744669529428,
+      "capture_p95_median": 512.4724749475718,
+      "route_correct": 18,
+      "products": 18,
+      "timeouts": 0,
+      "fail_safe_rejects": 0
+    },
+    {
+      "condition": "fixed_heavy",
+      "runs": 3,
+      "rtf_median": 0.6131581031754177,
+      "capture_p95_median": 212.48405004735105,
+      "route_correct": 18,
+      "products": 18,
+      "timeouts": 0,
+      "fail_safe_rejects": 0
+    },
+    {
+      "condition": "fixed_light",
+      "runs": 3,
+      "rtf_median": 1.0125174293333292,
+      "capture_p95_median": 128.47175006754696,
+      "route_correct": 18,
+      "products": 18,
+      "timeouts": 0,
+      "fail_safe_rejects": 0
+    },
+    {
+      "condition": "update_budget",
+      "runs": 3,
+      "rtf_median": 1.0812841035122156,
+      "capture_p95_median": null,
+      "route_correct": 9,
+      "products": 18,
+      "timeouts": 18,
+      "fail_safe_rejects": 18
+    },
+    {
+      "condition": "wall_heavy",
+      "runs": 3,
+      "rtf_median": 1.000871434763244,
+      "capture_p95_median": 201.42364999628626,
+      "route_correct": 18,
+      "products": 18,
+      "timeouts": 0,
+      "fail_safe_rejects": 0
+    },
+    {
+      "condition": "wall_light",
+      "runs": 3,
+      "rtf_median": 1.000811794691857,
+      "capture_p95_median": 128.84897497133352,
+      "route_correct": 18,
+      "products": 18,
+      "timeouts": 0,
+      "fail_safe_rejects": 0
+    },
+    {
+      "condition": "wall_timeout",
+      "runs": 3,
+      "rtf_median": 1.0852875488657678,
+      "capture_p95_median": null,
+      "route_correct": 9,
+      "products": 18,
+      "timeouts": 18,
+      "fail_safe_rejects": 18
+    }
+  ]
+}

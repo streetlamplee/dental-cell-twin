@@ -1,0 +1,15 @@
+#usda 1.0
+(
+    defaultPrim = "World"
+    metersPerUnit = 1
+    subLayers = [
+        @./runtime.usda@,
+        @./layout.usda@
+    ]
+    upAxis = "Z"
+)
+
+def Xform "World"
+{
+}
+

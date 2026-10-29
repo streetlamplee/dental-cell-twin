@@ -13,3 +13,8 @@
 *.step -text
 *.stp -text
 *.usd -text
+
+# Preserve measured USD fixtures and frozen source snapshot hashes.
+# USD exports include a trailing blank line by design.
+/results/interview/**/*.usda -text whitespace=-blank-at-eof
+/results/interview/source_before/** -text whitespace=cr-at-eol

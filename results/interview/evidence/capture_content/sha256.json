@@ -1,0 +1,17 @@
+﻿[
+    {
+        "original":  "results/interview/baseline/after_20261029_210305/box_2/runs/20261029_210546_782130200_seed42/frames/P_0020.png",
+        "sha256":  "BAA25A573A9E315A996C9A822105003DC82D550D3FCE2695756BBB5C9F51379F",
+        "file":  "box_product20_previous.png"
+    },
+    {
+        "original":  "results/interview/baseline/after_20261029_210305/box_2/runs/20261029_210546_782130200_seed42/frames/P_0021.png",
+        "sha256":  "BAA25A573A9E315A996C9A822105003DC82D550D3FCE2695756BBB5C9F51379F",
+        "file":  "box_product21_received.png"
+    },
+    {
+        "original":  "results/interview/baseline/after_20261029_210305/box_1/runs/20261029_210402_399861200_seed42/frames/P_0021.png",
+        "sha256":  "59FB290AAE2B08AE201551697DE095C3A587E1EA1B330008AE07DC8606C7A081",
+        "file":  "box_product21_reference.png"
+    }
+]

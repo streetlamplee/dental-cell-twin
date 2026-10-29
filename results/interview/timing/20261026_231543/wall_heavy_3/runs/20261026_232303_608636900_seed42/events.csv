@@ -1,0 +1,31 @@
+sim_time_s,product_id,event,x,station,detail
+0.0,1,SPAWN,-2.8,,
+1.5,2,SPAWN,-2.8,,
+1.5333,1,INSPECT,-0.5,,
+1.5442,1,VISION,,,good
+2.8667,1,SORT,1.5,,predicted good
+3.0,3,SPAWN,-2.8,,
+3.0333,2,INSPECT,-0.5,,
+3.0554,2,VISION,,,defect color
+3.8667,1,EXIT,3.0,,
+4.3667,2,REJECT,1.5,,predicted defect
+4.3667,2,EXIT,1.5,,
+4.5,4,SPAWN,-2.8,,
+4.5333,3,INSPECT,-0.5,,
+4.5409,3,VISION,,,defect color
+5.8667,3,REJECT,1.5,,predicted defect
+5.8667,3,EXIT,1.5,,
+6.0,5,SPAWN,-2.8,,
+6.0333,4,INSPECT,-0.5,,
+6.0483,4,VISION,,,defect color
+7.3667,4,REJECT,1.5,,predicted defect
+7.3667,4,EXIT,1.5,,
+7.5,6,SPAWN,-2.8,,
+7.5333,5,INSPECT,-0.5,,
+7.5528,5,VISION,,,good
+8.8667,5,SORT,1.5,,predicted good
+9.0333,6,INSPECT,-0.5,,
+9.0575,6,VISION,,,good
+9.8667,5,EXIT,3.0,,
+10.3667,6,SORT,1.5,,predicted good
+11.3667,6,EXIT,3.0,,

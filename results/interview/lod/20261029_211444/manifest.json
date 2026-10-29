@@ -1,0 +1,31 @@
+{
+  "entries": [
+    {
+      "mode": "instance_lod0",
+      "count": 50,
+      "scene": "instance_lod0_50.usda",
+      "lod": 0,
+      "source": "results\\cad_lod\\dental_crown\\lod0.usd"
+    },
+    {
+      "mode": "instance_lod3",
+      "count": 50,
+      "scene": "instance_lod3_50.usda",
+      "lod": 3,
+      "source": "results\\cad_lod\\dental_crown\\lod3.usd"
+    },
+    {
+      "mode": "instance_lod4",
+      "count": 50,
+      "scene": "instance_lod4_50.usda",
+      "lod": 4,
+      "source": "results\\cad_lod\\dental_crown\\lod4.usd"
+    }
+  ],
+  "usd_version": [
+    0,
+    26,
+    11
+  ],
+  "note": "50 instanced crowns; only source tessellation changes; quality from existing CAD comparison"
+}

@@ -1,0 +1,69 @@
+{
+  "mode": "before",
+  "repeats": 10,
+  "rows": [
+    {
+      "scenario": "reset",
+      "repeat": 0,
+      "stale_callback_applied": true,
+      "injection": "callback held at frame-provider API boundary"
+    },
+    {
+      "scenario": "reset",
+      "repeat": 1,
+      "stale_callback_applied": true,
+      "injection": "callback held at frame-provider API boundary"
+    },
+    {
+      "scenario": "reset",
+      "repeat": 2,
+      "stale_callback_applied": true,
+      "injection": "callback held at frame-provider API boundary"
+    },
+    {
+      "scenario": "reset",
+      "repeat": 3,
+      "stale_callback_applied": true,
+      "injection": "callback held at frame-provider API boundary"
+    },
+    {
+      "scenario": "reset",
+      "repeat": 4,
+      "stale_callback_applied": true,
+      "injection": "callback held at frame-provider API boundary"
+    },
+    {
+      "scenario": "reset",
+      "repeat": 5,
+      "stale_callback_applied": true,
+      "injection": "callback held at frame-provider API boundary"
+    },
+    {
+      "scenario": "reset",
+      "repeat": 6,
+      "stale_callback_applied": true,
+      "injection": "callback held at frame-provider API boundary"
+    },
+    {
+      "scenario": "reset",
+      "repeat": 7,
+      "stale_callback_applied": true,
+      "injection": "callback held at frame-provider API boundary"
+    },
+    {
+      "scenario": "reset",
+      "repeat": 8,
+      "stale_callback_applied": true,
+      "injection": "callback held at frame-provider API boundary"
+    },
+    {
+      "scenario": "reset",
+      "repeat": 9,
+      "stale_callback_applied": true,
+      "injection": "callback held at frame-provider API boundary"
+    }
+  ],
+  "stale_callbacks_applied": 10,
+  "pass_expected_behavior": true,
+  "source_snapshot": "C:\\Users\\PC\\Documents\\01_project\\omniverse\\results\\interview\\source_before\\20261026_225638"
+}

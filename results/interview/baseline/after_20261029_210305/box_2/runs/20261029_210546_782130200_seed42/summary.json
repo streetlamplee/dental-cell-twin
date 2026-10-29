@@ -1,0 +1,57 @@
+{
+  "status": "complete",
+  "run_id": "20261029_210546_782130200_seed42",
+  "products": 30,
+  "sorted": 30,
+  "sort_correct": 29,
+  "rejected": 14,
+  "fail_safe_rejects": 0,
+  "late_results": 0,
+  "frame_mismatches": 0,
+  "stale_frames": 1,
+  "view_retakes": 0,
+  "vision": true,
+  "frame_target_misses": 0,
+  "capture_timeouts": 0,
+  "not_exited": 0,
+  "pending_frames_at_finalize": 0,
+  "simulation_time_s": 55.117,
+  "part": "box",
+  "throughput_per_hour": 1959.5,
+  "timing": {
+    "wall_s": 68.176157,
+    "real_time_factor": 0.8084449046827716,
+    "clock": "perf_counter",
+    "window": "start to final capture drain; excludes stage/setup warmup",
+    "events": {
+      "STATE_APPLIED": 3307,
+      "CAPTURE_REQUESTED": 30,
+      "CAPTURE_RECEIVED": 30,
+      "INSPECTION_DONE": 30,
+      "VERDICT_APPLIED": 30,
+      "RUN_END": 1
+    },
+    "max_pending": 1,
+    "latency_ms": {
+      "capture": {
+        "n": 30,
+        "p50": 159.21750000416068,
+        "p95": 172.6067050025449,
+        "max": 181.76039999525528
+      },
+      "inspection": {
+        "n": 30,
+        "p50": 1.2369499963824637,
+        "p95": 1.6778699973656332,
+        "max": 7.671899991692044
+      },
+      "verdict": {
+        "n": 30,
+        "p50": 167.4834999939776,
+        "p95": 181.63554000348086,
+        "max": 192.28689999727067
+      }
+    }
+  },
+  "wall_throughput_per_hour": 1584.1315314971478
+}

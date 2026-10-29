@@ -1,0 +1,13 @@
+﻿{
+    "files":  [
+                  {
+                      "sha256":  "C2DCDAA8B103592E562664795CD76A1D62C5297E98440DD5648555EBC2452C68",
+                      "name":  "extension.py"
+                  },
+                  {
+                      "sha256":  "1E439202EE6044C22E8480D735BAA6356FC8656CF776B3163F753A53211E6E18",
+                      "name":  "frame_provider.py"
+                  }
+              ],
+    "commit":  "7fe1fc7b8c440ea2d802af9f7af0404441351c89"
+}

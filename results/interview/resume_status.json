@@ -1,0 +1,50 @@
+﻿[
+    {
+        "step":  "baseline",
+        "started_utc":  "2026-10-29T12:08:48.6136025Z",
+        "error":  "Baseline audit failed: C:\\Users\\PC\\Documents\\01_project\\omniverse\\results\\interview\\baseline\\after_20261029_210305\\crown_1\\runs\\20261029_210911_533143500_seed42",
+        "passed":  false
+    },
+    {
+        "step":  "baseline_comparison",
+        "started_utc":  "2026-10-29T12:12:07.5775154Z",
+        "error":  "Complete before and after baselines are required.",
+        "passed":  false
+    },
+    {
+        "step":  "native_pending",
+        "started_utc":  "2026-10-29T12:12:07.6225081Z",
+        "passed":  true
+    },
+    {
+        "step":  "lod",
+        "started_utc":  "2026-10-29T12:14:43.5648723Z",
+        "passed":  true
+    },
+    {
+        "step":  "core_tests",
+        "started_utc":  "2026-10-29T12:17:44.7438748Z",
+        "passed":  true
+    },
+    {
+        "step":  "extension_tests",
+        "started_utc":  "2026-10-29T12:18:27.5470004Z",
+        "passed":  true
+    },
+    {
+        "step":  "artifact_checks",
+        "started_utc":  "2026-10-29T12:18:33.4195801Z",
+        "passed":  true
+    },
+    {
+        "step":  "summary",
+        "started_utc":  "2026-10-29T12:18:33.6180774Z",
+        "passed":  true
+    },
+    {
+        "step":  "verification",
+        "started_utc":  "2026-10-29T12:18:34.4907470Z",
+        "error":  "Recorded experiment verification failed: C:\\Users\\PC\\Documents\\01_project\\omniverse\\logs\\verify_interview_results_20261029_211834.log",
+        "passed":  false
+    }
+]

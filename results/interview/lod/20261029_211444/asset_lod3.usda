@@ -1,0 +1,20 @@
+#usda 1.0
+(
+    defaultPrim = "Part"
+    metersPerUnit = 1
+    upAxis = "Z"
+)
+
+def Xform "Part"
+{
+    float3 xformOp:scale = (0.001, 0.001, 0.001)
+    double3 xformOp:translate = (-0, -0, -0)
+    uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+
+    def Xform "Geometry" (
+        prepend references = @../../../cad_lod/dental_crown/lod3.usd@
+    )
+    {
+    }
+}
+

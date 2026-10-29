@@ -1,0 +1,366 @@
+{
+  "passed": true,
+  "rows": [
+    {
+      "scenario": "reset",
+      "repeat": 0,
+      "native_scheduled": true,
+      "native_received_before_transition": false,
+      "delivery_after_transition": [],
+      "pending": 0,
+      "tasks": 0
+    },
+    {
+      "scenario": "reset",
+      "repeat": 1,
+      "native_scheduled": true,
+      "native_received_before_transition": false,
+      "delivery_after_transition": [],
+      "pending": 0,
+      "tasks": 0
+    },
+    {
+      "scenario": "reset",
+      "repeat": 2,
+      "native_scheduled": true,
+      "native_received_before_transition": false,
+      "delivery_after_transition": [],
+      "pending": 0,
+      "tasks": 0
+    },
+    {
+      "scenario": "reset",
+      "repeat": 3,
+      "native_scheduled": true,
+      "native_received_before_transition": false,
+      "delivery_after_transition": [],
+      "pending": 0,
+      "tasks": 0
+    },
+    {
+      "scenario": "reset",
+      "repeat": 4,
+      "native_scheduled": true,
+      "native_received_before_transition": false,
+      "delivery_after_transition": [],
+      "pending": 0,
+      "tasks": 0
+    },
+    {
+      "scenario": "reset",
+      "repeat": 5,
+      "native_scheduled": true,
+      "native_received_before_transition": false,
+      "delivery_after_transition": [],
+      "pending": 0,
+      "tasks": 0
+    },
+    {
+      "scenario": "reset",
+      "repeat": 6,
+      "native_scheduled": true,
+      "native_received_before_transition": false,
+      "delivery_after_transition": [],
+      "pending": 0,
+      "tasks": 0
+    },
+    {
+      "scenario": "reset",
+      "repeat": 7,
+      "native_scheduled": true,
+      "native_received_before_transition": false,
+      "delivery_after_transition": [],
+      "pending": 0,
+      "tasks": 0
+    },
+    {
+      "scenario": "reset",
+      "repeat": 8,
+      "native_scheduled": true,
+      "native_received_before_transition": false,
+      "delivery_after_transition": [],
+      "pending": 0,
+      "tasks": 0
+    },
+    {
+      "scenario": "reset",
+      "repeat": 9,
+      "native_scheduled": true,
+      "native_received_before_transition": false,
+      "delivery_after_transition": [],
+      "pending": 0,
+      "tasks": 0
+    },
+    {
+      "scenario": "build",
+      "repeat": 0,
+      "native_scheduled": true,
+      "native_received_before_transition": false,
+      "delivery_after_transition": [],
+      "pending": 0,
+      "tasks": 0
+    },
+    {
+      "scenario": "build",
+      "repeat": 1,
+      "native_scheduled": true,
+      "native_received_before_transition": false,
+      "delivery_after_transition": [],
+      "pending": 0,
+      "tasks": 0
+    },
+    {
+      "scenario": "build",
+      "repeat": 2,
+      "native_scheduled": true,
+      "native_received_before_transition": false,
+      "delivery_after_transition": [],
+      "pending": 0,
+      "tasks": 0
+    },
+    {
+      "scenario": "build",
+      "repeat": 3,
+      "native_scheduled": true,
+      "native_received_before_transition": false,
+      "delivery_after_transition": [],
+      "pending": 0,
+      "tasks": 0
+    },
+    {
+      "scenario": "build",
+      "repeat": 4,
+      "native_scheduled": true,
+      "native_received_before_transition": false,
+      "delivery_after_transition": [],
+      "pending": 0,
+      "tasks": 0
+    },
+    {
+      "scenario": "build",
+      "repeat": 5,
+      "native_scheduled": true,
+      "native_received_before_transition": false,
+      "delivery_after_transition": [],
+      "pending": 0,
+      "tasks": 0
+    },
+    {
+      "scenario": "build",
+      "repeat": 6,
+      "native_scheduled": true,
+      "native_received_before_transition": false,
+      "delivery_after_transition": [],
+      "pending": 0,
+      "tasks": 0
+    },
+    {
+      "scenario": "build",
+      "repeat": 7,
+      "native_scheduled": true,
+      "native_received_before_transition": false,
+      "delivery_after_transition": [],
+      "pending": 0,
+      "tasks": 0
+    },
+    {
+      "scenario": "build",
+      "repeat": 8,
+      "native_scheduled": true,
+      "native_received_before_transition": false,
+      "delivery_after_transition": [],
+      "pending": 0,
+      "tasks": 0
+    },
+    {
+      "scenario": "build",
+      "repeat": 9,
+      "native_scheduled": true,
+      "native_received_before_transition": false,
+      "delivery_after_transition": [],
+      "pending": 0,
+      "tasks": 0
+    },
+    {
+      "scenario": "external_stage",
+      "repeat": 0,
+      "native_scheduled": true,
+      "native_received_before_transition": false,
+      "delivery_after_transition": [],
+      "pending": 0,
+      "tasks": 0
+    },
+    {
+      "scenario": "external_stage",
+      "repeat": 1,
+      "native_scheduled": true,
+      "native_received_before_transition": false,
+      "delivery_after_transition": [],
+      "pending": 0,
+      "tasks": 0
+    },
+    {
+      "scenario": "external_stage",
+      "repeat": 2,
+      "native_scheduled": true,
+      "native_received_before_transition": false,
+      "delivery_after_transition": [],
+      "pending": 0,
+      "tasks": 0
+    },
+    {
+      "scenario": "external_stage",
+      "repeat": 3,
+      "native_scheduled": true,
+      "native_received_before_transition": false,
+      "delivery_after_transition": [],
+      "pending": 0,
+      "tasks": 0
+    },
+    {
+      "scenario": "external_stage",
+      "repeat": 4,
+      "native_scheduled": true,
+      "native_received_before_transition": false,
+      "delivery_after_transition": [],
+      "pending": 0,
+      "tasks": 0
+    },
+    {
+      "scenario": "external_stage",
+      "repeat": 5,
+      "native_scheduled": true,
+      "native_received_before_transition": false,
+      "delivery_after_transition": [],
+      "pending": 0,
+      "tasks": 0
+    },
+    {
+      "scenario": "external_stage",
+      "repeat": 6,
+      "native_scheduled": true,
+      "native_received_before_transition": false,
+      "delivery_after_transition": [],
+      "pending": 0,
+      "tasks": 0
+    },
+    {
+      "scenario": "external_stage",
+      "repeat": 7,
+      "native_scheduled": true,
+      "native_received_before_transition": false,
+      "delivery_after_transition": [],
+      "pending": 0,
+      "tasks": 0
+    },
+    {
+      "scenario": "external_stage",
+      "repeat": 8,
+      "native_scheduled": true,
+      "native_received_before_transition": false,
+      "delivery_after_transition": [],
+      "pending": 0,
+      "tasks": 0
+    },
+    {
+      "scenario": "external_stage",
+      "repeat": 9,
+      "native_scheduled": true,
+      "native_received_before_transition": false,
+      "delivery_after_transition": [],
+      "pending": 0,
+      "tasks": 0
+    },
+    {
+      "scenario": "extension_toggle",
+      "repeat": 0,
+      "native_scheduled": true,
+      "native_received_before_transition": false,
+      "delivery_after_transition": [],
+      "pending": 0,
+      "tasks": 0
+    },
+    {
+      "scenario": "extension_toggle",
+      "repeat": 1,
+      "native_scheduled": true,
+      "native_received_before_transition": false,
+      "delivery_after_transition": [],
+      "pending": 0,
+      "tasks": 0
+    },
+    {
+      "scenario": "extension_toggle",
+      "repeat": 2,
+      "native_scheduled": true,
+      "native_received_before_transition": false,
+      "delivery_after_transition": [],
+      "pending": 0,
+      "tasks": 0
+    },
+    {
+      "scenario": "extension_toggle",
+      "repeat": 3,
+      "native_scheduled": true,
+      "native_received_before_transition": false,
+      "delivery_after_transition": [],
+      "pending": 0,
+      "tasks": 0
+    },
+    {
+      "scenario": "extension_toggle",
+      "repeat": 4,
+      "native_scheduled": true,
+      "native_received_before_transition": false,
+      "delivery_after_transition": [],
+      "pending": 0,
+      "tasks": 0
+    },
+    {
+      "scenario": "extension_toggle",
+      "repeat": 5,
+      "native_scheduled": true,
+      "native_received_before_transition": false,
+      "delivery_after_transition": [],
+      "pending": 0,
+      "tasks": 0
+    },
+    {
+      "scenario": "extension_toggle",
+      "repeat": 6,
+      "native_scheduled": true,
+      "native_received_before_transition": false,
+      "delivery_after_transition": [],
+      "pending": 0,
+      "tasks": 0
+    },
+    {
+      "scenario": "extension_toggle",
+      "repeat": 7,
+      "native_scheduled": true,
+      "native_received_before_transition": false,
+      "delivery_after_transition": [],
+      "pending": 0,
+      "tasks": 0
+    },
+    {
+      "scenario": "extension_toggle",
+      "repeat": 8,
+      "native_scheduled": true,
+      "native_received_before_transition": false,
+      "delivery_after_transition": [],
+      "pending": 0,
+      "tasks": 0
+    },
+    {
+      "scenario": "extension_toggle",
+      "repeat": 9,
+      "native_scheduled": true,
+      "native_received_before_transition": false,
+      "delivery_after_transition": [],
+      "pending": 0,
+      "tasks": 0
+    }
+  ],
+  "native_callback_pending_before_transition": 40
+}

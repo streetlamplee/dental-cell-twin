@@ -1,0 +1,35 @@
+﻿{
+    "working_tree":  [
+                         " M scripts/_common.ps1",
+                         "?? docs/index.md",
+                         "?? \"docs/\\353\\251\\264\\354\\240\\221 \\354\\244\\200\\353\\271\\204\\354\\232\\251 Omniverse \\352\\263\\240\\353\\217\\204\\355\\231\\224 \\354\\236\\221\\354\\227\\205 \\352\\263\\204\\355\\232\\215.md\"",
+                         "?? results/interview/",
+                         "?? results/runs/20261026_224120_seed42/",
+                         "?? scripts/_interview.ps1",
+                         "?? scripts/run_interview_baseline.ps1",
+                         "?? scripts/verify_usd_composition.ps1",
+                         "?? scripts/verify_usd_composition.py",
+                         "?? source/extensions/visiontwin.factory/visiontwin/factory/core/runtime.py",
+                         "?? tests/test_runtime.py"
+                     ],
+    "exit_code":  null,
+    "watchdog_timeout":  false,
+    "started_utc":  "2026-10-26T13:43:35.5708897Z",
+    "os":  "Microsoft Windows NT 10.0.26200.0",
+    "source_commit":  "7fe1fc7b8c440ea2d802af9f7af0404441351c89",
+    "script":  "collect_frames.py",
+    "gpu":  [
+                "NVIDIA GeForce RTX 4060, 610.88, 8188 MiB"
+            ],
+    "wall_s":  111.8189836,
+    "settings":  {
+                     "/exts/visiontwin.factory/part":  "box",
+                     "/exts/visiontwin.factory/trace":  "true",
+                     "/exts/visiontwin.factory/maxProducts":  30,
+                     "/exts/visiontwin.factory/seed":  42,
+                     "/exts/visiontwin.factory/vision":  "true",
+                     "/visiontwin/interview/out":  "C:\\Users\\PC\\Documents\\01_project\\omniverse\\results\\interview\\baseline\\before_20261026_224335\\box_1",
+                     "/exts/visiontwin.factory/outputDir":  "C:\\Users\\PC\\Documents\\01_project\\omniverse\\results\\interview\\baseline\\before_20261026_224335\\box_1",
+                     "/exts/visiontwin.factory/speed":  0.5
+                 }
+}
