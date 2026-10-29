@@ -47,6 +47,13 @@ deps/**/user.toml
 /datasets/
 /results/demo/
 /results/gui_check/
+/results/interview/**/frames/
+/results/interview/**/*.log
+/results/interview/**/*.png
+!/results/interview/evidence/**/*.png
+/results/interview/**/*.tmp
+/results/interview/lifecycle/**/runs/
+/results/interview/lifecycle_pending/**/runs/
 
 # local-only notes
 /docs/_local/

@@ -13,8 +13,9 @@ if (-not (Test-Path $LogDir)) { New-Item -ItemType Directory -Path $LogDir | Out
 # repo.bat / packman은 cmd를 거치므로 빈 항목을 제거한다. (docs: [[cmd PATH 빈 항목 문제]])
 $env:Path = (($env:Path -split ';') | Where-Object { $_.Trim() -ne '' }) -join ';'
 
-# Kit flags for unattended runs (--exec scripts): no crash-report dialog, no save prompt on quit.
-$KitAutomationArgs = "--/crashreporter/gatherUserStory=0 --/app/file/ignoreUnsavedOnExit=true"
+# Unattended --exec runs keep rendering while hidden/minimized and disable dialogs/hot reload.
+# The normal GUI launch does not use these overrides.
+$KitAutomationArgs = "--/crashreporter/gatherUserStory=0 --/app/file/ignoreUnsavedOnExit=true --/app/extensions/fsWatcherEnabled=false --/app/renderer/skipWhileMinimized=false --/app/renderer/skipWhileInvisible=false"
 
 # Call from scripts that launch Kit. Warn (do not block) when another kit.exe already runs:
 # two instances share the 8 GB GPU (docs: [[검사 카메라 프레임 캡처 (Gate B)]]).
