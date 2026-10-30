@@ -1,0 +1,43 @@
+{
+  "status": "clear_at_samples",
+  "method": "per-geometry OBB SAT, discrete smoothstep samples",
+  "units": "m, rad, s",
+  "max_dt_s": 0.008333333333333333,
+  "max_joint_step_deg": 1.0,
+  "max_linear_joint_step_m": 0.002,
+  "box_padding_m": 0.0,
+  "robot_boxes": 34,
+  "environment_boxes": 37,
+  "excluded": [
+    "robot self-collision",
+    "carried products",
+    "machine vs environment",
+    "manual/teach motion",
+    "base_link vs mounting pedestal"
+  ],
+  "limits": [
+    "OBB overlap may be a false positive for non-box geometry",
+    "discrete samples do not prove continuous collision freedom",
+    "report is a snapshot; stage edits require a new preflight"
+  ],
+  "phases": {
+    "load": {
+      "samples": 608,
+      "duration_s": 2.0
+    },
+    "unload": {
+      "samples": 553,
+      "duration_s": 2.0
+    },
+    "inspection_wait": {
+      "samples": 1379,
+      "duration_s": 8.2
+    }
+  },
+  "contacts": [],
+  "usd_version": [
+    0,
+    26,
+    11
+  ]
+}

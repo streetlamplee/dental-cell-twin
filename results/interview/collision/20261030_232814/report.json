@@ -1,0 +1,151 @@
+{
+  "passed": true,
+  "checks": {
+    "baseline": {
+      "status": "clear_at_samples",
+      "method": "per-geometry OBB SAT, discrete smoothstep samples",
+      "units": "m, rad, s",
+      "max_dt_s": 0.008333333333333333,
+      "max_joint_step_deg": 1.0,
+      "max_linear_joint_step_m": 0.002,
+      "box_padding_m": 0.0,
+      "robot_boxes": 34,
+      "environment_boxes": 37,
+      "excluded": [
+        "robot self-collision",
+        "carried products",
+        "machine vs environment",
+        "manual/teach motion",
+        "base_link vs mounting pedestal"
+      ],
+      "limits": [
+        "OBB overlap may be a false positive for non-box geometry",
+        "discrete samples do not prove continuous collision freedom",
+        "report is a snapshot; stage edits require a new preflight"
+      ],
+      "phases": {
+        "load": {
+          "samples": 608,
+          "duration_s": 2.0
+        },
+        "unload": {
+          "samples": 553,
+          "duration_s": 2.0
+        },
+        "inspection_wait": {
+          "samples": 1379,
+          "duration_s": 8.2
+        }
+      },
+      "contacts": []
+    },
+    "clear_scene_starts": true,
+    "blocked": {
+      "status": "blocked_potential_collision",
+      "method": "per-geometry OBB SAT, discrete smoothstep samples",
+      "units": "m, rad, s",
+      "max_dt_s": 0.008333333333333333,
+      "max_joint_step_deg": 1.0,
+      "max_linear_joint_step_m": 0.002,
+      "box_padding_m": 0.0,
+      "robot_boxes": 34,
+      "environment_boxes": 38,
+      "excluded": [
+        "robot self-collision",
+        "carried products",
+        "machine vs environment",
+        "manual/teach motion",
+        "base_link vs mounting pedestal"
+      ],
+      "limits": [
+        "OBB overlap may be a false positive for non-box geometry",
+        "discrete samples do not prove continuous collision freedom",
+        "report is a snapshot; stage edits require a new preflight"
+      ],
+      "phases": {
+        "load": {
+          "samples": 608,
+          "duration_s": 2.0
+        },
+        "unload": {
+          "samples": 553,
+          "duration_s": 2.0
+        },
+        "inspection_wait": {
+          "samples": 1379,
+          "duration_s": 8.2
+        }
+      },
+      "contacts": [
+        {
+          "phase": "load",
+          "time_s": 0.36428571428571427,
+          "robot": "/World/Factory/Cell/Robot/finger_left_link/finger_left_body/Mesh",
+          "obstacle": "/World/Factory/InjectedObstacle",
+          "joints": {
+            "joint1": 0.9356252414252579,
+            "joint2": -2.496930240500532,
+            "joint3": -2.1028065598355874,
+            "joint4": 1.1766701425317911,
+            "joint5": -5.8521039879666895e-06,
+            "joint6": 2.5065178952312057,
+            "finger_left": 0.012,
+            "finger_right": -0.012
+          },
+          "machine_joints": {
+            "x_joint": 0.02545,
+            "y_joint": 0.0,
+            "z_joint": 0.0178,
+            "b_joint": 0.0,
+            "c_joint": 0.0
+          },
+          "robot_center_m": [
+            -1.381009922329066,
+            0.02841521679649988,
+            0.8662457848107822
+          ],
+          "obstacle_center_m": [
+            -1.3800151809888068,
+            1.1189378088194424e-05,
+            0.8040037992000135
+          ]
+        },
+        {
+          "phase": "load",
+          "time_s": 0.36428571428571427,
+          "robot": "/World/Factory/Cell/Robot/finger_right_link/finger_right_body/Mesh",
+          "obstacle": "/World/Factory/InjectedObstacle",
+          "joints": {
+            "joint1": 0.9356252414252579,
+            "joint2": -2.496930240500532,
+            "joint3": -2.1028065598355874,
+            "joint4": 1.1766701425317911,
+            "joint5": -5.8521039879666895e-06,
+            "joint6": 2.5065178952312057,
+            "finger_left": 0.012,
+            "finger_right": -0.012
+          },
+          "machine_joints": {
+            "x_joint": 0.02545,
+            "y_joint": 0.0,
+            "z_joint": 0.0178,
+            "b_joint": 0.0,
+            "c_joint": 0.0
+          },
+          "robot_center_m": [
+            -1.3808737955654062,
+            -0.02719980945738798,
+            0.8662456782036482
+          ],
+          "obstacle_center_m": [
+            -1.3800151809888068,
+            1.1189378088194424e-05,
+            0.8040037992000135
+          ]
+        }
+      ]
+    },
+    "blocked_scene_cannot_start": true,
+    "rebuild_recovers": true
+  }
+}

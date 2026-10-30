@@ -1,0 +1,38 @@
+﻿{
+    "working_tree":  [
+                         " M source/extensions/visiontwin.factory/visiontwin/factory/extension.py",
+                         "?? results/collision/",
+                         "?? results/interview/collision/",
+                         "?? scripts/check_collisions.ps1",
+                         "?? scripts/check_collisions.py",
+                         "?? scripts/verify_collision_preflight.ps1",
+                         "?? scripts/verify_collision_preflight.py",
+                         "?? source/extensions/visiontwin.factory/visiontwin/factory/collision_check.py",
+                         "?? source/extensions/visiontwin.factory/visiontwin/factory/core/collision.py",
+                         "?? tests/test_collision.py",
+                         "?? tests/test_collision_usd.py"
+                     ],
+    "exit_code":  0,
+    "watchdog_timeout":  false,
+    "started_utc":  "2026-10-30T14:18:03.4364052Z",
+    "os":  "Microsoft Windows NT 10.0.26200.0",
+    "source_commit":  "a99cf2002d752a2b1b58a30b3756632dcacff0f8",
+    "source_sha256_at_launch":  {
+                                    "capture_runtime.py":  "1CFA07E9E8C20F91797C4301B697BF9D787EC24057CA64CCFD4C22A735575FA5",
+                                    "runtime_session.py":  "B215FA98B14B9C375C8E9F46F36016A4EF53877E51299BE96740B84385BE69D5",
+                                    "frame_provider.py":  "A09CE9433F131714B033F7883639EFAE8D23BC274B55AC5F427349EC10FBED1C",
+                                    "extension.py":  "75447CDFE90B316294668B146FE60DC39A7DAF0197CADF5E70B7D3CB1CF4F2F7"
+                                },
+    "script":  "verify_collision_preflight.py",
+    "gpu":  [
+                "NVIDIA GeForce RTX 4060, 610.88, 8188 MiB"
+            ],
+    "wall_s":  130.86497,
+    "settings":  {
+                     "/visiontwin/interview/out":  "C:\\Users\\PC\\Documents\\01_project\\omniverse\\results\\interview\\collision\\20261030_231803",
+                     "/exts/visiontwin.factory/outputDir":  "C:\\Users\\PC\\Documents\\01_project\\omniverse\\results\\interview\\collision\\20261030_231803",
+                     "/exts/visiontwin.factory/vision":  "false",
+                     "/exts/visiontwin.factory/part":  "crown"
+                 },
+    "automation_args":  "--/crashreporter/gatherUserStory=0 --/app/file/ignoreUnsavedOnExit=true --/app/extensions/fsWatcherEnabled=false --/app/renderer/skipWhileMinimized=false --/app/renderer/skipWhileInvisible=false"
+}

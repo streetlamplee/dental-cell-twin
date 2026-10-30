@@ -1,0 +1,55 @@
+{
+  "status": "clear_at_samples",
+  "method": "per-geometry OBB SAT, discrete smoothstep samples",
+  "units": "m, rad, s",
+  "max_dt_s": 0.004166666666666667,
+  "max_joint_step_deg": 0.5,
+  "max_linear_joint_step_m": 0.002,
+  "box_padding_m": 0.0,
+  "robot_boxes": 34,
+  "environment_boxes": 37,
+  "excluded": [
+    "robot self-collision",
+    "carried products",
+    "machine vs environment",
+    "manual/teach motion",
+    "base_link vs mounting pedestal"
+  ],
+  "limits": [
+    "OBB overlap may be a false positive for non-box geometry",
+    "discrete samples do not prove continuous collision freedom",
+    "report is a snapshot; stage edits require a new preflight"
+  ],
+  "phases": {
+    "load": {
+      "samples": 1208,
+      "duration_s": 2.0
+    },
+    "unload": {
+      "samples": 1099,
+      "duration_s": 2.0
+    },
+    "inspection_wait": {
+      "samples": 2646,
+      "duration_s": 8.2
+    }
+  },
+  "contacts": [],
+  "usd_version": [
+    0,
+    26,
+    11
+  ],
+  "source_sha256": {
+    "assets/cad/teeth_mill.usd": "5851be7534bdc6b1214bfbfdeb80d5c2521ce56bf511028834766d84b43a737c",
+    "assets/cad/teeth_mill.kinematics.json": "473c8c45512a95ec37d2d987829d07cd3c2ef47742d9469645e4fdcb362482b3",
+    "assets/robots/usd/rebot_b601_dm.usd": "e9c884c0063ddea4052b02f2b31ebfc1b734e8c1992a09cf5cb4fb019229b535",
+    "assets/robots/usd/rebot_b601_dm.kinematics.json": "d62119bfb54a40ccdb0bdb0b38c0dea367514a1f290cc82864926194cea962ae",
+    "assets/parts/catalog.json": "bc96a8730045752290977784f5212bf0ee8ebe066fc11351e6e5cee15063911c",
+    "source/extensions/visiontwin.factory/visiontwin/factory/collision_check.py": "e46fed507b18fffed119bbf9f5d8701dbc4ee31a2eebd79593956d28b030b290",
+    "source/extensions/visiontwin.factory/visiontwin/factory/core/collision.py": "5ce4c9069a1db89d04d8fd8843f5d729f859c536dc9c5bd222d835c9dc94fcba",
+    "source/extensions/visiontwin.factory/visiontwin/factory/core/arm_transfer.py": "f237fbb6e3bfbe6cba7541a8770007aa5e0160f8792a27529318d6981a62cf6d",
+    "source/extensions/visiontwin.factory/visiontwin/factory/core/cell_cycle.py": "12b9b2e29d02ce19803b1708d6c6d95a9cdceffb90d4f8b9fbc34c13ffad7cc0",
+    "source/extensions/visiontwin.factory/visiontwin/factory/core/layout.py": "07bff07a5505c85b4818a721624e4f3e21c840caaffdd5bd1b40363052ff75f4"
+  }
+}

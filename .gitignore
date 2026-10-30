@@ -54,6 +54,7 @@ deps/**/user.toml
 /results/interview/**/*.tmp
 /results/interview/lifecycle/**/runs/
 /results/interview/lifecycle_pending/**/runs/
+/results/interview/collision/**/runs/
 
 # local-only notes
 /docs/_local/
