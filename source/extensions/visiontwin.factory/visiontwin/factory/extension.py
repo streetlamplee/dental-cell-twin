@@ -221,6 +221,14 @@ class VisionTwinFactoryExtension(omni.ext.IExt):
         self._runtime.building = True
         try:
             await self._build_scene_async()
+        except ValueError as exc:
+            from .core.collision import CollisionBlocked
+
+            if isinstance(exc, CollisionBlocked):
+                self._scene_ready = False
+                self._ui.set_status(str(exc))
+                carb.log_error(f"{LOG_PREFIX} {exc}")
+            raise
         finally:
             self._runtime.building = False
 
@@ -228,6 +236,8 @@ class VisionTwinFactoryExtension(omni.ext.IExt):
         self._runtime.invalidate("build")
         generation = self._runtime.generation
         self._scene_ready = False
+        self.collision_report = None
+        self._arm = None
         self._close_teach_pendant()
         self.stop()
         main = self.main_viewport
@@ -289,6 +299,15 @@ class VisionTwinFactoryExtension(omni.ext.IExt):
 
     def start(self):
         if not self._scene_ready:
+            report = getattr(self, "collision_report", None)
+            if report and report["status"] == "blocked_potential_collision":
+                from .core.collision import CollisionBlocked, require_clear
+
+                try:
+                    require_clear(report)
+                except CollisionBlocked as exc:
+                    self._ui.set_status(str(exc))
+                return
             self._ui.set_status("build the scene first")
             return
         if self._catalog.part != self._built_part:  # Reset re-reads the product setting, the scene does not change
@@ -438,6 +457,12 @@ class VisionTwinFactoryExtension(omni.ext.IExt):
                                       cycle.timing.load_s, cycle.timing.unload_s)
             self._transfer_cache = cached = (key, transfer)
         arm = RobotArm(stage, asset, cached[1])
+        from .collision_check import check_cell
+        from .core.collision import require_clear
+
+        # Recheck the newly composed stage even when IK trajectories are cached.
+        self.collision_report = check_cell(stage, arm, self._cell)
+        require_clear(self.collision_report)
         print(f"{LOG_PREFIX} transfer robot ready ({asset})")
         return arm
 
