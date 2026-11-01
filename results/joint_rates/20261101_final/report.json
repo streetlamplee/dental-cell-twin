@@ -1,0 +1,4302 @@
+{
+  "status": "discontinuous",
+  "trajectories": {
+    "arm_load": {
+      "status": "incomplete",
+      "duration_s": 2.0,
+      "joints": {
+        "finger_left": {
+          "type": "prismatic",
+          "units": "m/s, m/s^2",
+          "velocity_limit": 0.08,
+          "acceleration_limit": null,
+          "peak_velocity": 0.07500000000000005,
+          "peak_acceleration": 2.0000000000000027,
+          "velocity_status": "within",
+          "acceleration_status": "unverified",
+          "velocity_peak_segment": 6,
+          "acceleration_peak_segment": 6
+        },
+        "finger_right": {
+          "type": "prismatic",
+          "units": "m/s, m/s^2",
+          "velocity_limit": 0.08,
+          "acceleration_limit": null,
+          "peak_velocity": 0.07500000000000005,
+          "peak_acceleration": 2.0000000000000027,
+          "velocity_status": "within",
+          "acceleration_status": "unverified",
+          "velocity_peak_segment": 6,
+          "acceleration_peak_segment": 6
+        },
+        "joint1": {
+          "type": "revolute",
+          "units": "rad/s, rad/s^2",
+          "velocity_limit": 50.0,
+          "acceleration_limit": null,
+          "peak_velocity": 5.778892389653039,
+          "peak_acceleration": 95.18175700605003,
+          "velocity_status": "within",
+          "acceleration_status": "unverified",
+          "velocity_peak_segment": 4,
+          "acceleration_peak_segment": 4
+        },
+        "joint2": {
+          "type": "revolute",
+          "units": "rad/s, rad/s^2",
+          "velocity_limit": 50.0,
+          "acceleration_limit": null,
+          "peak_velocity": 11.548069270277217,
+          "peak_acceleration": 190.20349386338947,
+          "velocity_status": "within",
+          "acceleration_status": "unverified",
+          "velocity_peak_segment": 0,
+          "acceleration_peak_segment": 0
+        },
+        "joint3": {
+          "type": "revolute",
+          "units": "rad/s, rad/s^2",
+          "velocity_limit": 50.0,
+          "acceleration_limit": null,
+          "peak_velocity": 7.065643266874222,
+          "peak_acceleration": 116.37530086616366,
+          "velocity_status": "within",
+          "acceleration_status": "unverified",
+          "velocity_peak_segment": 4,
+          "acceleration_peak_segment": 4
+        },
+        "joint4": {
+          "type": "revolute",
+          "units": "rad/s, rad/s^2",
+          "velocity_limit": 200.0,
+          "acceleration_limit": null,
+          "peak_velocity": 2.505395209607269,
+          "peak_acceleration": 41.26533286411972,
+          "velocity_status": "within",
+          "acceleration_status": "unverified",
+          "velocity_peak_segment": 4,
+          "acceleration_peak_segment": 4
+        },
+        "joint5": {
+          "type": "revolute",
+          "units": "rad/s, rad/s^2",
+          "velocity_limit": 200.0,
+          "acceleration_limit": null,
+          "peak_velocity": 4.6113311651862754e-05,
+          "peak_acceleration": 0.0007595133683836217,
+          "velocity_status": "within",
+          "acceleration_status": "unverified",
+          "velocity_peak_segment": 8,
+          "acceleration_peak_segment": 8
+        },
+        "joint6": {
+          "type": "revolute",
+          "units": "rad/s, rad/s^2",
+          "velocity_limit": 200.0,
+          "acceleration_limit": null,
+          "peak_velocity": 15.481432617758102,
+          "peak_acceleration": 254.9883019395452,
+          "velocity_status": "within",
+          "acceleration_status": "unverified",
+          "velocity_peak_segment": 0,
+          "acceleration_peak_segment": 0
+        }
+      },
+      "segments": [
+        {
+          "index": 0,
+          "start_s": 0.0,
+          "end_s": 0.24285714285714285,
+          "duration_s": 0.24285714285714285,
+          "joints": {
+            "finger_left": {
+              "delta": 0.0,
+              "peak_velocity": 0.0,
+              "peak_acceleration": 0.0,
+              "velocity_limit": 0.08,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.0,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.0,
+              "velocity_peak_time_s": 0.12142857142857143,
+              "acceleration_peak_endpoint_times_s": [
+                0.0,
+                0.24285714285714285
+              ]
+            },
+            "finger_right": {
+              "delta": 0.0,
+              "peak_velocity": 0.0,
+              "peak_acceleration": 0.0,
+              "velocity_limit": 0.08,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.0,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.0,
+              "velocity_peak_time_s": 0.12142857142857143,
+              "acceleration_peak_endpoint_times_s": [
+                0.0,
+                0.24285714285714285
+              ]
+            },
+            "joint1": {
+              "delta": 0.9356250080642885,
+              "peak_velocity": 5.778860343926487,
+              "peak_acceleration": 95.18122919408331,
+              "velocity_limit": 50.0,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.11557720687852974,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.028068750241928654,
+              "velocity_peak_time_s": 0.12142857142857143,
+              "acceleration_peak_endpoint_times_s": [
+                0.0,
+                0.24285714285714285
+              ]
+            },
+            "joint2": {
+              "delta": -1.8696874056639303,
+              "peak_velocity": 11.548069270277217,
+              "peak_acceleration": 190.20349386338947,
+              "velocity_limit": 50.0,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.23096138540554434,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.05609062216991791,
+              "velocity_peak_time_s": 0.12142857142857143,
+              "acceleration_peak_endpoint_times_s": [
+                0.0,
+                0.24285714285714285
+              ]
+            },
+            "joint3": {
+              "delta": -0.2747856870915282,
+              "peak_velocity": 1.6972057143888506,
+              "peak_acceleration": 27.95397647228695,
+              "velocity_limit": 50.0,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.033944114287777015,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.008243570612745846,
+              "velocity_peak_time_s": 0.12142857142857143,
+              "acceleration_peak_endpoint_times_s": [
+                0.0,
+                0.24285714285714285
+              ]
+            },
+            "joint4": {
+              "delta": 0.3758831753009132,
+              "peak_velocity": 2.3216313768585812,
+              "peak_acceleration": 38.238634442376636,
+              "velocity_limit": 200.0,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.011608156884292906,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.0028191238147568486,
+              "velocity_peak_time_s": 0.12142857142857143,
+              "acceleration_peak_endpoint_times_s": [
+                0.0,
+                0.24285714285714285
+              ]
+            },
+            "joint5": {
+              "delta": -5.852120233444315e-06,
+              "peak_velocity": 3.614544850068547e-05,
+              "peak_acceleration": 0.0005953367988348195,
+              "velocity_limit": 200.0,
+              "acceleration_limit": null,
+              "velocity_ratio": 1.8072724250342734e-07,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 4.389090175083236e-08,
+              "velocity_peak_time_s": 0.12142857142857143,
+              "acceleration_peak_endpoint_times_s": [
+                0.0,
+                0.24285714285714285
+              ]
+            },
+            "joint6": {
+              "delta": 2.5065176619227403,
+              "peak_velocity": 15.481432617758102,
+              "peak_acceleration": 254.9883019395452,
+              "velocity_limit": 200.0,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.07740716308879052,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.018798882464420553,
+              "velocity_peak_time_s": 0.12142857142857143,
+              "acceleration_peak_endpoint_times_s": [
+                0.0,
+                0.24285714285714285
+              ]
+            }
+          },
+          "min_duration_known_limits_s": 0.05609062216991791
+        },
+        {
+          "index": 1,
+          "start_s": 0.24285714285714285,
+          "end_s": 0.4857142857142857,
+          "duration_s": 0.24285714285714285,
+          "joints": {
+            "finger_left": {
+              "delta": 0.0,
+              "peak_velocity": 0.0,
+              "peak_acceleration": 0.0,
+              "velocity_limit": 0.08,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.0,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.0,
+              "velocity_peak_time_s": 0.36428571428571427,
+              "acceleration_peak_endpoint_times_s": [
+                0.24285714285714285,
+                0.4857142857142857
+              ]
+            },
+            "finger_right": {
+              "delta": 0.0,
+              "peak_velocity": 0.0,
+              "peak_acceleration": 0.0,
+              "velocity_limit": 0.08,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.0,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.0,
+              "velocity_peak_time_s": 0.36428571428571427,
+              "acceleration_peak_endpoint_times_s": [
+                0.24285714285714285,
+                0.4857142857142857
+              ]
+            },
+            "joint1": {
+              "delta": 4.667219388743149e-07,
+              "peak_velocity": 2.882694328341357e-06,
+              "peak_acceleration": 4.7479671290328226e-05,
+              "velocity_limit": 50.0,
+              "acceleration_limit": null,
+              "velocity_ratio": 5.765388656682714e-08,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 1.4001658166229447e-08,
+              "velocity_peak_time_s": 0.36428571428571427,
+              "acceleration_peak_endpoint_times_s": [
+                0.24285714285714285,
+                0.4857142857142857
+              ]
+            },
+            "joint2": {
+              "delta": -0.054485669673202786,
+              "peak_velocity": 0.3365291362168407,
+              "peak_acceleration": 5.5428328318067885,
+              "velocity_limit": 50.0,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.006730582724336814,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.0016345700901960836,
+              "velocity_peak_time_s": 0.36428571428571427,
+              "acceleration_peak_endpoint_times_s": [
+                0.24285714285714285,
+                0.4857142857142857
+              ]
+            },
+            "joint3": {
+              "delta": 0.14395825451188182,
+              "peak_velocity": 0.8891539249263289,
+              "peak_acceleration": 14.644888175257183,
+              "velocity_limit": 50.0,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.01778307849852658,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.0043187476353564545,
+              "velocity_peak_time_s": 0.36428571428571427,
+              "acceleration_peak_endpoint_times_s": [
+                0.24285714285714285,
+                0.4857142857142857
+              ]
+            },
+            "joint4": {
+              "delta": -0.19842606553824438,
+              "peak_velocity": 1.2255727577362152,
+              "peak_acceleration": 20.185904245067075,
+              "velocity_limit": 200.0,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.006127863788681076,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.0014881954915368328,
+              "velocity_peak_time_s": 0.36428571428571427,
+              "acceleration_peak_endpoint_times_s": [
+                0.24285714285714285,
+                0.4857142857142857
+              ]
+            },
+            "joint5": {
+              "delta": 3.249095525063156e-11,
+              "peak_velocity": 2.0067942948919495e-10,
+              "peak_acceleration": 3.3053082504102695e-09,
+              "velocity_limit": 200.0,
+              "acceleration_limit": null,
+              "velocity_ratio": 1.0033971474459748e-12,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 2.436821643797367e-13,
+              "velocity_peak_time_s": 0.36428571428571427,
+              "acceleration_peak_endpoint_times_s": [
+                0.24285714285714285,
+                0.4857142857142857
+              ]
+            },
+            "joint6": {
+              "delta": 4.666169308720214e-07,
+              "peak_velocity": 2.8820457495036614e-06,
+              "peak_acceleration": 4.7468988815354426e-05,
+              "velocity_limit": 200.0,
+              "acceleration_limit": null,
+              "velocity_ratio": 1.4410228747518307e-08,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 3.4996269815401603e-09,
+              "velocity_peak_time_s": 0.36428571428571427,
+              "acceleration_peak_endpoint_times_s": [
+                0.24285714285714285,
+                0.4857142857142857
+              ]
+            }
+          },
+          "min_duration_known_limits_s": 0.0043187476353564545
+        },
+        {
+          "index": 2,
+          "start_s": 0.4857142857142857,
+          "end_s": 0.6357142857142857,
+          "duration_s": 0.14999999999999997,
+          "joints": {
+            "finger_left": {
+              "delta": -0.007500000000000001,
+              "peak_velocity": 0.07500000000000002,
+              "peak_acceleration": 2.0000000000000013,
+              "velocity_limit": 0.08,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.9375000000000003,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.140625,
+              "velocity_peak_time_s": 0.5607142857142857,
+              "acceleration_peak_endpoint_times_s": [
+                0.4857142857142857,
+                0.6357142857142857
+              ]
+            },
+            "finger_right": {
+              "delta": 0.007500000000000001,
+              "peak_velocity": 0.07500000000000002,
+              "peak_acceleration": 2.0000000000000013,
+              "velocity_limit": 0.08,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.9375000000000003,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.140625,
+              "velocity_peak_time_s": 0.5607142857142857,
+              "acceleration_peak_endpoint_times_s": [
+                0.4857142857142857,
+                0.6357142857142857
+              ]
+            },
+            "joint1": {
+              "delta": 0.0,
+              "peak_velocity": 0.0,
+              "peak_acceleration": 0.0,
+              "velocity_limit": 50.0,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.0,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.0,
+              "velocity_peak_time_s": 0.5607142857142857,
+              "acceleration_peak_endpoint_times_s": [
+                0.4857142857142857,
+                0.6357142857142857
+              ]
+            },
+            "joint2": {
+              "delta": 0.0,
+              "peak_velocity": 0.0,
+              "peak_acceleration": 0.0,
+              "velocity_limit": 50.0,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.0,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.0,
+              "velocity_peak_time_s": 0.5607142857142857,
+              "acceleration_peak_endpoint_times_s": [
+                0.4857142857142857,
+                0.6357142857142857
+              ]
+            },
+            "joint3": {
+              "delta": 0.0,
+              "peak_velocity": 0.0,
+              "peak_acceleration": 0.0,
+              "velocity_limit": 50.0,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.0,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.0,
+              "velocity_peak_time_s": 0.5607142857142857,
+              "acceleration_peak_endpoint_times_s": [
+                0.4857142857142857,
+                0.6357142857142857
+              ]
+            },
+            "joint4": {
+              "delta": 0.0,
+              "peak_velocity": 0.0,
+              "peak_acceleration": 0.0,
+              "velocity_limit": 200.0,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.0,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.0,
+              "velocity_peak_time_s": 0.5607142857142857,
+              "acceleration_peak_endpoint_times_s": [
+                0.4857142857142857,
+                0.6357142857142857
+              ]
+            },
+            "joint5": {
+              "delta": 0.0,
+              "peak_velocity": 0.0,
+              "peak_acceleration": 0.0,
+              "velocity_limit": 200.0,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.0,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.0,
+              "velocity_peak_time_s": 0.5607142857142857,
+              "acceleration_peak_endpoint_times_s": [
+                0.4857142857142857,
+                0.6357142857142857
+              ]
+            },
+            "joint6": {
+              "delta": 0.0,
+              "peak_velocity": 0.0,
+              "peak_acceleration": 0.0,
+              "velocity_limit": 200.0,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.0,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.0,
+              "velocity_peak_time_s": 0.5607142857142857,
+              "acceleration_peak_endpoint_times_s": [
+                0.4857142857142857,
+                0.6357142857142857
+              ]
+            }
+          },
+          "min_duration_known_limits_s": 0.140625
+        },
+        {
+          "index": 3,
+          "start_s": 0.6357142857142857,
+          "end_s": 0.8785714285714286,
+          "duration_s": 0.24285714285714288,
+          "joints": {
+            "finger_left": {
+              "delta": 0.0,
+              "peak_velocity": 0.0,
+              "peak_acceleration": 0.0,
+              "velocity_limit": 0.08,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.0,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.0,
+              "velocity_peak_time_s": 0.7571428571428571,
+              "acceleration_peak_endpoint_times_s": [
+                0.6357142857142857,
+                0.8785714285714286
+              ]
+            },
+            "finger_right": {
+              "delta": 0.0,
+              "peak_velocity": 0.0,
+              "peak_acceleration": 0.0,
+              "velocity_limit": 0.08,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.0,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.0,
+              "velocity_peak_time_s": 0.7571428571428571,
+              "acceleration_peak_endpoint_times_s": [
+                0.6357142857142857,
+                0.8785714285714286
+              ]
+            },
+            "joint1": {
+              "delta": -4.667219388743149e-07,
+              "peak_velocity": 2.8826943283413565e-06,
+              "peak_acceleration": 4.747967129032822e-05,
+              "velocity_limit": 50.0,
+              "acceleration_limit": null,
+              "velocity_ratio": 5.765388656682713e-08,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 1.4001658166229447e-08,
+              "velocity_peak_time_s": 0.7571428571428571,
+              "acceleration_peak_endpoint_times_s": [
+                0.6357142857142857,
+                0.8785714285714286
+              ]
+            },
+            "joint2": {
+              "delta": 0.054485669673202786,
+              "peak_velocity": 0.3365291362168407,
+              "peak_acceleration": 5.542832831806788,
+              "velocity_limit": 50.0,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.006730582724336814,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.0016345700901960836,
+              "velocity_peak_time_s": 0.7571428571428571,
+              "acceleration_peak_endpoint_times_s": [
+                0.6357142857142857,
+                0.8785714285714286
+              ]
+            },
+            "joint3": {
+              "delta": -0.14395825451188182,
+              "peak_velocity": 0.8891539249263288,
+              "peak_acceleration": 14.64488817525718,
+              "velocity_limit": 50.0,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.017783078498526575,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.0043187476353564545,
+              "velocity_peak_time_s": 0.7571428571428571,
+              "acceleration_peak_endpoint_times_s": [
+                0.6357142857142857,
+                0.8785714285714286
+              ]
+            },
+            "joint4": {
+              "delta": 0.19842606553824438,
+              "peak_velocity": 1.2255727577362152,
+              "peak_acceleration": 20.18590424506707,
+              "velocity_limit": 200.0,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.006127863788681076,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.0014881954915368328,
+              "velocity_peak_time_s": 0.7571428571428571,
+              "acceleration_peak_endpoint_times_s": [
+                0.6357142857142857,
+                0.8785714285714286
+              ]
+            },
+            "joint5": {
+              "delta": -3.249095525063156e-11,
+              "peak_velocity": 2.0067942948919492e-10,
+              "peak_acceleration": 3.3053082504102687e-09,
+              "velocity_limit": 200.0,
+              "acceleration_limit": null,
+              "velocity_ratio": 1.0033971474459746e-12,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 2.436821643797367e-13,
+              "velocity_peak_time_s": 0.7571428571428571,
+              "acceleration_peak_endpoint_times_s": [
+                0.6357142857142857,
+                0.8785714285714286
+              ]
+            },
+            "joint6": {
+              "delta": -4.666169308720214e-07,
+              "peak_velocity": 2.8820457495036614e-06,
+              "peak_acceleration": 4.746898881535441e-05,
+              "velocity_limit": 200.0,
+              "acceleration_limit": null,
+              "velocity_ratio": 1.4410228747518307e-08,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 3.4996269815401603e-09,
+              "velocity_peak_time_s": 0.7571428571428571,
+              "acceleration_peak_endpoint_times_s": [
+                0.6357142857142857,
+                0.8785714285714286
+              ]
+            }
+          },
+          "min_duration_known_limits_s": 0.0043187476353564545
+        },
+        {
+          "index": 4,
+          "start_s": 0.8785714285714286,
+          "end_s": 1.1214285714285714,
+          "duration_s": 0.24285714285714288,
+          "joints": {
+            "finger_left": {
+              "delta": 0.0,
+              "peak_velocity": 0.0,
+              "peak_acceleration": 0.0,
+              "velocity_limit": 0.08,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.0,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.0,
+              "velocity_peak_time_s": 1.0,
+              "acceleration_peak_endpoint_times_s": [
+                0.8785714285714286,
+                1.1214285714285714
+              ]
+            },
+            "finger_right": {
+              "delta": 0.0,
+              "peak_velocity": 0.0,
+              "peak_acceleration": 0.0,
+              "velocity_limit": 0.08,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.0,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.0,
+              "velocity_peak_time_s": 1.0,
+              "acceleration_peak_endpoint_times_s": [
+                0.8785714285714286,
+                1.1214285714285714
+              ]
+            },
+            "joint1": {
+              "delta": -0.9356301964200159,
+              "peak_velocity": 5.778892389653039,
+              "peak_acceleration": 95.18175700605003,
+              "velocity_limit": 50.0,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.11557784779306077,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.028068905892600474,
+              "velocity_peak_time_s": 1.0,
+              "acceleration_peak_endpoint_times_s": [
+                0.8785714285714286,
+                1.1214285714285714
+              ]
+            },
+            "joint2": {
+              "delta": 0.7383156165352518,
+              "peak_velocity": 4.56018469036479,
+              "peak_acceleration": 75.10892431189065,
+              "velocity_limit": 50.0,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.0912036938072958,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.022149468496057555,
+              "velocity_peak_time_s": 1.0,
+              "acceleration_peak_endpoint_times_s": [
+                0.8785714285714286,
+                1.1214285714285714
+              ]
+            },
+            "joint3": {
+              "delta": 1.1439612908272552,
+              "peak_velocity": 7.065643266874222,
+              "peak_acceleration": 116.37530086616366,
+              "velocity_limit": 50.0,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.14131286533748444,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.034318838724817655,
+              "velocity_peak_time_s": 1.0,
+              "acceleration_peak_endpoint_times_s": [
+                0.8785714285714286,
+                1.1214285714285714
+              ]
+            },
+            "joint4": {
+              "delta": -0.40563541488879595,
+              "peak_velocity": 2.505395209607269,
+              "peak_acceleration": 41.26533286411972,
+              "velocity_limit": 200.0,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.012526976048036344,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.0030422656116659698,
+              "velocity_peak_time_s": 1.0,
+              "acceleration_peak_endpoint_times_s": [
+                0.8785714285714286,
+                1.1214285714285714
+              ]
+            },
+            "joint5": {
+              "delta": -1.6138445101906083e-06,
+              "peak_velocity": 9.967863151177285e-06,
+              "peak_acceleration": 0.00016417656954880233,
+              "velocity_limit": 200.0,
+              "acceleration_limit": null,
+              "velocity_ratio": 4.983931575588643e-08,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 1.2103833826429562e-08,
+              "velocity_peak_time_s": 1.0,
+              "acceleration_peak_endpoint_times_s": [
+                0.8785714285714286,
+                1.1214285714285714
+              ]
+            },
+            "joint6": {
+              "delta": -0.935630291068926,
+              "peak_velocity": 5.778892974249248,
+              "peak_acceleration": 95.18176663469349,
+              "velocity_limit": 200.0,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.02889446487124624,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.007017227183016945,
+              "velocity_peak_time_s": 1.0,
+              "acceleration_peak_endpoint_times_s": [
+                0.8785714285714286,
+                1.1214285714285714
+              ]
+            }
+          },
+          "min_duration_known_limits_s": 0.034318838724817655
+        },
+        {
+          "index": 5,
+          "start_s": 1.1214285714285714,
+          "end_s": 1.3642857142857143,
+          "duration_s": 0.24285714285714288,
+          "joints": {
+            "finger_left": {
+              "delta": 0.0,
+              "peak_velocity": 0.0,
+              "peak_acceleration": 0.0,
+              "velocity_limit": 0.08,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.0,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.0,
+              "velocity_peak_time_s": 1.2428571428571429,
+              "acceleration_peak_endpoint_times_s": [
+                1.1214285714285714,
+                1.3642857142857143
+              ]
+            },
+            "finger_right": {
+              "delta": 0.0,
+              "peak_velocity": 0.0,
+              "peak_acceleration": 0.0,
+              "velocity_limit": 0.08,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.0,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.0,
+              "velocity_peak_time_s": 1.2428571428571429,
+              "acceleration_peak_endpoint_times_s": [
+                1.1214285714285714,
+                1.3642857142857143
+              ]
+            },
+            "joint1": {
+              "delta": 3.2121639813382618e-06,
+              "peak_velocity": 1.9839836355324556e-05,
+              "peak_acceleration": 0.0003267737752641691,
+              "velocity_limit": 50.0,
+              "acceleration_limit": null,
+              "velocity_ratio": 3.9679672710649114e-07,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 9.636491944014785e-08,
+              "velocity_peak_time_s": 1.2428571428571429,
+              "acceleration_peak_endpoint_times_s": [
+                1.1214285714285714,
+                1.3642857142857143
+              ]
+            },
+            "joint2": {
+              "delta": -0.13974544948651224,
+              "peak_velocity": 0.8631336585931637,
+              "peak_acceleration": 14.21631908271093,
+              "velocity_limit": 50.0,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.017262673171863273,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.0041923634845953675,
+              "velocity_peak_time_s": 1.2428571428571429,
+              "acceleration_peak_endpoint_times_s": [
+                1.1214285714285714,
+                1.3642857142857143
+              ]
+            },
+            "joint3": {
+              "delta": 0.11371272725878823,
+              "peak_velocity": 0.7023433154219272,
+              "peak_acceleration": 11.568007548125859,
+              "velocity_limit": 50.0,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.014046866308438544,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.003411381817763647,
+              "velocity_peak_time_s": 1.2428571428571429,
+              "acceleration_peak_endpoint_times_s": [
+                1.1214285714285714,
+                1.3642857142857143
+              ]
+            },
+            "joint4": {
+              "delta": -0.2534587216088281,
+              "peak_velocity": 1.565480339348644,
+              "peak_acceleration": 25.784382059860015,
+              "velocity_limit": 200.0,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.00782740169674322,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.0019009404120662106,
+              "velocity_peak_time_s": 1.2428571428571429,
+              "acceleration_peak_endpoint_times_s": [
+                1.1214285714285714,
+                1.3642857142857143
+              ]
+            },
+            "joint5": {
+              "delta": 1.1992729710300146e-07,
+              "peak_velocity": 7.407274232832442e-07,
+              "peak_acceleration": 1.2200216383488726e-05,
+              "velocity_limit": 200.0,
+              "acceleration_limit": null,
+              "velocity_ratio": 3.7036371164162212e-09,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 8.99454728272511e-10,
+              "velocity_peak_time_s": 1.2428571428571429,
+              "acceleration_peak_endpoint_times_s": [
+                1.1214285714285714,
+                1.3642857142857143
+              ]
+            },
+            "joint6": {
+              "delta": 3.3067180833512566e-06,
+              "peak_velocity": 2.0423846985404817e-05,
+              "peak_acceleration": 0.00033639277387725576,
+              "velocity_limit": 200.0,
+              "acceleration_limit": null,
+              "velocity_ratio": 1.0211923492702408e-07,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 2.4800385625134423e-08,
+              "velocity_peak_time_s": 1.2428571428571429,
+              "acceleration_peak_endpoint_times_s": [
+                1.1214285714285714,
+                1.3642857142857143
+              ]
+            }
+          },
+          "min_duration_known_limits_s": 0.0041923634845953675
+        },
+        {
+          "index": 6,
+          "start_s": 1.3642857142857143,
+          "end_s": 1.5142857142857142,
+          "duration_s": 0.1499999999999999,
+          "joints": {
+            "finger_left": {
+              "delta": 0.007500000000000001,
+              "peak_velocity": 0.07500000000000005,
+              "peak_acceleration": 2.0000000000000027,
+              "velocity_limit": 0.08,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.9375000000000007,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.140625,
+              "velocity_peak_time_s": 1.4392857142857143,
+              "acceleration_peak_endpoint_times_s": [
+                1.3642857142857143,
+                1.5142857142857142
+              ]
+            },
+            "finger_right": {
+              "delta": -0.007500000000000001,
+              "peak_velocity": 0.07500000000000005,
+              "peak_acceleration": 2.0000000000000027,
+              "velocity_limit": 0.08,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.9375000000000007,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.140625,
+              "velocity_peak_time_s": 1.4392857142857143,
+              "acceleration_peak_endpoint_times_s": [
+                1.3642857142857143,
+                1.5142857142857142
+              ]
+            },
+            "joint1": {
+              "delta": 0.0,
+              "peak_velocity": 0.0,
+              "peak_acceleration": 0.0,
+              "velocity_limit": 50.0,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.0,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.0,
+              "velocity_peak_time_s": 1.4392857142857143,
+              "acceleration_peak_endpoint_times_s": [
+                1.3642857142857143,
+                1.5142857142857142
+              ]
+            },
+            "joint2": {
+              "delta": 0.0,
+              "peak_velocity": 0.0,
+              "peak_acceleration": 0.0,
+              "velocity_limit": 50.0,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.0,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.0,
+              "velocity_peak_time_s": 1.4392857142857143,
+              "acceleration_peak_endpoint_times_s": [
+                1.3642857142857143,
+                1.5142857142857142
+              ]
+            },
+            "joint3": {
+              "delta": 0.0,
+              "peak_velocity": 0.0,
+              "peak_acceleration": 0.0,
+              "velocity_limit": 50.0,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.0,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.0,
+              "velocity_peak_time_s": 1.4392857142857143,
+              "acceleration_peak_endpoint_times_s": [
+                1.3642857142857143,
+                1.5142857142857142
+              ]
+            },
+            "joint4": {
+              "delta": 0.0,
+              "peak_velocity": 0.0,
+              "peak_acceleration": 0.0,
+              "velocity_limit": 200.0,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.0,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.0,
+              "velocity_peak_time_s": 1.4392857142857143,
+              "acceleration_peak_endpoint_times_s": [
+                1.3642857142857143,
+                1.5142857142857142
+              ]
+            },
+            "joint5": {
+              "delta": 0.0,
+              "peak_velocity": 0.0,
+              "peak_acceleration": 0.0,
+              "velocity_limit": 200.0,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.0,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.0,
+              "velocity_peak_time_s": 1.4392857142857143,
+              "acceleration_peak_endpoint_times_s": [
+                1.3642857142857143,
+                1.5142857142857142
+              ]
+            },
+            "joint6": {
+              "delta": 0.0,
+              "peak_velocity": 0.0,
+              "peak_acceleration": 0.0,
+              "velocity_limit": 200.0,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.0,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.0,
+              "velocity_peak_time_s": 1.4392857142857143,
+              "acceleration_peak_endpoint_times_s": [
+                1.3642857142857143,
+                1.5142857142857142
+              ]
+            }
+          },
+          "min_duration_known_limits_s": 0.140625
+        },
+        {
+          "index": 7,
+          "start_s": 1.5142857142857142,
+          "end_s": 1.7571428571428571,
+          "duration_s": 0.24285714285714288,
+          "joints": {
+            "finger_left": {
+              "delta": 0.0,
+              "peak_velocity": 0.0,
+              "peak_acceleration": 0.0,
+              "velocity_limit": 0.08,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.0,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.0,
+              "velocity_peak_time_s": 1.6357142857142857,
+              "acceleration_peak_endpoint_times_s": [
+                1.5142857142857142,
+                1.7571428571428571
+              ]
+            },
+            "finger_right": {
+              "delta": 0.0,
+              "peak_velocity": 0.0,
+              "peak_acceleration": 0.0,
+              "velocity_limit": 0.08,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.0,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.0,
+              "velocity_peak_time_s": 1.6357142857142857,
+              "acceleration_peak_endpoint_times_s": [
+                1.5142857142857142,
+                1.7571428571428571
+              ]
+            },
+            "joint1": {
+              "delta": -3.2121639813382618e-06,
+              "peak_velocity": 1.9839836355324556e-05,
+              "peak_acceleration": 0.0003267737752641691,
+              "velocity_limit": 50.0,
+              "acceleration_limit": null,
+              "velocity_ratio": 3.9679672710649114e-07,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 9.636491944014785e-08,
+              "velocity_peak_time_s": 1.6357142857142857,
+              "acceleration_peak_endpoint_times_s": [
+                1.5142857142857142,
+                1.7571428571428571
+              ]
+            },
+            "joint2": {
+              "delta": 0.13974544948651224,
+              "peak_velocity": 0.8631336585931637,
+              "peak_acceleration": 14.21631908271093,
+              "velocity_limit": 50.0,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.017262673171863273,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.0041923634845953675,
+              "velocity_peak_time_s": 1.6357142857142857,
+              "acceleration_peak_endpoint_times_s": [
+                1.5142857142857142,
+                1.7571428571428571
+              ]
+            },
+            "joint3": {
+              "delta": -0.11371272725878823,
+              "peak_velocity": 0.7023433154219272,
+              "peak_acceleration": 11.568007548125859,
+              "velocity_limit": 50.0,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.014046866308438544,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.003411381817763647,
+              "velocity_peak_time_s": 1.6357142857142857,
+              "acceleration_peak_endpoint_times_s": [
+                1.5142857142857142,
+                1.7571428571428571
+              ]
+            },
+            "joint4": {
+              "delta": 0.2534587216088281,
+              "peak_velocity": 1.565480339348644,
+              "peak_acceleration": 25.784382059860015,
+              "velocity_limit": 200.0,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.00782740169674322,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.0019009404120662106,
+              "velocity_peak_time_s": 1.6357142857142857,
+              "acceleration_peak_endpoint_times_s": [
+                1.5142857142857142,
+                1.7571428571428571
+              ]
+            },
+            "joint5": {
+              "delta": -1.1992729710300146e-07,
+              "peak_velocity": 7.407274232832442e-07,
+              "peak_acceleration": 1.2200216383488726e-05,
+              "velocity_limit": 200.0,
+              "acceleration_limit": null,
+              "velocity_ratio": 3.7036371164162212e-09,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 8.99454728272511e-10,
+              "velocity_peak_time_s": 1.6357142857142857,
+              "acceleration_peak_endpoint_times_s": [
+                1.5142857142857142,
+                1.7571428571428571
+              ]
+            },
+            "joint6": {
+              "delta": -3.3067180833512566e-06,
+              "peak_velocity": 2.0423846985404817e-05,
+              "peak_acceleration": 0.00033639277387725576,
+              "velocity_limit": 200.0,
+              "acceleration_limit": null,
+              "velocity_ratio": 1.0211923492702408e-07,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 2.4800385625134423e-08,
+              "velocity_peak_time_s": 1.6357142857142857,
+              "acceleration_peak_endpoint_times_s": [
+                1.5142857142857142,
+                1.7571428571428571
+              ]
+            }
+          },
+          "min_duration_known_limits_s": 0.0041923634845953675
+        },
+        {
+          "index": 8,
+          "start_s": 1.7571428571428571,
+          "end_s": 2.0,
+          "duration_s": 0.24285714285714288,
+          "joints": {
+            "finger_left": {
+              "delta": 0.0,
+              "peak_velocity": 0.0,
+              "peak_acceleration": 0.0,
+              "velocity_limit": 0.08,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.0,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.0,
+              "velocity_peak_time_s": 1.8785714285714286,
+              "acceleration_peak_endpoint_times_s": [
+                1.7571428571428571,
+                2.0
+              ]
+            },
+            "finger_right": {
+              "delta": 0.0,
+              "peak_velocity": 0.0,
+              "peak_acceleration": 0.0,
+              "velocity_limit": 0.08,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.0,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.0,
+              "velocity_peak_time_s": 1.8785714285714286,
+              "acceleration_peak_endpoint_times_s": [
+                1.7571428571428571,
+                2.0
+              ]
+            },
+            "joint1": {
+              "delta": 5.188355727349295e-06,
+              "peak_velocity": 3.204572655127506e-05,
+              "peak_acceleration": 0.0005278119667268832,
+              "velocity_limit": 50.0,
+              "acceleration_limit": null,
+              "velocity_ratio": 6.409145310255012e-07,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 1.5565067182047885e-07,
+              "velocity_peak_time_s": 1.8785714285714286,
+              "acceleration_peak_endpoint_times_s": [
+                1.7571428571428571,
+                2.0
+              ]
+            },
+            "joint2": {
+              "delta": 1.1313717891286785,
+              "peak_velocity": 6.987884579912426,
+              "peak_acceleration": 115.09456955149876,
+              "velocity_limit": 50.0,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.13975769159824852,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.03394115367386036,
+              "velocity_peak_time_s": 1.8785714285714286,
+              "acceleration_peak_endpoint_times_s": [
+                1.7571428571428571,
+                2.0
+              ]
+            },
+            "joint3": {
+              "delta": -0.869175603735727,
+              "peak_velocity": 5.368437552485372,
+              "peak_acceleration": 88.4213243938767,
+              "velocity_limit": 50.0,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.10736875104970744,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.02607526811207181,
+              "velocity_peak_time_s": 1.8785714285714286,
+              "acceleration_peak_endpoint_times_s": [
+                1.7571428571428571,
+                2.0
+              ]
+            },
+            "joint4": {
+              "delta": 0.029752239587882756,
+              "peak_velocity": 0.1837638327486876,
+              "peak_acceleration": 3.0266984217430895,
+              "velocity_limit": 200.0,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.000918819163743438,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.00022314179690912067,
+              "velocity_peak_time_s": 1.8785714285714286,
+              "acceleration_peak_endpoint_times_s": [
+                1.7571428571428571,
+                2.0
+              ]
+            },
+            "joint5": {
+              "delta": 7.465964743634923e-06,
+              "peak_velocity": 4.6113311651862754e-05,
+              "peak_acceleration": 0.0007595133683836217,
+              "velocity_limit": 200.0,
+              "acceleration_limit": null,
+              "velocity_ratio": 2.3056655825931378e-07,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 5.599473557726192e-08,
+              "velocity_peak_time_s": 1.8785714285714286,
+              "acceleration_peak_endpoint_times_s": [
+                1.7571428571428571,
+                2.0
+              ]
+            },
+            "joint6": {
+              "delta": -1.5708873708538142,
+              "peak_velocity": 9.702539643508851,
+              "peak_acceleration": 159.80653530485165,
+              "velocity_limit": 200.0,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.04851269821754425,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.011781655281403607,
+              "velocity_peak_time_s": 1.8785714285714286,
+              "acceleration_peak_endpoint_times_s": [
+                1.7571428571428571,
+                2.0
+              ]
+            }
+          },
+          "min_duration_known_limits_s": 0.03394115367386036
+        }
+      ],
+      "limitations": [
+        "Declared URDF limits are not independently verified hardware specifications",
+        "Missing limits are unverified, not passing",
+        "Cubic smoothstep has acceleration jumps and unbounded ideal jerk at joins",
+        "No payload, torque, tracking error or real controller dynamics considered",
+        "Minimum duration uses known limits only and is not an approved retiming"
+      ],
+      "runtime_crosscheck": {
+        "passed": true,
+        "normalized_max_errors": {
+          "position": 2.1918278297151462e-16,
+          "velocity": 1.7777780059795302e-06,
+          "acceleration": 1.5059080472424264e-08
+        },
+        "tolerance": 1e-05,
+        "method": "central differences at u=.25/.5/.75, h=T*.001; endpoints use analytical one-sided limits"
+      },
+      "endpoint_reset": {
+        "status": "continuous",
+        "joints": {
+          "finger_left": {
+            "delta": 0.0,
+            "physical_delta": 0.0,
+            "status": "continuous"
+          },
+          "finger_right": {
+            "delta": 0.0,
+            "physical_delta": 0.0,
+            "status": "continuous"
+          },
+          "joint1": {
+            "delta": 0.0,
+            "physical_delta": 0.0,
+            "status": "continuous"
+          },
+          "joint2": {
+            "delta": -1.1102230246251565e-16,
+            "physical_delta": -1.1102230246251565e-16,
+            "status": "continuous"
+          },
+          "joint3": {
+            "delta": 0.0,
+            "physical_delta": 0.0,
+            "status": "continuous"
+          },
+          "joint4": {
+            "delta": 0.0,
+            "physical_delta": 0.0,
+            "status": "continuous"
+          },
+          "joint5": {
+            "delta": 0.0,
+            "physical_delta": 0.0,
+            "status": "continuous"
+          },
+          "joint6": {
+            "delta": 0.0,
+            "physical_delta": 0.0,
+            "status": "continuous"
+          }
+        },
+        "note": "Position jumps cannot be assigned finite continuous-time rate bounds"
+      }
+    },
+    "arm_unload": {
+      "status": "incomplete",
+      "duration_s": 2.0,
+      "joints": {
+        "finger_left": {
+          "type": "prismatic",
+          "units": "m/s, m/s^2",
+          "velocity_limit": 0.08,
+          "acceleration_limit": null,
+          "peak_velocity": 0.07500000000000005,
+          "peak_acceleration": 2.0000000000000027,
+          "velocity_status": "within",
+          "acceleration_status": "unverified",
+          "velocity_peak_segment": 6,
+          "acceleration_peak_segment": 6
+        },
+        "finger_right": {
+          "type": "prismatic",
+          "units": "m/s, m/s^2",
+          "velocity_limit": 0.08,
+          "acceleration_limit": null,
+          "peak_velocity": 0.07500000000000005,
+          "peak_acceleration": 2.0000000000000027,
+          "velocity_status": "within",
+          "acceleration_status": "unverified",
+          "velocity_peak_segment": 6,
+          "acceleration_peak_segment": 6
+        },
+        "joint1": {
+          "type": "revolute",
+          "units": "rad/s, rad/s^2",
+          "velocity_limit": 50.0,
+          "acceleration_limit": null,
+          "peak_velocity": 5.778873415795361,
+          "peak_acceleration": 95.181444495453,
+          "velocity_status": "within",
+          "acceleration_status": "unverified",
+          "velocity_peak_segment": 8,
+          "acceleration_peak_segment": 8
+        },
+        "joint2": {
+          "type": "revolute",
+          "units": "rad/s, rad/s^2",
+          "velocity_limit": 50.0,
+          "acceleration_limit": null,
+          "peak_velocity": 11.549027297896409,
+          "peak_acceleration": 190.21927314182318,
+          "velocity_status": "within",
+          "acceleration_status": "unverified",
+          "velocity_peak_segment": 8,
+          "acceleration_peak_segment": 8
+        },
+        "joint3": {
+          "type": "revolute",
+          "units": "rad/s, rad/s^2",
+          "velocity_limit": 50.0,
+          "acceleration_limit": null,
+          "peak_velocity": 7.0683891953028395,
+          "peak_acceleration": 116.42052792263499,
+          "velocity_status": "within",
+          "acceleration_status": "unverified",
+          "velocity_peak_segment": 4,
+          "acceleration_peak_segment": 4
+        },
+        "joint4": {
+          "type": "revolute",
+          "units": "rad/s, rad/s^2",
+          "velocity_limit": 200.0,
+          "acceleration_limit": null,
+          "peak_velocity": 2.5068739281940293,
+          "peak_acceleration": 41.28968822907812,
+          "velocity_status": "within",
+          "acceleration_status": "unverified",
+          "velocity_peak_segment": 4,
+          "acceleration_peak_segment": 4
+        },
+        "joint5": {
+          "type": "revolute",
+          "units": "rad/s, rad/s^2",
+          "velocity_limit": 200.0,
+          "acceleration_limit": null,
+          "peak_velocity": 4.46165956169631e-05,
+          "peak_acceleration": 0.0007348615748676275,
+          "velocity_status": "within",
+          "acceleration_status": "unverified",
+          "velocity_peak_segment": 0,
+          "acceleration_peak_segment": 0
+        },
+        "joint6": {
+          "type": "revolute",
+          "units": "rad/s, rad/s^2",
+          "velocity_limit": 200.0,
+          "acceleration_limit": null,
+          "peak_velocity": 9.702570726185233,
+          "peak_acceleration": 159.8070472548156,
+          "velocity_status": "within",
+          "acceleration_status": "unverified",
+          "velocity_peak_segment": 0,
+          "acceleration_peak_segment": 0
+        }
+      },
+      "segments": [
+        {
+          "index": 0,
+          "start_s": 0.0,
+          "end_s": 0.24285714285714285,
+          "duration_s": 0.24285714285714285,
+          "joints": {
+            "finger_left": {
+              "delta": 0.0,
+              "peak_velocity": 0.0,
+              "peak_acceleration": 0.0,
+              "velocity_limit": 0.08,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.0,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.0,
+              "velocity_peak_time_s": 0.12142857142857143,
+              "acceleration_peak_endpoint_times_s": [
+                0.0,
+                0.24285714285714285
+              ]
+            },
+            "finger_right": {
+              "delta": 0.0,
+              "peak_velocity": 0.0,
+              "peak_acceleration": 0.0,
+              "velocity_limit": 0.08,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.0,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.0,
+              "velocity_peak_time_s": 0.12142857142857143,
+              "acceleration_peak_endpoint_times_s": [
+                0.0,
+                0.24285714285714285
+              ]
+            },
+            "joint1": {
+              "delta": -3.46856121417126e-07,
+              "peak_velocity": 2.142346632282249e-06,
+              "peak_acceleration": 3.528570923758998e-05,
+              "velocity_limit": 50.0,
+              "acceleration_limit": null,
+              "velocity_ratio": 4.2846932645644986e-08,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 1.040568364251378e-08,
+              "velocity_peak_time_s": 0.12142857142857143,
+              "acceleration_peak_endpoint_times_s": [
+                0.0,
+                0.24285714285714285
+              ]
+            },
+            "joint2": {
+              "delta": -1.1313011199368588,
+              "peak_velocity": 6.987448093727657,
+              "peak_acceleration": 115.08738036727907,
+              "velocity_limit": 50.0,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.13974896187455316,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.03393903359810577,
+              "velocity_peak_time_s": 0.12142857142857143,
+              "acceleration_peak_endpoint_times_s": [
+                0.0,
+                0.24285714285714285
+              ]
+            },
+            "joint3": {
+              "delta": 0.8693027438344754,
+              "peak_velocity": 5.369222829565878,
+              "peak_acceleration": 88.43425836932035,
+              "velocity_limit": 50.0,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.10738445659131755,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.026079082315034263,
+              "velocity_peak_time_s": 0.12142857142857143,
+              "acceleration_peak_endpoint_times_s": [
+                0.0,
+                0.24285714285714285
+              ]
+            },
+            "joint4": {
+              "delta": -0.02981600727616407,
+              "peak_velocity": 0.1841576919998369,
+              "peak_acceleration": 3.0331855152914313,
+              "velocity_limit": 200.0,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.0009207884599991844,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.0002236200545712305,
+              "velocity_peak_time_s": 0.12142857142857143,
+              "acceleration_peak_endpoint_times_s": [
+                0.0,
+                0.24285714285714285
+              ]
+            },
+            "joint5": {
+              "delta": -7.223639290365455e-06,
+              "peak_velocity": 4.46165956169631e-05,
+              "peak_acceleration": 0.0007348615748676275,
+              "velocity_limit": 200.0,
+              "acceleration_limit": null,
+              "velocity_ratio": 2.230829780848155e-07,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 5.417729467774091e-08,
+              "velocity_peak_time_s": 0.12142857142857143,
+              "acceleration_peak_endpoint_times_s": [
+                0.0,
+                0.24285714285714285
+              ]
+            },
+            "joint6": {
+              "delta": 1.570892403287133,
+              "peak_velocity": 9.702570726185233,
+              "peak_acceleration": 159.8070472548156,
+              "velocity_limit": 200.0,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.04851285363092616,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.011781693024653497,
+              "velocity_peak_time_s": 0.12142857142857143,
+              "acceleration_peak_endpoint_times_s": [
+                0.0,
+                0.24285714285714285
+              ]
+            }
+          },
+          "min_duration_known_limits_s": 0.03393903359810577
+        },
+        {
+          "index": 1,
+          "start_s": 0.24285714285714285,
+          "end_s": 0.4857142857142857,
+          "duration_s": 0.24285714285714285,
+          "joints": {
+            "finger_left": {
+              "delta": 0.0,
+              "peak_velocity": 0.0,
+              "peak_acceleration": 0.0,
+              "velocity_limit": 0.08,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.0,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.0,
+              "velocity_peak_time_s": 0.36428571428571427,
+              "acceleration_peak_endpoint_times_s": [
+                0.24285714285714285,
+                0.4857142857142857
+              ]
+            },
+            "finger_right": {
+              "delta": 0.0,
+              "peak_velocity": 0.0,
+              "peak_acceleration": 0.0,
+              "velocity_limit": 0.08,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.0,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.0,
+              "velocity_peak_time_s": 0.36428571428571427,
+              "acceleration_peak_endpoint_times_s": [
+                0.24285714285714285,
+                0.4857142857142857
+              ]
+            },
+            "joint1": {
+              "delta": -1.62842771576546e-06,
+              "peak_velocity": 1.0057935891492548e-05,
+              "peak_acceleration": 0.00016566012056575962,
+              "velocity_limit": 50.0,
+              "acceleration_limit": null,
+              "velocity_ratio": 2.0115871782985095e-07,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 4.8852831472963805e-08,
+              "velocity_peak_time_s": 0.36428571428571427,
+              "acceleration_peak_endpoint_times_s": [
+                0.24285714285714285,
+                0.4857142857142857
+              ]
+            },
+            "joint2": {
+              "delta": -0.13981615194837294,
+              "peak_velocity": 0.8635703502693622,
+              "peak_acceleration": 14.223511651495379,
+              "velocity_limit": 50.0,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.017271407005387245,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.004194484558451188,
+              "velocity_peak_time_s": 0.36428571428571427,
+              "acceleration_peak_endpoint_times_s": [
+                0.24285714285714285,
+                0.4857142857142857
+              ]
+            },
+            "joint3": {
+              "delta": 0.11358562981386089,
+              "peak_velocity": 0.7015583017914937,
+              "peak_acceleration": 11.555077911859897,
+              "velocity_limit": 50.0,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.014031166035829873,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.0034075688944158267,
+              "velocity_peak_time_s": 0.36428571428571427,
+              "acceleration_peak_endpoint_times_s": [
+                0.24285714285714285,
+                0.4857142857142857
+              ]
+            },
+            "joint4": {
+              "delta": -0.25339503337318403,
+              "peak_velocity": 1.565086970834372,
+              "peak_acceleration": 25.777903049036716,
+              "velocity_limit": 200.0,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.00782543485417186,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.0019004627502988802,
+              "velocity_peak_time_s": 0.36428571428571427,
+              "acceleration_peak_endpoint_times_s": [
+                0.24285714285714285,
+                0.4857142857142857
+              ]
+            },
+            "joint5": {
+              "delta": -1.2234965951789745e-07,
+              "peak_velocity": 7.556890734928961e-07,
+              "peak_acceleration": 1.2446643563412404e-05,
+              "velocity_limit": 200.0,
+              "acceleration_limit": null,
+              "velocity_ratio": 3.778445367464481e-09,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 9.176224463842309e-10,
+              "velocity_peak_time_s": 0.36428571428571427,
+              "acceleration_peak_endpoint_times_s": [
+                0.24285714285714285,
+                0.4857142857142857
+              ]
+            },
+            "joint6": {
+              "delta": -1.7247713002266352e-06,
+              "peak_velocity": 1.0652999207282159e-05,
+              "peak_acceleration": 0.00017546116341405908,
+              "velocity_limit": 200.0,
+              "acceleration_limit": null,
+              "velocity_ratio": 5.3264996036410796e-08,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 1.2935784751699764e-08,
+              "velocity_peak_time_s": 0.36428571428571427,
+              "acceleration_peak_endpoint_times_s": [
+                0.24285714285714285,
+                0.4857142857142857
+              ]
+            }
+          },
+          "min_duration_known_limits_s": 0.004194484558451188
+        },
+        {
+          "index": 2,
+          "start_s": 0.4857142857142857,
+          "end_s": 0.6357142857142857,
+          "duration_s": 0.14999999999999997,
+          "joints": {
+            "finger_left": {
+              "delta": -0.007500000000000001,
+              "peak_velocity": 0.07500000000000002,
+              "peak_acceleration": 2.0000000000000013,
+              "velocity_limit": 0.08,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.9375000000000003,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.140625,
+              "velocity_peak_time_s": 0.5607142857142857,
+              "acceleration_peak_endpoint_times_s": [
+                0.4857142857142857,
+                0.6357142857142857
+              ]
+            },
+            "finger_right": {
+              "delta": 0.007500000000000001,
+              "peak_velocity": 0.07500000000000002,
+              "peak_acceleration": 2.0000000000000013,
+              "velocity_limit": 0.08,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.9375000000000003,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.140625,
+              "velocity_peak_time_s": 0.5607142857142857,
+              "acceleration_peak_endpoint_times_s": [
+                0.4857142857142857,
+                0.6357142857142857
+              ]
+            },
+            "joint1": {
+              "delta": 0.0,
+              "peak_velocity": 0.0,
+              "peak_acceleration": 0.0,
+              "velocity_limit": 50.0,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.0,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.0,
+              "velocity_peak_time_s": 0.5607142857142857,
+              "acceleration_peak_endpoint_times_s": [
+                0.4857142857142857,
+                0.6357142857142857
+              ]
+            },
+            "joint2": {
+              "delta": 0.0,
+              "peak_velocity": 0.0,
+              "peak_acceleration": 0.0,
+              "velocity_limit": 50.0,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.0,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.0,
+              "velocity_peak_time_s": 0.5607142857142857,
+              "acceleration_peak_endpoint_times_s": [
+                0.4857142857142857,
+                0.6357142857142857
+              ]
+            },
+            "joint3": {
+              "delta": 0.0,
+              "peak_velocity": 0.0,
+              "peak_acceleration": 0.0,
+              "velocity_limit": 50.0,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.0,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.0,
+              "velocity_peak_time_s": 0.5607142857142857,
+              "acceleration_peak_endpoint_times_s": [
+                0.4857142857142857,
+                0.6357142857142857
+              ]
+            },
+            "joint4": {
+              "delta": 0.0,
+              "peak_velocity": 0.0,
+              "peak_acceleration": 0.0,
+              "velocity_limit": 200.0,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.0,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.0,
+              "velocity_peak_time_s": 0.5607142857142857,
+              "acceleration_peak_endpoint_times_s": [
+                0.4857142857142857,
+                0.6357142857142857
+              ]
+            },
+            "joint5": {
+              "delta": 0.0,
+              "peak_velocity": 0.0,
+              "peak_acceleration": 0.0,
+              "velocity_limit": 200.0,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.0,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.0,
+              "velocity_peak_time_s": 0.5607142857142857,
+              "acceleration_peak_endpoint_times_s": [
+                0.4857142857142857,
+                0.6357142857142857
+              ]
+            },
+            "joint6": {
+              "delta": 0.0,
+              "peak_velocity": 0.0,
+              "peak_acceleration": 0.0,
+              "velocity_limit": 200.0,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.0,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.0,
+              "velocity_peak_time_s": 0.5607142857142857,
+              "acceleration_peak_endpoint_times_s": [
+                0.4857142857142857,
+                0.6357142857142857
+              ]
+            }
+          },
+          "min_duration_known_limits_s": 0.140625
+        },
+        {
+          "index": 3,
+          "start_s": 0.6357142857142857,
+          "end_s": 0.8785714285714286,
+          "duration_s": 0.24285714285714288,
+          "joints": {
+            "finger_left": {
+              "delta": 0.0,
+              "peak_velocity": 0.0,
+              "peak_acceleration": 0.0,
+              "velocity_limit": 0.08,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.0,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.0,
+              "velocity_peak_time_s": 0.7571428571428571,
+              "acceleration_peak_endpoint_times_s": [
+                0.6357142857142857,
+                0.8785714285714286
+              ]
+            },
+            "finger_right": {
+              "delta": 0.0,
+              "peak_velocity": 0.0,
+              "peak_acceleration": 0.0,
+              "velocity_limit": 0.08,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.0,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.0,
+              "velocity_peak_time_s": 0.7571428571428571,
+              "acceleration_peak_endpoint_times_s": [
+                0.6357142857142857,
+                0.8785714285714286
+              ]
+            },
+            "joint1": {
+              "delta": 1.62842771576546e-06,
+              "peak_velocity": 1.0057935891492548e-05,
+              "peak_acceleration": 0.0001656601205657596,
+              "velocity_limit": 50.0,
+              "acceleration_limit": null,
+              "velocity_ratio": 2.0115871782985095e-07,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 4.8852831472963805e-08,
+              "velocity_peak_time_s": 0.7571428571428571,
+              "acceleration_peak_endpoint_times_s": [
+                0.6357142857142857,
+                0.8785714285714286
+              ]
+            },
+            "joint2": {
+              "delta": 0.13981615194837294,
+              "peak_velocity": 0.8635703502693621,
+              "peak_acceleration": 14.223511651495375,
+              "velocity_limit": 50.0,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.017271407005387242,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.004194484558451188,
+              "velocity_peak_time_s": 0.7571428571428571,
+              "acceleration_peak_endpoint_times_s": [
+                0.6357142857142857,
+                0.8785714285714286
+              ]
+            },
+            "joint3": {
+              "delta": -0.11358562981386089,
+              "peak_velocity": 0.7015583017914937,
+              "peak_acceleration": 11.555077911859893,
+              "velocity_limit": 50.0,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.014031166035829873,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.0034075688944158267,
+              "velocity_peak_time_s": 0.7571428571428571,
+              "acceleration_peak_endpoint_times_s": [
+                0.6357142857142857,
+                0.8785714285714286
+              ]
+            },
+            "joint4": {
+              "delta": 0.25339503337318403,
+              "peak_velocity": 1.5650869708343718,
+              "peak_acceleration": 25.77790304903671,
+              "velocity_limit": 200.0,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.00782543485417186,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.0019004627502988802,
+              "velocity_peak_time_s": 0.7571428571428571,
+              "acceleration_peak_endpoint_times_s": [
+                0.6357142857142857,
+                0.8785714285714286
+              ]
+            },
+            "joint5": {
+              "delta": 1.2234965951789745e-07,
+              "peak_velocity": 7.55689073492896e-07,
+              "peak_acceleration": 1.2446643563412403e-05,
+              "velocity_limit": 200.0,
+              "acceleration_limit": null,
+              "velocity_ratio": 3.77844536746448e-09,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 9.176224463842309e-10,
+              "velocity_peak_time_s": 0.7571428571428571,
+              "acceleration_peak_endpoint_times_s": [
+                0.6357142857142857,
+                0.8785714285714286
+              ]
+            },
+            "joint6": {
+              "delta": 1.7247713002266352e-06,
+              "peak_velocity": 1.0652999207282157e-05,
+              "peak_acceleration": 0.00017546116341405905,
+              "velocity_limit": 200.0,
+              "acceleration_limit": null,
+              "velocity_ratio": 5.326499603641079e-08,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 1.2935784751699764e-08,
+              "velocity_peak_time_s": 0.7571428571428571,
+              "acceleration_peak_endpoint_times_s": [
+                0.6357142857142857,
+                0.8785714285714286
+              ]
+            }
+          },
+          "min_duration_known_limits_s": 0.004194484558451188
+        },
+        {
+          "index": 4,
+          "start_s": 0.8785714285714286,
+          "end_s": 1.1214285714285714,
+          "duration_s": 0.24285714285714288,
+          "joints": {
+            "finger_left": {
+              "delta": 0.0,
+              "peak_velocity": 0.0,
+              "peak_acceleration": 0.0,
+              "velocity_limit": 0.08,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.0,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.0,
+              "velocity_peak_time_s": 1.0,
+              "acceleration_peak_endpoint_times_s": [
+                0.8785714285714286,
+                1.1214285714285714
+              ]
+            },
+            "finger_right": {
+              "delta": 0.0,
+              "peak_velocity": 0.0,
+              "peak_acceleration": 0.0,
+              "velocity_limit": 0.08,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.0,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.0,
+              "velocity_peak_time_s": 1.0,
+              "acceleration_peak_endpoint_times_s": [
+                0.8785714285714286,
+                1.1214285714285714
+              ]
+            },
+            "joint1": {
+              "delta": -0.9356267776059848,
+              "peak_velocity": 5.778871273448728,
+              "peak_acceleration": 95.18140920974375,
+              "velocity_limit": 50.0,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.11557742546897457,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.028068803328179542,
+              "velocity_peak_time_s": 1.0,
+              "acceleration_peak_endpoint_times_s": [
+                0.8785714285714286,
+                1.1214285714285714
+              ]
+            },
+            "joint2": {
+              "delta": -0.738541394960655,
+              "peak_velocity": 4.56157920416875,
+              "peak_acceleration": 75.13189277454413,
+              "velocity_limit": 50.0,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.091231584083375,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.02215624184881965,
+              "velocity_peak_time_s": 1.0,
+              "acceleration_peak_endpoint_times_s": [
+                0.8785714285714286,
+                1.1214285714285714
+              ]
+            },
+            "joint3": {
+              "delta": -1.1444058697156978,
+              "peak_velocity": 7.0683891953028395,
+              "peak_acceleration": 116.42052792263499,
+              "velocity_limit": 50.0,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.14136778390605678,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.034332176091470934,
+              "velocity_peak_time_s": 1.0,
+              "acceleration_peak_endpoint_times_s": [
+                0.8785714285714286,
+                1.1214285714285714
+              ]
+            },
+            "joint4": {
+              "delta": 0.40587482646950956,
+              "peak_velocity": 2.5068739281940293,
+              "peak_acceleration": 41.28968822907812,
+              "velocity_limit": 200.0,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.012534369640970147,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.0030440611985213216,
+              "velocity_peak_time_s": 1.0,
+              "acceleration_peak_endpoint_times_s": [
+                0.8785714285714286,
+                1.1214285714285714
+              ]
+            },
+            "joint5": {
+              "delta": 1.3712659358916204e-06,
+              "peak_velocity": 8.469583721683538e-06,
+              "peak_acceleration": 0.0001394990260041994,
+              "velocity_limit": 200.0,
+              "acceleration_limit": null,
+              "velocity_ratio": 4.234791860841769e-08,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 1.0284494519187153e-08,
+              "velocity_peak_time_s": 1.0,
+              "acceleration_peak_endpoint_times_s": [
+                0.8785714285714286,
+                1.1214285714285714
+              ]
+            },
+            "joint6": {
+              "delta": -0.9356268739615491,
+              "peak_velocity": 5.778871868586038,
+              "peak_acceleration": 95.18141901200532,
+              "velocity_limit": 200.0,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.028894359342930193,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.0070172015547116185,
+              "velocity_peak_time_s": 1.0,
+              "acceleration_peak_endpoint_times_s": [
+                0.8785714285714286,
+                1.1214285714285714
+              ]
+            }
+          },
+          "min_duration_known_limits_s": 0.034332176091470934
+        },
+        {
+          "index": 5,
+          "start_s": 1.1214285714285714,
+          "end_s": 1.3642857142857143,
+          "duration_s": 0.24285714285714288,
+          "joints": {
+            "finger_left": {
+              "delta": 0.0,
+              "peak_velocity": 0.0,
+              "peak_acceleration": 0.0,
+              "velocity_limit": 0.08,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.0,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.0,
+              "velocity_peak_time_s": 1.2428571428571429,
+              "acceleration_peak_endpoint_times_s": [
+                1.1214285714285714,
+                1.3642857142857143
+              ]
+            },
+            "finger_right": {
+              "delta": 0.0,
+              "peak_velocity": 0.0,
+              "peak_acceleration": 0.0,
+              "velocity_limit": 0.08,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.0,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.0,
+              "velocity_peak_time_s": 1.2428571428571429,
+              "acceleration_peak_endpoint_times_s": [
+                1.1214285714285714,
+                1.3642857142857143
+              ]
+            },
+            "joint1": {
+              "delta": 4.667613884290489e-07,
+              "peak_velocity": 2.88293798735589e-06,
+              "peak_acceleration": 4.748368449762642e-05,
+              "velocity_limit": 50.0,
+              "acceleration_limit": null,
+              "velocity_ratio": 5.76587597471178e-08,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 1.4002841652871468e-08,
+              "velocity_peak_time_s": 1.2428571428571429,
+              "acceleration_peak_endpoint_times_s": [
+                1.1214285714285714,
+                1.3642857142857143
+              ]
+            },
+            "joint2": {
+              "delta": -0.054338431026625056,
+              "peak_velocity": 0.33561972104680177,
+              "peak_acceleration": 5.527854229006146,
+              "velocity_limit": 50.0,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.006712394420936035,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.0016301529307987516,
+              "velocity_peak_time_s": 1.2428571428571429,
+              "acceleration_peak_endpoint_times_s": [
+                1.1214285714285714,
+                1.3642857142857143
+              ]
+            },
+            "joint3": {
+              "delta": 0.14426069911357642,
+              "peak_velocity": 0.891021965113266,
+              "peak_acceleration": 14.675655895983203,
+              "velocity_limit": 50.0,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.01782043930226532,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.004327820973407293,
+              "velocity_peak_time_s": 1.2428571428571429,
+              "acceleration_peak_endpoint_times_s": [
+                1.1214285714285714,
+                1.3642857142857143
+              ]
+            },
+            "joint4": {
+              "delta": -0.1985886346867738,
+              "peak_velocity": 1.2265768613006616,
+              "peak_acceleration": 20.202442421422656,
+              "velocity_limit": 200.0,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.006132884306503308,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.0014894147601508035,
+              "velocity_peak_time_s": 1.2428571428571429,
+              "acceleration_peak_endpoint_times_s": [
+                1.1214285714285714,
+                1.3642857142857143
+              ]
+            },
+            "joint5": {
+              "delta": 1.5213502786074037e-11,
+              "peak_velocity": 9.396575250222199e-11,
+              "peak_acceleration": 1.547671217683656e-09,
+              "velocity_limit": 200.0,
+              "acceleration_limit": null,
+              "velocity_ratio": 4.698287625111099e-13,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 1.141012708955553e-13,
+              "velocity_peak_time_s": 1.2428571428571429,
+              "acceleration_peak_endpoint_times_s": [
+                1.1214285714285714,
+                1.3642857142857143
+              ]
+            },
+            "joint6": {
+              "delta": 4.666987825086011e-07,
+              "peak_velocity": 2.8825513037295946e-06,
+              "peak_acceleration": 4.747731559084038e-05,
+              "velocity_limit": 200.0,
+              "acceleration_limit": null,
+              "velocity_ratio": 1.4412756518647973e-08,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 3.500240868814508e-09,
+              "velocity_peak_time_s": 1.2428571428571429,
+              "acceleration_peak_endpoint_times_s": [
+                1.1214285714285714,
+                1.3642857142857143
+              ]
+            }
+          },
+          "min_duration_known_limits_s": 0.004327820973407293
+        },
+        {
+          "index": 6,
+          "start_s": 1.3642857142857143,
+          "end_s": 1.5142857142857142,
+          "duration_s": 0.1499999999999999,
+          "joints": {
+            "finger_left": {
+              "delta": 0.007500000000000001,
+              "peak_velocity": 0.07500000000000005,
+              "peak_acceleration": 2.0000000000000027,
+              "velocity_limit": 0.08,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.9375000000000007,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.140625,
+              "velocity_peak_time_s": 1.4392857142857143,
+              "acceleration_peak_endpoint_times_s": [
+                1.3642857142857143,
+                1.5142857142857142
+              ]
+            },
+            "finger_right": {
+              "delta": -0.007500000000000001,
+              "peak_velocity": 0.07500000000000005,
+              "peak_acceleration": 2.0000000000000027,
+              "velocity_limit": 0.08,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.9375000000000007,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.140625,
+              "velocity_peak_time_s": 1.4392857142857143,
+              "acceleration_peak_endpoint_times_s": [
+                1.3642857142857143,
+                1.5142857142857142
+              ]
+            },
+            "joint1": {
+              "delta": 0.0,
+              "peak_velocity": 0.0,
+              "peak_acceleration": 0.0,
+              "velocity_limit": 50.0,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.0,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.0,
+              "velocity_peak_time_s": 1.4392857142857143,
+              "acceleration_peak_endpoint_times_s": [
+                1.3642857142857143,
+                1.5142857142857142
+              ]
+            },
+            "joint2": {
+              "delta": 0.0,
+              "peak_velocity": 0.0,
+              "peak_acceleration": 0.0,
+              "velocity_limit": 50.0,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.0,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.0,
+              "velocity_peak_time_s": 1.4392857142857143,
+              "acceleration_peak_endpoint_times_s": [
+                1.3642857142857143,
+                1.5142857142857142
+              ]
+            },
+            "joint3": {
+              "delta": 0.0,
+              "peak_velocity": 0.0,
+              "peak_acceleration": 0.0,
+              "velocity_limit": 50.0,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.0,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.0,
+              "velocity_peak_time_s": 1.4392857142857143,
+              "acceleration_peak_endpoint_times_s": [
+                1.3642857142857143,
+                1.5142857142857142
+              ]
+            },
+            "joint4": {
+              "delta": 0.0,
+              "peak_velocity": 0.0,
+              "peak_acceleration": 0.0,
+              "velocity_limit": 200.0,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.0,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.0,
+              "velocity_peak_time_s": 1.4392857142857143,
+              "acceleration_peak_endpoint_times_s": [
+                1.3642857142857143,
+                1.5142857142857142
+              ]
+            },
+            "joint5": {
+              "delta": 0.0,
+              "peak_velocity": 0.0,
+              "peak_acceleration": 0.0,
+              "velocity_limit": 200.0,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.0,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.0,
+              "velocity_peak_time_s": 1.4392857142857143,
+              "acceleration_peak_endpoint_times_s": [
+                1.3642857142857143,
+                1.5142857142857142
+              ]
+            },
+            "joint6": {
+              "delta": 0.0,
+              "peak_velocity": 0.0,
+              "peak_acceleration": 0.0,
+              "velocity_limit": 200.0,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.0,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.0,
+              "velocity_peak_time_s": 1.4392857142857143,
+              "acceleration_peak_endpoint_times_s": [
+                1.3642857142857143,
+                1.5142857142857142
+              ]
+            }
+          },
+          "min_duration_known_limits_s": 0.140625
+        },
+        {
+          "index": 7,
+          "start_s": 1.5142857142857142,
+          "end_s": 1.7571428571428571,
+          "duration_s": 0.24285714285714288,
+          "joints": {
+            "finger_left": {
+              "delta": 0.0,
+              "peak_velocity": 0.0,
+              "peak_acceleration": 0.0,
+              "velocity_limit": 0.08,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.0,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.0,
+              "velocity_peak_time_s": 1.6357142857142857,
+              "acceleration_peak_endpoint_times_s": [
+                1.5142857142857142,
+                1.7571428571428571
+              ]
+            },
+            "finger_right": {
+              "delta": 0.0,
+              "peak_velocity": 0.0,
+              "peak_acceleration": 0.0,
+              "velocity_limit": 0.08,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.0,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.0,
+              "velocity_peak_time_s": 1.6357142857142857,
+              "acceleration_peak_endpoint_times_s": [
+                1.5142857142857142,
+                1.7571428571428571
+              ]
+            },
+            "joint1": {
+              "delta": -4.667613884290489e-07,
+              "peak_velocity": 2.88293798735589e-06,
+              "peak_acceleration": 4.748368449762642e-05,
+              "velocity_limit": 50.0,
+              "acceleration_limit": null,
+              "velocity_ratio": 5.76587597471178e-08,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 1.4002841652871468e-08,
+              "velocity_peak_time_s": 1.6357142857142857,
+              "acceleration_peak_endpoint_times_s": [
+                1.5142857142857142,
+                1.7571428571428571
+              ]
+            },
+            "joint2": {
+              "delta": 0.054338431026625056,
+              "peak_velocity": 0.33561972104680177,
+              "peak_acceleration": 5.527854229006146,
+              "velocity_limit": 50.0,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.006712394420936035,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.0016301529307987516,
+              "velocity_peak_time_s": 1.6357142857142857,
+              "acceleration_peak_endpoint_times_s": [
+                1.5142857142857142,
+                1.7571428571428571
+              ]
+            },
+            "joint3": {
+              "delta": -0.14426069911357642,
+              "peak_velocity": 0.891021965113266,
+              "peak_acceleration": 14.675655895983203,
+              "velocity_limit": 50.0,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.01782043930226532,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.004327820973407293,
+              "velocity_peak_time_s": 1.6357142857142857,
+              "acceleration_peak_endpoint_times_s": [
+                1.5142857142857142,
+                1.7571428571428571
+              ]
+            },
+            "joint4": {
+              "delta": 0.1985886346867738,
+              "peak_velocity": 1.2265768613006616,
+              "peak_acceleration": 20.202442421422656,
+              "velocity_limit": 200.0,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.006132884306503308,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.0014894147601508035,
+              "velocity_peak_time_s": 1.6357142857142857,
+              "acceleration_peak_endpoint_times_s": [
+                1.5142857142857142,
+                1.7571428571428571
+              ]
+            },
+            "joint5": {
+              "delta": -1.5213502786074037e-11,
+              "peak_velocity": 9.396575250222199e-11,
+              "peak_acceleration": 1.547671217683656e-09,
+              "velocity_limit": 200.0,
+              "acceleration_limit": null,
+              "velocity_ratio": 4.698287625111099e-13,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 1.141012708955553e-13,
+              "velocity_peak_time_s": 1.6357142857142857,
+              "acceleration_peak_endpoint_times_s": [
+                1.5142857142857142,
+                1.7571428571428571
+              ]
+            },
+            "joint6": {
+              "delta": -4.666987825086011e-07,
+              "peak_velocity": 2.8825513037295946e-06,
+              "peak_acceleration": 4.747731559084038e-05,
+              "velocity_limit": 200.0,
+              "acceleration_limit": null,
+              "velocity_ratio": 1.4412756518647973e-08,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 3.500240868814508e-09,
+              "velocity_peak_time_s": 1.6357142857142857,
+              "acceleration_peak_endpoint_times_s": [
+                1.5142857142857142,
+                1.7571428571428571
+              ]
+            }
+          },
+          "min_duration_known_limits_s": 0.004327820973407293
+        },
+        {
+          "index": 8,
+          "start_s": 1.7571428571428571,
+          "end_s": 2.0,
+          "duration_s": 0.24285714285714288,
+          "joints": {
+            "finger_left": {
+              "delta": 0.0,
+              "peak_velocity": 0.0,
+              "peak_acceleration": 0.0,
+              "velocity_limit": 0.08,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.0,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.0,
+              "velocity_peak_time_s": 1.8785714285714286,
+              "acceleration_peak_endpoint_times_s": [
+                1.7571428571428571,
+                2.0
+              ]
+            },
+            "finger_right": {
+              "delta": 0.0,
+              "peak_velocity": 0.0,
+              "peak_acceleration": 0.0,
+              "velocity_limit": 0.08,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.0,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.0,
+              "velocity_peak_time_s": 1.8785714285714286,
+              "acceleration_peak_endpoint_times_s": [
+                1.7571428571428571,
+                2.0
+              ]
+            },
+            "joint1": {
+              "delta": 0.9356271244621062,
+              "peak_velocity": 5.778873415795361,
+              "peak_acceleration": 95.181444495453,
+              "velocity_limit": 50.0,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.11557746831590722,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.028068813733863184,
+              "velocity_peak_time_s": 1.8785714285714286,
+              "acceleration_peak_endpoint_times_s": [
+                1.7571428571428571,
+                2.0
+              ]
+            },
+            "joint2": {
+              "delta": 1.8698425148975137,
+              "peak_velocity": 11.549027297896409,
+              "peak_acceleration": 190.21927314182318,
+              "velocity_limit": 50.0,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.23098054595792816,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.05609527544692541,
+              "velocity_peak_time_s": 1.8785714285714286,
+              "acceleration_peak_endpoint_times_s": [
+                1.7571428571428571,
+                2.0
+              ]
+            },
+            "joint3": {
+              "delta": 0.27510312588122243,
+              "peak_velocity": 1.699166365736962,
+              "peak_acceleration": 27.986269553314663,
+              "velocity_limit": 50.0,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.03398332731473924,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.008253093776436673,
+              "velocity_peak_time_s": 1.8785714285714286,
+              "acceleration_peak_endpoint_times_s": [
+                1.7571428571428571,
+                2.0
+              ]
+            },
+            "joint4": {
+              "delta": -0.3760588191933455,
+              "peak_velocity": 2.3227162361941924,
+              "peak_acceleration": 38.256502713786695,
+              "velocity_limit": 200.0,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.011613581180970962,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.002820441143950091,
+              "velocity_peak_time_s": 1.8785714285714286,
+              "acceleration_peak_endpoint_times_s": [
+                1.7571428571428571,
+                2.0
+              ]
+            },
+            "joint5": {
+              "delta": 5.852373354473834e-06,
+              "peak_velocity": 3.614701189527956e-05,
+              "peak_acceleration": 0.000595362548863428,
+              "velocity_limit": 200.0,
+              "acceleration_limit": null,
+              "velocity_ratio": 1.8073505947639779e-07,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 4.389280015855376e-08,
+              "velocity_peak_time_s": 1.8785714285714286,
+              "acceleration_peak_endpoint_times_s": [
+                1.7571428571428571,
+                2.0
+              ]
+            },
+            "joint6": {
+              "delta": -0.6352655293255839,
+              "peak_velocity": 3.9236988575991942,
+              "peak_acceleration": 64.62562824281025,
+              "velocity_limit": 200.0,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.01961849428799597,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.00476449146994188,
+              "velocity_peak_time_s": 1.8785714285714286,
+              "acceleration_peak_endpoint_times_s": [
+                1.7571428571428571,
+                2.0
+              ]
+            }
+          },
+          "min_duration_known_limits_s": 0.05609527544692541
+        }
+      ],
+      "limitations": [
+        "Declared URDF limits are not independently verified hardware specifications",
+        "Missing limits are unverified, not passing",
+        "Cubic smoothstep has acceleration jumps and unbounded ideal jerk at joins",
+        "No payload, torque, tracking error or real controller dynamics considered",
+        "Minimum duration uses known limits only and is not an approved retiming"
+      ],
+      "runtime_crosscheck": {
+        "passed": true,
+        "normalized_max_errors": {
+          "position": 2.220446049250313e-16,
+          "velocity": 1.777778031160949e-06,
+          "acceleration": 1.12943103543182e-08
+        },
+        "tolerance": 1e-05,
+        "method": "central differences at u=.25/.5/.75, h=T*.001; endpoints use analytical one-sided limits"
+      },
+      "endpoint_reset": {
+        "status": "continuous",
+        "joints": {
+          "finger_left": {
+            "delta": 0.0,
+            "physical_delta": 0.0,
+            "status": "continuous"
+          },
+          "finger_right": {
+            "delta": 0.0,
+            "physical_delta": 0.0,
+            "status": "continuous"
+          },
+          "joint1": {
+            "delta": 0.0,
+            "physical_delta": 0.0,
+            "status": "continuous"
+          },
+          "joint2": {
+            "delta": -1.1102230246251565e-16,
+            "physical_delta": -1.1102230246251565e-16,
+            "status": "continuous"
+          },
+          "joint3": {
+            "delta": 0.0,
+            "physical_delta": 0.0,
+            "status": "continuous"
+          },
+          "joint4": {
+            "delta": 0.0,
+            "physical_delta": 0.0,
+            "status": "continuous"
+          },
+          "joint5": {
+            "delta": 0.0,
+            "physical_delta": 0.0,
+            "status": "continuous"
+          },
+          "joint6": {
+            "delta": 0.0,
+            "physical_delta": 0.0,
+            "status": "continuous"
+          }
+        },
+        "note": "Position jumps cannot be assigned finite continuous-time rate bounds"
+      }
+    },
+    "inspection_machine": {
+      "status": "discontinuous",
+      "duration_s": 8.2,
+      "joints": {
+        "b_joint": {
+          "type": "continuous",
+          "units": "rad/s, rad/s^2",
+          "velocity_limit": null,
+          "acceleration_limit": null,
+          "peak_velocity": 2.617993877991493,
+          "peak_acceleration": 23.27105669325771,
+          "velocity_status": "unverified",
+          "acceleration_status": "unverified",
+          "velocity_peak_segment": 3,
+          "acceleration_peak_segment": 3
+        },
+        "c_joint": {
+          "type": "continuous",
+          "units": "rad/s, rad/s^2",
+          "velocity_limit": null,
+          "acceleration_limit": null,
+          "peak_velocity": 5.235987755982986,
+          "peak_acceleration": 46.54211338651542,
+          "velocity_status": "unverified",
+          "acceleration_status": "unverified",
+          "velocity_peak_segment": 5,
+          "acceleration_peak_segment": 5
+        },
+        "x_joint": {
+          "type": "prismatic",
+          "units": "m/s, m/s^2",
+          "velocity_limit": 0.1,
+          "acceleration_limit": null,
+          "peak_velocity": 0.4846666666666666,
+          "peak_acceleration": 4.308148148148145,
+          "velocity_status": "exceeded",
+          "acceleration_status": "unverified",
+          "velocity_peak_segment": 11,
+          "acceleration_peak_segment": 1
+        },
+        "y_joint": {
+          "type": "prismatic",
+          "units": "m/s, m/s^2",
+          "velocity_limit": 0.1,
+          "acceleration_limit": null,
+          "peak_velocity": 0.16991666666666658,
+          "peak_acceleration": 1.510370370370369,
+          "velocity_status": "exceeded",
+          "acceleration_status": "unverified",
+          "velocity_peak_segment": 1,
+          "acceleration_peak_segment": 1
+        },
+        "z_joint": {
+          "type": "prismatic",
+          "units": "m/s, m/s^2",
+          "velocity_limit": 0.1,
+          "acceleration_limit": null,
+          "peak_velocity": 0.03284686151327196,
+          "peak_acceleration": 0.29197210234019505,
+          "velocity_status": "within",
+          "acceleration_status": "unverified",
+          "velocity_peak_segment": 11,
+          "acceleration_peak_segment": 11
+        }
+      },
+      "segments": [
+        {
+          "index": 0,
+          "start_s": 0.0,
+          "end_s": 2.0,
+          "duration_s": 2.0,
+          "joints": {
+            "b_joint": {
+              "delta": 0.0,
+              "peak_velocity": 0.0,
+              "peak_acceleration": 0.0,
+              "velocity_limit": null,
+              "acceleration_limit": null,
+              "velocity_ratio": null,
+              "acceleration_ratio": null,
+              "velocity_status": "unverified",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0,
+              "velocity_peak_time_s": 1.0,
+              "acceleration_peak_endpoint_times_s": [
+                0.0,
+                2.0
+              ]
+            },
+            "c_joint": {
+              "delta": 0.0,
+              "peak_velocity": 0.0,
+              "peak_acceleration": 0.0,
+              "velocity_limit": null,
+              "acceleration_limit": null,
+              "velocity_ratio": null,
+              "acceleration_ratio": null,
+              "velocity_status": "unverified",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0,
+              "velocity_peak_time_s": 1.0,
+              "acceleration_peak_endpoint_times_s": [
+                0.0,
+                2.0
+              ]
+            },
+            "x_joint": {
+              "delta": 0.0,
+              "peak_velocity": 0.0,
+              "peak_acceleration": 0.0,
+              "velocity_limit": 0.1,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.0,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.0,
+              "velocity_peak_time_s": 1.0,
+              "acceleration_peak_endpoint_times_s": [
+                0.0,
+                2.0
+              ]
+            },
+            "y_joint": {
+              "delta": 0.0,
+              "peak_velocity": 0.0,
+              "peak_acceleration": 0.0,
+              "velocity_limit": 0.1,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.0,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.0,
+              "velocity_peak_time_s": 1.0,
+              "acceleration_peak_endpoint_times_s": [
+                0.0,
+                2.0
+              ]
+            },
+            "z_joint": {
+              "delta": 0.0,
+              "peak_velocity": 0.0,
+              "peak_acceleration": 0.0,
+              "velocity_limit": 0.1,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.0,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.0,
+              "velocity_peak_time_s": 1.0,
+              "acceleration_peak_endpoint_times_s": [
+                0.0,
+                2.0
+              ]
+            }
+          },
+          "min_duration_known_limits_s": 0
+        },
+        {
+          "index": 1,
+          "start_s": 2.0,
+          "end_s": 2.45,
+          "duration_s": 0.4500000000000002,
+          "joints": {
+            "b_joint": {
+              "delta": 0.0,
+              "peak_velocity": 0.0,
+              "peak_acceleration": 0.0,
+              "velocity_limit": null,
+              "acceleration_limit": null,
+              "velocity_ratio": null,
+              "acceleration_ratio": null,
+              "velocity_status": "unverified",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0,
+              "velocity_peak_time_s": 2.225,
+              "acceleration_peak_endpoint_times_s": [
+                2.0,
+                2.45
+              ]
+            },
+            "c_joint": {
+              "delta": 0.0,
+              "peak_velocity": 0.0,
+              "peak_acceleration": 0.0,
+              "velocity_limit": null,
+              "acceleration_limit": null,
+              "velocity_ratio": null,
+              "acceleration_ratio": null,
+              "velocity_status": "unverified",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0,
+              "velocity_peak_time_s": 2.225,
+              "acceleration_peak_endpoint_times_s": [
+                2.0,
+                2.45
+              ]
+            },
+            "x_joint": {
+              "delta": -0.1454,
+              "peak_velocity": 0.4846666666666665,
+              "peak_acceleration": 4.308148148148145,
+              "velocity_limit": 0.1,
+              "acceleration_limit": null,
+              "velocity_ratio": 4.846666666666665,
+              "acceleration_ratio": null,
+              "velocity_status": "exceeded",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 2.181,
+              "velocity_peak_time_s": 2.225,
+              "acceleration_peak_endpoint_times_s": [
+                2.0,
+                2.45
+              ]
+            },
+            "y_joint": {
+              "delta": 0.05097499999999999,
+              "peak_velocity": 0.16991666666666658,
+              "peak_acceleration": 1.510370370370369,
+              "velocity_limit": 0.1,
+              "acceleration_limit": null,
+              "velocity_ratio": 1.6991666666666656,
+              "acceleration_ratio": null,
+              "velocity_status": "exceeded",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.7646249999999999,
+              "velocity_peak_time_s": 2.225,
+              "acceleration_peak_endpoint_times_s": [
+                2.0,
+                2.45
+              ]
+            },
+            "z_joint": {
+              "delta": -0.005899999999999923,
+              "peak_velocity": 0.019666666666666402,
+              "peak_acceleration": 0.1748148148148124,
+              "velocity_limit": 0.1,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.19666666666666402,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.08849999999999883,
+              "velocity_peak_time_s": 2.225,
+              "acceleration_peak_endpoint_times_s": [
+                2.0,
+                2.45
+              ]
+            }
+          },
+          "min_duration_known_limits_s": 2.181
+        },
+        {
+          "index": 2,
+          "start_s": 2.45,
+          "end_s": 2.75,
+          "duration_s": 0.2999999999999998,
+          "joints": {
+            "b_joint": {
+              "delta": 0.0,
+              "peak_velocity": 0.0,
+              "peak_acceleration": 0.0,
+              "velocity_limit": null,
+              "acceleration_limit": null,
+              "velocity_ratio": null,
+              "acceleration_ratio": null,
+              "velocity_status": "unverified",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0,
+              "velocity_peak_time_s": 2.6,
+              "acceleration_peak_endpoint_times_s": [
+                2.45,
+                2.75
+              ]
+            },
+            "c_joint": {
+              "delta": 0.0,
+              "peak_velocity": 0.0,
+              "peak_acceleration": 0.0,
+              "velocity_limit": null,
+              "acceleration_limit": null,
+              "velocity_ratio": null,
+              "acceleration_ratio": null,
+              "velocity_status": "unverified",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0,
+              "velocity_peak_time_s": 2.6,
+              "acceleration_peak_endpoint_times_s": [
+                2.45,
+                2.75
+              ]
+            },
+            "x_joint": {
+              "delta": 0.0,
+              "peak_velocity": 0.0,
+              "peak_acceleration": 0.0,
+              "velocity_limit": 0.1,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.0,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.0,
+              "velocity_peak_time_s": 2.6,
+              "acceleration_peak_endpoint_times_s": [
+                2.45,
+                2.75
+              ]
+            },
+            "y_joint": {
+              "delta": 0.0,
+              "peak_velocity": 0.0,
+              "peak_acceleration": 0.0,
+              "velocity_limit": 0.1,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.0,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.0,
+              "velocity_peak_time_s": 2.6,
+              "acceleration_peak_endpoint_times_s": [
+                2.45,
+                2.75
+              ]
+            },
+            "z_joint": {
+              "delta": 0.0,
+              "peak_velocity": 0.0,
+              "peak_acceleration": 0.0,
+              "velocity_limit": 0.1,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.0,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.0,
+              "velocity_peak_time_s": 2.6,
+              "acceleration_peak_endpoint_times_s": [
+                2.45,
+                2.75
+              ]
+            }
+          },
+          "min_duration_known_limits_s": 0
+        },
+        {
+          "index": 3,
+          "start_s": 2.75,
+          "end_s": 3.2,
+          "duration_s": 0.4500000000000002,
+          "joints": {
+            "b_joint": {
+              "delta": 0.7853981633974483,
+              "peak_velocity": 2.617993877991493,
+              "peak_acceleration": 23.27105669325771,
+              "velocity_limit": null,
+              "acceleration_limit": null,
+              "velocity_ratio": null,
+              "acceleration_ratio": null,
+              "velocity_status": "unverified",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0,
+              "velocity_peak_time_s": 2.975,
+              "acceleration_peak_endpoint_times_s": [
+                2.75,
+                3.2
+              ]
+            },
+            "c_joint": {
+              "delta": 0.0,
+              "peak_velocity": 0.0,
+              "peak_acceleration": 0.0,
+              "velocity_limit": null,
+              "acceleration_limit": null,
+              "velocity_ratio": null,
+              "acceleration_ratio": null,
+              "velocity_status": "unverified",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0,
+              "velocity_peak_time_s": 2.975,
+              "acceleration_peak_endpoint_times_s": [
+                2.75,
+                3.2
+              ]
+            },
+            "x_joint": {
+              "delta": 0.0,
+              "peak_velocity": 0.0,
+              "peak_acceleration": 0.0,
+              "velocity_limit": 0.1,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.0,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.0,
+              "velocity_peak_time_s": 2.975,
+              "acceleration_peak_endpoint_times_s": [
+                2.75,
+                3.2
+              ]
+            },
+            "y_joint": {
+              "delta": -0.009545941546018392,
+              "peak_velocity": 0.03181980515339463,
+              "peak_acceleration": 0.28284271247461884,
+              "velocity_limit": 0.1,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.31819805153394626,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.14318912319027588,
+              "velocity_peak_time_s": 2.975,
+              "acceleration_peak_endpoint_times_s": [
+                2.75,
+                3.2
+              ]
+            },
+            "z_joint": {
+              "delta": -0.003954058453981668,
+              "peak_velocity": 0.013180194846605556,
+              "peak_acceleration": 0.11715728752538267,
+              "velocity_limit": 0.1,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.13180194846605556,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.05931087680972502,
+              "velocity_peak_time_s": 2.975,
+              "acceleration_peak_endpoint_times_s": [
+                2.75,
+                3.2
+              ]
+            }
+          },
+          "min_duration_known_limits_s": 0.14318912319027588
+        },
+        {
+          "index": 4,
+          "start_s": 3.2,
+          "end_s": 3.5,
+          "duration_s": 0.2999999999999998,
+          "joints": {
+            "b_joint": {
+              "delta": 0.0,
+              "peak_velocity": 0.0,
+              "peak_acceleration": 0.0,
+              "velocity_limit": null,
+              "acceleration_limit": null,
+              "velocity_ratio": null,
+              "acceleration_ratio": null,
+              "velocity_status": "unverified",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0,
+              "velocity_peak_time_s": 3.35,
+              "acceleration_peak_endpoint_times_s": [
+                3.2,
+                3.5
+              ]
+            },
+            "c_joint": {
+              "delta": 0.0,
+              "peak_velocity": 0.0,
+              "peak_acceleration": 0.0,
+              "velocity_limit": null,
+              "acceleration_limit": null,
+              "velocity_ratio": null,
+              "acceleration_ratio": null,
+              "velocity_status": "unverified",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0,
+              "velocity_peak_time_s": 3.35,
+              "acceleration_peak_endpoint_times_s": [
+                3.2,
+                3.5
+              ]
+            },
+            "x_joint": {
+              "delta": 0.0,
+              "peak_velocity": 0.0,
+              "peak_acceleration": 0.0,
+              "velocity_limit": 0.1,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.0,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.0,
+              "velocity_peak_time_s": 3.35,
+              "acceleration_peak_endpoint_times_s": [
+                3.2,
+                3.5
+              ]
+            },
+            "y_joint": {
+              "delta": 0.0,
+              "peak_velocity": 0.0,
+              "peak_acceleration": 0.0,
+              "velocity_limit": 0.1,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.0,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.0,
+              "velocity_peak_time_s": 3.35,
+              "acceleration_peak_endpoint_times_s": [
+                3.2,
+                3.5
+              ]
+            },
+            "z_joint": {
+              "delta": 0.0,
+              "peak_velocity": 0.0,
+              "peak_acceleration": 0.0,
+              "velocity_limit": 0.1,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.0,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.0,
+              "velocity_peak_time_s": 3.35,
+              "acceleration_peak_endpoint_times_s": [
+                3.2,
+                3.5
+              ]
+            }
+          },
+          "min_duration_known_limits_s": 0
+        },
+        {
+          "index": 5,
+          "start_s": 3.5,
+          "end_s": 3.95,
+          "duration_s": 0.4500000000000002,
+          "joints": {
+            "b_joint": {
+              "delta": 0.0,
+              "peak_velocity": 0.0,
+              "peak_acceleration": 0.0,
+              "velocity_limit": null,
+              "acceleration_limit": null,
+              "velocity_ratio": null,
+              "acceleration_ratio": null,
+              "velocity_status": "unverified",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0,
+              "velocity_peak_time_s": 3.725,
+              "acceleration_peak_endpoint_times_s": [
+                3.5,
+                3.95
+              ]
+            },
+            "c_joint": {
+              "delta": 1.5707963267948966,
+              "peak_velocity": 5.235987755982986,
+              "peak_acceleration": 46.54211338651542,
+              "velocity_limit": null,
+              "acceleration_limit": null,
+              "velocity_ratio": null,
+              "acceleration_ratio": null,
+              "velocity_status": "unverified",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0,
+              "velocity_peak_time_s": 3.725,
+              "acceleration_peak_endpoint_times_s": [
+                3.5,
+                3.95
+              ]
+            },
+            "x_joint": {
+              "delta": 0.0,
+              "peak_velocity": 0.0,
+              "peak_acceleration": 0.0,
+              "velocity_limit": 0.1,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.0,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.0,
+              "velocity_peak_time_s": 3.725,
+              "acceleration_peak_endpoint_times_s": [
+                3.5,
+                3.95
+              ]
+            },
+            "y_joint": {
+              "delta": 0.0,
+              "peak_velocity": 0.0,
+              "peak_acceleration": 0.0,
+              "velocity_limit": 0.1,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.0,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.0,
+              "velocity_peak_time_s": 3.725,
+              "acceleration_peak_endpoint_times_s": [
+                3.5,
+                3.95
+              ]
+            },
+            "z_joint": {
+              "delta": 0.0,
+              "peak_velocity": 0.0,
+              "peak_acceleration": 0.0,
+              "velocity_limit": 0.1,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.0,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.0,
+              "velocity_peak_time_s": 3.725,
+              "acceleration_peak_endpoint_times_s": [
+                3.5,
+                3.95
+              ]
+            }
+          },
+          "min_duration_known_limits_s": 0
+        },
+        {
+          "index": 6,
+          "start_s": 3.95,
+          "end_s": 4.25,
+          "duration_s": 0.2999999999999998,
+          "joints": {
+            "b_joint": {
+              "delta": 0.0,
+              "peak_velocity": 0.0,
+              "peak_acceleration": 0.0,
+              "velocity_limit": null,
+              "acceleration_limit": null,
+              "velocity_ratio": null,
+              "acceleration_ratio": null,
+              "velocity_status": "unverified",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0,
+              "velocity_peak_time_s": 4.1,
+              "acceleration_peak_endpoint_times_s": [
+                3.95,
+                4.25
+              ]
+            },
+            "c_joint": {
+              "delta": 0.0,
+              "peak_velocity": 0.0,
+              "peak_acceleration": 0.0,
+              "velocity_limit": null,
+              "acceleration_limit": null,
+              "velocity_ratio": null,
+              "acceleration_ratio": null,
+              "velocity_status": "unverified",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0,
+              "velocity_peak_time_s": 4.1,
+              "acceleration_peak_endpoint_times_s": [
+                3.95,
+                4.25
+              ]
+            },
+            "x_joint": {
+              "delta": 0.0,
+              "peak_velocity": 0.0,
+              "peak_acceleration": 0.0,
+              "velocity_limit": 0.1,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.0,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.0,
+              "velocity_peak_time_s": 4.1,
+              "acceleration_peak_endpoint_times_s": [
+                3.95,
+                4.25
+              ]
+            },
+            "y_joint": {
+              "delta": 0.0,
+              "peak_velocity": 0.0,
+              "peak_acceleration": 0.0,
+              "velocity_limit": 0.1,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.0,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.0,
+              "velocity_peak_time_s": 4.1,
+              "acceleration_peak_endpoint_times_s": [
+                3.95,
+                4.25
+              ]
+            },
+            "z_joint": {
+              "delta": 0.0,
+              "peak_velocity": 0.0,
+              "peak_acceleration": 0.0,
+              "velocity_limit": 0.1,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.0,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.0,
+              "velocity_peak_time_s": 4.1,
+              "acceleration_peak_endpoint_times_s": [
+                3.95,
+                4.25
+              ]
+            }
+          },
+          "min_duration_known_limits_s": 0
+        },
+        {
+          "index": 7,
+          "start_s": 4.25,
+          "end_s": 4.7,
+          "duration_s": 0.4500000000000002,
+          "joints": {
+            "b_joint": {
+              "delta": 0.0,
+              "peak_velocity": 0.0,
+              "peak_acceleration": 0.0,
+              "velocity_limit": null,
+              "acceleration_limit": null,
+              "velocity_ratio": null,
+              "acceleration_ratio": null,
+              "velocity_status": "unverified",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0,
+              "velocity_peak_time_s": 4.475,
+              "acceleration_peak_endpoint_times_s": [
+                4.25,
+                4.7
+              ]
+            },
+            "c_joint": {
+              "delta": 1.5707963267948966,
+              "peak_velocity": 5.235987755982986,
+              "peak_acceleration": 46.54211338651542,
+              "velocity_limit": null,
+              "acceleration_limit": null,
+              "velocity_ratio": null,
+              "acceleration_ratio": null,
+              "velocity_status": "unverified",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0,
+              "velocity_peak_time_s": 4.475,
+              "acceleration_peak_endpoint_times_s": [
+                4.25,
+                4.7
+              ]
+            },
+            "x_joint": {
+              "delta": 0.0,
+              "peak_velocity": 0.0,
+              "peak_acceleration": 0.0,
+              "velocity_limit": 0.1,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.0,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.0,
+              "velocity_peak_time_s": 4.475,
+              "acceleration_peak_endpoint_times_s": [
+                4.25,
+                4.7
+              ]
+            },
+            "y_joint": {
+              "delta": 0.0,
+              "peak_velocity": 0.0,
+              "peak_acceleration": 0.0,
+              "velocity_limit": 0.1,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.0,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.0,
+              "velocity_peak_time_s": 4.475,
+              "acceleration_peak_endpoint_times_s": [
+                4.25,
+                4.7
+              ]
+            },
+            "z_joint": {
+              "delta": 0.0,
+              "peak_velocity": 0.0,
+              "peak_acceleration": 0.0,
+              "velocity_limit": 0.1,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.0,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.0,
+              "velocity_peak_time_s": 4.475,
+              "acceleration_peak_endpoint_times_s": [
+                4.25,
+                4.7
+              ]
+            }
+          },
+          "min_duration_known_limits_s": 0
+        },
+        {
+          "index": 8,
+          "start_s": 4.7,
+          "end_s": 5.0,
+          "duration_s": 0.2999999999999998,
+          "joints": {
+            "b_joint": {
+              "delta": 0.0,
+              "peak_velocity": 0.0,
+              "peak_acceleration": 0.0,
+              "velocity_limit": null,
+              "acceleration_limit": null,
+              "velocity_ratio": null,
+              "acceleration_ratio": null,
+              "velocity_status": "unverified",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0,
+              "velocity_peak_time_s": 4.85,
+              "acceleration_peak_endpoint_times_s": [
+                4.7,
+                5.0
+              ]
+            },
+            "c_joint": {
+              "delta": 0.0,
+              "peak_velocity": 0.0,
+              "peak_acceleration": 0.0,
+              "velocity_limit": null,
+              "acceleration_limit": null,
+              "velocity_ratio": null,
+              "acceleration_ratio": null,
+              "velocity_status": "unverified",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0,
+              "velocity_peak_time_s": 4.85,
+              "acceleration_peak_endpoint_times_s": [
+                4.7,
+                5.0
+              ]
+            },
+            "x_joint": {
+              "delta": 0.0,
+              "peak_velocity": 0.0,
+              "peak_acceleration": 0.0,
+              "velocity_limit": 0.1,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.0,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.0,
+              "velocity_peak_time_s": 4.85,
+              "acceleration_peak_endpoint_times_s": [
+                4.7,
+                5.0
+              ]
+            },
+            "y_joint": {
+              "delta": 0.0,
+              "peak_velocity": 0.0,
+              "peak_acceleration": 0.0,
+              "velocity_limit": 0.1,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.0,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.0,
+              "velocity_peak_time_s": 4.85,
+              "acceleration_peak_endpoint_times_s": [
+                4.7,
+                5.0
+              ]
+            },
+            "z_joint": {
+              "delta": 0.0,
+              "peak_velocity": 0.0,
+              "peak_acceleration": 0.0,
+              "velocity_limit": 0.1,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.0,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.0,
+              "velocity_peak_time_s": 4.85,
+              "acceleration_peak_endpoint_times_s": [
+                4.7,
+                5.0
+              ]
+            }
+          },
+          "min_duration_known_limits_s": 0
+        },
+        {
+          "index": 9,
+          "start_s": 5.0,
+          "end_s": 5.45,
+          "duration_s": 0.4500000000000002,
+          "joints": {
+            "b_joint": {
+              "delta": 0.0,
+              "peak_velocity": 0.0,
+              "peak_acceleration": 0.0,
+              "velocity_limit": null,
+              "acceleration_limit": null,
+              "velocity_ratio": null,
+              "acceleration_ratio": null,
+              "velocity_status": "unverified",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0,
+              "velocity_peak_time_s": 5.225,
+              "acceleration_peak_endpoint_times_s": [
+                5.0,
+                5.45
+              ]
+            },
+            "c_joint": {
+              "delta": 1.5707963267948966,
+              "peak_velocity": 5.235987755982986,
+              "peak_acceleration": 46.54211338651542,
+              "velocity_limit": null,
+              "acceleration_limit": null,
+              "velocity_ratio": null,
+              "acceleration_ratio": null,
+              "velocity_status": "unverified",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0,
+              "velocity_peak_time_s": 5.225,
+              "acceleration_peak_endpoint_times_s": [
+                5.0,
+                5.45
+              ]
+            },
+            "x_joint": {
+              "delta": 0.0,
+              "peak_velocity": 0.0,
+              "peak_acceleration": 0.0,
+              "velocity_limit": 0.1,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.0,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.0,
+              "velocity_peak_time_s": 5.225,
+              "acceleration_peak_endpoint_times_s": [
+                5.0,
+                5.45
+              ]
+            },
+            "y_joint": {
+              "delta": 0.0,
+              "peak_velocity": 0.0,
+              "peak_acceleration": 0.0,
+              "velocity_limit": 0.1,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.0,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.0,
+              "velocity_peak_time_s": 5.225,
+              "acceleration_peak_endpoint_times_s": [
+                5.0,
+                5.45
+              ]
+            },
+            "z_joint": {
+              "delta": 0.0,
+              "peak_velocity": 0.0,
+              "peak_acceleration": 0.0,
+              "velocity_limit": 0.1,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.0,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.0,
+              "velocity_peak_time_s": 5.225,
+              "acceleration_peak_endpoint_times_s": [
+                5.0,
+                5.45
+              ]
+            }
+          },
+          "min_duration_known_limits_s": 0
+        },
+        {
+          "index": 10,
+          "start_s": 5.45,
+          "end_s": 5.75,
+          "duration_s": 0.2999999999999998,
+          "joints": {
+            "b_joint": {
+              "delta": 0.0,
+              "peak_velocity": 0.0,
+              "peak_acceleration": 0.0,
+              "velocity_limit": null,
+              "acceleration_limit": null,
+              "velocity_ratio": null,
+              "acceleration_ratio": null,
+              "velocity_status": "unverified",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0,
+              "velocity_peak_time_s": 5.6,
+              "acceleration_peak_endpoint_times_s": [
+                5.45,
+                5.75
+              ]
+            },
+            "c_joint": {
+              "delta": 0.0,
+              "peak_velocity": 0.0,
+              "peak_acceleration": 0.0,
+              "velocity_limit": null,
+              "acceleration_limit": null,
+              "velocity_ratio": null,
+              "acceleration_ratio": null,
+              "velocity_status": "unverified",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0,
+              "velocity_peak_time_s": 5.6,
+              "acceleration_peak_endpoint_times_s": [
+                5.45,
+                5.75
+              ]
+            },
+            "x_joint": {
+              "delta": 0.0,
+              "peak_velocity": 0.0,
+              "peak_acceleration": 0.0,
+              "velocity_limit": 0.1,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.0,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.0,
+              "velocity_peak_time_s": 5.6,
+              "acceleration_peak_endpoint_times_s": [
+                5.45,
+                5.75
+              ]
+            },
+            "y_joint": {
+              "delta": 0.0,
+              "peak_velocity": 0.0,
+              "peak_acceleration": 0.0,
+              "velocity_limit": 0.1,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.0,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.0,
+              "velocity_peak_time_s": 5.6,
+              "acceleration_peak_endpoint_times_s": [
+                5.45,
+                5.75
+              ]
+            },
+            "z_joint": {
+              "delta": 0.0,
+              "peak_velocity": 0.0,
+              "peak_acceleration": 0.0,
+              "velocity_limit": 0.1,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.0,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.0,
+              "velocity_peak_time_s": 5.6,
+              "acceleration_peak_endpoint_times_s": [
+                5.45,
+                5.75
+              ]
+            }
+          },
+          "min_duration_known_limits_s": 0
+        },
+        {
+          "index": 11,
+          "start_s": 5.75,
+          "end_s": 6.2,
+          "duration_s": 0.4500000000000002,
+          "joints": {
+            "b_joint": {
+              "delta": -0.7853981633974483,
+              "peak_velocity": 2.617993877991493,
+              "peak_acceleration": 23.27105669325771,
+              "velocity_limit": null,
+              "acceleration_limit": null,
+              "velocity_ratio": null,
+              "acceleration_ratio": null,
+              "velocity_status": "unverified",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0,
+              "velocity_peak_time_s": 5.975,
+              "acceleration_peak_endpoint_times_s": [
+                5.75,
+                6.2
+              ]
+            },
+            "c_joint": {
+              "delta": 1.5707963267948966,
+              "peak_velocity": 5.235987755982986,
+              "peak_acceleration": 46.54211338651542,
+              "velocity_limit": null,
+              "acceleration_limit": null,
+              "velocity_ratio": null,
+              "acceleration_ratio": null,
+              "velocity_status": "unverified",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0,
+              "velocity_peak_time_s": 5.975,
+              "acceleration_peak_endpoint_times_s": [
+                5.75,
+                6.2
+              ]
+            },
+            "x_joint": {
+              "delta": -0.14540000000000003,
+              "peak_velocity": 0.4846666666666666,
+              "peak_acceleration": 4.308148148148145,
+              "velocity_limit": 0.1,
+              "acceleration_limit": null,
+              "velocity_ratio": 4.846666666666666,
+              "acceleration_ratio": null,
+              "velocity_status": "exceeded",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 2.1810000000000005,
+              "velocity_peak_time_s": 5.975,
+              "acceleration_peak_endpoint_times_s": [
+                5.75,
+                6.2
+              ]
+            },
+            "y_joint": {
+              "delta": -0.0414290584539816,
+              "peak_velocity": 0.13809686151327194,
+              "peak_acceleration": 1.2275276578957504,
+              "velocity_limit": 0.1,
+              "acceleration_limit": null,
+              "velocity_ratio": 1.3809686151327194,
+              "acceleration_ratio": null,
+              "velocity_status": "exceeded",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.621435876809724,
+              "velocity_peak_time_s": 5.975,
+              "acceleration_peak_endpoint_times_s": [
+                5.75,
+                6.2
+              ]
+            },
+            "z_joint": {
+              "delta": 0.00985405845398159,
+              "peak_velocity": 0.03284686151327196,
+              "peak_acceleration": 0.29197210234019505,
+              "velocity_limit": 0.1,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.3284686151327196,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.14781087680972385,
+              "velocity_peak_time_s": 5.975,
+              "acceleration_peak_endpoint_times_s": [
+                5.75,
+                6.2
+              ]
+            }
+          },
+          "min_duration_known_limits_s": 2.1810000000000005
+        },
+        {
+          "index": 12,
+          "start_s": 6.2,
+          "end_s": 8.2,
+          "duration_s": 1.9999999999999991,
+          "joints": {
+            "b_joint": {
+              "delta": 0.0,
+              "peak_velocity": 0.0,
+              "peak_acceleration": 0.0,
+              "velocity_limit": null,
+              "acceleration_limit": null,
+              "velocity_ratio": null,
+              "acceleration_ratio": null,
+              "velocity_status": "unverified",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0,
+              "velocity_peak_time_s": 7.199999999999999,
+              "acceleration_peak_endpoint_times_s": [
+                6.2,
+                8.2
+              ]
+            },
+            "c_joint": {
+              "delta": 0.0,
+              "peak_velocity": 0.0,
+              "peak_acceleration": 0.0,
+              "velocity_limit": null,
+              "acceleration_limit": null,
+              "velocity_ratio": null,
+              "acceleration_ratio": null,
+              "velocity_status": "unverified",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0,
+              "velocity_peak_time_s": 7.199999999999999,
+              "acceleration_peak_endpoint_times_s": [
+                6.2,
+                8.2
+              ]
+            },
+            "x_joint": {
+              "delta": 0.0,
+              "peak_velocity": 0.0,
+              "peak_acceleration": 0.0,
+              "velocity_limit": 0.1,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.0,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.0,
+              "velocity_peak_time_s": 7.199999999999999,
+              "acceleration_peak_endpoint_times_s": [
+                6.2,
+                8.2
+              ]
+            },
+            "y_joint": {
+              "delta": 0.0,
+              "peak_velocity": 0.0,
+              "peak_acceleration": 0.0,
+              "velocity_limit": 0.1,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.0,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.0,
+              "velocity_peak_time_s": 7.199999999999999,
+              "acceleration_peak_endpoint_times_s": [
+                6.2,
+                8.2
+              ]
+            },
+            "z_joint": {
+              "delta": 0.0,
+              "peak_velocity": 0.0,
+              "peak_acceleration": 0.0,
+              "velocity_limit": 0.1,
+              "acceleration_limit": null,
+              "velocity_ratio": 0.0,
+              "acceleration_ratio": null,
+              "velocity_status": "within",
+              "acceleration_status": "unverified",
+              "min_duration_known_limits_s": 0.0,
+              "velocity_peak_time_s": 7.199999999999999,
+              "acceleration_peak_endpoint_times_s": [
+                6.2,
+                8.2
+              ]
+            }
+          },
+          "min_duration_known_limits_s": 0
+        }
+      ],
+      "limitations": [
+        "Declared URDF limits are not independently verified hardware specifications",
+        "Missing limits are unverified, not passing",
+        "Cubic smoothstep has acceleration jumps and unbounded ideal jerk at joins",
+        "No payload, torque, tracking error or real controller dynamics considered",
+        "Minimum duration uses known limits only and is not an approved retiming"
+      ],
+      "runtime_crosscheck": {
+        "passed": true,
+        "normalized_max_errors": {
+          "position": 1.2212453270876722e-15,
+          "velocity": 1.7777783422099275e-06,
+          "acceleration": 4.386066270124071e-09
+        },
+        "tolerance": 1e-05,
+        "method": "central differences at u=.25/.5/.75, h=T*.001; endpoints use analytical one-sided limits"
+      },
+      "endpoint_reset": {
+        "status": "discontinuous",
+        "joints": {
+          "b_joint": {
+            "delta": 0.0,
+            "physical_delta": 0.0,
+            "status": "continuous"
+          },
+          "c_joint": {
+            "delta": -6.283185307179586,
+            "physical_delta": -0.0,
+            "status": "continuous_angle_wrap"
+          },
+          "x_joint": {
+            "delta": 0.29080000000000006,
+            "physical_delta": 0.29080000000000006,
+            "status": "position_jump"
+          },
+          "y_joint": {
+            "delta": 0.0,
+            "physical_delta": 0.0,
+            "status": "continuous"
+          },
+          "z_joint": {
+            "delta": 0.0,
+            "physical_delta": 0.0,
+            "status": "continuous"
+          }
+        },
+        "note": "Position jumps cannot be assigned finite continuous-time rate bounds"
+      }
+    }
+  },
+  "continuous_boundary_note": "Continuous joints may finish at an equivalent angle +/-2pi; raw cycle reset is not a physical motion command. No wrap within segments is assumed.",
+  "source_sha256": {
+    "reference/teeth_mill.urdf": "7c179f5478def59a96a9646f17ea86360cf53d030c1881a1a030419007d431bc",
+    "assets/cad/teeth_mill.kinematics.json": "473c8c45512a95ec37d2d987829d07cd3c2ef47742d9469645e4fdcb362482b3",
+    "assets/robots/rebot_b601_dm/Rebot_Arm_description/DM/urdf/ReBot_Arm_DM.urdf": "bce0d4740ec97a27e30d521e890416231c6d0117093fa997d1ae7ac95204ffb6",
+    "assets/robots/usd/rebot_b601_dm.kinematics.json": "d62119bfb54a40ccdb0bdb0b38c0dea367514a1f290cc82864926194cea962ae",
+    "assets/parts/catalog.json": "bc96a8730045752290977784f5212bf0ee8ebe066fc11351e6e5cee15063911c",
+    "assets/robots/sources.json": "55ebec92c5b88e8b4610e994d9f86a71fa484c16f883085b2867d109495b8be8",
+    "source/extensions/visiontwin.factory/visiontwin/factory/core/arm_transfer.py": "f237fbb6e3bfbe6cba7541a8770007aa5e0160f8792a27529318d6981a62cf6d",
+    "source/extensions/visiontwin.factory/visiontwin/factory/core/cell_cycle.py": "12b9b2e29d02ce19803b1708d6c6d95a9cdceffb90d4f8b9fbc34c13ffad7cc0",
+    "source/extensions/visiontwin.factory/visiontwin/factory/core/layout.py": "07bff07a5505c85b4818a721624e4f3e21c840caaffdd5bd1b40363052ff75f4",
+    "source/extensions/visiontwin.factory/visiontwin/factory/core/motion_limits.py": "d7bec00421e19a5676c6abd298486f4441c49e282bb83743ddacfb1ddff5742c",
+    "source/extensions/visiontwin.factory/visiontwin/factory/scene_manager.py": "f8967a28609bd40a9affb5aa7ea6b6979d197d7f314f17c4beb420968b342ed9",
+    "scripts/check_joint_rates.py": "fbdf97ae973410dc155e4007749548f91829c6e8f05efddf4981962b453fae58"
+  }
+}

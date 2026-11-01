@@ -1,0 +1,51 @@
+﻿{
+    "working_tree":  [
+                         " M .gitignore",
+                         " M README.md",
+                         " M assets/cad/teeth_mill.kinematics.json",
+                         " M docs/index.md",
+                         " M source/extensions/visiontwin.factory/visiontwin/factory/core/cell_cycle.py",
+                         " M source/extensions/visiontwin.factory/visiontwin/factory/core/urdf_model.py",
+                         " M source/extensions/visiontwin.factory/visiontwin/factory/extension.py",
+                         " M source/extensions/visiontwin.factory/visiontwin/factory/inspection_cell.py",
+                         " M tests/test_cell_cycle.py",
+                         " M tests/test_urdf_model.py",
+                         "?? \"docs/2026-11-01 \\352\\264\\200\\354\\240\\210 \\354\\206\\215\\353\\217\\204\\354\\231\\200 \\352\\260\\200\\354\\206\\215\\353\\217\\204 \\352\\262\\200\\354\\246\\235.md\"",
+                         "?? \"docs/URDF \\354\\232\\264\\353\\217\\231 \\354\\240\\234\\355\\225\\234\\354\\235\\230 \\352\\262\\200\\354\\246\\235 \\353\\262\\224\\354\\234\\204.md\"",
+                         "?? \"docs/smoothstep \\352\\266\\244\\354\\240\\201\\354\\235\\230 \\354\\206\\215\\353\\217\\204\\354\\231\\200 \\352\\260\\200\\354\\206\\215\\353\\217\\204.md\"",
+                         "?? results/collision/20261101_retimed/",
+                         "?? results/interview/retiming/",
+                         "?? results/joint_rates/",
+                         "?? scripts/check_joint_rates.ps1",
+                         "?? scripts/check_joint_rates.py",
+                         "?? scripts/verify_retimed_cycle.ps1",
+                         "?? scripts/verify_retimed_cycle.py",
+                         "?? source/extensions/visiontwin.factory/visiontwin/factory/core/motion_limits.py",
+                         "?? tests/test_motion_limits.py"
+                     ],
+    "exit_code":  0,
+    "watchdog_timeout":  false,
+    "started_utc":  "2026-11-01T13:58:58.0193254Z",
+    "os":  "Microsoft Windows NT 10.0.26200.0",
+    "source_commit":  "1b76b1c3e81d90af07cb1ca12d2b336e8c65739d",
+    "source_sha256_at_launch":  {
+                                    "capture_runtime.py":  "1CFA07E9E8C20F91797C4301B697BF9D787EC24057CA64CCFD4C22A735575FA5",
+                                    "runtime_session.py":  "B215FA98B14B9C375C8E9F46F36016A4EF53877E51299BE96740B84385BE69D5",
+                                    "frame_provider.py":  "A09CE9433F131714B033F7883639EFAE8D23BC274B55AC5F427349EC10FBED1C",
+                                    "extension.py":  "D6D3B3E51AAE3D8CC17E0103DB9CA3FD5B0C1F33CEC9AC3D9FF162D4E443D5B6"
+                                },
+    "script":  "verify_retimed_cycle.py",
+    "gpu":  [
+                "NVIDIA GeForce RTX 4060, 610.88, 8188 MiB"
+            ],
+    "wall_s":  110.222867,
+    "settings":  {
+                     "/exts/visiontwin.factory/part":  "crown",
+                     "/exts/visiontwin.factory/trace":  "true",
+                     "/exts/visiontwin.factory/vision":  "true",
+                     "/visiontwin/interview/out":  "C:\\Users\\PC\\Documents\\01_project\\omniverse\\results\\interview\\retiming\\20261101_225857",
+                     "/exts/visiontwin.factory/outputDir":  "C:\\Users\\PC\\Documents\\01_project\\omniverse\\results\\interview\\retiming\\20261101_225857",
+                     "/exts/visiontwin.factory/maxProducts":  "2"
+                 },
+    "automation_args":  "--/crashreporter/gatherUserStory=0 --/app/file/ignoreUnsavedOnExit=true --/app/extensions/fsWatcherEnabled=false --/app/renderer/skipWhileMinimized=false --/app/renderer/skipWhileInvisible=false"
+}

@@ -1,0 +1,137 @@
+{
+  "passed": true,
+  "cycle_s": 16.024,
+  "return_s": 4.362000000000001,
+  "max_observed_velocity": {
+    "x_joint": 0.09999947598952133,
+    "z_joint": 0.013169279451586668,
+    "y_joint": 0.03505734378666766
+  },
+  "velocity_limits": {
+    "x_joint": 0.1,
+    "z_joint": 0.1,
+    "y_joint": 0.1
+  },
+  "applied_samples": 2347,
+  "return_samples": 523,
+  "returning_products": [
+    1,
+    2
+  ],
+  "load_times": {
+    "1": 2.84,
+    "2": 18.864
+  },
+  "unload_times": {
+    "1": 18.864,
+    "2": 34.888
+  },
+  "inspection_rows": 12,
+  "summary": {
+    "status": "complete",
+    "run_id": "20261101_230004_907130500_seed42",
+    "products": 2,
+    "sorted": 2,
+    "sort_correct": 2,
+    "rejected": 1,
+    "fail_safe_rejects": 0,
+    "late_results": 0,
+    "frame_mismatches": 0,
+    "stale_frames": 0,
+    "view_retakes": 0,
+    "vision": true,
+    "frame_target_misses": 0,
+    "capture_timeouts": 0,
+    "not_exited": 0,
+    "pending_frames_at_finalize": 0,
+    "simulation_time_s": 39.133,
+    "part": "crown",
+    "throughput_per_hour": 184.0,
+    "line": {
+      "station": "cell",
+      "cycle_s": 16.024,
+      "views": 5,
+      "spawn_interval_s": 9.0,
+      "station_utilization": 0.819,
+      "station_busy_s": 32.05,
+      "station_exit_blocked_s": 0.0,
+      "queue_max": 1,
+      "queue_mean": 0.179
+    },
+    "timing": {
+      "wall_s": 42.588784,
+      "real_time_factor": 0.918864777099226,
+      "clock": "perf_counter",
+      "window": "start to final capture drain; excludes stage/setup warmup",
+      "events": {
+        "STATE_APPLIED": 2348,
+        "CAPTURE_REQUESTED": 10,
+        "CAPTURE_RECEIVED": 10,
+        "INSPECTION_DONE": 10,
+        "VERDICT_APPLIED": 2,
+        "RUN_END": 1
+      },
+      "max_pending": 1,
+      "latency_ms": {
+        "capture": {
+          "n": 10,
+          "p50": 150.59124998515472,
+          "p95": 152.4064849887509,
+          "max": 152.63989998493344
+        },
+        "inspection": {
+          "n": 10,
+          "p50": 2.1912500087637454,
+          "p95": 82.97777500702078,
+          "max": 148.5934000229463
+        },
+        "verdict": {
+          "n": 2,
+          "p50": 177.39144997904077,
+          "p95": 181.3786749553401,
+          "max": 181.8216999527067
+        }
+      }
+    },
+    "wall_throughput_per_hour": 169.05859533345682
+  },
+  "run_dir": "C:\\Users\\PC\\Documents\\01_project\\omniverse\\results\\interview\\retiming\\20261101_225857\\runs\\20261101_230004_907130500_seed42",
+  "collision_report": {
+    "status": "clear_at_samples",
+    "method": "per-geometry OBB SAT, discrete smoothstep samples",
+    "units": "m, rad, s",
+    "max_dt_s": 0.008333333333333333,
+    "max_joint_step_deg": 1.0,
+    "max_linear_joint_step_m": 0.002,
+    "box_padding_m": 0.0,
+    "robot_boxes": 34,
+    "environment_boxes": 37,
+    "excluded": [
+      "robot self-collision",
+      "carried products",
+      "machine vs environment",
+      "manual/teach motion",
+      "base_link vs mounting pedestal"
+    ],
+    "limits": [
+      "OBB overlap may be a false positive for non-box geometry",
+      "discrete samples do not prove continuous collision freedom",
+      "report is a snapshot; stage edits require a new preflight"
+    ],
+    "phases": {
+      "load": {
+        "samples": 608,
+        "duration_s": 2.0
+      },
+      "unload": {
+        "samples": 553,
+        "duration_s": 2.0
+      },
+      "inspection_wait": {
+        "samples": 2198,
+        "duration_s": 16.024
+      }
+    },
+    "contacts": []
+  }
+}
