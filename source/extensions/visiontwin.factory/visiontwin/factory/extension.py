@@ -705,8 +705,14 @@ class VisionTwinFactoryExtension(omni.ext.IExt):
             pose = seat
             if self._arm is not None:
                 self._arm.apply(self._arm.transfer.wait_pose())
-        else:
+        elif t < cycle.return_start:
             pose = self._transfer_pose("unload", t - u0, seat, self._belt_pose(st.x_exit), (t - u0) / unload_s)
+        else:
+            # Product is already placed; keep it at the reserved exit while the
+            # empty cell returns home. Conveyor release occurs at cycle_s.
+            pose = self._belt_pose(st.x_exit)
+            if self._arm is not None:
+                self._arm.apply(self._arm.transfer.wait_pose())
         scene.set_product_pose(stage, self._sim.station_product, pose)
 
     def _transfer_pose(self, phase, t, pick, place, k):

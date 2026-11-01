@@ -158,6 +158,8 @@ class InspectionCell:
             return "idle"
         if t_since_load < self.cycle.timing.load_s:
             return "LOADING"
+        if t_since_load >= self.cycle.return_start:
+            return "RETURNING"
         k = self.cycle.view_at(t_since_load)
         if k is not None:
             return f"VIEW {k + 1}/{len(self.cycle.views)} {self.cycle.views[k].name}"

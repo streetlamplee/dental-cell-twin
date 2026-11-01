@@ -9,6 +9,7 @@ import pytest
 
 from core.cell_cycle import CellCycle, CellTiming, View, views_from_spec
 from core.urdf_model import model_from_kinematics
+from core.motion_limits import audit_boundary, audit_smoothstep, urdf_rate_limits
 
 ROOT = Path(__file__).resolve().parents[1]
 KIN = ROOT / "assets" / "cad" / "teeth_mill.kinematics.json"
@@ -60,7 +61,8 @@ def test_unreachable_standoff_is_rejected(model):
 
 def test_timeline_holds_still_around_each_capture(cell):
     t = cell.timing
-    assert cell.cycle_s == pytest.approx(t.load_s + len(cell.views) * (t.move_s + t.hold_s) + t.move_s + t.unload_s)
+    assert cell.cycle_s == pytest.approx(t.load_s + sum(cell.move_durations) + len(cell.views) * t.hold_s
+                                       + cell.park_duration_s + t.unload_s + cell.return_duration_s)
     for i, vt in enumerate(cell.view_times):
         for dt in (-t.hold_s / 2 + 1e-3, 0.0, t.hold_s / 2 - 1e-3):
             q = cell.pose_at(vt + dt)
@@ -79,3 +81,54 @@ def test_root_puts_the_load_seat_on_the_belt_line(cell):
     root = cell.root(-1.0, 0.798)
     seat = root @ cell.product_seat(cell.load_pose)
     assert np.allclose(seat[:3, 3], (-1.0, 0.0, 0.798))
+
+
+def test_all_machine_segments_respect_source_velocity_limits(cell):
+    limits = urdf_rate_limits(ROOT / "reference/teeth_mill.urdf")
+    report = audit_smoothstep(cell._keys, limits)
+    for row in report["joints"].values():
+        if row["velocity_limit"] is not None:
+            assert row["velocity_status"] == "within"
+    assert cell.cycle_s == pytest.approx(16.024)
+    assert cell.return_duration_s == pytest.approx(4.362)
+    assert cell.move_durations[0] == pytest.approx(2.181)
+    assert cell.park_duration_s == pytest.approx(2.181)
+
+
+def test_empty_machine_returns_smoothly_without_endpoint_reset(cell):
+    limits = urdf_rate_limits(ROOT / "reference/teeth_mill.urdf")
+    before = cell.pose_at(cell.cycle_s - 1e-5)
+    at = cell.pose_at(cell.cycle_s)
+    after = cell.pose_at(cell.cycle_s + 1e-5)
+    assert cell.pose_at(cell.return_start) == cell.unload_pose
+    assert any(abs(cell.pose_at(cell.return_start + cell.return_duration_s / 2)[j] - cell.unload_pose[j]) > 1e-6
+               for j in cell.load_pose)
+    assert max(abs(before[j] - at[j]) for j in at) < 1e-8
+    assert at == after == cell.load_pose
+    boundary = audit_boundary(cell._keys[-1][1], at, limits)
+    assert all(row["status"] == "continuous" for row in boundary["joints"].values())
+
+
+def test_conveyor_reserves_cell_until_return_is_finished(cell):
+    from core import layout as L
+    from core.conveyor import ConveyorConfig, ConveyorSim, ProcessStation, LOAD, UNLOAD, VIEW
+
+    sim = ConveyorSim(ConveyorConfig(max_products=2, spawn_interval=0.1,
+        process=ProcessStation("cell", L.CELL_ENTRY_X, L.CELL_EXIT_X, cell.cycle_s,
+                               tuple(cell.view_times), inspects=True)))
+    sim.start()
+    events = []
+    for _ in range(5000):
+        events.extend(sim.step(1 / 60))
+        if sim.finished:
+            break
+    assert sim.finished
+    loads = {e.product_id: e.time for e in events if e.kind == LOAD}
+    unloads = {e.product_id: e.time for e in events if e.kind == UNLOAD}
+    assert len(loads) == len(unloads) == 2
+    for product_id, load in loads.items():
+        assert unloads[product_id] - load == pytest.approx(cell.cycle_s)
+        view_events = [e for e in events if e.product_id == product_id and e.kind == VIEW]
+        assert [e.time - load for e in view_events] == pytest.approx(cell.view_times)
+    ordered = sorted(loads, key=loads.get)
+    assert loads[ordered[1]] >= unloads[ordered[0]]

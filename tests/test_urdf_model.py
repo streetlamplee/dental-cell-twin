@@ -66,6 +66,12 @@ def test_kinematics_json_round_trip(mill):
     assert "x_joint" in names and "tool_tip_joint" in names
     y = next(j for j in k["joints"] if j["name"] == "y_joint")
     assert y["origin_xyz"] == pytest.approx([0, -0.050975, 0.04])
+    assert y["velocity"] == 0.1
+    from core.urdf_model import model_from_kinematics
+
+    restored = model_from_kinematics(k)
+    assert restored.joints["y_joint"].velocity == 0.1
+    assert restored.joints["b_joint"].velocity is None
 
 
 def test_mesh_visuals_are_read(tmp_path):

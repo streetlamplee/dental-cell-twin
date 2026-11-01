@@ -8,8 +8,9 @@ last view the camera parks aside and the product is unloaded onto the next belt.
 
 Timeline (seconds after the product reached the station entry, i.e. after LOAD):
   [0, load_s)                 load: camera parked on the +X side, platter level
-  per view: move_s, hold_s    move to the view pose, hold still; the frame is taken mid-hold
-  move_s, unload_s            park the camera on the -X side, unload
+  per view: retimed move, hold_s   move to the view pose; frame is taken mid-hold
+  retimed park, unload_s          park on the -X side, unload
+  retimed return                 empty cell returns home before the next product
 
 Inverse kinematics is closed-form: X and Z only move the camera and Y only moves the table
 (all prismatic, axis-aligned), so one linear step solves it. Every pose is checked against
@@ -23,6 +24,7 @@ from typing import Dict, List, Optional, Sequence, Tuple
 import numpy as np
 
 from .urdf_model import UrdfModel
+from .motion_limits import retime_duration
 
 PLATTER_TOP = 0.01  # c_platter frame: top face of the platter cylinder (URDF)
 FIXTURE_THICKNESS = 0.002  # dark pad on the platter (uniform background for the camera)
@@ -44,6 +46,7 @@ class CellTiming:
     move_s: float = 0.45
     hold_s: float = 0.3
     unload_s: float = 0.6
+    return_s: float = 0.45  # minimum empty-cell return duration; extended by known limits
 
 
 def _smooth(u: float) -> float:
@@ -63,12 +66,16 @@ class CellCycle:
         """standoff: camera to product centre (m); target_dz: product centre above the pad."""
         if not views:
             raise ValueError("at least one view is required")
+        if not all(math.isfinite(v) and v > 0 for v in
+                   (timing.load_s, timing.move_s, timing.hold_s, timing.unload_s, timing.return_s)):
+            raise ValueError("cell timings must be finite and positive")
         self.model = model
         self.views = tuple(views)
         self.timing = timing
         self.standoff = standoff
         self.target_dz = target_dz
         self.limits = {n: (j.lower, j.upper) for n, j in model.joints.items() if j.type == "prismatic"}
+        self.velocity_limits = {n: j.velocity for n, j in model.joints.items() if j.movable and j.velocity is not None}
         lo = {n: v[0] for n, v in self.limits.items()}
         hi = {n: v[1] for n, v in self.limits.items()}
         # Park poses: camera high and aside so the load/unload transfer passes under nothing.
@@ -86,17 +93,27 @@ class CellCycle:
         t += timing.load_s
         keys.append((t, self.load_pose))
         self.view_times: List[float] = []
+        self.move_durations: List[float] = []
         for q in self.view_poses:
-            t += timing.move_s
+            duration = retime_duration(keys[-1][1], q, timing.move_s, self.velocity_limits)
+            self.move_durations.append(duration)
+            t += duration
             keys.append((t, q))
             self.view_times.append(t + timing.hold_s / 2.0)
             t += timing.hold_s
             keys.append((t, q))
-        t += timing.move_s
+        self.park_duration_s = retime_duration(keys[-1][1], self.unload_pose, timing.move_s, self.velocity_limits)
+        t += self.park_duration_s
         keys.append((t, self.unload_pose))
         self.unload_start = t
         t += timing.unload_s
         keys.append((t, self.unload_pose))
+        # Reserve the station until the robot has placed the product and the empty
+        # machine returns home. Include C's return in the trajectory instead of resetting it.
+        self.return_start = t
+        self.return_duration_s = retime_duration(self.unload_pose, self.load_pose, timing.return_s, self.velocity_limits)
+        t += self.return_duration_s
+        keys.append((t, self.load_pose))
         self.cycle_s = t
         self._keys = keys
 

@@ -77,6 +77,7 @@ class Joint:
     axis: Tuple[float, float, float]
     lower: Optional[float]
     upper: Optional[float]
+    velocity: Optional[float] = None  # declared URDF limit, m/s or rad/s; unknown stays None
 
     @property
     def movable(self) -> bool:
@@ -141,6 +142,7 @@ class UrdfModel:
                 "origin_xyz": [round(float(x), 9) for x in j.origin[:3, 3]],
                 "origin_rotation": [[round(float(x), 9) for x in row] for row in j.origin[:3, :3]],
                 "axis": list(j.axis), "lower": j.lower, "upper": j.upper,
+                **({"velocity": j.velocity} if j.velocity is not None else {}),
             } for j in self.joints.values()],
         }
 
@@ -161,7 +163,7 @@ def model_from_kinematics(kin: dict) -> UrdfModel:
         origin[:3, :3] = np.array(j["origin_rotation"], dtype=float)
         origin[:3, 3] = j["origin_xyz"]
         joints[j["name"]] = Joint(j["name"], j["type"], j["parent"], j["child"], origin,
-                                  tuple(j["axis"]), j["lower"], j["upper"])
+                                  tuple(j["axis"]), j["lower"], j["upper"], j.get("velocity"))
         links.setdefault(j["parent"], Link(j["parent"]))
         links.setdefault(j["child"], Link(j["child"]))
     return UrdfModel(kin["robot"], links, joints)
@@ -207,5 +209,6 @@ def load_urdf(path: str) -> UrdfModel:
             origin=_origin(je), axis=_floats(ax.get("xyz") if ax is not None else "1 0 0", 3),
             lower=float(lim.get("lower")) if lim is not None and lim.get("lower") else None,
             upper=float(lim.get("upper")) if lim is not None and lim.get("upper") else None,
+            velocity=float(lim.get("velocity")) if lim is not None and lim.get("velocity") else None,
         )
     return UrdfModel(root.get("name"), links, joints)
