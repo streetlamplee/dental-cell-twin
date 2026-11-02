@@ -1,23 +1,24 @@
 """Kit startup script (run with kit --exec): record one short clip per part of the line, then quit.
-Used by scripts/record_clips.ps1 (which encodes each clip with ffmpeg).
+Used by scripts/record_clips.ps1 (which encodes each clip and a combined MP4 with ffmpeg).
 
-The line runs as in scripts/record_demo.py (crown, vision on, seed 42) and the clips follow one
-product (`focus`, default #3 = chip defect) through the line, so they never overlap in time:
+The line uses crown, vision on and seed 3; the clips follow one
+product (`focus`, default #1 = shape defect) through the line, so they never overlap in time:
   01_line      wide shot, crown ringed: the product rides belt section 1 to the cell entry
   02_load      cell close-up: reBot Arm picks it from the belt and seats it on the platter
   03_inspect   spindle camera: B tilt + C turn, 5 views; inset = the frame the inspector saved
   04_unload    cell close-up: machine parks the camera, robot places it on the outfeed belt
   05_reject    wide shot, crown ringed: the pusher sweeps it into the bin (product-ID based sorting)
   06_teach     teach pendant plays origin + 5 faces (opening the pendant stops the line)
-Frames between clips are not captured. One update is 1/60 s of simulation, so every 2nd update
+Frames between clips are not captured. One update is 1/30 s of simulation, so every update
 encoded at 30 fps plays at real time.
 
-Settings: --/visiontwin/rec/frames=<dir>  --/visiontwin/rec/focus=3  --/visiontwin/rec/seed=42
+Settings: --/visiontwin/rec/frames=<dir>  --/visiontwin/rec/focus=1  --/visiontwin/rec/seed=3
 """
 
 import asyncio
 import collections
 import csv
+import json
 import os
 import traceback
 
@@ -30,7 +31,7 @@ from omni.kit.viewport.utility import capture_viewport_to_buffer, get_active_vie
 from pxr import Gf, Usd, UsdGeom
 
 TAG = "[clips]"
-W, H, STRIDE = 1280, 720, 2
+W, H, STRIDE = 1280, 720, 1
 CELL, SPINDLE = 1, 2  # ext.set_view indices (cell close-up, inspection camera)
 LINE_CAM = "/World/Factory/RecordLineCamera"  # belt section 1 from the spawn point to the cell
 REJECT_CAM = "/World/Factory/RecordRejectCamera"  # outfeed belt, reject line, pusher, bin
@@ -67,7 +68,8 @@ class WideCamera:
         self.world_to_cam = self.cam_to_world.GetInverse()
         self.focal_px = focal_mm / h_aperture_mm * W  # Kit fits the horizontal aperture to the width
         cam = UsdGeom.Camera.Define(stage, path)
-        cam.AddTransformOp().Set(self.cam_to_world)
+        self.transform = cam.AddTransformOp()
+        self.transform.Set(self.cam_to_world)
         cam.CreateFocalLengthAttr(focal_mm)
         cam.CreateHorizontalApertureAttr(h_aperture_mm)
         cam.CreateClippingRangeAttr(Gf.Vec2f(0.01, 100.0))
@@ -185,11 +187,12 @@ def _overlay(rgb, caption, footer, inset=None, marker=None):
 
 
 class Recorder:
-    def __init__(self, viewport, out_dir):
+    def __init__(self, viewport, out_dir, detail_viewport):
         self.vp, self.out = viewport, out_dir
-        self.counts, self.pending = {}, 0
+        self.detail_vp = detail_viewport
+        self.counts, self.pending, self.errors = {}, 0, 0
 
-    def grab(self, clip, caption, footer, inset=None, marker=None):
+    def grab(self, clip, caption, footer, inset=None, marker=None, detail=False):
         from visiontwin.factory.frame_provider import capsule_to_rgb
 
         d = os.path.join(self.out, clip)
@@ -198,50 +201,104 @@ class Recorder:
         self.counts[clip] = i + 1
         self.pending += 1
 
-        def done(buffer, buffer_size, width, height, fmt):
-            try:
-                rgb = capsule_to_rgb(buffer, buffer_size, width, height, fmt)
-                cv2.imwrite(os.path.join(d, f"{i:05d}.jpg"), _overlay(rgb, caption, footer, inset, marker),
-                            [cv2.IMWRITE_JPEG_QUALITY, 92])
-            except Exception as exc:
-                carb.log_error(f"{TAG} {clip} frame {i}: {exc}")
-            finally:
-                self.pending -= 1
+        captured = {}
+        expected = 2 if detail else 1
 
-        capture_viewport_to_buffer(self.vp, done)
+        def receive(name):
+            def done(buffer, buffer_size, width, height, fmt):
+                try:
+                    captured[name] = capsule_to_rgb(buffer, buffer_size, width, height, fmt)
+                    if len(captured) == expected:
+                        panel = inset
+                        if detail:
+                            detail_rgb = captured["detail"]
+                            dh, dw = detail_rgb.shape[:2]
+                            crop_h = min(dh, dw * 9 // 16)
+                            top = (dh - crop_h) // 2
+                            panel = (cv2.cvtColor(detail_rgb[top:top + crop_h], cv2.COLOR_RGB2BGR),
+                                     "LIVE close-up: same part, magnified")
+                        ok = cv2.imwrite(os.path.join(d, f"{i:05d}.jpg"),
+                                         _overlay(captured["main"], caption, footer, panel, marker),
+                                         [cv2.IMWRITE_JPEG_QUALITY, 92])
+                        if not ok:
+                            raise RuntimeError("could not write recorded frame")
+                except Exception as exc:
+                    self.errors += 1
+                    carb.log_error(f"{TAG} {clip} frame {i}: {exc}")
+                finally:
+                    self.pending -= 1
+            return done
+
+        if detail:
+            self.pending += 1
+            capture_viewport_to_buffer(self.detail_vp, receive("detail"))
+        capture_viewport_to_buffer(self.vp, receive("main"))
+
 
 
 async def _main():
     app = omni.kit.app.get_app()
     s = carb.settings.get_settings()
     code = 1
+    # Keep batch recordings independent of a user's expensive interactive render mode.
+    s.set("/rtx/rendermode", "RaytracedLighting")
+    s.set("/rtx/pathtracing/spp", 1)
+    s.set("/rtx/pathtracing/totalSpp", 1)
+    s.set("/exts/visiontwin.factory/fixedDt", 1.0 / 30.0)
     try:
         import visiontwin.factory.extension as vt
         from visiontwin.factory.core import layout as L
 
         out = s.get("/visiontwin/rec/frames")
-        focus = int(s.get("/visiontwin/rec/focus") or 3)
+        focus = int(s.get("/visiontwin/rec/focus") or 1)
         ext = await _wait_for(vt.get_instance, app)
         vp = await _wait_for(get_active_viewport, app)
         for key, value in (("part", "crown"), ("vision", True), ("defectRate", 0.3),
-                           ("seed", int(s.get("/visiontwin/rec/seed") or 42)), ("maxProducts", focus + 1)):
+                           ("seed", int(s.get("/visiontwin/rec/seed") or 3)), ("maxProducts", focus + 1)):
             s.set(f"/exts/visiontwin.factory/{key}", value)
+        vp.resolution_scale = 1.0
+        vp.resolution = (W, H)
         await ext.build_scene_async()
         stage = omni.usd.get_context().get_stage()
         crown_path = f"{L.PRODUCTS_PATH}/P_{focus:04d}"
         wide = {LINE_CAM: WideCamera(stage, LINE_CAM, (-2.15, -1.9, 1.6), (-2.0, 0.0, 0.8), 20.0),
                 REJECT_CAM: WideCamera(stage, REJECT_CAM, (L.REJECT_X - 0.65, -2.2, 2.0),
                                        (L.REJECT_X - 0.05, -0.35, 0.62), 24.0)}  # down to the bin
+        # Recording-only camera: product geometry and robot trajectories stay at real scale.
+        detail_path = f"{crown_path}/RecordDetailCamera"
+        detail_camera = None
+        from visiontwin.factory.frame_provider import InspectionFrameProvider
+
+        class DetailFrameProvider(InspectionFrameProvider):
+            WINDOW_TITLE = "VisionTwin Recording Detail"
+
+        detail_provider = DetailFrameProvider(L.CELL_CAMERA_PATH, (640, 480))
+        await detail_provider.ready_async()
+        cell_cam = UsdGeom.Camera(stage.GetPrimAtPath(L.CELL_OVERVIEW_CAMERA_PATH))
+        cell_cam.GetFocalLengthAttr().Set(cell_cam.GetFocalLengthAttr().Get() * 1.25)
         history = collections.deque(maxlen=RENDER_LAG + 1)  # crown positions, oldest first
         vp.resolution_scale = 1.0
         vp.resolution = (W, H)
-        await next_viewport_frame_async(vp, 30)
-        rec, clips = Recorder(vp, out), Clips(ext, focus, L)
+        await next_viewport_frame_async(vp, 6)
+        rec, clips = Recorder(vp, out, detail_provider.viewport_api), Clips(ext, focus, L)
         vp.camera_path = LINE_CAM  # first clip's camera; nothing is captured until the crown spawns
+        print(f"{TAG} recording started, render mode={s.get('/rtx/rendermode')}", flush=True)
         ext.start()
-        current_cam, settle, k = LINE_CAM, 0, 0
+        current_cam, settle, k = LINE_CAM, SWITCH_SETTLE, 0
         while True:
-            history.append(_crown_position(stage, crown_path))
+            position = _crown_position(stage, crown_path)
+            history.append(position)
+            if position is not None and detail_camera is None:
+                # Parent to the translation-only product root so camera and geometry
+                # share the same rendered translation.
+                detail_camera = WideCamera(stage, detail_path, (0.05625, -0.075, 0.08125),
+                                           (0, 0, 0), 45.0)
+                # A newly selected camera needs rendered frames before recording.
+                was_running = ext._sim.running
+                ext._sim.running = False
+                detail_provider.set_camera(detail_path)
+                await next_viewport_frame_async(detail_provider.viewport_api, 12)
+                ext._sim.running = was_running
             state = clips.current()
             if state == "done" or ext.run_complete:
                 break
@@ -260,8 +317,11 @@ async def _main():
                     pos = history[0] if cam in wide else None
                     xy = wide[cam].project(pos) if pos is not None else None
                     rec.grab(clip, caption, footer, _inspect_inset(ext, focus) if clip == "03_inspect" else None,
-                             (xy, f"#{focus}") if xy is not None else None)
+                             (xy, f"#{focus}") if xy is not None else None,
+                             detail=position is not None and clip != "03_inspect")
             k += 1
+            if k % 300 == 0:
+                print(f"{TAG} sim {ext._sim.time:.1f}s, frames {sum(rec.counts.values())}", flush=True)
             await app.next_update_async()
         print(f"{TAG} line clips done at sim {ext._sim.time:.1f}s")
         pendant = ext.open_teach_pendant()
@@ -272,7 +332,7 @@ async def _main():
         pendant.play()
         k = 0
         while pendant.playing:
-            if k % STRIDE == 0:
+            if k % 2 == 0:  # teaching playback itself advances at 60 Hz
                 point = pendant._status.text.replace("playing: ", "")
                 rec.grab("06_teach", f"Surface teaching: {point}, tool normal to the face at 20 mm",
                          "origin + top + 4 sides of the block on the C platter (B -90 for the sides)")
@@ -282,6 +342,14 @@ async def _main():
             if rec.pending == 0:
                 break
             await app.next_update_async()
+        if rec.pending or rec.errors:
+            raise RuntimeError(f"capture incomplete: pending={rec.pending}, errors={rec.errors}")
+        detail_provider.destroy()
+        with open(os.path.join(os.path.dirname(out), "render.json"), "w", encoding="utf-8") as fh:
+            json.dump(dict(focus=focus, seed=int(s.get("/visiontwin/rec/seed") or 3),
+                           resolution=[W, H], detail_resolution=[640, 480], fps=30,
+                           frames=rec.counts, capture_errors=rec.errors,
+                           render_mode=s.get("/rtx/rendermode")), fh, indent=2)
         print(f"{TAG} " + ", ".join(f"{c}={n}" for c, n in sorted(rec.counts.items())) + f" -> {out}")
         code = 0
     except Exception:
