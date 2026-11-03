@@ -1,16 +1,19 @@
 ﻿<#
 목적: README용 부분별 클립을 녹화한다. 크라운 라인(검사 켬)에서 제품 하나(기본 #1, 미완성 가공 형상 불량)를 따라가며 라인 진입, 로봇 로딩, 5시점 검사, 언로딩, 불량 배출, 표면 티칭을 각각 실제 속도 클립으로 저장하고, ffmpeg로 클립마다 MP4와 README GIF를 만든다.
-사용법: .\scripts\record_clips.ps1 [-Focus 1] [-Seed 3]
-인자: -Focus  따라갈 제품 번호(seed 3: #1 미완성 가공 형상), -Seed  랜덤 시드
+사용법: .\scripts\record_clips.ps1 [-Example defect|good] [-Focus 1] [-Seed 3]
+인자: -Example  불량/정상 예제(기본 defect), -Focus  따라갈 제품 번호, -Seed  랜덤 시드(불량 기본 3, 정상 기본 42)
 출력: results/demo/clips_<timestamp>/<clip>.mp4, docs/screenshots/clips/<clip>.gif (README가 참조), logs/record_clips_<timestamp>.log
 필요: ffmpeg (PATH)
 #>
 param(
     [int]$Focus = 1,
-    [int]$Seed = 3
+    [int]$Seed = 3,
+    [ValidateSet('defect', 'good')]
+    [string]$Example = 'defect'
 )
 . "$PSScriptRoot\_common.ps1"
 Warn-IfKitRunning
+if ($Example -eq 'good' -and -not $PSBoundParameters.ContainsKey('Seed')) { $Seed = 42 }
 
 $bat = Join-Path $Root "_build\windows-x86_64\release\visiontwin.app.kit.bat"
 if (-not (Test-Path $bat)) { throw "Not built yet. Run .\scripts\build_app.ps1 first." }
@@ -19,11 +22,12 @@ $stamp = Get-Date -Format "yyyyMMdd_HHmmss"
 $outDir = Join-Path $Root "results\demo\clips_$stamp"
 $frames = Join-Path $outDir "frames"
 $gifDir = Join-Path $Root "docs\screenshots\clips"
+if ($Example -eq 'good') { $gifDir = Join-Path $gifDir 'good' }
 New-Item -ItemType Directory -Force -Path $frames, $gifDir | Out-Null
 $exec = (Join-Path $PSScriptRoot "record_clips.py") -replace '\\', '/'
 $runs = (Join-Path $Root "results\smoke\demo_runs") -replace '\\', '/'
 $log = New-LogPath "record_clips"
-$kitArgs = "--exec `"$exec`" --/visiontwin/rec/frames=`"$($frames -replace '\\', '/')`" --/visiontwin/rec/focus=$Focus --/visiontwin/rec/seed=$Seed --/exts/visiontwin.factory/mainViewportScale=1.0 --/exts/visiontwin.factory/outputDir=`"$runs`" $KitAutomationArgs --/app/settings/persistent=0 --/app/settings/loadUserConfig=0 --/persistent/rtx/modes/rt/enabled=true --/persistent/rtx/modes/pt/enabled=false --/persistent/rtx/modes/rt2/enabled=false --/rtx/rendermode=RaytracedLighting"
+$kitArgs = "--exec `"$exec`" --/visiontwin/rec/frames=`"$($frames -replace '\\', '/')`" --/visiontwin/rec/focus=$Focus --/visiontwin/rec/seed=$Seed --/visiontwin/rec/example=$Example --/exts/visiontwin.factory/mainViewportScale=1.0 --/exts/visiontwin.factory/outputDir=`"$runs`" $KitAutomationArgs --/app/settings/persistent=0 --/app/settings/loadUserConfig=0 --/persistent/rtx/modes/rt/enabled=true --/persistent/rtx/modes/pt/enabled=false --/persistent/rtx/modes/rt2/enabled=false --/rtx/rendermode=RaytracedLighting"
 $ErrorActionPreference = 'Continue'
 & cmd /c "`"$bat`" $kitArgs 2>&1" | ForEach-Object {
     Add-Content -Path $log -Value $_ -Encoding utf8
@@ -32,6 +36,9 @@ $ErrorActionPreference = 'Continue'
 $clips = Get-ChildItem $frames -Directory | Sort-Object Name
 if ($LASTEXITCODE -ne 0) { throw "Kit recording failed. Frames retained at $frames. Log: $log" }
 if ($clips.Count -lt 6) { throw "Only $($clips.Count) clips recorded. Log: $log" }
+Copy-Item -LiteralPath (Join-Path $outDir 'render.json') -Destination (Join-Path $gifDir 'render.json') -ErrorAction Stop
+$renderMetadata = Get-Content -LiteralPath (Join-Path $outDir 'render.json') -Raw | ConvertFrom-Json
+Copy-Item -LiteralPath (Join-Path $runs "runs/$($renderMetadata.example.run_id)/inspections.csv") -Destination (Join-Path $gifDir 'inspections.csv') -ErrorAction Stop
 foreach ($c in $clips) {
     $n = (Get-ChildItem $c.FullName -Filter *.jpg).Count
     $mp4 = Join-Path $outDir "$($c.Name).mp4"

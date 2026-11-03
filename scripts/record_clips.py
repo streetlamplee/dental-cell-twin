@@ -8,11 +8,13 @@ product (`focus`, default #1 = shape defect) through the line, so they never ove
   03_inspect   spindle camera: B tilt + C turn, 5 views; inset = the frame the inspector saved
   04_unload    cell close-up: machine parks the camera, robot places it on the outfeed belt
   05_reject    wide shot, crown ringed: the pusher sweeps it into the bin (product-ID based sorting)
+  05_pass      alternative to 05_reject: a good product continues past the reject gate
   06_teach     teach pendant plays origin + 5 faces (opening the pendant stops the line)
 Frames between clips are not captured. One update is 1/30 s of simulation, so every update
 encoded at 30 fps plays at real time.
 
 Settings: --/visiontwin/rec/frames=<dir>  --/visiontwin/rec/focus=1  --/visiontwin/rec/seed=3
+          --/visiontwin/rec/example=good|defect verifies the recorded truth, verdict and route
 """
 
 import asyncio
@@ -102,6 +104,9 @@ class Clips:
             return None
         p = ext._sim.tracker.get(f)
         tag = f"Crown #{f} ({p.defect_kind or 'good'})"
+        decision = ext._sorter.decisions.get(f)
+        route = decision.route if decision else ("pass" if p.prediction == "good" else "reject")
+        sort_clip = "05_pass" if route == "pass" else "05_reject"
         if ext._sim.station_product == f:
             t, cycle = ext._station_time(), ext._cell.cycle
             edge = cycle.timing.hold_s / 2.0 + SPINDLE_LEAD_S
@@ -122,13 +127,12 @@ class Clips:
             if p.x < self.L.REJECT_X - REJECT_LEAD_M:
                 return None
             verdict = f"{p.prediction} ({p.defect_reason})" if p.defect_reason else str(p.prediction)
-            return "05_reject", REJECT_CAM, f"{tag}: vision verdict {verdict} -> sorted by product ID"
+            return sort_clip, REJECT_CAM, f"{tag}: vision verdict {verdict} -> sorted by product ID"
         if self.left_belt_t is None:
             self.left_belt_t = ext._sim.time
         if ext._sim.time <= self.left_belt_t + REJECT_TAIL_S:
-            route = "pushed into the reject bin" if p.state.value in ("REJECTED", "EXITED") and \
-                ext._sorter.decisions.get(f) and ext._sorter.decisions[f].route == "reject" else "passed"
-            return "05_reject", REJECT_CAM, f"{tag}: {route}"
+            action = "pushed into the reject bin" if route == "reject" else "passed reject gate; continues on outfeed belt"
+            return sort_clip, REJECT_CAM, f"{tag}: {action}"
         return "done"
 
 
@@ -251,10 +255,12 @@ async def _main():
 
         out = s.get("/visiontwin/rec/frames")
         focus = int(s.get("/visiontwin/rec/focus") or 1)
+        expected_kind = s.get("/visiontwin/rec/example")
         ext = await _wait_for(vt.get_instance, app)
         vp = await _wait_for(get_active_viewport, app)
         for key, value in (("part", "crown"), ("vision", True), ("defectRate", 0.3),
-                           ("seed", int(s.get("/visiontwin/rec/seed") or 3)), ("maxProducts", focus + 1)):
+                           ("seed", int(s.get("/visiontwin/rec/seed") or 3)),
+                           ("maxProducts", focus if expected_kind == "good" else focus + 1)):
             s.set(f"/exts/visiontwin.factory/{key}", value)
         vp.resolution_scale = 1.0
         vp.resolution = (W, H)
@@ -272,8 +278,16 @@ async def _main():
         class DetailFrameProvider(InspectionFrameProvider):
             WINDOW_TITLE = "VisionTwin Recording Detail"
 
-        detail_provider = DetailFrameProvider(L.CELL_CAMERA_PATH, (640, 480))
-        await detail_provider.ready_async()
+        owns_detail = expected_kind != "good"
+        if owns_detail:
+            detail_provider = DetailFrameProvider(L.CELL_CAMERA_PATH, (640, 480))
+            await detail_provider.ready_async()
+        else:
+            # A single good product stays on the belt after sorting. Its inspection
+            # and close-up never overlap, so two RTX viewports suffice.
+            detail_provider = ext._frames
+            if detail_provider is None:
+                raise RuntimeError("inspection viewport required for the good example")
         cell_cam = UsdGeom.Camera(stage.GetPrimAtPath(L.CELL_OVERVIEW_CAMERA_PATH))
         cell_cam.GetFocalLengthAttr().Set(cell_cam.GetFocalLengthAttr().Get() * 1.25)
         history = collections.deque(maxlen=RENDER_LAG + 1)  # crown positions, oldest first
@@ -289,6 +303,9 @@ async def _main():
             position = _crown_position(stage, crown_path)
             history.append(position)
             if position is not None and detail_camera is None:
+                product = ext._sim.tracker.get(focus)
+                if expected_kind and product.ground_truth != expected_kind:
+                    raise ValueError(f"requested {expected_kind} example, but seed/focus produced {product.ground_truth}")
                 # Parent to the translation-only product root so camera and geometry
                 # share the same rendered translation.
                 detail_camera = WideCamera(stage, detail_path, (0.05625, -0.075, 0.08125),
@@ -304,6 +321,14 @@ async def _main():
                 break
             if state is not None:
                 clip, cam, caption = state
+                if not owns_detail:
+                    camera = L.CELL_CAMERA_PATH if clip == "03_inspect" else detail_path
+                    if str(detail_provider.viewport_api.camera_path) != camera:
+                        was_running = ext._sim.running
+                        ext._sim.running = False
+                        detail_provider.set_camera(camera)
+                        await next_viewport_frame_async(detail_provider.viewport_api, 12)
+                        ext._sim.running = was_running
                 if cam != current_cam:
                     if isinstance(cam, str):
                         vp.camera_path = cam
@@ -324,6 +349,13 @@ async def _main():
                 print(f"{TAG} sim {ext._sim.time:.1f}s, frames {sum(rec.counts.values())}", flush=True)
             await app.next_update_async()
         print(f"{TAG} line clips done at sim {ext._sim.time:.1f}s")
+        product = ext._sim.tracker.get(focus)
+        decision = ext._sorter.decisions.get(focus)
+        expected_route = "pass" if expected_kind == "good" else "reject"
+        if expected_kind and (product.prediction != expected_kind or decision is None or decision.route != expected_route):
+            raise RuntimeError(f"example not verified: truth={product.ground_truth}, prediction={product.prediction}, decision={decision}")
+        example_result = dict(ground_truth=product.ground_truth, prediction=product.prediction,
+                              route=decision.route if decision else None, run_id=os.path.basename(ext._log.run_dir))
         pendant = ext.open_teach_pendant()
         if pendant is None:
             raise RuntimeError("teach pendant did not open")
@@ -344,11 +376,15 @@ async def _main():
             await app.next_update_async()
         if rec.pending or rec.errors:
             raise RuntimeError(f"capture incomplete: pending={rec.pending}, errors={rec.errors}")
-        detail_provider.destroy()
+        if owns_detail:
+            detail_provider.destroy()
+        else:
+            detail_provider.set_camera(L.CELL_CAMERA_PATH)
         with open(os.path.join(os.path.dirname(out), "render.json"), "w", encoding="utf-8") as fh:
             json.dump(dict(focus=focus, seed=int(s.get("/visiontwin/rec/seed") or 3),
                            resolution=[W, H], detail_resolution=[640, 480], fps=30,
                            frames=rec.counts, capture_errors=rec.errors,
+                           example=example_result,
                            render_mode=s.get("/rtx/rendermode")), fh, indent=2)
         print(f"{TAG} " + ", ".join(f"{c}={n}" for c, n in sorted(rec.counts.items())) + f" -> {out}")
         code = 0
