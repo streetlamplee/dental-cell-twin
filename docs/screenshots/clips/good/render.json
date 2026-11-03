@@ -1,0 +1,29 @@
+{
+  "focus": 1,
+  "seed": 42,
+  "resolution": [
+    1280,
+    720
+  ],
+  "detail_resolution": [
+    640,
+    480
+  ],
+  "fps": 30,
+  "frames": {
+    "01_line": 81,
+    "02_load": 117,
+    "03_inspect": 104,
+    "04_unload": 247,
+    "05_pass": 68,
+    "06_teach": 270
+  },
+  "capture_errors": 0,
+  "example": {
+    "ground_truth": "good",
+    "prediction": "good",
+    "route": "pass",
+    "run_id": "20261103_220834_149742700_seed42"
+  },
+  "render_mode": "RaytracedLighting"
+}
