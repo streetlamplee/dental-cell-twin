@@ -38,7 +38,7 @@ foreach ($c in $clips) {
     $gif = Join-Path $gifDir "$($c.Name).gif"
     & ffmpeg -hide_banner -loglevel error -y -framerate 30 -i (Join-Path $c.FullName "%05d.jpg") -c:v libx264 -pix_fmt yuv420p -crf 20 -preset slow -movflags +faststart $mp4
     if ($LASTEXITCODE -ne 0) { throw "MP4 encoding failed: $mp4" }
-    & ffmpeg -hide_banner -loglevel error -y -i $mp4 -vf "fps=10,scale=560:-1:flags=lanczos,split[a][b];[a]palettegen=max_colors=96[p];[b][p]paletteuse" $gif
+    & ffmpeg -hide_banner -loglevel error -y -i $mp4 -vf "fps=10,scale=960:-1:flags=lanczos,split[a][b];[a]palettegen=max_colors=96[p];[b][p]paletteuse" $gif
     if ($LASTEXITCODE -ne 0) { throw "GIF encoding failed: $gif" }
     Write-Host ("{0}: {1} frames ({2:N1} s), mp4 {3:N1} MB, gif {4:N1} MB" -f $c.Name, $n, ($n / 30), ((Get-Item $mp4).Length / 1MB), ((Get-Item $gif).Length / 1MB))
 }
