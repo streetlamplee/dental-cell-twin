@@ -13,7 +13,27 @@
 
 ---
 
-## 데모 클립: 크라운 #1 하나를 확대하며 따라가기
+## 정상 예제: good 판정과 배출선 통과
+
+정상 제품과 불량 제품을 각각 같은 확대 구도로 녹화했다. 정상 예제는 **seed 42의 크라운 #1**, 아래 불량 예제는 **seed 3의 미완성 가공 형상 크라운 #1**이다. 두 예제 모두 GIF를 **960×540**으로 표시한다.
+
+### 정상 제품의 5시점 검사
+
+![정상 크라운을 다섯 시점에서 검사하고 good으로 판정한다](docs/screenshots/clips/good/03_inspect.gif)
+
+정상 크라운은 미가공 블록이나 치핑이 없는 형상이다. 윗면과 옆면 네 곳을 실제 렌더 이미지로 검사한 결과 **5개 시점 모두 good**, 합친 판정도 **good**이었다. 오른쪽 아래에는 검사기가 실제로 저장한 시점과 판정이 표시된다.
+
+### 정상 제품의 배출선 통과
+
+![good으로 판정된 정상 크라운이 푸셔에 밀리지 않고 컨베이어를 계속 이동한다](docs/screenshots/clips/good/05_pass.gif)
+
+검사 결과를 제품 ID에 연결해 배출선에서 조회한다. 정상 제품 #1은 실제 분류 경로가 **pass**이며, 푸셔가 밀어내지 않고 배출선을 지나 벨트 위를 계속 이동한다. 확대 화면에서도 같은 제품을 따라간다.
+
+- **정상 녹화 재현:** `.\scripts\record_clips.ps1 -Example good -Focus 1 -Seed 42`.
+- **검증 자료:** [정상 녹화 metadata](docs/screenshots/clips/good/render.json) · [5시점 검사 CSV](docs/screenshots/clips/good/inspections.csv). 실제 제품 종류·검사 판정·분류 경로가 모두 일치할 때만 정상 예제로 저장한다.
+- **나머지 정상 공정 클립:** [투입](docs/screenshots/clips/good/01_line.gif) · [로봇 로딩](docs/screenshots/clips/good/02_load.gif) · [언로딩](docs/screenshots/clips/good/04_unload.gif) · [공통 표면 티칭](docs/screenshots/clips/good/06_teach.gif).
+
+## 불량 예제: 미완성 가공 형상 크라운의 전체 공정
 
 아래 여섯 클립은 **run 하나**(seed 3)에서 크라운 #1이 라인을 지나는 순서대로 녹화했다. #1은 **미완성 가공 형상** 불량품이다. 부품의 실제 크기는 유지하고, 별도 카메라가 같은 부품을 따라가며 확대한다.
 
@@ -23,7 +43,7 @@
 - **실제 속도:** 이 녹화는 고정 스텝 1/30 s마다 캡처해 30fps로 묶는다. 티칭 재생은 1/60 s마다 진행되므로 2스텝마다 캡처한다. 일반 앱의 기본 스텝은 1/60 s다.
 - **확대 화면:** 640×480 독립 뷰포트의 중앙 영역을 400×225로 표시한다. 검사 중에는 검사기가 실제로 저장한 시점별 이미지와 판정을 확대한다.
 - **화면 글자:** 위 자막과 아래 줄(sim 시간, 셀 상태)은 녹화 스크립트가 그 순간의 run 상태를 읽어 넣었다.
-- **다시 만들기:** `.\scripts\record_clips.ps1 -Focus 1 -Seed 3` (통합·장면별 MP4는 `results/demo/clips_*`, GIF는 `docs/screenshots/clips/`). [구현·검증 기록](<docs/2026-11-02 데모 부품 가시성 개선.md>).
+- **불량 녹화 재현:** `.\scripts\record_clips.ps1 -Example defect -Focus 1 -Seed 3` (통합·장면별 MP4는 `results/demo/clips_*`, 불량 GIF는 `docs/screenshots/clips/`, 정상 GIF는 `docs/screenshots/clips/good/`). [구현·검증 기록](<docs/2026-11-02 데모 부품 가시성 개선.md>).
 - **로컬 통합 영상:** `results/demo/clips_20261102_215142/dental_cell_closeup_demo.mp4`. MP4는 Git 제외 대상이며, 아래 GIF 6개는 저장소에 포함되어 README에서 바로 볼 수 있다.
 
 | # | 구간 | 클립 길이 | 화면 |
